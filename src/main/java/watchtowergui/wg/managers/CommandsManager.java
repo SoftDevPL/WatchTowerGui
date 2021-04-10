@@ -1,5 +1,7 @@
 package watchtowergui.wg.managers;
 
+import org.bukkit.ChatColor;
+import org.bukkit.command.Command;
 import watchtowergui.wg.WatchTowerGui;
 import watchtowergui.wg.adminfun.commands.*;
 import watchtowergui.wg.bans.command.BanCommand;
@@ -14,8 +16,6 @@ import watchtowergui.wg.servercontrol.commandcontrol.commands.CommandMenuCommand
 import watchtowergui.wg.servercontrol.commandcontrol.commands.ResetAllCommandsCommand;
 import watchtowergui.wg.servercontrol.commandcontrol.utilities.CommandIdentifier;
 import watchtowergui.wg.servercontrol.plugincontrol.commands.PluginMenuCommand;
-import org.bukkit.ChatColor;
-import org.bukkit.command.Command;
 
 import java.util.ArrayList;
 import java.util.List;

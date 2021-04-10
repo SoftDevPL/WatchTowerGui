@@ -2,11 +2,6 @@ package watchtowergui.wg.servercontrol.commandcontrol;
 
 import ad.guis.ultimateguis.engine.Pair;
 import ad.guis.ultimateguis.engine.interfaces.BasicAction;
-import watchtowergui.wg.WatchTowerGui;
-import watchtowergui.wg.fileManager.configsutils.configs.GuiLanguageConfig;
-import watchtowergui.wg.fileManager.sql.sqlUtils.databasescommands.AdminGuiDatabase;
-import watchtowergui.wg.servercontrol.commandcontrol.events.*;
-import watchtowergui.wg.servercontrol.commandcontrol.utilities.CommandIdentifier;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandMap;
@@ -15,6 +10,11 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
+import watchtowergui.wg.WatchTowerGui;
+import watchtowergui.wg.fileManager.configsutils.configs.GuiLanguageConfig;
+import watchtowergui.wg.fileManager.sql.sqlUtils.databasescommands.AdminGuiDatabase;
+import watchtowergui.wg.servercontrol.commandcontrol.events.*;
+import watchtowergui.wg.servercontrol.commandcontrol.utilities.CommandIdentifier;
 
 import java.lang.reflect.Field;
 import java.util.*;
@@ -25,11 +25,11 @@ import java.util.stream.Collectors;
 
 public class CommandsControlListener implements Listener {
 
-    private CommandMap commandMap;
-    private Map<String, Command> activeCommands = new HashMap<>();
     private final Map<Command, String> prefixMap = new HashMap<>();
     private final Set<Command> disableCommands = new HashSet<>();
     private final Set<CommandIdentifier> unchangeableCommands = new HashSet<>();
+    private CommandMap commandMap;
+    private Map<String, Command> activeCommands = new HashMap<>();
     private AdminGuiDatabase database;
     private GuiLanguageConfig glc;
 
@@ -190,7 +190,7 @@ public class CommandsControlListener implements Listener {
     }
 
     @SuppressWarnings("unchecked")
-    private boolean initCommandsContainers(){
+    private boolean initCommandsContainers() {
         try {
             Field mapField = findUnderlying(Bukkit.getServer().getClass(), "commandMap");
             mapField.setAccessible(true);
@@ -211,7 +211,7 @@ public class CommandsControlListener implements Listener {
         do {
             try {
                 return current.getDeclaredField(fieldName);
-            } catch (Exception e) {
+            } catch (Exception ignored) {
             }
         } while ((current = current.getSuperclass()) != null);
         return null;
@@ -227,14 +227,14 @@ public class CommandsControlListener implements Listener {
                 ((PluginIdentifiableCommand) entry.getValue()).getPlugin().getName().equals(pluginName));
     }
 
-    public void removeDisabledCommandsByPlugin(Plugin plugin){
+    public void removeDisabledCommandsByPlugin(Plugin plugin) {
         this.disableCommands.removeIf(command -> command instanceof PluginIdentifiableCommand &&
-                ((PluginIdentifiableCommand)command).getPlugin().equals(plugin));
+                ((PluginIdentifiableCommand) command).getPlugin().equals(plugin));
     }
 
-    public void removeDisabledCommandsByPlugin(String pluginName){
+    public void removeDisabledCommandsByPlugin(String pluginName) {
         this.disableCommands.removeIf(command -> command instanceof PluginIdentifiableCommand &&
-                ((PluginIdentifiableCommand)command).getPlugin().getName().equals(pluginName));
+                ((PluginIdentifiableCommand) command).getPlugin().getName().equals(pluginName));
     }
 
     public void removeCommandsByPlugin(String pluginName) {
@@ -599,7 +599,6 @@ public class CommandsControlListener implements Listener {
     }
 
 
-
     //EVENT HANDLERS
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     private void disableCommandsHandler(CommandDisableEvent event) {
@@ -612,37 +611,39 @@ public class CommandsControlListener implements Listener {
     }
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
-    private void enableCommandsHandler(CommandEnableEvent event){
+    private void enableCommandsHandler(CommandEnableEvent event) {
         Pair<Boolean, String> result = this.enableCommand(event.getCommand());
         if (result.getFirsValue()) event.done();
         event.setComment(result.getSecondValue());
 
-        if(result.getFirsValue()) this.removeDisableCommandFromDatabase(new CommandIdentifier(event.getCommand()));
+        if (result.getFirsValue()) this.removeDisableCommandFromDatabase(new CommandIdentifier(event.getCommand()));
     }
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
-    private void addingAliasesHandler(CommandAliasAddEvent event){
+    private void addingAliasesHandler(CommandAliasAddEvent event) {
         Pair<Boolean, String> result = this.addAlias(event.getCommand(), event.getAlias());
         if (result.getFirsValue()) event.done();
         event.setComment(result.getSecondValue());
 
-        if(result.getFirsValue()) this.saveAliasToDatabase(new CommandIdentifier(event.getCommand()), event.getAlias());
+        if (result.getFirsValue())
+            this.saveAliasToDatabase(new CommandIdentifier(event.getCommand()), event.getAlias());
     }
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
-    private void removingAliasesHandler(CommandAliasRemoveEvent event){
+    private void removingAliasesHandler(CommandAliasRemoveEvent event) {
         boolean isAliasRemoved = this.removeAlias(event.getCommand(), event.getAlias());
         if (isAliasRemoved) event.done();
 
-        if(isAliasRemoved) this.removeAliasFromDatabase(new CommandIdentifier(event.getCommand()), event.getAlias());
+        if (isAliasRemoved) this.removeAliasFromDatabase(new CommandIdentifier(event.getCommand()), event.getAlias());
     }
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
-    private void changingLabelHandler(CommandLabelChangeEvent event){
+    private void changingLabelHandler(CommandLabelChangeEvent event) {
         Pair<Boolean, String> result = this.changeLabel(event.getCommand(), event.getNewLabel());
         if (result.getFirsValue()) event.done();
         event.setComment(result.getSecondValue());
 
-        if(result.getFirsValue()) this.changeLabelInDatabase(new CommandIdentifier(event.getCommand()), event.getNewLabel());
+        if (result.getFirsValue())
+            this.changeLabelInDatabase(new CommandIdentifier(event.getCommand()), event.getNewLabel());
     }
 }

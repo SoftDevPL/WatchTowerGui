@@ -1,12 +1,12 @@
 package watchtowergui.wg.servercontrol.commandcontrol.commands;
 
-import watchtowergui.wg.WatchTowerGui;
-import watchtowergui.wg.fileManager.configsutils.configs.LanguageConfig;
-import watchtowergui.wg.servercontrol.commandcontrol.CommandsControlListener;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
+import watchtowergui.wg.WatchTowerGui;
+import watchtowergui.wg.fileManager.configsutils.configs.LanguageConfig;
+import watchtowergui.wg.servercontrol.commandcontrol.CommandsControlListener;
 
 import java.util.ArrayList;
 import java.util.Collections;

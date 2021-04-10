@@ -4,6 +4,15 @@ import ad.guis.ultimateguis.Colors;
 import ad.guis.ultimateguis.engine.basics.BasicGui;
 import ad.guis.ultimateguis.engine.interfaces.Action;
 import ad.guis.ultimateguis.examples.ConfirmGui;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.Material;
+import org.bukkit.command.Command;
+import org.bukkit.command.PluginIdentifiableCommand;
+import org.bukkit.entity.HumanEntity;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 import watchtowergui.wg.WatchTowerGui;
 import watchtowergui.wg.chat.chatguard.ChatManager;
 import watchtowergui.wg.chat.chatguard.PlayerChatAction;
@@ -14,15 +23,6 @@ import watchtowergui.wg.servercontrol.commandcontrol.events.CommandEnableEvent;
 import watchtowergui.wg.servercontrol.commandcontrol.events.CommandLabelChangeEvent;
 import watchtowergui.wg.servercontrol.commandcontrol.listeners.SingleCommandGuiListener;
 import watchtowergui.wg.servercontrol.plugincontrol.guis.SinglePluginGui;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.command.Command;
-import org.bukkit.command.PluginIdentifiableCommand;
-import org.bukkit.entity.HumanEntity;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -96,7 +96,7 @@ public class SingleCommandGui extends BasicGui {
         List<String> lore = new ArrayList<>(command.getAliases().size() + 1);
         command.getAliases().forEach(alias -> lore.add(ChatColor.GREEN + alias));
         lore.add(glc.getSingleCommandGuiCreateAliasesItemLore());
-        return BasicGui.createItem(Material.SIGN, glc.getSingleCommandGuiCreateAliasesItemName() , lore);
+        return BasicGui.createItem(Material.SIGN, glc.getSingleCommandGuiCreateAliasesItemName(), lore);
     }
 
     private ItemStack createPluginItem() {

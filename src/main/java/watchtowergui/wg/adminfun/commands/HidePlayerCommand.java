@@ -4,7 +4,7 @@ import ad.guis.ultimateguis.UltimateGuis;
 import watchtowergui.wg.WatchTowerGui;
 import watchtowergui.wg.adminfun.events.PlayerHideEvent;
 import watchtowergui.wg.adminfun.events.PlayerUnHideEvent;
-import watchtowergui.wg.adminfun.listeners.HiddingPlayerListener;
+import watchtowergui.wg.adminfun.listeners.HidingPlayerListener;
 import watchtowergui.wg.fileManager.configsutils.configs.LanguageConfig;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
@@ -15,18 +15,18 @@ import org.bukkit.entity.Player;
 
 public class HidePlayerCommand implements CommandExecutor {
     private final LanguageConfig languageConfig;
-    private final HiddingPlayerListener hiddingPlayerListener;
+    private final HidingPlayerListener hidingPlayerListener;
 
     public HidePlayerCommand(WatchTowerGui plugin) {
         this.languageConfig = plugin.configsManager.languageConfig;
-        this.hiddingPlayerListener = plugin.listenersManager.hiddingPlayerListener;
+        this.hidingPlayerListener = plugin.listenersManager.hidingPlayerListener;
     }
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player && args.length == 0) {
             Player player = (Player) sender;
-            if (!hiddingPlayerListener.isHidden(player.getUniqueId())) {
+            if (!hidingPlayerListener.isHidden(player.getUniqueId())) {
                 Bukkit.getPluginManager().callEvent(new PlayerHideEvent(player, sender));
             } else {
                 Bukkit.getPluginManager().callEvent(new PlayerUnHideEvent(player, sender));
@@ -39,7 +39,7 @@ public class HidePlayerCommand implements CommandExecutor {
                 sender.sendMessage(languageConfig.getMesPlayerNotFound(playerName));
                 return true;
             }
-            if (!hiddingPlayerListener.isHidden(player.getUniqueId())) {
+            if (!hidingPlayerListener.isHidden(player.getUniqueId())) {
                 Bukkit.getPluginManager().callEvent(new PlayerHideEvent(player, sender));
             } else {
                 Bukkit.getPluginManager().callEvent(new PlayerUnHideEvent(player, sender));

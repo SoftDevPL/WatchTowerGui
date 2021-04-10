@@ -31,19 +31,16 @@ public class MuteListener implements Listener {
         this.languageConfig = watchTowerGui.configsManager.languageConfig;
         watchTowerGui.getServer().getPluginManager().registerEvents(this, watchTowerGui);
         getAllMutes();
-        Bukkit.getScheduler().scheduleSyncRepeatingTask(watchTowerGui, new Runnable() {
-            @Override
-            public void run() {
+        Bukkit.getScheduler().scheduleSyncRepeatingTask(watchTowerGui, () -> {
 
-                for (PlayerMuteData playerMuteData : muteDataList) {
-                    if (playerMuteData.expiryTime <= System.currentTimeMillis()) {
-                        adminGuiDatabase.deleteBanFromPlayersMutesTable(playerMuteData.MutedPlayer.toString());
-                    }
+            for (PlayerMuteData playerMuteData : muteDataList) {
+                if (playerMuteData.expiryTime <= System.currentTimeMillis()) {
+                    adminGuiDatabase.deleteBanFromPlayersMutesTable(playerMuteData.MutedPlayer.toString());
                 }
-
-                muteDataList.removeIf((PlayerMuteData playerMuteData) ->
-                        playerMuteData.expiryTime <= System.currentTimeMillis());
             }
+
+            muteDataList.removeIf((PlayerMuteData playerMuteData) ->
+                    playerMuteData.expiryTime <= System.currentTimeMillis());
         }, schedulerDelay, schedulerDelay);
     }
 

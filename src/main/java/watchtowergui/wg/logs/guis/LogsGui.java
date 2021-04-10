@@ -5,13 +5,13 @@ import ad.guis.ultimateguis.engine.basics.BasicGui;
 import ad.guis.ultimateguis.examples.PlayersGui;
 import ad.guis.ultimateguis.examples.calendargui.CalendarGui;
 import ad.guis.ultimateguis.examples.calendargui.SpecialDate;
-import watchtowergui.wg.WatchTowerGui;
-import watchtowergui.wg.fileManager.configsutils.configs.GuiLanguageConfig;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.inventory.ItemStack;
+import watchtowergui.wg.WatchTowerGui;
+import watchtowergui.wg.fileManager.configsutils.configs.GuiLanguageConfig;
 
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;

@@ -5,6 +5,7 @@ import watchtowergui.wg.logs.utils.LogsYmlGenerator;
 import watchtowergui.wg.fileManager.configsutils.configs.*;
 
 public class ConfigsManager {
+
     public LanguageConfig languageConfig;
     public MainConfig mainConfig;
     public DisabledCommandsForLogsConfig disabledCommandsForLogsConfig;
@@ -31,8 +32,5 @@ public class ConfigsManager {
         this.mainConfig.init();
         this.badWordsConfig.init();
         this.disabledCommandsForLogsConfig.init();
-    }
-
-    public void saveAllConfigs() {
     }
 }

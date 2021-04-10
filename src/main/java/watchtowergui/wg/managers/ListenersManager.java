@@ -1,5 +1,6 @@
 package watchtowergui.wg.managers;
 
+import watchtowergui.wg.adminfun.listeners.*;
 import watchtowergui.wg.bans.listeners.CustomBansGuiListener;
 import watchtowergui.wg.bans.listeners.TempBanListener;
 import watchtowergui.wg.chat.chatguard.ChatManager;
@@ -10,7 +11,6 @@ import watchtowergui.wg.logs.utils.ConsoleChatListener;
 import watchtowergui.wg.servercontrol.commandcontrol.listeners.AliasesGuiListener;
 import watchtowergui.wg.servercontrol.commandcontrol.listeners.SingleCommandGuiListener;
 import watchtowergui.wg.servercontrol.plugincontrol.PluginControlListener;
-import watchtowergui.wg.adminfun.listeners.*;
 
 public class ListenersManager {
 
@@ -21,7 +21,7 @@ public class ListenersManager {
     public CustomBansGuiListener customBansGuiListener;
     public MuteListener muteListener;
     public ChatManager chatManager;
-    public HiddingPlayerListener hiddingPlayerListener;
+    public HidingPlayerListener hidingPlayerListener;
     public WhiteListListener whiteListListener;
     public DisableChatListener disableChatListener;
     public ConsoleChatListener consoleChatListener;
@@ -39,7 +39,7 @@ public class ListenersManager {
         this.replaceBadWords = new ReplaceBadWords();
         this.customBansGuiListener = new CustomBansGuiListener();
         this.muteListener = new MuteListener();
-        this.hiddingPlayerListener = new HiddingPlayerListener();
+        this.hidingPlayerListener = new HidingPlayerListener();
         this.whiteListListener = new WhiteListListener();
         this.disableChatListener = new DisableChatListener();
         this.consoleChatListener = new ConsoleChatListener();
@@ -57,7 +57,7 @@ public class ListenersManager {
         this.replaceBadWords.init();
         this.customBansGuiListener.init();
         this.muteListener.init();
-        this.hiddingPlayerListener.init();
+        this.hidingPlayerListener.init();
         this.whiteListListener.init();
         this.disableChatListener.init();
         this.consoleChatListener.init();
@@ -67,6 +67,6 @@ public class ListenersManager {
     }
 
     public void disable() {
-        this.hiddingPlayerListener.disable();
+        this.hidingPlayerListener.disable();
     }
 }

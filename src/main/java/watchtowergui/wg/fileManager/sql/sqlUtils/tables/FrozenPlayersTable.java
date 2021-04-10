@@ -19,7 +19,7 @@ public class FrozenPlayersTable {
         return adminGuiDatabase.insertDataIntoFrozenPlayersTable(player.getUniqueId().toString());
     }
 
-    public boolean removePlayerfromConfig(OfflinePlayer player) {
+    public boolean removePlayerFromConfig(OfflinePlayer player) {
         return adminGuiDatabase.deleteFrozenPlayerFromFrozenPlayersTable(player.getUniqueId().toString());
     }
 

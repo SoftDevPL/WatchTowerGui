@@ -1,8 +1,8 @@
 package watchtowergui.wg.managers.staticclasses;
 
 import ad.guis.ultimateguis.UltimateGuis;
-import watchtowergui.wg.WatchTowerGui;
 import org.bukkit.OfflinePlayer;
+import watchtowergui.wg.WatchTowerGui;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

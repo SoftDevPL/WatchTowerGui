@@ -47,7 +47,7 @@ public class FreezeListener implements Listener {
         if (!frozenUUIDs.contains(frozenPlayer.getUniqueId().toString()))
             return false;
         frozenUUIDs.remove(frozenPlayer.getUniqueId().toString());
-        this.frozenPlayersTable.removePlayerfromConfig(frozenPlayer);
+        this.frozenPlayersTable.removePlayerFromConfig(frozenPlayer);
         this.plugin.getServer().getPluginManager().callEvent(new PlayerUnfreezeEvent(frozenPlayer, null));
         return true;
 

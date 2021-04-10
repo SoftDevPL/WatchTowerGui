@@ -1,10 +1,10 @@
 package watchtowergui.wg.logs.utils;
 
-import watchtowergui.wg.WatchTowerGui;
 import org.bukkit.command.CommandSender;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.server.ServerCommandEvent;
+import watchtowergui.wg.WatchTowerGui;
 
 import java.util.HashMap;
 import java.util.Map;

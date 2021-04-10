@@ -2,11 +2,11 @@ package watchtowergui.wg.logs.guis;
 
 import ad.guis.ultimateguis.Colors;
 import ad.guis.ultimateguis.engine.basics.BasicGui;
-import watchtowergui.wg.WatchTowerGui;
-import watchtowergui.wg.fileManager.configsutils.configs.GuiLanguageConfig;
 import org.bukkit.Material;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.inventory.ItemStack;
+import watchtowergui.wg.WatchTowerGui;
+import watchtowergui.wg.fileManager.configsutils.configs.GuiLanguageConfig;
 
 public class LogsTimeRangeGui extends BasicGui {
 

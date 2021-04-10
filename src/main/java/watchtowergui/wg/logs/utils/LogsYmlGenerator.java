@@ -1,10 +1,10 @@
 package watchtowergui.wg.logs.utils;
 
-import watchtowergui.wg.WatchTowerGui;
-import watchtowergui.wg.fileManager.configsutils.configs.LanguageConfig;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
+import watchtowergui.wg.WatchTowerGui;
+import watchtowergui.wg.fileManager.configsutils.configs.LanguageConfig;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,9 +21,8 @@ public class LogsYmlGenerator {
     public static List<String> chatLogList;
     public static List<String> joinLogList;
     public static List<String> quitLogsList;
-    private WatchTowerGui plugin;
-    private File folder;
     public LanguageConfig languageConfig;
+    private File folder;
 
     public void sendTypedMessageToSender(CommandSender sender, String string) {
         sender.sendMessage(string);
@@ -34,9 +33,9 @@ public class LogsYmlGenerator {
     }
 
     public void init() {
-        this.plugin = WatchTowerGui.getInstance();
-        this.folder = new File(this.plugin.getDataFolder() + "/logs");
-        this.languageConfig = this.plugin.configsManager.languageConfig;
+        WatchTowerGui plugin = WatchTowerGui.getInstance();
+        this.folder = new File(plugin.getDataFolder() + "/logs");
+        this.languageConfig = plugin.configsManager.languageConfig;
     }
 
     private void deleteFiles() {
@@ -118,7 +117,7 @@ public class LogsYmlGenerator {
     private String getPlayerNameFromUUID(String uuid) {
         try {
             return Bukkit.getOfflinePlayer(UUID.fromString(uuid)).getName();
-        } catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             return "Server console";
         }
     }

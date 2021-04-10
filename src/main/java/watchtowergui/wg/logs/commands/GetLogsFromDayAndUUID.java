@@ -1,19 +1,18 @@
 package watchtowergui.wg.logs.commands;
 
 import ad.guis.ultimateguis.UltimateGuis;
-import watchtowergui.wg.WatchTowerGui;
-import watchtowergui.wg.fileManager.configsutils.configs.LanguageConfig;
-import watchtowergui.wg.fileManager.sql.sqlUtils.databasescommands.AdminGuiDatabase;
-import watchtowergui.wg.logs.guis.LogsGui;
-import watchtowergui.wg.logs.utils.ConsoleChatListener;
-import watchtowergui.wg.logs.utils.LogsYmlGenerator;
-import watchtowergui.wg.managers.Permissions;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import watchtowergui.wg.WatchTowerGui;
+import watchtowergui.wg.fileManager.configsutils.configs.LanguageConfig;
+import watchtowergui.wg.fileManager.sql.sqlUtils.databasescommands.AdminGuiDatabase;
+import watchtowergui.wg.logs.guis.LogsGui;
+import watchtowergui.wg.logs.utils.ConsoleChatListener;
+import watchtowergui.wg.logs.utils.LogsYmlGenerator;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -27,7 +26,6 @@ public class GetLogsFromDayAndUUID implements CommandExecutor {
     private final WatchTowerGui plugin;
     private final ConsoleChatListener consoleChatListener;
     public AdminGuiDatabase adminGuiDatabase;
-    public Permissions permissions;
     public LogsYmlGenerator logsYmlGenerator;
     public LanguageConfig languageConfig;
 
@@ -37,7 +35,6 @@ public class GetLogsFromDayAndUUID implements CommandExecutor {
         this.logsYmlGenerator = this.plugin.configsManager.logsYmlGenerator;
         this.languageConfig = this.plugin.configsManager.languageConfig;
         this.adminGuiDatabase = this.plugin.SQLmanager.database;
-        this.permissions = this.plugin.permissions;
     }
 
     private List<List<String>> getFromDatabase(String playerName, AdminGuiDatabase database, String StringDate, CommandSender sender) {

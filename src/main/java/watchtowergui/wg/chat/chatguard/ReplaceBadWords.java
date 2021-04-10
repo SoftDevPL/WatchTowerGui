@@ -27,7 +27,6 @@ public class ReplaceBadWords implements Listener {
     Map<String, Integer> count = new HashMap<>();
     Map<UUID, AtomicInteger> countOfKicks = new HashMap<>();
     private WatchTowerGui watchTowerGui;
-    private BadWordsConfig badWordsConfig;
     private LanguageConfig languageConfig;
     private MainConfig mainConfig;
     private long banTime;
@@ -42,7 +41,7 @@ public class ReplaceBadWords implements Listener {
         this.mainConfig = watchTowerGui.configsManager.mainConfig;
         this.countsToBan = mainConfig.getCountOfTriesToBan();
         this.banTimeStringFormat = mainConfig.getBanTime();
-        this.badWordsConfig = watchTowerGui.configsManager.badWordsConfig;
+        BadWordsConfig badWordsConfig = watchTowerGui.configsManager.badWordsConfig;
         this.disabledCommandsForLogsConfig = this.watchTowerGui.configsManager.disabledCommandsForLogsConfig;
         this.languageConfig = watchTowerGui.configsManager.languageConfig;
         badWords = badWordsConfig.getAllWordsFromConfig();

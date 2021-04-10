@@ -132,7 +132,7 @@ public class AdminFunGui extends BasicGui {
         setDisableCharMode(disableChatListener.getDisableChatValueValue());
         whiteListListener.addToAdminFunGuis(this);
         disableChatListener.addOpenedGuis(this);
-        this.setVanishMode(plugin.listenersManager.hiddingPlayerListener.isHidden(getLastViewer().getUniqueId()));
+        this.setVanishMode(plugin.listenersManager.hidingPlayerListener.isHidden(getLastViewer().getUniqueId()));
     }
 
     protected void init() {

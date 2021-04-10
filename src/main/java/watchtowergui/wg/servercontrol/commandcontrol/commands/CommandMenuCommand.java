@@ -1,5 +1,7 @@
 package watchtowergui.wg.servercontrol.commandcontrol.commands;
 
+import org.bukkit.command.*;
+import org.bukkit.entity.Player;
 import watchtowergui.wg.WatchTowerGui;
 import watchtowergui.wg.fileManager.configsutils.configs.GuiLanguageConfig;
 import watchtowergui.wg.fileManager.configsutils.configs.LanguageConfig;
@@ -7,8 +9,6 @@ import watchtowergui.wg.managers.CommandsManager;
 import watchtowergui.wg.servercontrol.commandcontrol.CommandsControlListener;
 import watchtowergui.wg.servercontrol.commandcontrol.guis.CommandsControlGui;
 import watchtowergui.wg.servercontrol.commandcontrol.guis.SingleCommandGui;
-import org.bukkit.command.*;
-import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.List;

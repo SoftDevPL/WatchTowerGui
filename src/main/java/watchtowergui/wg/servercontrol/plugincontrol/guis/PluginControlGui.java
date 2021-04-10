@@ -2,20 +2,20 @@ package watchtowergui.wg.servercontrol.plugincontrol.guis;
 
 import ad.guis.ultimateguis.engine.basics.BasicGui;
 import ad.guis.ultimateguis.engine.basics.ListGui;
-import watchtowergui.wg.WatchTowerGui;
-import watchtowergui.wg.fileManager.configsutils.configs.GuiLanguageConfig;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
+import watchtowergui.wg.WatchTowerGui;
+import watchtowergui.wg.fileManager.configsutils.configs.GuiLanguageConfig;
 
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.stream.Collectors;
 
 public class PluginControlGui extends ListGui<Plugin> {
-    private GuiLanguageConfig glc;
+    private final GuiLanguageConfig glc;
 
     public PluginControlGui(BasicGui previousGui, String title) {
         super(previousGui, title);

@@ -213,7 +213,7 @@ public class PlayerActionGui extends BasicGui {
         }
         this.setItem(8, 2, close, HumanEntity::closeInventory);
         setActivity(toActivity(offlinePlayer.isOnline()));
-        setVanished(WatchTowerGui.getInstance().listenersManager.hiddingPlayerListener.isHidden(offlinePlayer.getUniqueId()));
+        setVanished(WatchTowerGui.getInstance().listenersManager.hidingPlayerListener.isHidden(offlinePlayer.getUniqueId()));
 
         this.autoFill(backgroundBlack);
     }

@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ConfigAccessor {
+
     protected WatchTowerGui plugin;
     private YamlConfiguration yml;
     private File file;

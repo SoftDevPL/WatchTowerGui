@@ -20,7 +20,6 @@ public class DatabaseLogsListenersManager {
     public ExecuteCommandAndSaveInDatabaseListener executeCommandAndSaveInDatabaseListener;
     public WriteAndSaveInDatabaseListener writeAndSaveInDatabaseListener;
     private WatchTowerGui plugin;
-    private BukkitTask task;
 
     public static AdminGuiDatabase getAdminGuiDatabase() {
         return adminGuiDatabase;
@@ -38,7 +37,6 @@ public class DatabaseLogsListenersManager {
         quitAndSaveUserInDatabaseListener = new QuitAndSaveUserInDatabaseListener(this.plugin);
         executeCommandAndSaveInDatabaseListener = new ExecuteCommandAndSaveInDatabaseListener(this.plugin);
         writeAndSaveInDatabaseListener = new WriteAndSaveInDatabaseListener(this.plugin);
-
     }
 
     public void deleteOldLogs() {
@@ -46,17 +44,14 @@ public class DatabaseLogsListenersManager {
         Calendar next = new GregorianCalendar();
         next.set(Calendar.MILLISECOND, 0);
         next.set(Calendar.SECOND, 0);
-
-        next.set(Calendar.HOUR_OF_DAY, 4); // 4:00 AM
+        next.set(Calendar.HOUR_OF_DAY, 4);
         next.set(Calendar.MINUTE, 0);
-
         if (now.after(next)) {
             next.add(Calendar.DATE, 1);
         }
-
         if (now.before(next)) {
             long ticks = (next.getTimeInMillis() - now.getTimeInMillis()) / 1000 * 20;
-            task = Bukkit.getScheduler().runTaskTimer(this.plugin, () ->
+            Bukkit.getScheduler().runTaskTimer(this.plugin, () ->
                     getAdminGuiDatabase().deleteAllOldLogs(30, now.getTimeInMillis()), ticks, 24 * 60 * 60 * 20);
         }
     }

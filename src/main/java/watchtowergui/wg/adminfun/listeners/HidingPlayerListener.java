@@ -22,9 +22,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
-public class HiddingPlayerListener implements Listener {
+public class HidingPlayerListener implements Listener {
 
-    private final int delayTime = 20;
     private final List<UUID> hiddenPlayers = new ArrayList<>();
     private final List<UUID> permissionList = new ArrayList<>();
     private WatchTowerGui plugin;
@@ -170,28 +169,18 @@ public class HiddingPlayerListener implements Listener {
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void showingPlayers(PlayerUnHideEvent event) {
         CommandSender sender = event.getSender();
-        boolean senderIsHiddingPlayer = sender instanceof Player && ((Player) sender).getUniqueId().equals(event.getPlayer().getUniqueId());
-        if (removePlayerFromHideList(event.getPlayer().getUniqueId())) {
-            if (sender != null) {
-                if (senderIsHiddingPlayer) {
-                    event.getSender().sendMessage(languageConfig.getYouAreNotHidden());
-                } else {
-                    event.getSender().sendMessage(languageConfig.getPlayerNotHidden(event.getPlayer().getName()));
-                }
-            }
-        } else {
-            if (sender != null) {
-                if (senderIsHiddingPlayer) {
-                    event.getSender().sendMessage(languageConfig.getYouAreNotHidden());
-                } else {
-                    event.getSender().sendMessage(languageConfig.getPlayerNotHidden(event.getPlayer().getName()));
-                }
+        boolean senderIsHidingPlayer = sender instanceof Player && ((Player) sender).getUniqueId().equals(event.getPlayer().getUniqueId());
+        if (sender != null) {
+            if (senderIsHidingPlayer) {
+                event.getSender().sendMessage(languageConfig.getYouAreNotHidden());
+            } else {
+                event.getSender().sendMessage(languageConfig.getPlayerNotHidden(event.getPlayer().getName()));
             }
         }
     }
 
     @EventHandler
-    public void removingHiddingWhenQuit(PlayerQuitEvent event) {
+    public void removingHidingWhenQuit(PlayerQuitEvent event) {
         Player playerWhoLeave = event.getPlayer();
         if (isHidden(playerWhoLeave.getUniqueId())) {
             showPlayer(playerWhoLeave);
@@ -204,7 +193,7 @@ public class HiddingPlayerListener implements Listener {
     }
 
     @EventHandler
-    public void hiddingPlayerWhenJoin(PlayerJoinEvent event) {
+    public void hidingPlayerWhenJoin(PlayerJoinEvent event) {
         Player playerWhoJoin = event.getPlayer();
         if (isHidden(playerWhoJoin.getUniqueId())) {
             hidePlayer(playerWhoJoin);

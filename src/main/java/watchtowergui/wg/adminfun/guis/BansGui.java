@@ -103,7 +103,7 @@ public class BansGui extends BasicGui {
             PlayersGui hiddenPlayersGui = new PlayersGui(BansGui.this, glc.getBansGuiHiddenPlayers());
 
             hiddenPlayersGui.setRefreshFunction(() ->
-                    sortedPlayers(WatchTowerGui.getInstance().listenersManager.hiddingPlayerListener.getHiddenPlayers()));
+                    sortedPlayers(WatchTowerGui.getInstance().listenersManager.hidingPlayerListener.getHiddenPlayers()));
 
             hiddenPlayersGui.setAction(playerFromHead -> {
                 new PlayerActionGui(Bukkit.getOfflinePlayer(playerFromHead),

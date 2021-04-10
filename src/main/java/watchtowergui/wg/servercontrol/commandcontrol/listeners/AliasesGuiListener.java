@@ -1,13 +1,13 @@
 package watchtowergui.wg.servercontrol.commandcontrol.listeners;
 
-import watchtowergui.wg.WatchTowerGui;
-import watchtowergui.wg.servercontrol.commandcontrol.events.CommandAliasAddEvent;
-import watchtowergui.wg.servercontrol.commandcontrol.events.CommandAliasRemoveEvent;
-import watchtowergui.wg.servercontrol.commandcontrol.guis.AliasesGui;
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import watchtowergui.wg.WatchTowerGui;
+import watchtowergui.wg.servercontrol.commandcontrol.events.CommandAliasAddEvent;
+import watchtowergui.wg.servercontrol.commandcontrol.events.CommandAliasRemoveEvent;
+import watchtowergui.wg.servercontrol.commandcontrol.guis.AliasesGui;
 
 import java.util.HashSet;
 import java.util.Set;

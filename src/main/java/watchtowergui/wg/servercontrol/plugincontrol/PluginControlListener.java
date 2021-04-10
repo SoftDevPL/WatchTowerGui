@@ -1,12 +1,12 @@
 package watchtowergui.wg.servercontrol.plugincontrol;
 
-import watchtowergui.wg.WatchTowerGui;
-import watchtowergui.wg.servercontrol.commandcontrol.CommandsControlListener;
-import watchtowergui.wg.servercontrol.plugincontrol.events.CustomDisablePluginEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import watchtowergui.wg.WatchTowerGui;
+import watchtowergui.wg.servercontrol.commandcontrol.CommandsControlListener;
+import watchtowergui.wg.servercontrol.plugincontrol.events.CustomDisablePluginEvent;
 
 public class PluginControlListener implements Listener {
 

@@ -1,7 +1,7 @@
 package watchtowergui.wg.servercontrol.commandcontrol.utilities;
 
-import watchtowergui.wg.WatchTowerGui;
 import org.bukkit.command.Command;
+import watchtowergui.wg.WatchTowerGui;
 
 import java.util.Objects;
 

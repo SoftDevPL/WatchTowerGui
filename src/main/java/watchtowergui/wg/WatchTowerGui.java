@@ -81,7 +81,6 @@ public final class WatchTowerGui extends JavaPlugin {
         if (instance == this) instance = null;
         if (initCorrect) {
             listenersManager.disable();
-            configsManager.saveAllConfigs();
         }
         setupLoggerOnDisable();
     }

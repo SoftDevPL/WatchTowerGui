@@ -2,9 +2,6 @@ package watchtowergui.wg.servercontrol.plugincontrol.guis;
 
 import ad.guis.ultimateguis.Colors;
 import ad.guis.ultimateguis.engine.basics.BasicGui;
-import watchtowergui.wg.WatchTowerGui;
-import watchtowergui.wg.fileManager.configsutils.configs.GuiLanguageConfig;
-import watchtowergui.wg.servercontrol.commandcontrol.guis.CommandsControlGui;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -13,6 +10,9 @@ import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
+import watchtowergui.wg.WatchTowerGui;
+import watchtowergui.wg.fileManager.configsutils.configs.GuiLanguageConfig;
+import watchtowergui.wg.servercontrol.commandcontrol.guis.CommandsControlGui;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,10 +20,10 @@ import java.util.stream.Collectors;
 
 public class SinglePluginGui extends BasicGui {
     private final Plugin plugin;
+    private final GuiLanguageConfig glc;
     private ItemStack backgroundBlue;
     private ItemStack backItem;
     private ItemStack closeItem;
-    private final GuiLanguageConfig glc;
     private List<Command> pluginCommands;
 
     public SinglePluginGui(Plugin plugin, BasicGui previousGui) {
