@@ -1,0 +1,31 @@
+# <================================[Admin Gui]================================>
+#
+#      WWWWWWWW                           WWWWWWWW             GGGGGGGGGGGGG
+#      W::::::W                           W::::::W          GGG::::::::::::G
+#      W::::::W                           W::::::W        GG:::::::::::::::G
+#      W::::::W                           W::::::W       G:::::GGGGGGGG::::G
+#       W:::::W           WWWWW           W:::::W       G:::::G       GGGGGG
+#        W:::::W         W:::::W         W:::::W       G:::::G
+#         W:::::W       W:::::::W       W:::::W        G:::::G
+#          W:::::W     W:::::::::W     W:::::W         G:::::G    GGGGGGGGGG
+#           W:::::W   W:::::W:::::W   W:::::W          G:::::G    G::::::::G
+#            W:::::W W:::::W W:::::W W:::::W           G:::::G    GGGGG::::G
+#             W:::::W:::::W   W:::::W:::::W            G:::::G        G::::G
+#              W:::::::::W     W:::::::::W              G:::::G       G::::G
+#               W:::::::W       W:::::::W                G:::::GGGGGGGG::::G
+#                W:::::W         W:::::W                  GG:::::::::::::::G
+#                 W:::W           W:::W                     GGG::::::GGG:::G
+#                  WWW             WWW                         GGGGGG   GGGG
+#
+# <==================================[About]==================================>
+# Remove this file to return to defaults
+# Here you can disable any words you want.
+# Example:
+# words:
+# - test
+# - test1
+# <=======[About]=======>
+BadWords:
+  words:
+  - cat
+  - dog

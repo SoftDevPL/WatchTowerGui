@@ -1,0 +1,432 @@
+# <================================[Admin Gui]================================>
+#
+#      WWWWWWWW                           WWWWWWWW             GGGGGGGGGGGGG
+#      W::::::W                           W::::::W          GGG::::::::::::G
+#      W::::::W                           W::::::W        GG:::::::::::::::G
+#      W::::::W                           W::::::W       G:::::GGGGGGGG::::G
+#       W:::::W           WWWWW           W:::::W       G:::::G       GGGGGG
+#        W:::::W         W:::::W         W:::::W       G:::::G
+#         W:::::W       W:::::::W       W:::::W        G:::::G
+#          W:::::W     W:::::::::W     W:::::W         G:::::G    GGGGGGGGGG
+#           W:::::W   W:::::W:::::W   W:::::W          G:::::G    G::::::::G
+#            W:::::W W:::::W W:::::W W:::::W           G:::::G    GGGGG::::G
+#             W:::::W:::::W   W:::::W:::::W            G:::::G        G::::G
+#              W:::::::::W     W:::::::::W              G:::::G       G::::G
+#               W:::::::W       W:::::::W                G:::::GGGGGGGG::::G
+#                W:::::W         W:::::W                  GG:::::::::::::::G
+#                 W:::W           W:::W                     GGG::::::GGG:::G
+#                  WWW             WWW                         GGGGGG   GGGG
+#
+# <==================================[About]==================================>
+# Remove this file to return to defaults
+# Here you can set your own language
+# by changing below values
+# Chat Colors:
+# - &0 - Black
+# - &1 - Dark Blue
+# - &2 - Dark Green
+# - &3 - Dark Aqua
+# - &4 - Dark Red
+# - &5 - Dark Purple
+# - &6 - Gold
+# - &7 - Gray
+# - &8 - Dark Gray
+# - &9 - Blue
+# - &a - Green
+# - &b - Aqua
+# - &c - Red
+# - &d - Light Purple
+# - &e - Yellow
+# - &f - White
+# Text types:
+# - &k - Obfuscated
+# - &l - Bold
+# - &m - Strikethrough
+# - &n - Underline
+# - &o - Italic
+# - &r - Color Reset
+# - \n - next Line
+# Usage:
+# ==> &l&3Word <==> &3Word <==> &lWord:
+#     - the font type must be the first, followed by the color
+#     - !!IMPORTANT if you change the order, It will not work
+# <=======[About]=======>
+Guis:
+  adminGui:
+    serverControl:
+      serverControlGui:
+        guiTitle: '&5&lManage your server'
+        pluginList:
+          name: '&e&lPlugins list'
+          lore: '&f&lShow information about installed plugins'
+        manageCommands:
+          name: '&6&lManage commands'
+          lore: '&f&lShow or edit information and usage of this server commands'
+        warps:
+          name: '&2&lWarps'
+          lore: '&f&lShow warp list'
+      singlePluginGui:
+        createPluginNameItem:
+          version: '&5&lVersion: &f&l[pluginVersion]'
+        createPluginDescriptionItem:
+          description: '&6&lDescription:'
+          lore: '&d[pluginDescription]'
+          notSpecified: '&cNot specified'
+        createAuthorsItem:
+          authors: '&e&lAuthors:'
+          lore: '&9[pluginAuthors]'
+          notSpecified: '&cNot specified'
+        createWebsiteItem:
+          website: '&b&LWebsite:'
+          lore: '&2[pluginWebsite]'
+          notSpecified: '&cNot specified'
+        createPluginCommandsItem:
+          name: '&2&lPlugin commands'
+          commands_lore: '&dClick to manage this plugin commands'
+          no_commands_lore: '&dThis plugin do not have commands'
+        createDependItem:
+          name: '&aPlugins required for this plugin:'
+          lore: '&aPlugins that give full functionalities:'
+      pluginControlGui:
+        getDescriptionItem:
+          lore: '&2&lClick for details'
+      commandControlListener:
+        showError: '&c&lSomething is wrong check command: [commandName]'
+        newCommandAlias: '&e&lIt seems like you have new command with alias or label: &f&l[commandLabel] &e&lCommand &f&l[commandName] &e&lhas return to original label'
+        loadAddedAliases: '&c&lAlias: &f&l[commandAlias] &c&lcan not be added to &f&l[commandName] &c&lit is probably because you have new command with that alias or label'
+        enableCommand:
+          notExists: '&c&lCommand: &6&l[commandName] &c&ldoes not exist'
+          commandAlreadyExists: '&e&lCommand already is enabled'
+        aliasAlreadyExists:
+          alreadyExists: '&c&lAlias/label: &f&l[commandAlias] &c&lis already use by: &f&l[commandName]'
+          successfullyEnabled: '&2&lCommand enabled successfully'
+        changeLabel:
+          notExists: '&c&lCommand does not exist'
+          canNotBeChanged: '&4&lThis label can not be changed'
+          successfullyChanged: '&2&lLabel change successfully'
+        addAlias:
+          notExists: '&c&lCommand does not exists'
+          successfullyAdded: '&2&lAlias added successfully'
+        onlyViableAliasMessage: '&e&lOnly viable prefix for this command is: &f&l[commandPrefix]'
+        commandHasThatAliasOrLabel: '&c&lThis command already has that alias or label'
+        commandHasThatAlias: '&c&lCommand: &f&l[commandName] &c&lalready has that alias or label!'
+      commandMenu:
+        pageName: '&5&lManage Commands'
+      aliasGui:
+        commandNameAliasesPageName: '&6&l[commandName] aliases'
+        addAliasItemName: '&a&lAdd alias'
+        removeAliasItemName: '&c&lClick to remove'
+        typeNewAlias: '&dType new alias on chat ("[cancelModel]" to cancel)'
+        enterAliasAgain: '&dEnter alias again ("[cancelModel]" to cancel)'
+        aliasRemoved: '&a&lAlias successfully removed!'
+        cantRemovedAlias: '&c&lRemoving alias failed!'
+        cancelPhrase: '&c&lCanceled'
+      commandControlGui:
+        pageName: '&5&lManage &2&l[commandName] &5&lcommands'
+        filterOn: '&f&lCurrent: &a&lON'
+        filterOff: '&f&lCurrent: &c&lOFF'
+        getUsage: '&f&lUsage: &2&l[commandUsage]'
+        getLabel: '&f&lLabel: &b&l[commandLabel]'
+        statusOn: '&f&lStatus: &a&lactive'
+        statusOff: '&f&lStatus: &c&ldisabled'
+        getAliases: '&6&lAliases:'
+        getPlugin: '&f&lPlugin: &d&l[pluginName]'
+        getEditLabel: '&b&lClick to edit'
+        itemNames:
+          activeCommandsFilterItem: '&2&lShow active commands'
+          disabledCommandsFilterItem: '&4&lShow disabled commands'
+          alphabeticOrderFilterItem: '&b&lSort in alphabetic order'
+          pluginOrderFilterItem: '&9&lSort in plugin order'
+          vanillaCommandsFilterItem: '&e&lShow default commands'
+          pluginCommandsFilterItem: '&d&lShow plugins commands'
+      singleCommandGui:
+        areYouSure: '&e&lAre you sure?'
+        receiveChangeLabelResult: '&f&lEnter label again or cancel with &d&l[cancelModel]'
+        checkIsLabelEnterCancel:
+          cancelPhrase: '&c&lCanceled'
+        receiveDisableResult:
+          canNotDisable: '&c&lCan not disable this command'
+          successfullyDisabled: '&a&lCommand successfully disabled'
+        setCommandEnable:
+          enterNewLabel: '&f&lEnter new label &c&l([cancelModel] to cancel)'
+        createPermissionItem:
+          name: '&f&lPermission for this command: &9&l[commandPermission]'
+          notSpecified: '&c&lNot specified'
+        createNameItem:
+          name: '&f&lName: &1&l[commandName]'
+          lore_1: '&f&lLabel: &e&l[commandLabel]'
+          lore_2: '&f&lClick to change label &c&l(not recommended)'
+        createAliasesItem:
+          name: '&5&lAliases:'
+          lore: '&b&lClick to add/remove alias'
+        createPluginItem:
+          nameSpecified: '&f&lCommand received from: &5&l[commandName] &f&l-> Click to see plugin'
+          nameNotSpecified: '&d&lThis command is default server command or plugin can not be specified'
+        createUsageItem:
+          name: '&f&lUsage: &d&l[commandUsage]'
+          notSpecified: '&c&lNot specified'
+        createDescriptionItem:
+          name: '&f&lDescription: &b&l[commandDescription]'
+        createActiveStatusItem:
+          name: '&e&lThis command is enabled. &f&lClick to disable this command'
+        createDisableStatusItem:
+          name: '&c&lThis command is disabled. &f&lClick to enable this command'
+    worldToolsGui:
+      enterMessageInChat: '&e&lEnter message in chat'
+      selectPlayerPageName: '&2&lSelect player'
+      worldToolsGuiPageName: '&d&lWorld Tools Gui'
+      defaultGamemode:
+        name: '&b&lSet default gamemode'
+        lore: '&f&lBy clicking this you can set default gamemode type for every player: [survival, creative, spectator, hardcore]'
+      difficulty:
+        name: '&c&lSet difficulty'
+        lore: '&f&lBy clicking this you can set world difficulty: [peaceful, easy, medium, hard]'
+      gamemode:
+        name: '&e&lGamemode'
+        lore: '&f&lSet your gamemode: [survival, creative, spectator, hardcore]'
+      reload:
+        name: '&a&lReload server'
+        lore: '&f&lBy clicking this you can reload your server'
+      say:
+        name: '&9&lSay globally'
+        lore: '&f&lBy clicking this you can write in chat to say something globally'
+      seed:
+        name: '&2&lGet world seed'
+        lore: '&f&lBy clicking this you can display world seed'
+      setWorldSpawn:
+        name: '&6&lSet worldspawn'
+        lore: '&f&l(provided by Minecraft) By clicking this you can set world spawn in position when you are staying'
+      spawnPoint:
+        name: '&4&lSet set spawn point'
+        lore: '&f&l(provided by Minecraft) By clicking this you can set spawn point to yourself in position when you are staying'
+      time:
+        name: '&d&lSet time'
+        lore: '&f&lBy clicking this you can change your world time'
+      weather:
+        name: '&5&lSet weather'
+        lore: '&f&lBy clicking this you can set your world weather'
+      worldBorder:
+        name: '&7&lSet world border'
+        lore: '&f&lBy clicking this you can set you world border'
+      xp:
+        name: '&4&lGive xp'
+        lore: '&f&lBy clicking this you can add xp'
+        chatMessage: '&f&lEnter xp amount &c&l([cancelModel] to cancel)'
+        chatCanceledMessage: '&c&lCanceled'
+      title:
+        name: '&5&lDisplay title to player'
+        lore: '&f&lBy clicking this you can send a screen title to specific player'
+        chatMessage: '&f&lEnter message to player &c&l([cancelModel] to cancel)'
+        chatCanceledMessage: '&c&lCanceled'
+      tell:
+        name: '&1&lSend private message'
+        lore: '&f&lby clicking this you can send a private message to a specific player'
+        chatMessage: '&f&lEnter message to player &c&l([cancelModel] to cancel)'
+        chatCanceledMessage: '&c&lCanceled'
+    weatherGui:
+      weatherGuiPageName: '&b&lSet weather'
+      sunny: '&e&lSunny'
+      rainy: '&9&lRainy'
+      thunder: '&7&lThunder'
+    timeGui:
+      timeGuiPageName: '&5&lSelect Time'
+      day: '&b&lDay'
+      noon: '&e&lNoon'
+      midNight: '&a&lMidnight'
+      night: '&9&lNight'
+      chatResponse: '&f&lWrite message in chat'
+      number: '&f&lTime value'
+    difficultyGui:
+      difficultyGuiPageName: '&d&lSet difficulty'
+      peaceful: '&a&lPeaceful'
+      easy: '&2&lEasy'
+      normal: '&e&lNormal'
+      hard: '&4&lHard'
+    gamemodeGui:
+      gamemodeGuiPageName: '&9&lSet your gamemode'
+      survival: '&2&lSurvival'
+      creative: '&b&lCreative'
+      hardcore: '&c&lHardcore'
+      spectator: '&6&lSpectator'
+    defaultGamemodeGui:
+      defaultGamemodeGuiPageName: '&5&lSet default gamemode'
+      survival: '&2&lSurvival'
+      creative: '&b&lCreative'
+      hardcore: '&c&lHardcore'
+      spectator: '&6&lSpectator'
+    worldBorderGui:
+      worldBorderGuiPageName: '&2&lConfigure your world border'
+      addToWorldBorder:
+        name: '&a&lAdd'
+        lore: '&f&l/worldborder add <sizeInBlocks> [timeInSeconds]'
+        chatMessage: '&f&lWrite message in chat'
+      getWorldBorder:
+        name: '&f&lActual border:'
+        lore: '&f&lworldborder size: &6&l[worldBorderSize]'
+      worldBorderWarning:
+        name: '&e&lWarning'
+        lore: '&f&l/worldborder warning time &e&l<timeInSeconds>'
+        chatMessage: '&f&lWrite message in chat'
+      worldBorderdamage:
+        name: '&c&lDamage'
+        lore: '&f&l/worldborder damage buffer &d&l<sizeInBlocks>'
+        chatMessage: '&f&lWrite message in chat'
+      centerWorldBorder:
+        name: '&d&lCenter'
+        lore: '&f&l/worldborder center &c&l<x> <z>'
+        chatMessage: '&f&lWrite message in chat'
+      setWorldBorder:
+        name: '&3&lSet'
+        lore: '&f&l/worldborder set &c&l<sizeInBlocks> [timeInSeconds]'
+        chatMessage: '&f&lWrite message in chat'
+    calendarGui:
+      calendarEndDate: '&e&lEnd Date'
+      calendarFirstDate: '&2&lFirst Date'
+      calendarGuiTitle: '&a&lSelect date'
+      calendarGuiTitleFirst: '&d&lSelect first date'
+      calendarGuiTitleSecond: '&5&lSelect second date'
+    logsGui:
+      selectPlayer: '&e&lSelect Player'
+      logsTimeGuiTitle: '&b&lChoose time range'
+      logsTimeOneDay: '&2&lMerge logs from one day'
+      logsTimeMultiDay: '&5&lMerge logs from many days'
+      logsGuiTitle: '&3&lWhose logs should be printed?'
+      logsForAll: '&5&lLogs for all players'
+      logsForPlayer: '&2&lGet logs for specified player'
+    back: '&f&lGo Back'
+    close: '&c&lClose'
+    execute: '&a&lExecute &f&l[title]'
+    expiredTime: '&6&lExpired Time'
+    unknownStatus: '&c&lUnknown status'
+    mainGui:
+      pageName: "&6&lAdmin Gui"
+      bans: '&c&lBans'
+      manageServer: "&5&lManage Server"
+      adminStaff: '&6&lAdmin Staff'
+      players: '&1&lPlayers'
+      logs: '&e&lLogs'
+    mutesGui:
+      mutedBy: '&f&lMuted by: [playerName]'
+      expiredDate: '&f&lExpired date: [date]'
+      unmute: '&f&lUnmute: [playerName]'
+    warpsGui:
+      pageName: '&5&lWarps'
+      itemName: '&d&l[warpName]'
+    singleWarpGui:
+      warpNameItem: '&a&lName: &f&l[warpName]'
+      locationItem:
+        name: '&5&lWarp Location:'
+        x: '&c&lX: &f&l[X]'
+        y: '&e&lY: &f&l[Y]'
+        z: '&9&lZ: &f&l[Z]'
+        clickToTeleport: '&b&lClick to teleport'
+      removeWarpItem: '&c&lRemove warp'
+    singleHomesGui:
+      homeNameItem:
+        name: '&a&lName: &f&l[homeName]'
+        owner: '&b&lOwner: &f&l[owner]'
+      locationItem:
+        name: '&5&lHome Location:'
+        x: '&c&lX: &f&l[X]'
+        y: '&e&lY: &f&l[Y]'
+        z: '&9&lZ: &f&l[Z]'
+        clickToTeleport: '&b&lClick to teleport'
+      removeHomeItem: '&c&lRemove home'
+    homesGui:
+      guiPageName: '[playerName] homes'
+      name: 'Name: [homeName]'
+    bansGui:
+      pageName: '&c&lBans'
+      bannedPlayersList: '&7&lBanned Players List'
+      temporaryBannedPlayersList: '&e&lTmBanned Players'
+      mutedPlayers: '&d&lMuted Players'
+      frozenPlayersList: '&1&lFrozen Players List'
+      hiddenPlayers: '&b&lHidden Players'
+      unban: '&6&lUnban &5&L[playerName]?'
+      selectTime: '&c&lSelect Time'
+      banDescription:
+        bannedBy: '&6&lBanned by: &f&l[date]'
+        bannedDate: '&6&lBan date: &f&l[date]'
+        expiredDate: '&6&lExpired date: &f&l[date]'
+        comment: '&7&lComment: &c&l[comment]'
+    playersGui:
+      pageName: "&5&lPlayers"
+      addFilter: "&5&lShow offline players"
+      filterOn: "&f&lCurrent: &a&lON"
+      filterOff: "&f&lCurrent: &c&lOFF"
+      singlePlayerGui:
+        pageName: '&6&l[playerName]'
+        lastActivity: '&6&lLast activity: &f&l[lastActivity]'
+        playerLocation:
+          name: '&d&lCurrent location'
+          x: '&c&lX: &f&l[X]'
+          y: '&b&lY: &f&l[Y]'
+          z: '&e&lZ: &f&l[Z]'
+          clickToTeleportToPlayer: '&a&lClick to teleport to player'
+          locationPlayersOffline: '&2&lLocation: &f&lPlayer is offline'
+        playerInfo:
+          banned: '&4&lThis player is banned'
+          muted: '&a&lThis player is muted'
+        unbanPlayer: '&4&lThis player is banned &f&lClick to unban'
+        tempUnbanPlayer: '&c&lThis player is banned temporary &f&lClick to remove temp-ban'
+        unMutePlayer: '&e&lThis player is muted &f&lClick to unmute'
+        status_online: '&a&lPlayer is online'
+        status_offline: '&c&lPlayer is offline'
+        status_offline_never_player_before: '&e&lPlayer has never played before'
+        killPlayer: '&4&lKill Player'
+        freezePlayer: '&9&lFreeze Player'
+        logsFromDay: '&b&lGet logs from specific day'
+        logsFromDateInterval: '&3&lGet logs from date interval'
+        releasePlayer: '&c&lRelease Player'
+        teleportPlayer: '&2&lTeleport Player'
+        teleportToPlayer: '&2&lTeleport To Player'
+        banPlayer: '&6&lBan Player'
+        mutePlayer: '&a&lMute Player'
+        inventory: '&2&lInventory'
+        homesList: '&6&lShow this player homes'
+        enderChest: '&5&lEnder Chest'
+        hidePlayer: '&f&lHide Player'
+        hidePlayer_current: '&f&lCurrent: '
+        kickPlayer: '&d&lKick Player'
+        temporaryBanPlayer: '&8&lTemporary Ban Player'
+        banGui:
+          pageName: '&0&lBan &6&l[playerName]?'
+        chooseTimeGui:
+          pageName: '&0&lChoose Time'
+          exit: '&c&lExit'
+          single:
+            second: '&7&lSecond'
+            minute: '&9&lMinute'
+            hour: '&b&lHour'
+            day: '&d&lDay'
+            week: '&5&lWeek'
+            month: '&e&lMonth'
+            year: '&6&lYear'
+          plural:
+            seconds: '&7&lSeconds'
+            minutes: '&9&lMinutes'
+            hours: '&b&lHours'
+            days: '&d&lDays'
+            weeks: '&5&lWeeks'
+            months: '&e&lMonths'
+            years: '&6&lYears'
+    adminStaffGui:
+      pageName: '&2&lAdminStaff'
+      vanish:
+        vanish: '&6&lVanish'
+        vanish_current: '&fCurrent:'
+      maintenanceMode:
+        maintenanceMode: '&7&lMaintenance Mode'
+        maintenanceMode_current: '&fCurrent:'
+      disableChat:
+        disableChat: '&b&lDisable chat for all players'
+        disableChatCurrent: '&fCurrent:'
+      adminTools: '&b&lAdmin Tools'
+      adminToolsGui:
+        pageName: '&b&lAdmin Tools'
+        adminAxe: '&e&lAdmin Axe'
+        adminPickAxe: '&9&lAdmin Pickaxe'
+        adminShovel: '&2&lAdmin Shovel'
+        adminSword: '&c&lAdmin Sword'
+        adminBow: '&d&lAdmin Bow'
+        adminHoe: '&b&lAdmin... Hoe???'

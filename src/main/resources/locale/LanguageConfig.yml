@@ -1,0 +1,135 @@
+# <================================[Admin Gui]================================>
+#
+#      WWWWWWWW                           WWWWWWWW             GGGGGGGGGGGGG
+#      W::::::W                           W::::::W          GGG::::::::::::G
+#      W::::::W                           W::::::W        GG:::::::::::::::G
+#      W::::::W                           W::::::W       G:::::GGGGGGGG::::G
+#       W:::::W           WWWWW           W:::::W       G:::::G       GGGGGG
+#        W:::::W         W:::::W         W:::::W       G:::::G
+#         W:::::W       W:::::::W       W:::::W        G:::::G
+#          W:::::W     W:::::::::W     W:::::W         G:::::G    GGGGGGGGGG
+#           W:::::W   W:::::W:::::W   W:::::W          G:::::G    G::::::::G
+#            W:::::W W:::::W W:::::W W:::::W           G:::::G    GGGGG::::G
+#             W:::::W:::::W   W:::::W:::::W            G:::::G        G::::G
+#              W:::::::::W     W:::::::::W              G:::::G       G::::G
+#               W:::::::W       W:::::::W                G:::::GGGGGGGG::::G
+#                W:::::W         W:::::W                  GG:::::::::::::::G
+#                 W:::W           W:::W                     GGG::::::GGG:::G
+#                  WWW             WWW                         GGGGGG   GGGG
+#
+# <==================================[About]==================================>
+# Remove this file to return to defaults
+# Here you can set your own language
+# by changing below values
+# Chat Colors:
+# - &0 - Black
+# - &1 - Dark Blue
+# - &2 - Dark Green
+# - &3 - Dark Aqua
+# - &4 - Dark Red
+# - &5 - Dark Purple
+# - &6 - Gold
+# - &7 - Gray
+# - &8 - Dark Gray
+# - &9 - Blue
+# - &a - Green
+# - &b - Aqua
+# - &c - Red
+# - &d - Light Purple
+# - &e - Yellow
+# - &f - White
+# Text types:
+# - &k - Obfuscated
+# - &l - Bold
+# - &m - Strikethrough
+# - &n - Underline
+# - &o - Italic
+# - &r - Color Reset
+# - \n - next Line
+# Usage:
+# ==> &l&3Word <==> &3Word <==> &lWord:
+#     - the font type must be the first, followed by the color
+#     - !!IMPORTANT if you change the order, It will not work
+# <=======[About]=======>
+General:
+  commands:
+    freeze:
+      freeze:
+        '1': '&9&lYou have been frozen by &f&l[playerName]! '
+        '2': '&9&lYou''ve frozen &f&l[playerName]'
+      unfreeze:
+        '1': '&c&lYou have been released by &f&l[playerName]!'
+        '2': '&c&lYou''ve released &f&l[playerName]'
+      playerNotFound: '&4&lPlayer &f&l[playerName] &4&lnot found'
+      offlinePlayerFrozen: '&4&lWARNING: &3&l[playerName] &e&lis offline!'
+      frozenPlayerMove: '&9&lYou are frozen!'
+    adminGui:
+      chatisDisabled: '&7Chat has been disabled!'
+      pluginMenu:
+        notExists: '&c&lPlugin does not exist'
+      commandMenu:
+        notFound: '&c&lCommand not found or is disabled'
+        resetAllCommandsWarning: '&dCalling this command will reset all your commands setting like aliases and labels, this cannot be undo. Type &l[commandLabel]  yes. &r&dIf you really want it'
+        commandsHasBeenReset: '&aCommands has been reset reload your server via /reload to apply changes'
+      playerIsOffline: '&c&lPlayer is offline'
+      youAreHiddenNow: '&4&lYou can''t be hidden &f&ltwice!'
+      playerIsHiddenNow: '&4&lPlayer &f&l[playerName] &4&lis already hidden!'
+      playerHidden: '&e&lPlayer &f&l[playerName] &e&lhas been hidden!'
+      playerNotHidden: '&2&lPlayer &f&l[playerName] &2&lis visible now!'
+      youAreHidden: '&e&lYou are hidden now!'
+      youAreNotHidden: '&2&lYou aren''t hidden now!'
+      maintenanceModeOn: '&6&lMaintenance mode is &2&loff!'
+      maintenanceModeOff: '&6&lMaintenance mode is &c&lon!'
+      maintenanceModeMessage: '&c&lSORRY &6&lbut server is in repairs!'
+      playerNotFoundAD: '&c&lYou cannot do this!'
+    ban:
+      valueNotANumber: '&c&lWrong arguments, &f&lvalue not a number'
+      bannedPlayer: '&2&lPlayer &f&l[playerName] &2&lhas been banned'
+      mustBeGreaterThan0: '&c&lBan time must be greater than 0'
+      playerNotExists: '&4&lPlayer &f&l[playerName] &4&ldoesn''t exists'
+      enterBanComment: '&e&lEnter ban comment'
+      banComment: '&e&lYou are banned to &6&l[banTime] &e&lReason: &c&l[comment]'
+      banCommentCanceled: '&c&lCanceled'
+      thisPlayerIsNotBanned: '&c&lThis player is not banned!'
+      banEnterTime: '&c&lEnter time!'
+      banReasonCom: '&c&lYou are banned to &e&l[banTime] /n &c&lReason: &e&l[comment]'
+    unBan:
+      banUnBadArgs: '&2&l/tmunban &l&3<player>'
+      unBannedPlayer: '&2&lPlayer &f&l[playerName] &2&lhas been unbanned'
+      playerToUnbanNotExists: '&4&lPlayer &f&l[playerName] &4&ldoesn''t exists'
+    mute:
+      muteBadArgs: '&2&l/mute &l&3<player> &l&e<seconds> <minutes> <hours> <days>
+        <weeks> <years>'
+      muteValueNotANumber: '&4&lWrong arguments, value not a number'
+      mutedPlayer: '&2&l[playerName] is muted'
+      mutedEarlier: '&6&l[playerName] has been muted earlier'
+      muteNotExists: '&4&l[playerName] to mute doesn''t exists'
+      muteEnterTime: '&6&lEnter Time'
+      muteMessage: '&c&lYou are muted by &e&l[sender] &e&lto &2&l[date]'
+      youAreMutedMessage: '&4&lSORRY!! &l&eYou are muted'
+    unmute:
+      unmuteBadArgs: '&2&l/unmute &l&3<player>'
+      unMutedPlayer: '&e&l[playerName] is unmuted'
+      unMutedEarlier: '&e&l[playerName] has been unmuted earlier'
+      unMuteNotExists: '&4&l[playerName] to unmute doesn''t exists'
+    permissions:
+      onlyPlayer: '&c&lOnly player can execute this command!'
+Logs:
+  gettingLogs: '&e&lGetting Logs'
+  successfullyDownloaded: '&2&lLogs created &4&l!!&f&lCheck plugins/MainAD/Logs'
+  enterMessageForDay: "&6&lEnter day: \n <yyyy/MM/dd>"
+  enterMessageForDayAndUUID: "&6&lEnter date: \n <playerName> <yyyy/MM/dd>"
+  enterMessageForDate: "&6&lEnter date: \n <yyyy/MM/dd HH:mm:ss> <yyyy/MM/dd HH:mm:ss>"
+  enterMessageForDateAndUUID: "&6&lEnter date: \n <playerName> <yyyy/MM/dd HH:mm:ss>\
+    \ <yyyy/MM/dd HH:mm:ss>"
+  wrongMessageForDay: "&c&lWrong format: \n &f&l<yyyy/MM/dd>"
+  wrongMessageForDayAndUUID: "&c&lWrong format: \n &f&l<playerName> <yyyy/MM/dd>"
+  wrongMessageForDate: "&c&lWrong format: \n &f&l<yyyy/MM/dd HH:mm:ss> <yyyy/MM/dd\
+    \ HH:mm:ss>"
+  wrongMessageForDateAndUUID: "&c&lWrong format: \n &f&l<playerName> <yyyy/MM/dd HH:mm:ss>\
+    \ <yyyy/MM/dd HH:mm:ss>"
+  PlayerNotExists: '&c&lPlayer &f&l[playerName] &c&lnot exists!'
+Chat:
+  spamKickMessage: '&4&lYou have been kicked for spamming'
+  spamKickMessageInConsole: '&3&l[playerName] &e&lhas been kicked for spamming'
+  messageForSpammingToPlayer: '&4&lHey!! &l&eStop spamming'
