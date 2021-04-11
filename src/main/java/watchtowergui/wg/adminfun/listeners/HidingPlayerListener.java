@@ -1,11 +1,5 @@
 package watchtowergui.wg.adminfun.listeners;
 
-import watchtowergui.wg.WatchTowerGui;
-import watchtowergui.wg.adminfun.events.PlayerHideEvent;
-import watchtowergui.wg.adminfun.events.PlayerUnHideEvent;
-import watchtowergui.wg.fileManager.configsutils.configs.LanguageConfig;
-import watchtowergui.wg.fileManager.sql.sqlUtils.databasescommands.AdminGuiDatabase;
-import watchtowergui.wg.managers.Permissions;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
@@ -16,6 +10,12 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import watchtowergui.wg.WatchTowerGui;
+import watchtowergui.wg.adminfun.events.PlayerHideEvent;
+import watchtowergui.wg.adminfun.events.PlayerUnHideEvent;
+import watchtowergui.wg.fileManager.configsutils.configs.LanguageConfig;
+import watchtowergui.wg.fileManager.sql.sqlUtils.databasescommands.AdminGuiDatabase;
+import watchtowergui.wg.managers.Permissions;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -153,23 +153,31 @@ public class HidingPlayerListener implements Listener {
         CommandSender sender = event.getSender();
         boolean senderIsHidingPlayer = sender instanceof Player && ((Player) sender).getUniqueId().equals(event.getPlayer().getUniqueId());
 
-        if (addPlayerToHideList(event.getPlayer().getUniqueId())) {
-            if (sender != null) {
-                if (senderIsHidingPlayer) {
-                    event.getSender().sendMessage(languageConfig.getYouAreHidden());
-                } else {
-                    event.getSender().sendMessage(languageConfig.getPlayerHidden(event.getPlayer().getName()));
-                }
-            }
-        } else {
-            if (sender != null) {
-                if (senderIsHidingPlayer) {
-                    event.getSender().sendMessage(languageConfig.getYouAreHiddenNow());
-                } else {
-                    event.getSender().sendMessage(languageConfig.getPlayerIsHiddenNow(event.getPlayer().getName()));
-                }
+        if (sender != null) {
+            if (senderIsHidingPlayer) {
+                event.getSender().sendMessage(languageConfig.getYouAreHidden());
+            } else {
+                event.getSender().sendMessage(languageConfig.getPlayerHidden(event.getPlayer().getName()));
             }
         }
+
+//        if (addPlayerToHideList(event.getPlayer().getUniqueId())) {
+//            if (sender != null) {
+//                if (senderIsHidingPlayer) {
+//                    event.getSender().sendMessage(languageConfig.getYouAreHidden());
+//                } else {
+//                    event.getSender().sendMessage(languageConfig.getPlayerHidden(event.getPlayer().getName()));
+//                }
+//            }
+//        } else {
+//            if (sender != null) {
+//                if (senderIsHidingPlayer) {
+//                    event.getSender().sendMessage(languageConfig.getYouAreHiddenNow());
+//                } else {
+//                    event.getSender().sendMessage(languageConfig.getPlayerIsHiddenNow(event.getPlayer().getName()));
+//                }
+//            }
+//        }
     }
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
