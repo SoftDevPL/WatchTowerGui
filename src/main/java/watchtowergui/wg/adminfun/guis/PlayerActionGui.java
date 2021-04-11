@@ -290,7 +290,7 @@ public class PlayerActionGui extends BasicGui {
     }
 
     public void setVanished(boolean value) {
-        this.setItem(2, 3, (value) ? vanishOnItem : vanishOffItem, player ->
+        this.setItem(1, 3, (value) ? vanishOnItem : vanishOffItem, player ->
                 player.performCommand(plugin.commandsControlListener.getMainADCommandLabel("hide")
                         + " " + offlinePlayer.getName()));
     }
