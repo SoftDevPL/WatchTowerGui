@@ -14,6 +14,7 @@ import watchtowergui.wg.logs.guis.LogsGui;
 import watchtowergui.wg.logs.utils.ConsoleChatListener;
 import watchtowergui.wg.logs.utils.LogsYmlGenerator;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -111,32 +112,46 @@ public class GetLogsFromIntervalCommandAndUUID implements CommandExecutor {
         }
     }
 
+    private boolean checkDate(String date1, String date2) {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        dateFormat.setLenient(false);
+        try {
+            dateFormat.parse(date1 + " " + date2);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (args.length == 0) {
             changeActionForPlayerNull(sender);
+            return true;
+        }
+        OfflinePlayer playerToBan = UltimateGuis.getOfflinePlayer(args[0]);
+        if (playerToBan == null) {
+            logsYmlGenerator.sendTypedMessageToSender(sender, languageConfig.getBasicPlayerNotFound(args[0]));
+            return true;
+        }
+        if (args.length == 1) {
+            changeActionForPlayerNull((CommandSender) playerToBan);
+            return true;
+        }
+        if (args.length == 5 && checkDate(args[1], args[2]) && checkDate(args[3], args[4])) {
+            Bukkit.getScheduler().runTaskAsynchronously(this.plugin,
+                    () -> {
+                        sender.sendMessage(languageConfig.getLogsGettingLogs());
+                        generateFilesWithLogs(getFromDatabase(
+                                args[0],
+                                adminGuiDatabase,
+                                args[1] + " " + args[2],
+                                args[3] + " " + args[4],
+                                sender));
+                        logsYmlGenerator.taskFinished(sender);
+                    });
         } else {
-            if (args.length == 5) {
-                OfflinePlayer playerToBan = UltimateGuis.getOfflinePlayer(args[0]);
-                if (playerToBan == null) {
-                    sendTypedMessageToSender(sender, languageConfig.getBasicPlayerNotFound(args[0]));
-                    return true;
-                }
-                Bukkit.getScheduler().runTaskAsynchronously(this.plugin,
-                        () -> {
-                            sender.sendMessage(languageConfig.getLogsGettingLogs());
-                            generateFilesWithLogs(getFromDatabase(
-                                    args[0],
-                                    adminGuiDatabase,
-                                    args[1] + " " + args[2],
-                                    args[3] + " " + args[4],
-                                    sender));
-                            logsYmlGenerator.taskFinished(sender);
-                        });
-
-            } else {
-                sendTypedMessageToSender(sender, languageConfig.getLogsWrongMessageForDateAndUUID());
-            }
+            sendTypedMessageToSender(sender, languageConfig.getLogsWrongMessageForDateAndUUID());
         }
         return true;
     }

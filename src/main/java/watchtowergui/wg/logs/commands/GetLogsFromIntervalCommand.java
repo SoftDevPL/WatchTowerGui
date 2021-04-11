@@ -12,6 +12,7 @@ import watchtowergui.wg.logs.guis.LogsGui;
 import watchtowergui.wg.logs.utils.ConsoleChatListener;
 import watchtowergui.wg.logs.utils.LogsYmlGenerator;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -67,7 +68,6 @@ public class GetLogsFromIntervalCommand implements CommandExecutor {
 
     private List<String> getDatesFromString(String chatMessage) {
         return new ArrayList<>(Arrays.asList(chatMessage.split(" ")));
-
     }
 
     private List<List<String>> getFromDatabase(AdminGuiDatabase database, String stringFirstDate, String stringSecondDate, CommandSender sender) {
@@ -88,25 +88,36 @@ public class GetLogsFromIntervalCommand implements CommandExecutor {
         return database.getLogsByDate(firstMillis, secondMillis);
     }
 
+    private boolean checkDate(String date1, String date2) {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        dateFormat.setLenient(false);
+        try {
+            dateFormat.parse(date1 + " " + date2);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (args.length == 0) {
             changeActionForPlayerNull(sender);
+            return true;
+        }
+        if (args.length == 4 && checkDate(args[0], args[1]) && checkDate(args[2],args[3])) {
+            Bukkit.getScheduler().runTaskAsynchronously(this.plugin,
+                    () -> {
+                        sender.sendMessage(languageConfig.getLogsGettingLogs());
+                        generateFilesWithLogs(getFromDatabase(
+                                adminGuiDatabase,
+                                args[0] + " " + args[1],
+                                args[2] + " " + args[3],
+                                sender));
+                        logsYmlGenerator.taskFinished(sender);
+                    });
         } else {
-            if (args.length == 4) {
-                Bukkit.getScheduler().runTaskAsynchronously(this.plugin,
-                        () -> {
-                            sender.sendMessage(languageConfig.getLogsGettingLogs());
-                            generateFilesWithLogs(getFromDatabase(
-                                    adminGuiDatabase,
-                                    args[0] + " " + args[1],
-                                    args[2] + " " + args[3],
-                                    sender));
-                            logsYmlGenerator.taskFinished(sender);
-                        });
-            } else {
-                logsYmlGenerator.sendTypedMessageToSender(sender, languageConfig.getLogsWrongMessageForDate());
-            }
+            logsYmlGenerator.sendTypedMessageToSender(sender, languageConfig.getLogsWrongMessageForDate());
         }
         return true;
     }
