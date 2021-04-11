@@ -42,6 +42,18 @@ public class HidingPlayerListener implements Listener {
         hideAllPlayersOnReload();
     }
 
+    private void loadFromDatabase() {
+        List<String> all = database.getVanishedPlayers();
+        for (String one : all) {
+            try {
+                UUID uuid = UUID.fromString(one);
+                this.hiddenPlayers.add(uuid);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     private void startScheduler() {
         Bukkit.getScheduler().scheduleSyncRepeatingTask(this.plugin, () -> {
             Collection<? extends Player> onlinePlayers = Bukkit.getOnlinePlayers();
@@ -65,8 +77,13 @@ public class HidingPlayerListener implements Listener {
         }
     }
 
-    public List<UUID> getHiddenPlayers() {
-        return hiddenPlayers;
+
+    public void disable() {
+        for (UUID uuid : hiddenPlayers) {
+            Player player = Bukkit.getPlayer(uuid);
+            if (player == null) continue;
+            this.showPlayer(player);
+        }
     }
 
     public boolean addPlayerToHideList(UUID playerUUID) {
@@ -78,24 +95,6 @@ public class HidingPlayerListener implements Listener {
             return true;
         }
         return false;
-    }
-
-    public boolean canSeeOthers(Player player) {
-        return player.hasPermission(permissions.canSeeHiddenPerm);
-    }
-
-    private void hidePlayersForThisPlayer(Player player) {
-        Collection<? extends Player> onlinePlayers = Bukkit.getOnlinePlayers();
-        for (Player p : onlinePlayers) {
-            player.hidePlayer(WatchTowerGui.getInstance(), p);
-        }
-    }
-
-    private void showPlayersForThisPlayer(Player player) {
-        Collection<? extends Player> onlinePlayers = Bukkit.getOnlinePlayers();
-        for (Player p : onlinePlayers) {
-            player.showPlayer(WatchTowerGui.getInstance(), p);
-        }
     }
 
     public boolean addPlayerToHideList(Player player) {
@@ -129,9 +128,21 @@ public class HidingPlayerListener implements Listener {
         return false;
     }
 
-    public boolean isHidden(UUID player) {
-        return hiddenPlayers.contains(player);
+
+    private void hidePlayersForThisPlayer(Player player) {
+        Collection<? extends Player> onlinePlayers = Bukkit.getOnlinePlayers();
+        for (Player p : onlinePlayers) {
+            player.hidePlayer(WatchTowerGui.getInstance(), p);
+        }
     }
+
+    private void showPlayersForThisPlayer(Player player) {
+        Collection<? extends Player> onlinePlayers = Bukkit.getOnlinePlayers();
+        for (Player p : onlinePlayers) {
+            player.showPlayer(WatchTowerGui.getInstance(), p);
+        }
+    }
+
 
     private void hidePlayer(Player player) {
         Collection<? extends Player> onlinePlayers = Bukkit.getOnlinePlayers();
@@ -152,32 +163,15 @@ public class HidingPlayerListener implements Listener {
     public void hidingPlayers(PlayerHideEvent event) {
         CommandSender sender = event.getSender();
         boolean senderIsHidingPlayer = sender instanceof Player && ((Player) sender).getUniqueId().equals(event.getPlayer().getUniqueId());
-
         if (sender != null) {
+            assert sender instanceof Player;
+            addPlayerToHideList((Player) event.getPlayer());
             if (senderIsHidingPlayer) {
                 event.getSender().sendMessage(languageConfig.getYouAreHidden());
             } else {
                 event.getSender().sendMessage(languageConfig.getPlayerHidden(event.getPlayer().getName()));
             }
         }
-
-//        if (addPlayerToHideList(event.getPlayer().getUniqueId())) {
-//            if (sender != null) {
-//                if (senderIsHidingPlayer) {
-//                    event.getSender().sendMessage(languageConfig.getYouAreHidden());
-//                } else {
-//                    event.getSender().sendMessage(languageConfig.getPlayerHidden(event.getPlayer().getName()));
-//                }
-//            }
-//        } else {
-//            if (sender != null) {
-//                if (senderIsHidingPlayer) {
-//                    event.getSender().sendMessage(languageConfig.getYouAreHiddenNow());
-//                } else {
-//                    event.getSender().sendMessage(languageConfig.getPlayerIsHiddenNow(event.getPlayer().getName()));
-//                }
-//            }
-//        }
     }
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
@@ -185,6 +179,8 @@ public class HidingPlayerListener implements Listener {
         CommandSender sender = event.getSender();
         boolean senderIsHidingPlayer = sender instanceof Player && ((Player) sender).getUniqueId().equals(event.getPlayer().getUniqueId());
         if (sender != null) {
+            assert sender instanceof Player;
+            removePlayerFromHideList((Player) event.getPlayer());
             if (senderIsHidingPlayer) {
                 event.getSender().sendMessage(languageConfig.getYouAreNotHidden());
             } else {
@@ -192,6 +188,7 @@ public class HidingPlayerListener implements Listener {
             }
         }
     }
+
 
     @EventHandler
     public void removingHidingWhenQuit(PlayerQuitEvent event) {
@@ -248,16 +245,16 @@ public class HidingPlayerListener implements Listener {
         }
     }
 
-    private void loadFromDatabase() {
-        List<String> all = database.getVanishedPlayers();
-        for (String one : all) {
-            try {
-                UUID uuid = UUID.fromString(one);
-                this.hiddenPlayers.add(uuid);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
+    public List<UUID> getHiddenPlayers() {
+        return hiddenPlayers;
+    }
+
+    public boolean isHidden(UUID player) {
+        return hiddenPlayers.contains(player);
+    }
+
+    public boolean canSeeOthers(Player player) {
+        return player.hasPermission(permissions.canSeeHiddenPerm);
     }
 
     private void addToDatabase(UUID player) {
@@ -266,13 +263,5 @@ public class HidingPlayerListener implements Listener {
 
     private void removeFromDatabase(UUID player) {
         database.deleteVanishedPlayers(player.toString());
-    }
-
-    public void disable() {
-        for (UUID uuid : hiddenPlayers) {
-            Player player = Bukkit.getPlayer(uuid);
-            if (player == null) continue;
-            this.showPlayer(player);
-        }
     }
 }
