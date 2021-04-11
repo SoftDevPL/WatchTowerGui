@@ -5,6 +5,7 @@ import ad.guis.ultimateguis.engine.basics.ListGui;
 import ad.guis.ultimateguis.examples.ConfirmGui;
 import ad.guis.ultimateguis.examples.PlayersGui;
 import ad.guis.ultimateguis.multithreading.Operation;
+import org.bukkit.ChatColor;
 import watchtowergui.wg.WatchTowerGui;
 import watchtowergui.wg.bans.listeners.PlayerBanData;
 import watchtowergui.wg.fileManager.configsutils.configs.GuiLanguageConfig;

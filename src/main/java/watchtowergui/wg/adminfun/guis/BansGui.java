@@ -54,29 +54,23 @@ public class BansGui extends BasicGui {
                             .map(OfflinePlayer::getUniqueId)
                             .collect(Collectors.toList()));
 
-            playersGui.setAction(playerFromHead -> {
-                new PlayerActionGui(Bukkit.getOfflinePlayer(playerFromHead),
-                        playersGui).open(playersGui.getLastClicker());
-            });
+            playersGui.setAction(playerFromHead -> new PlayerActionGui(Bukkit.getOfflinePlayer(playerFromHead),
+                    playersGui).open(playersGui.getLastClicker()));
             playersGui.open(player);
         });
 
         this.setItem(3, 1, tempBanItem, player -> {
             ActiveTempBansGui tempBansGui = new ActiveTempBansGui(BansGui.this);
-            tempBansGui.setAction(banData -> {
-                new PlayerActionGui(Bukkit.getOfflinePlayer(banData.getBannedPlayer()),
-                        tempBansGui).open(tempBansGui.getLastClicker());
-            });
+            tempBansGui.setAction(banData -> new PlayerActionGui(Bukkit.getOfflinePlayer(banData.getBannedPlayer()),
+                    tempBansGui).open(tempBansGui.getLastClicker()));
             tempBansGui.open(player);
         });
 
         this.setItem(4, 1, mutedPlayersItem,
                 player -> {
                     ActiveMuteGui muteGui = new ActiveMuteGui(BansGui.this);
-                    muteGui.setAction(muteData -> {
-                        new PlayerActionGui(Bukkit.getOfflinePlayer(muteData.getMutedPlayer()),
-                                muteGui).open(muteGui.getLastClicker());
-                    });
+                    muteGui.setAction(muteData -> new PlayerActionGui(Bukkit.getOfflinePlayer(muteData.getMutedPlayer()),
+                            muteGui).open(muteGui.getLastClicker()));
                     muteGui.open(player);
                 });
 
@@ -84,10 +78,8 @@ public class BansGui extends BasicGui {
             PlayersGui frozenPlayersGui = new PlayersGui(this, glc.getBansGuiFrozenPlayersList());
             frozenPlayersGui.setAction(playerFromHead ->
                     new PlayerActionGui(Bukkit.getOfflinePlayer(playerFromHead), frozenPlayersGui).open(player));
-
             frozenPlayersGui.setRefreshFunction(() ->
                     sortedPlayers(WatchTowerGui.getInstance().listenersManager.freezeListener.getFrozenPlayers()));
-
             frozenPlayersGui.open(player);
         });
 
@@ -101,23 +93,14 @@ public class BansGui extends BasicGui {
 
         this.setItem(6, 1, hiddenPlayersItem, player -> {
             PlayersGui hiddenPlayersGui = new PlayersGui(BansGui.this, glc.getBansGuiHiddenPlayers());
-
             hiddenPlayersGui.setRefreshFunction(() ->
                     sortedPlayers(WatchTowerGui.getInstance().listenersManager.hidingPlayerListener.getHiddenPlayers()));
-
-            hiddenPlayersGui.setAction(playerFromHead -> {
-                new PlayerActionGui(Bukkit.getOfflinePlayer(playerFromHead),
-                        hiddenPlayersGui).open(hiddenPlayersGui.getLastClicker());
-            });
-
+            hiddenPlayersGui.setAction(playerFromHead -> new PlayerActionGui(Bukkit.getOfflinePlayer(playerFromHead),
+                    hiddenPlayersGui).open(hiddenPlayersGui.getLastClicker()));
             hiddenPlayersGui.open(player);
         });
-
         ItemStack frame = BasicGui.createBackground(Colors.BLACK);
-
         ItemStack backgroundBlue = BasicGui.createBackground(Colors.RED);
-
-
         this.autoFrame(frame);
         this.autoFill(backgroundBlue);
     }
@@ -127,6 +110,4 @@ public class BansGui extends BasicGui {
                 .sorted(Comparator.comparing(OfflinePlayer::getName, String.CASE_INSENSITIVE_ORDER))
                 .map(OfflinePlayer::getUniqueId).collect(Collectors.toList());
     }
-
-
 }

@@ -52,29 +52,26 @@
 #     - !!IMPORTANT if you change the order, It will not work
 # <=======[About]=======>
 Chat:
-  spamKickMessage: '&4&lYou have been kicked for spamming'
+  spamKickMessage: '&c&lYou have been kicked &f&lfor spamming'
   spamKickMessageInConsole: '&3&l[playerName] &e&lhas been kicked for spamming'
-  messageForSpammingToPlayer: '&4&lHey!! &l&eStop spamming'
+  messageForSpammingToPlayer: '&c&lHey!! &f&lStop spamming'
 General:
   commands:
     basicResponses:
       playerNotFoundAD: '&4&lPlayer not found'
       playerNotFound: '&4&lPlayer &f&l[playerName] &4&lnot found'
-      onlyPlayer: '&c&lOnly player can execute this command!'
+      onlyPlayer: '&4&lOnly &f&lplayer &4&lcan execute this command!'
     logs:
-      gettingLogs: '&e&lGetting Logs'
+      gettingLogs: '&e&lGetting Logs....'
       successfullyDownloaded: '&2&lLogs created &4&l!!&f&lCheck plugins/MainAD/Logs'
       enterMessageForDay: "&6&lEnter day: \n <yyyy/MM/dd>"
       enterMessageForDayAndUUID: "&6&lEnter date: \n <playerName> <yyyy/MM/dd>"
       enterMessageForDate: "&6&lEnter date: \n <yyyy/MM/dd HH:mm:ss> <yyyy/MM/dd HH:mm:ss>"
-      enterMessageForDateAndUUID: "&6&lEnter date: \n <playerName> <yyyy/MM/dd HH:mm:ss>\
-        \ <yyyy/MM/dd HH:mm:ss>"
+      enterMessageForDateAndUUID: "&6&lEnter date: \n <playerName> <yyyy/MM/dd HH:mm:ss> <yyyy/MM/dd HH:mm:ss>"
       wrongMessageForDay: "&c&lWrong format: \n &f&l<yyyy/MM/dd>"
       wrongMessageForDayAndUUID: "&c&lWrong format: \n &f&l<playerName> <yyyy/MM/dd>"
-      wrongMessageForDate: "&c&lWrong format: \n &f&l<yyyy/MM/dd HH:mm:ss> <yyyy/MM/dd\
-        \ HH:mm:ss>"
-      wrongMessageForDateAndUUID: "&c&lWrong format: \n &f&l<playerName> <yyyy/MM/dd HH:mm:ss>\
-        \ <yyyy/MM/dd HH:mm:ss>"
+      wrongMessageForDate: "&c&lWrong format: \n &f&l<yyyy/MM/dd HH:mm:ss> <yyyy/MM/dd/HH:mm:ss>"
+      wrongMessageForDateAndUUID: "&c&lWrong format: \n &f&l<playerName> <yyyy/MM/dd HH:mm:ss> <yyyy/MM/dd HH:mm:ss>"
     freeze:
       freeze:
         '1': '&9&lYou have been frozen by &f&l[playerName]! '
@@ -82,50 +79,52 @@ General:
       unfreeze:
         '1': '&c&lYou have been released by &f&l[playerName]!'
         '2': '&c&lYou''ve released &f&l[playerName]'
-      offlinePlayerFrozen: '&4&lWARNING: &3&l[playerName] &e&lis offline!'
+      offlinePlayerFrozen: '&4&lWARNING: &f&l[playerName] &e&lis offline!'
       frozenPlayerMove: '&9&lYou are frozen!'
     listeners:
-      chatisDisabled: '&7Chat has been disabled!'
+      chatisDisabled: '&7&lChat has been disabled!'
       pluginMenu:
         notExists: '&c&lPlugin does not exist'
       commandMenu:
         notFound: '&c&lCommand not found or is disabled'
-        resetAllCommandsWarning: '&dCalling this command will reset all your commands setting like aliases and labels, this cannot be undo. Type &l[commandLabel]  yes. &r&dIf you really want it'
-        commandsHasBeenReset: '&aCommands has been reset reload your server via /reload to apply changes'
+        resetAllCommandsWarning: '&d&lCalling this command will reset all your commands setting like aliases and labels, this cannot be undo. Type &f&l[commandLabel] yes. &d&lIf you really want it'
+        commandsHasBeenReset: '&f&lCommands has been reset reload your server by typing &a&l /reload &f&lto apply changes'
     hide:
-      youAreHiddenNow: '&4&lYou can not be hidden &f&ltwice!'
+      youAreHiddenNow: '&f&lYou &4&lcan not &f&lbe hidden twice!'
       playerIsHiddenNow: '&4&lPlayer &f&l[playerName] &4&lis already hidden!'
-      playerHidden: '&e&lPlayer &f&l[playerName] &e&lhas been hidden!'
-      playerNotHidden: '&2&lPlayer &f&l[playerName] &2&lis visible now!'
-      youAreHidden: '&e&lYou are hidden now!'
-      youAreNotHidden: '&2&lYou aren''t hidden now!'
+      playerHidden: '&f&lPlayer &e&l[playerName] &f&lhas been hidden!'
+      playerNotHidden: '&f&lPlayer &2&l[playerName] &f&lis visible now!'
+      youAreHidden: '&f&lYou &e&lare hidden &f&lnow!'
+      youAreNotHidden: '&f&lYou &2&lare not hidden &f&lnow!'
     maintenanceMode:
       maintenanceModeOn: '&6&lMaintenance mode is &2&loff!'
       maintenanceModeOff: '&6&lMaintenance mode is &c&lon!'
-      maintenanceModeKickMessage: '&c&lSORRY &6&lbut server is in repairs!'
+      # Message is in "double quotes" because if not \n will not work!
+      maintenanceModeKickMessage: "&c&lSORRY! \n &6&lServer &f&lencountered an unprecedented problem \n &a&lTry again later!"
     ban:
       valueNotANumber: '&c&lWrong arguments, &f&lvalue not a number'
-      bannedPlayer: '&2&lPlayer &f&l[playerName] &2&lhas been banned'
+      bannedPlayer: '&f&lPlayer &2&l[playerName] &f&lhas been banned'
       mustBeGreaterThan0: '&c&lBan time must be greater than 0'
       enterBanComment: '&e&lEnter ban comment'
-      banComment: '&e&lYou are banned to &6&l[banTime] &e&lReason: &c&l[comment]'
+      # Message is in "double quotes" because if not \n will not work!
+      banComment: "&f&lYou are banned to &6&l[banTime] \n &f&lReason: &c&l[comment]"
       banCommentCanceled: '&c&lCanceled'
-      thisPlayerIsNotBanned: '&c&lThis player is not banned!'
+      thisPlayerIsNotBanned: '&f&lThis player &c&lis &f&lnot banned!'
       banEnterTime: '&c&lEnter time!'
-      banReasonCom: '&c&lYou are banned to &e&l[banTime] /n &c&lReason: &e&l[comment]'
+      # Message is in "double quotes" because if not \n will not work!
+      banReasonCom: "&f&lYou are banned to &e&l[banTime] /n &f&lReason: &e&l[comment]"
     unBan:
-      banUnBadArgs: '&2&l/tmunban &l&3<player>'
+      banUnBadArgs: '&2&l/tmunban &3&l<player>'
       unBannedPlayer: '&2&lPlayer &f&l[playerName] &2&lhas been unbanned'
     mute:
-      muteBadArgs: '&2&l/mute &l&3<player> &l&e<seconds> <minutes> <hours> <days>
-        <weeks> <years>'
-      muteValueNotANumber: '&4&lWrong arguments, value not a number'
-      mutedPlayer: '&2&l[playerName] is muted'
-      mutedEarlier: '&6&l[playerName] has been muted earlier'
+      muteBadArgs: '&2&l/mute &3&l<player> &e&l<seconds> <minutes> <hours> <days> <weeks> <years>'
+      muteValueNotANumber: '&f&lWrong arguments, &f&lvalue not a number'
+      mutedPlayer: '&f&l[playerName] &6&lis muted'
+      mutedEarlier: '&f&l[playerName] &e&lhas been muted earlier'
       muteEnterTime: '&6&lEnter Time'
-      muteMessage: '&c&lYou are muted by &e&l[sender] &e&lto &2&l[date]'
-      youAreMutedMessage: '&4&lSORRY!! &l&eYou are muted'
+      muteMessage: '&b&lYou are muted by &a&l[sender] &b&lto &f&l[date]'
+      youAreMutedMessage: '&4&lSORRY!! &e&lYou are muted'
     unmute:
-      unmuteBadArgs: '&2&l/unmute &l&3<player>'
-      unMutedPlayer: '&e&l[playerName] is unmuted'
-      unMutedEarlier: '&e&l[playerName] has been unmuted earlier'
+      unmuteBadArgs: '&2&l/unmute &3&l<player>'
+      unMutedPlayer: '&f&l[playerName] &a&lis unmuted'
+      unMutedEarlier: '&f&l[playerName] &a&lhas been unmuted earlier'
