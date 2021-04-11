@@ -12,7 +12,7 @@ public class MainConfig extends ConfigAccessor {
     private String banTime;
 
     public void init() {
-        super.init("MainConfig", "configuration/");
+        super.init("Config", "configuration/");
         this.countOfTriesToBan = getIntPath(path + "chat.spamming.countOfTriesToBan");
         this.banTime = getStringPath(path + "chat.spamming.banTime");
         this.countOfTries = getIntPath(path + "chat.spamming.countOfTries");

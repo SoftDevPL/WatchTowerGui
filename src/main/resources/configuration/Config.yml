@@ -19,18 +19,30 @@
 #
 # <==================================[About]==================================>
 # Remove this file to return to defaults
-# Here you can disable any commands
-# to save in database you want.
+#  Here you can change basic
+#  server settings by setting:
+#  - boolean values => "false" <-> "true
+#  - ban time:
+#    ==> %S  => seconds => %S<number>  => example %S10  => 10 seconds
+#    ==> %Mi => minutes => %Mi<number> => example %Mi10 => 10 minutes
+#    ==> %H  => hours   => %H<number>  => example %Mi10 => 10 hours
+#    ==> %D  => days    => %D<number>  => example %Mi10 => 10 days
+#    ==> %W  => weeks   => %W<number>  => example %Mi10 => 10 weeks
+#    ==> %Mo => months  => %Mo<number> => example %Mi10 => 10 months
+#    ==> %Y  => years   => %Y<number>  => example %Mi10 => 10 years
+#    !!IMPORTANT!! => if you want to skip one value just set 0 => example => %W0
+#    ==> EXAMPLE => %S10 %Mi0 %H0 %D0 %W0 %Mo0 %Y0 ==> ban time = 10 seconds
 # <=======[About]=======>
-Commands_excluded_from_logs:
-  # Here you can specify a value that will be replaced
-  command_exclude_response: 'Command Excluded'
-  # Here you can specify commands
-  # which won't be saved in logs
-  # Example:
-  # words:
-  # - /login
-  # - /register
-  commands:
-    - /login
-    - /register
+Configurations:
+  chat:
+    # Here you can disable catching specific words see => ChatConfig.yml
+    allowBadWords: false
+    spamming:
+      # Here you can set an amount to kick when player was spamming
+      countOfTries: 4
+      # Here you can change a cooldown between messages when player was spamming
+      cooldown: 3
+      # Here you can change an amount to ban player on spamming count
+      countOfTriesToBan: 3
+      # Here you can set a ban time when player was spamming
+      banTime: '%S10 %Mi0 %H0 %D0 %W0 %Mo0 %Y0'

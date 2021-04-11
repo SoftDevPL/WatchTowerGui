@@ -9,7 +9,7 @@ public class BadWordsConfig extends ConfigAccessor {
     public final String path = "BadWords";
 
     public void init() {
-        super.init("BadWordsConfig", "configuration/");
+        super.init("ChatConfig", "configuration/");
     }
 
     public List<String> getAllWordsFromConfig() {

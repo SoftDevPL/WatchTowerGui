@@ -62,7 +62,7 @@ public class LanguageConfig extends ConfigAccessor {
     private String pluginMenuNotExists;
 
     public void init() {
-        super.init("LanguageConfig", "locale/");
+        super.init("Locale_en", "locale/");
         this.basicPlayerNotFoundAD = this.getStringPath("General.commands.basicResponses.playerNotFoundAD");
         this.basicPlayerNotFound = this.getStringPath("General.commands.basicResponses.playerNotFound");
         this.basicOnlyPlayerCanExecuteThisCommand = this.getStringPath("General.commands.basicResponses.onlyPlayer");

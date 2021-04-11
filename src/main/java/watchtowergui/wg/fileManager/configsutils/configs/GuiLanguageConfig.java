@@ -275,7 +275,7 @@ public class GuiLanguageConfig extends ConfigAccessor {
     private String playerIsOffline;
 
     public void init() {
-        super.init("GuiLanguageConfig", "locale/");
+        super.init("GuiLocale_en", "locale/");
         this.playerIsOffline = this.getStringPath("Guis.adminGui.basicResponses.playerIsOffline");
         this.singlePlayerGuiLastActivity = this.getStringPath("Guis.adminGui.playersGui.singlePlayerGui.lastActivity");
         this.singlePlayerGuiPlayerLocationName = this.getStringPath("Guis.adminGui.playersGui.singlePlayerGui.playerLocation.name");
