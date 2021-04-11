@@ -32,14 +32,17 @@ public class HidingPlayerListener implements Listener {
     private Permissions permissions;
 
     public void init() {
-
         this.plugin = WatchTowerGui.getInstance();
         this.plugin.getServer().getPluginManager().registerEvents(this, this.plugin);
         this.languageConfig = this.plugin.configsManager.languageConfig;
         this.database = this.plugin.SQLmanager.database;
         this.permissions = this.plugin.permissions;
-
         loadFromDatabase();
+        startScheduler();
+        hideAllPlayersOnReload();
+    }
+
+    private void startScheduler() {
         Bukkit.getScheduler().scheduleSyncRepeatingTask(this.plugin, () -> {
             Collection<? extends Player> onlinePlayers = Bukkit.getOnlinePlayers();
             for (Player p : onlinePlayers) {
@@ -52,6 +55,9 @@ public class HidingPlayerListener implements Listener {
                 }
             }
         }, 0, 20);
+    }
+
+    private void hideAllPlayersOnReload() {
         for (UUID uuid : hiddenPlayers) {
             Player player = Bukkit.getPlayer(uuid);
             if (player == null) continue;
@@ -143,13 +149,13 @@ public class HidingPlayerListener implements Listener {
     }
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
-    public void hiddingPlayers(PlayerHideEvent event) {
+    public void hidingPlayers(PlayerHideEvent event) {
         CommandSender sender = event.getSender();
-        boolean senderIsHiddingPlayer = sender instanceof Player && ((Player) sender).getUniqueId().equals(event.getPlayer().getUniqueId());
+        boolean senderIsHidingPlayer = sender instanceof Player && ((Player) sender).getUniqueId().equals(event.getPlayer().getUniqueId());
 
         if (addPlayerToHideList(event.getPlayer().getUniqueId())) {
             if (sender != null) {
-                if (senderIsHiddingPlayer) {
+                if (senderIsHidingPlayer) {
                     event.getSender().sendMessage(languageConfig.getYouAreHidden());
                 } else {
                     event.getSender().sendMessage(languageConfig.getPlayerHidden(event.getPlayer().getName()));
@@ -157,7 +163,7 @@ public class HidingPlayerListener implements Listener {
             }
         } else {
             if (sender != null) {
-                if (senderIsHiddingPlayer) {
+                if (senderIsHidingPlayer) {
                     event.getSender().sendMessage(languageConfig.getYouAreHiddenNow());
                 } else {
                     event.getSender().sendMessage(languageConfig.getPlayerIsHiddenNow(event.getPlayer().getName()));
