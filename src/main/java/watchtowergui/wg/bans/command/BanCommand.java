@@ -41,7 +41,7 @@ public class BanCommand extends OfflinePlayerTabCompleter implements CommandExec
         if (args.length > 0) {
             OfflinePlayer playerToBan = UltimateGuis.getOfflinePlayer(args[0]);
             if (playerToBan == null) {
-                sender.sendMessage(languageConfig.getBanPlayerNotExists(args[0]));
+                sender.sendMessage(languageConfig.getBasicPlayerNotFound(args[0]));
                 return true;
             }
             if (!this.watchTowerGui.listenersManager.tempBanListener.isPlayerBanned(playerToBan.getUniqueId())) {

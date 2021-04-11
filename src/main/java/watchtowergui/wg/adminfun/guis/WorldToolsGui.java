@@ -169,7 +169,7 @@ public class WorldToolsGui extends BasicGui {
                     }
                     Player onlinePlayer = Bukkit.getPlayer(offlinePlayer);
                     if (onlinePlayer == null) {
-                        player.sendMessage(WatchTowerGui.getInstance().configsManager.languageConfig.getPlayerIsOffline());
+                        player.sendMessage(glc.getPlayerIsOffline());
                         return true;
                     }
                     onlinePlayer.sendTitle(

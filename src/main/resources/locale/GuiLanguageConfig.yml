@@ -53,6 +53,8 @@
 # <=======[About]=======>
 Guis:
   adminGui:
+    basicResponses:
+      playerIsOffline: '&c&lPlayer is offline'
     serverControl:
       serverControlGui:
         guiTitle: '&5&lManage your server'

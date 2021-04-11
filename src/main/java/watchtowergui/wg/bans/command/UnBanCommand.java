@@ -34,7 +34,7 @@ public class UnBanCommand implements CommandExecutor, TabCompleter {
         if (args.length >= 1) {
             OfflinePlayer offlinePlayer = UltimateGuis.getOfflinePlayer(args[0]);
             if (offlinePlayer == null) {
-                sender.sendMessage(languageConfig.getPlayerToUnbanNotExists(args[0]));
+                sender.sendMessage(languageConfig.getBasicPlayerNotFound(args[0]));
                 return true;
             }
             if (!this.watchTowerGui.listenersManager.tempBanListener.isPlayerBanned(offlinePlayer.getUniqueId())) {

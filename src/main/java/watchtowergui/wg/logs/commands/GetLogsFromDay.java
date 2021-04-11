@@ -21,6 +21,11 @@ import java.util.List;
 
 public class GetLogsFromDay implements CommandExecutor {
 
+
+    //TODO
+    /*
+    Repair uuid
+     */
     private final WatchTowerGui plugin;
     private final ConsoleChatListener consoleChatListener;
     public AdminGuiDatabase adminGuiDatabase;

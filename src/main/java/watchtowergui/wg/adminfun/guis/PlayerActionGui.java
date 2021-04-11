@@ -4,13 +4,6 @@ import ad.guis.ultimateguis.Colors;
 import ad.guis.ultimateguis.engine.basics.BasicGui;
 import ad.guis.ultimateguis.examples.ConfirmGui;
 import ad.guis.ultimateguis.multithreading.Operation;
-import watchtowergui.wg.WatchTowerGui;
-import watchtowergui.wg.bans.guis.CustomBansGui;
-import watchtowergui.wg.fileManager.configsutils.configs.GuiLanguageConfig;
-import watchtowergui.wg.fileManager.configsutils.configs.LanguageConfig;
-import watchtowergui.wg.logs.guis.LogsGui;
-import watchtowergui.wg.managers.CommandsManager;
-import watchtowergui.wg.managers.staticclasses.CalendarCalculator;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -19,6 +12,12 @@ import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import watchtowergui.wg.WatchTowerGui;
+import watchtowergui.wg.bans.guis.CustomBansGui;
+import watchtowergui.wg.fileManager.configsutils.configs.GuiLanguageConfig;
+import watchtowergui.wg.logs.guis.LogsGui;
+import watchtowergui.wg.managers.CommandsManager;
+import watchtowergui.wg.managers.staticclasses.CalendarCalculator;
 
 public class PlayerActionGui extends BasicGui {
 
@@ -43,7 +42,6 @@ public class PlayerActionGui extends BasicGui {
     private static ItemStack unMuteItem;
     private static ItemStack backgroundBlack;
     private static boolean initFirstTime = true;
-    private final LanguageConfig languageConfig;
     private final WatchTowerGui plugin;
     public GuiLanguageConfig glc;
     OfflinePlayer offlinePlayer;
@@ -55,7 +53,6 @@ public class PlayerActionGui extends BasicGui {
         glc = plugin.configsManager.guiLanguageConfig;
         setupGui();
         this.offlinePlayer = offlinePlayer;
-        this.languageConfig = plugin.configsManager.languageConfig;
         init();
     }
 
@@ -193,13 +190,13 @@ public class PlayerActionGui extends BasicGui {
             Player p = offlinePlayer.getPlayer();
             if (p != null)
                 playerWhoClicked.openInventory(p.getInventory());
-            else playerWhoClicked.sendMessage(languageConfig.getPlayerIsOffline());
+            else playerWhoClicked.sendMessage(glc.getPlayerIsOffline());
         });
         this.setItem(3, 2, enderChest, playerWhoClicked -> {
             Player p = offlinePlayer.getPlayer();
             if (p != null)
                 playerWhoClicked.openInventory(p.getEnderChest());
-            else playerWhoClicked.sendMessage(languageConfig.getPlayerIsOffline());
+            else playerWhoClicked.sendMessage(glc.getPlayerIsOffline());
         });
         this.setItem(2, 2, logsDate, playerWhoClicked ->
                 LogsGui.logsManyDaysForPlayer(offlinePlayer.getName(), this).open(playerWhoClicked));

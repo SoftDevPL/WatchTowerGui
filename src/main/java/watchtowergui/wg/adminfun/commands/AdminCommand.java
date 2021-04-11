@@ -24,7 +24,7 @@ public class AdminCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player)) {
-            sender.sendMessage(plugin.configsManager.languageConfig.getPlayerNotFoundAD());
+            sender.sendMessage(plugin.configsManager.languageConfig.getBasicPlayerNotFoundAD());
             return true;
         }
         Player player = (Player) sender;

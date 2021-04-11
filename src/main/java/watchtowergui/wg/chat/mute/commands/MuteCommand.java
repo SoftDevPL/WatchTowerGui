@@ -32,7 +32,7 @@ public class MuteCommand implements CommandExecutor {
         }
         OfflinePlayer player = UltimateGuis.getOfflinePlayer(args[0]);
         if (player == null) {
-            sender.sendMessage(languageConfig.getMuteNotExists(args[0]));
+            sender.sendMessage(languageConfig.getBasicPlayerNotFound(args[0]));
             return true;
         }
         if (args.length == 1) {

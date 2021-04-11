@@ -90,7 +90,7 @@ public class WhiteListListener implements Listener {
     }
 
     @EventHandler
-    private void kickIfNotInMaintenaceMode(PlayerLoginEvent event) {
+    private void kickIfNotInMaintenanceMode(PlayerLoginEvent event) {
         if (maintenanceMode) {
             if (!event.getPlayer().hasPermission(permissions.maintenancePerm)) {
                 event.disallow(PlayerLoginEvent.Result.KICK_OTHER, languageConfig.getMaintenanceModeMessage());

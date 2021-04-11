@@ -55,7 +55,7 @@ public class GetLogsFromIntervalCommandAndUUID implements CommandExecutor {
                 }
                 OfflinePlayer playerToBan = UltimateGuis.getOfflinePlayer(dates.get(0));
                 if (playerToBan == null) {
-                    sendTypedMessageToSender(chatSender, languageConfig.getLogsPlayerNotExists(dates.get(0)));
+                    sendTypedMessageToSender(chatSender, languageConfig.getBasicPlayerNotFound(dates.get(0)));
                     return true;
                 }
                 if (dates.size() == 5) {
@@ -119,7 +119,7 @@ public class GetLogsFromIntervalCommandAndUUID implements CommandExecutor {
             if (args.length == 5) {
                 OfflinePlayer playerToBan = UltimateGuis.getOfflinePlayer(args[0]);
                 if (playerToBan == null) {
-                    sendTypedMessageToSender(sender, languageConfig.getLogsPlayerNotExists(args[0]));
+                    sendTypedMessageToSender(sender, languageConfig.getBasicPlayerNotFound(args[0]));
                     return true;
                 }
                 Bukkit.getScheduler().runTaskAsynchronously(this.plugin,

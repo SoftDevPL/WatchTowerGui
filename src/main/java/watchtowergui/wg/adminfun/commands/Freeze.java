@@ -29,7 +29,7 @@ public class Freeze implements CommandExecutor {
                 playerToFreeze = UltimateGuis.getOfflinePlayer(args[0]);
             }
             if (playerToFreeze == null) {
-                sender.sendMessage(this.languageConfig.getMesPlayerNotFound(args[0]));
+                sender.sendMessage(this.languageConfig.getBasicPlayerNotFound(args[0]));
                 return true;
             }
             if (freezeListener.isFrozen(playerToFreeze)) {

@@ -26,7 +26,7 @@ public class PluginMenuCommand implements CommandExecutor, TabCompleter {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, final String[] args) {
         if (!(sender instanceof Player)) {
-            sender.sendMessage(languageConfig.getOnlyPlayerCanExecuteCommand());
+            sender.sendMessage(languageConfig.getBasicOnlyPlayerCanExecuteThisCommand());
             return true;
         }
         if (args.length <= 0) {

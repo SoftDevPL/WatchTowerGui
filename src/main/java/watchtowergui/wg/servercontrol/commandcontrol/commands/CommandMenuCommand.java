@@ -30,7 +30,7 @@ public class CommandMenuCommand implements CommandExecutor, TabCompleter {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player)) {
-            sender.sendMessage(lg.getOnlyPlayerCanExecuteCommand());
+            sender.sendMessage(lg.getBasicOnlyPlayerCanExecuteThisCommand());
             return true;
         }
         if (args.length == 0) {

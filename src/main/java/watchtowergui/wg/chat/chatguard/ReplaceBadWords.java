@@ -34,6 +34,11 @@ public class ReplaceBadWords implements Listener {
     private int countsToBan;
     private List<String> badWords;
 
+    //TODO
+    /*
+    Disable banning for spamming !
+     */
+
     public void init() {
         this.watchTowerGui = WatchTowerGui.getInstance();
         this.permission = watchTowerGui.permissions;

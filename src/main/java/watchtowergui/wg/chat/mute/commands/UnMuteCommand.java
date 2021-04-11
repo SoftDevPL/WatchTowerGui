@@ -30,7 +30,7 @@ public class UnMuteCommand implements CommandExecutor {
         if (args.length == 1) {
             OfflinePlayer offlinePlayer = UltimateGuis.getOfflinePlayer(args[0]);
             if (offlinePlayer == null) {
-                sender.sendMessage(languageConfig.getUnMuteNotExists(args[0]));
+                sender.sendMessage(languageConfig.getBasicPlayerNotFound(args[0]));
                 return true;
             }
             if (muteListener.isPlayerMuted(offlinePlayer.getUniqueId())) {

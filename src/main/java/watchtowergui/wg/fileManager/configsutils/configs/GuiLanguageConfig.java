@@ -272,9 +272,11 @@ public class GuiLanguageConfig extends ConfigAccessor {
     private String adminGuiWorldBorderGuiSetWorldBorderName;
     private String adminGuiWorldBorderGuiSetWorldBorderLore;
     private String adminGuiWorldBorderGuiSetWorldBorderChatMessage;
+    private String playerIsOffline;
 
     public void init() {
         super.init("GuiLanguageConfig", "locale/");
+        this.playerIsOffline = this.getStringPath("Guis.adminGui.basicResponses.playerIsOffline");
         this.singlePlayerGuiLastActivity = this.getStringPath("Guis.adminGui.playersGui.singlePlayerGui.lastActivity");
         this.singlePlayerGuiPlayerLocationName = this.getStringPath("Guis.adminGui.playersGui.singlePlayerGui.playerLocation.name");
         this.singlePlayerGuiPlayerLocationX = this.getStringPath("Guis.adminGui.playersGui.singlePlayerGui.playerLocation.x");
@@ -542,6 +544,9 @@ public class GuiLanguageConfig extends ConfigAccessor {
         this.commandControlGuiPluginOrderFilterItem = this.getStringPath("Guis.adminGui.serverControl.commandControlGui.itemNames.pluginOrderFilterItem");
         this.commandControlGuiVanillaCommandsFilterItem = this.getStringPath("Guis.adminGui.serverControl.commandControlGui.itemNames.vanillaCommandsFilterItem");
         this.commandControlGuiPluginCommandsFilterItem = this.getStringPath("Guis.adminGui.serverControl.commandControlGui.itemNames.pluginCommandsFilterItem");
+    }
+    public String getPlayerIsOffline() {
+        return playerIsOffline;
     }
 
     public String getAdminStaffGuiDisableChat() {

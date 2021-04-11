@@ -27,7 +27,7 @@ public class PlayerMenuCommand extends OfflinePlayerTabCompleter implements Comm
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player)) {
-            sender.sendMessage(languageConfig.getPlayerNotFoundAD());
+            sender.sendMessage(languageConfig.getBasicPlayerNotFoundAD());
             return true;
         }
         Player player = (Player) sender;
@@ -37,7 +37,7 @@ public class PlayerMenuCommand extends OfflinePlayerTabCompleter implements Comm
                 playerToMenu = UltimateGuis.getOfflinePlayer(args[0]);
             }
             if (playerToMenu == null) {
-                player.sendMessage(languageConfig.getMesPlayerNotFound(args[0]));
+                player.sendMessage(languageConfig.getBasicPlayerNotFound(args[0]));
                 return true;
             }
             new PlayerActionGui(playerToMenu, null).open(player);
