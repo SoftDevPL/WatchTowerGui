@@ -1,9 +1,6 @@
-name: Release
+name: Build Jars
 
-on:
-  push:
-    tags:
-      - 'v*.*.*'
+on: [push]
 
 jobs:
   build:
@@ -19,5 +16,5 @@ jobs:
       - run: mkdir staging && cp target/*.jar staging
       - uses: actions/upload-artifact@v2
         with:
-          name: Package
+          name: Built-JARS
           path: staging
