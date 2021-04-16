@@ -17,15 +17,12 @@ import watchtowergui.wg.fileManager.configsutils.configs.LanguageConfig;
 import watchtowergui.wg.fileManager.sql.sqlUtils.databasescommands.AdminGuiDatabase;
 import watchtowergui.wg.managers.Permissions;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class HidingPlayerListener implements Listener {
 
     private final List<UUID> hiddenPlayers = new ArrayList<>();
-    private final List<UUID> permissionList = new ArrayList<>();
     private WatchTowerGui plugin;
     private LanguageConfig languageConfig;
     private AdminGuiDatabase database;
@@ -55,14 +52,16 @@ public class HidingPlayerListener implements Listener {
     }
 
     private void startScheduler() {
+        List<UUID> alreadyChecked = new ArrayList<>();
+
         Bukkit.getScheduler().scheduleSyncRepeatingTask(this.plugin, () -> {
             Collection<? extends Player> onlinePlayers = Bukkit.getOnlinePlayers();
             for (Player p : onlinePlayers) {
-                if (canSeeOthers(p) && !permissionList.contains(p.getUniqueId())) {
-                    permissionList.add(p.getUniqueId());
+                if (canSeeOthers(p) && !alreadyChecked.contains(p.getUniqueId())) {
+                    alreadyChecked.add(p.getUniqueId());
                     showPlayersForThisPlayer(p);
-                } else if (!canSeeOthers(p) && permissionList.contains(p.getUniqueId())) {
-                    permissionList.remove(p.getUniqueId());
+                } else if (!canSeeOthers(p) && alreadyChecked.contains(p.getUniqueId())) {
+                    alreadyChecked.remove(p.getUniqueId());
                     hidePlayersForThisPlayer(p);
                 }
             }
@@ -130,8 +129,10 @@ public class HidingPlayerListener implements Listener {
 
 
     private void hidePlayersForThisPlayer(Player player) {
-        Collection<? extends Player> onlinePlayers = Bukkit.getOnlinePlayers();
-        for (Player p : onlinePlayers) {
+        Collection<Player> hiddenPlayers = this.getHiddenPlayers().stream()
+                .map(Bukkit::getPlayer).filter(Objects::nonNull).collect(Collectors.toList());
+
+        for (Player p : hiddenPlayers) {
             player.hidePlayer(WatchTowerGui.getInstance(), p);
         }
     }
@@ -164,7 +165,7 @@ public class HidingPlayerListener implements Listener {
         CommandSender sender = event.getSender();
         boolean senderIsHidingPlayer = sender instanceof Player && ((Player) sender).getUniqueId().equals(event.getPlayer().getUniqueId());
         if (sender != null) {
-            assert sender instanceof Player;
+            //assert sender instanceof Player;
             addPlayerToHideList((Player) event.getPlayer());
             if (senderIsHidingPlayer) {
                 event.getSender().sendMessage(languageConfig.getYouAreHidden());
@@ -179,7 +180,7 @@ public class HidingPlayerListener implements Listener {
         CommandSender sender = event.getSender();
         boolean senderIsHidingPlayer = sender instanceof Player && ((Player) sender).getUniqueId().equals(event.getPlayer().getUniqueId());
         if (sender != null) {
-            assert sender instanceof Player;
+           // assert sender instanceof Player;
             removePlayerFromHideList((Player) event.getPlayer());
             if (senderIsHidingPlayer) {
                 event.getSender().sendMessage(languageConfig.getYouAreNotHidden());

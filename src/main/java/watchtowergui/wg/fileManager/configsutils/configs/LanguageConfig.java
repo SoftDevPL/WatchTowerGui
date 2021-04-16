@@ -1,5 +1,6 @@
 package watchtowergui.wg.fileManager.configsutils.configs;
 
+import lombok.Getter;
 import watchtowergui.wg.fileManager.configsutils.resourcesConfigGenerator.ConfigAccessor;
 import watchtowergui.wg.fileManager.configsutils.resourcesConfigGenerator.LiteralType;
 
@@ -60,6 +61,10 @@ public class LanguageConfig extends ConfigAccessor {
     private String playerIsHiddenNow;
     private String maintenanceModeOff;
     private String pluginMenuNotExists;
+    @Getter
+    private String sudoSuccess;
+    @Getter
+    private String sudoFailed;
 
     public void init() {
         super.init("Locale_en", "locale/");
@@ -118,6 +123,8 @@ public class LanguageConfig extends ConfigAccessor {
         this.unMutedEarlier = this.getStringPath("General.commands.unmute.unMutedEarlier");
         this.enterBanComment = this.getStringPath("General.commands.ban.enterBanComment");
         this.banEnterTime = this.getStringPath("General.commands.ban.enterBanComment");
+        this.sudoSuccess = this.getStringPath("General.commands.sudo.success");
+        this.sudoFailed = this.getStringPath("General.commands.sudo.failed");
     }
 
     public String getBasicOnlyPlayerCanExecuteThisCommand() {

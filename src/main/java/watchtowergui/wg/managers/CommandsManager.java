@@ -4,6 +4,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import watchtowergui.wg.WatchTowerGui;
 import watchtowergui.wg.adminfun.commands.*;
+import watchtowergui.wg.adminfun.commands.sudo.SudoCommand;
 import watchtowergui.wg.bans.command.BanCommand;
 import watchtowergui.wg.bans.command.UnBanCommand;
 import watchtowergui.wg.chat.mute.commands.MuteCommand;
@@ -71,5 +72,6 @@ public class CommandsManager {
         new CommandMenuCommand(plugin.getCommand("commandmenu"));
         new PluginMenuCommand(plugin.getCommand("pluginmenu"));
         plugin.getCommand("resetallcommands").setExecutor(new ResetAllCommandsCommand());
+        new SudoCommand(plugin.getCommand("sudo"));
     }
 }

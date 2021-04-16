@@ -1,5 +1,6 @@
 package watchtowergui.wg.managers;
 
+import watchtowergui.wg.adminfun.commands.sudo.SudoListener;
 import watchtowergui.wg.adminfun.listeners.*;
 import watchtowergui.wg.bans.listeners.CustomBansGuiListener;
 import watchtowergui.wg.bans.listeners.TempBanListener;
@@ -29,6 +30,7 @@ public class ListenersManager {
     public SingleCommandGuiListener singleCommandGuiListener;
     public AliasesGuiListener aliasesGuiListener;
     public PluginControlListener pluginControlListener;
+    public SudoListener sudoListener;
 
     public ListenersManager() {
         this.databaseLogsListenersManager = new DatabaseLogsListenersManager();
@@ -46,6 +48,7 @@ public class ListenersManager {
         this.singleCommandGuiListener = new SingleCommandGuiListener();
         this.aliasesGuiListener = new AliasesGuiListener();
         this.pluginControlListener = new PluginControlListener();
+        this.sudoListener = new SudoListener();
     }
 
     public void init() {
@@ -64,6 +67,7 @@ public class ListenersManager {
         this.singleCommandGuiListener.init();
         this.aliasesGuiListener.init();
         this.pluginControlListener.init();
+        this.sudoListener.init();
     }
 
     public void disable() {

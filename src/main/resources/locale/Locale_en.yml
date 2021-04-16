@@ -128,3 +128,6 @@ General:
       unmuteBadArgs: '&2&l/unmute &3&l<player>'
       unMutedPlayer: '&f&l[playerName] &a&lis unmuted'
       unMutedEarlier: '&f&l[playerName] &a&lhas been unmuted earlier'
+    sudo:
+      success: '&aCommand successfully revoked!'
+      failed: '&cCommand failed!'
