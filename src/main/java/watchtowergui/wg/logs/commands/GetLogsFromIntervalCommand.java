@@ -7,7 +7,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import watchtowergui.wg.WatchTowerGui;
 import watchtowergui.wg.fileManager.configsutils.configs.LanguageConfig;
-import watchtowergui.wg.fileManager.sql.sqlUtils.databasescommands.AdminGuiDatabase;
+import watchtowergui.wg.fileManager.sql.sqlUtils.Database;
 import watchtowergui.wg.logs.guis.LogsGui;
 import watchtowergui.wg.logs.utils.ConsoleChatListener;
 import watchtowergui.wg.logs.utils.LogsYmlGenerator;
@@ -24,7 +24,7 @@ public class GetLogsFromIntervalCommand implements CommandExecutor {
 
     private final WatchTowerGui plugin;
     private final ConsoleChatListener consoleChatListener;
-    public AdminGuiDatabase adminGuiDatabase;
+    public Database database;
     public LogsYmlGenerator logsYmlGenerator;
     public LanguageConfig languageConfig;
 
@@ -33,7 +33,7 @@ public class GetLogsFromIntervalCommand implements CommandExecutor {
         this.consoleChatListener = this.plugin.listenersManager.consoleChatListener;
         this.logsYmlGenerator = this.plugin.configsManager.logsYmlGenerator;
         this.languageConfig = this.plugin.configsManager.languageConfig;
-        this.adminGuiDatabase = this.plugin.SQLmanager.database;
+        this.database = this.plugin.SQLmanager.database;
     }
 
     private void changeActionForPlayerNull(CommandSender sender) {
@@ -48,7 +48,7 @@ public class GetLogsFromIntervalCommand implements CommandExecutor {
                             () -> {
                                 sender.sendMessage(languageConfig.getLogsGettingLogs());
                                 generateFilesWithLogs(getFromDatabase(
-                                        adminGuiDatabase,
+                                        database,
                                         dates.get(0) + " " + dates.get(1),
                                         dates.get(2) + " " + dates.get(3),
                                         sender));
@@ -70,7 +70,7 @@ public class GetLogsFromIntervalCommand implements CommandExecutor {
         return new ArrayList<>(Arrays.asList(chatMessage.split(" ")));
     }
 
-    private List<List<String>> getFromDatabase(AdminGuiDatabase database, String stringFirstDate, String stringSecondDate, CommandSender sender) {
+    private List<List<String>> getFromDatabase(Database database, String stringFirstDate, String stringSecondDate, CommandSender sender) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         Date date1 = null;
         Date date2 = null;
@@ -110,7 +110,7 @@ public class GetLogsFromIntervalCommand implements CommandExecutor {
                     () -> {
                         sender.sendMessage(languageConfig.getLogsGettingLogs());
                         generateFilesWithLogs(getFromDatabase(
-                                adminGuiDatabase,
+                                database,
                                 args[0] + " " + args[1],
                                 args[2] + " " + args[3],
                                 sender));

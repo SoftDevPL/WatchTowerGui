@@ -4,6 +4,8 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import watchtowergui.wg.WatchTowerGui;
 import watchtowergui.wg.adminfun.commands.*;
+import watchtowergui.wg.adminfun.commands.controlPlayer.ControlPlayerCommand;
+import watchtowergui.wg.adminfun.commands.controlPlayer.SpectatePlayerCommand;
 import watchtowergui.wg.adminfun.commands.sudo.SudoCommand;
 import watchtowergui.wg.bans.command.BanCommand;
 import watchtowergui.wg.bans.command.UnBanCommand;
@@ -58,6 +60,8 @@ public class CommandsManager {
         WatchTowerGui plugin = WatchTowerGui.getInstance();
         plugin.getCommand("freeze").setExecutor(new Freeze(plugin));
         plugin.getCommand("ad").setExecutor(new AdminCommand(plugin));
+        plugin.getCommand("control").setExecutor(new ControlPlayerCommand(plugin));
+        plugin.getCommand("spectate").setExecutor(new SpectatePlayerCommand(plugin));
         new PlayerMenuCommand(plugin.getCommand("playerMenu"));
         new BanCommand(plugin.getCommand("tmban"));
         new UnBanCommand(plugin.getCommand("tmunban"));

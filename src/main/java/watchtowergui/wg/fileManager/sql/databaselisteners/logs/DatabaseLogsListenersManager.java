@@ -5,30 +5,29 @@ import watchtowergui.wg.fileManager.sql.databaselisteners.logs.chat.WriteAndSave
 import watchtowergui.wg.fileManager.sql.databaselisteners.logs.commands.ExecuteCommandAndSaveInDatabaseListener;
 import watchtowergui.wg.fileManager.sql.databaselisteners.logs.joinandquit.JoinAndSaveUserInDatabaseListener;
 import watchtowergui.wg.fileManager.sql.databaselisteners.logs.joinandquit.QuitAndSaveUserInDatabaseListener;
-import watchtowergui.wg.fileManager.sql.sqlUtils.databasescommands.AdminGuiDatabase;
+import watchtowergui.wg.fileManager.sql.sqlUtils.Database;
 import org.bukkit.Bukkit;
-import org.bukkit.scheduler.BukkitTask;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 public class DatabaseLogsListenersManager {
 
-    private static AdminGuiDatabase adminGuiDatabase;
+    private static Database database;
     public JoinAndSaveUserInDatabaseListener joinAndSaveUserInDatabaseListener;
     public QuitAndSaveUserInDatabaseListener quitAndSaveUserInDatabaseListener;
     public ExecuteCommandAndSaveInDatabaseListener executeCommandAndSaveInDatabaseListener;
     public WriteAndSaveInDatabaseListener writeAndSaveInDatabaseListener;
     private WatchTowerGui plugin;
 
-    public static AdminGuiDatabase getAdminGuiDatabase() {
-        return adminGuiDatabase;
+    public static Database getAdminGuiDatabase() {
+        return database;
     }
 
     public void init() {
         this.plugin = WatchTowerGui.getInstance();
         initDatabaseListeners();
-        adminGuiDatabase = this.plugin.SQLmanager.database;
+        database = this.plugin.SQLmanager.database;
         deleteOldLogs();
     }
 

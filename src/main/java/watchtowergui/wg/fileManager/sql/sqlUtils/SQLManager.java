@@ -1,14 +1,11 @@
 package watchtowergui.wg.fileManager.sql.sqlUtils;
 
-import watchtowergui.wg.fileManager.sql.sqlUtils.databasescommands.AdminGuiDatabase;
-import watchtowergui.wg.fileManager.sql.sqlUtils.tables.FrozenPlayersTable;
-
 public class SQLManager {
-    public AdminGuiDatabase database;
+    public Database database;
     public FrozenPlayersTable frozenPlayersConfig;
 
     public SQLManager() {
-        this.database = new AdminGuiDatabase();
+        this.database = new Database();
         this.frozenPlayersConfig = new FrozenPlayersTable();
     }
 

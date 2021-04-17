@@ -5,6 +5,14 @@ description: Manage your server in the easiest way!
 authors: [ Devie, DJKK12 ]
 softdepend: [ UltimateGuis ]
 commands:
+  spectate:
+    usage: /spectate [player]
+    description: Spectate player
+    permission: watchTowerGui.commands.admin.spectate
+  control:
+    usage: /control [player]
+    description: Control player
+    permission: watchTowerGui.commands.admin.control
   gluday:
     usage: /gluday
     description: Get Logs From Day By UUID

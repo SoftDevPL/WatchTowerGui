@@ -4,7 +4,7 @@ import watchtowergui.wg.WatchTowerGui;
 import watchtowergui.wg.chat.mute.events.PlayerGetMuteEvent;
 import watchtowergui.wg.chat.mute.events.PlayerRemoveMuteEvent;
 import watchtowergui.wg.fileManager.configsutils.configs.LanguageConfig;
-import watchtowergui.wg.fileManager.sql.sqlUtils.databasescommands.AdminGuiDatabase;
+import watchtowergui.wg.fileManager.sql.sqlUtils.Database;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -23,11 +23,11 @@ public class MuteListener implements Listener {
     private final int schedulerDelay = 20;
     public LanguageConfig languageConfig;
     List<PlayerMuteData> muteDataList = new ArrayList<>();
-    private AdminGuiDatabase adminGuiDatabase;
+    private Database database;
 
     public void init() {
         WatchTowerGui watchTowerGui = WatchTowerGui.getInstance();
-        this.adminGuiDatabase = watchTowerGui.SQLmanager.database;
+        this.database = watchTowerGui.SQLmanager.database;
         this.languageConfig = watchTowerGui.configsManager.languageConfig;
         watchTowerGui.getServer().getPluginManager().registerEvents(this, watchTowerGui);
         getAllMutes();
@@ -35,7 +35,7 @@ public class MuteListener implements Listener {
 
             for (PlayerMuteData playerMuteData : muteDataList) {
                 if (playerMuteData.expiryTime <= System.currentTimeMillis()) {
-                    adminGuiDatabase.deleteBanFromPlayersMutesTable(playerMuteData.MutedPlayer.toString());
+                    database.deleteBanFromPlayersMutesTable(playerMuteData.MutedPlayer.toString());
                 }
             }
 
@@ -58,7 +58,7 @@ public class MuteListener implements Listener {
     }
 
     private void getAllMutes() {
-        List<List<String>> allMutes = adminGuiDatabase.getAllMuted();
+        List<List<String>> allMutes = database.getAllMuted();
         for (List<String> mute : allMutes) {
             UUID playerUUID = UUID.fromString(mute.get(0));
             long muteTime = Long.parseLong(mute.get(2));

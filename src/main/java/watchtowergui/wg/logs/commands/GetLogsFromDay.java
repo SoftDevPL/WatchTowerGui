@@ -1,15 +1,13 @@
 package watchtowergui.wg.logs.commands;
 
-import ad.guis.ultimateguis.UltimateGuis;
 import org.bukkit.Bukkit;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import watchtowergui.wg.WatchTowerGui;
 import watchtowergui.wg.fileManager.configsutils.configs.LanguageConfig;
-import watchtowergui.wg.fileManager.sql.sqlUtils.databasescommands.AdminGuiDatabase;
+import watchtowergui.wg.fileManager.sql.sqlUtils.Database;
 import watchtowergui.wg.logs.guis.LogsGui;
 import watchtowergui.wg.logs.utils.ConsoleChatListener;
 import watchtowergui.wg.logs.utils.LogsYmlGenerator;
@@ -26,7 +24,7 @@ public class GetLogsFromDay implements CommandExecutor {
 
     private final WatchTowerGui plugin;
     private final ConsoleChatListener consoleChatListener;
-    public AdminGuiDatabase adminGuiDatabase;
+    public Database database;
     public LogsYmlGenerator logsYmlGenerator;
     public LanguageConfig languageConfig;
 
@@ -35,10 +33,10 @@ public class GetLogsFromDay implements CommandExecutor {
         this.consoleChatListener = this.plugin.listenersManager.consoleChatListener;
         this.logsYmlGenerator = this.plugin.configsManager.logsYmlGenerator;
         this.languageConfig = this.plugin.configsManager.languageConfig;
-        this.adminGuiDatabase = this.plugin.SQLmanager.database;
+        this.database = this.plugin.SQLmanager.database;
     }
 
-    private List<List<String>> getFromDatabase(AdminGuiDatabase database, String StringDate, CommandSender sender) {
+    private List<List<String>> getFromDatabase(Database database, String StringDate, CommandSender sender) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         Date date = null;
         try {
@@ -68,7 +66,7 @@ public class GetLogsFromDay implements CommandExecutor {
                             () -> {
                                 sender.sendMessage(languageConfig.getLogsGettingLogs());
                                 generateFilesWithLogs(getFromDatabase(
-                                        adminGuiDatabase,
+                                        database,
                                         dates.get(0) + " 00:00:00",
                                         sender));
                                 logsYmlGenerator.taskFinished(sender);
@@ -110,7 +108,7 @@ public class GetLogsFromDay implements CommandExecutor {
                 () -> {
                     sender.sendMessage(languageConfig.getLogsGettingLogs());
                     generateFilesWithLogs(getFromDatabase(
-                            adminGuiDatabase,
+                            database,
                             args[0] + " 00:00:00",
                             sender));
                     logsYmlGenerator.taskFinished(sender);

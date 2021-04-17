@@ -129,5 +129,5 @@ General:
       unMutedPlayer: '&f&l[playerName] &a&lis unmuted'
       unMutedEarlier: '&f&l[playerName] &a&lhas been unmuted earlier'
     sudo:
-      success: '&aCommand successfully revoked!'
-      failed: '&cCommand failed!'
+      success: '&a&lCommand successfully revoked!'
+      failed: '&c&lCommand failed!'

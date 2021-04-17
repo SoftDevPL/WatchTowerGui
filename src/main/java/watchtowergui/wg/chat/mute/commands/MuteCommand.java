@@ -5,7 +5,7 @@ import watchtowergui.wg.WatchTowerGui;
 import watchtowergui.wg.bans.guis.CustomBansGui;
 import watchtowergui.wg.chat.mute.events.PlayerGetMuteEvent;
 import watchtowergui.wg.fileManager.configsutils.configs.LanguageConfig;
-import watchtowergui.wg.fileManager.sql.sqlUtils.databasescommands.AdminGuiDatabase;
+import watchtowergui.wg.fileManager.sql.sqlUtils.Database;
 import watchtowergui.wg.managers.CommandsManager;
 import watchtowergui.wg.managers.staticclasses.CalendarCalculator;
 import org.bukkit.Bukkit;
@@ -17,10 +17,10 @@ import org.bukkit.entity.Player;
 
 public class MuteCommand implements CommandExecutor {
     private final LanguageConfig languageConfig;
-    private final AdminGuiDatabase adminGuiDatabase;
+    private final Database database;
 
     public MuteCommand(WatchTowerGui watchTowerGui) {
-        this.adminGuiDatabase = watchTowerGui.SQLmanager.database;
+        this.database = watchTowerGui.SQLmanager.database;
         this.languageConfig = watchTowerGui.configsManager.languageConfig;
     }
 
@@ -60,7 +60,7 @@ public class MuteCommand implements CommandExecutor {
             }
         }
         if (banTime > 0) {
-            adminGuiDatabase.insertDataIntoPlayersMutesTable(player.getUniqueId().toString(), sender.getName(), banTime);
+            database.insertDataIntoPlayersMutesTable(player.getUniqueId().toString(), sender.getName(), banTime);
             Bukkit.getPluginManager().callEvent(new PlayerGetMuteEvent(player, sender, banTime));
             sender.sendMessage(languageConfig.getMutedPlayer(args[0]));
         }

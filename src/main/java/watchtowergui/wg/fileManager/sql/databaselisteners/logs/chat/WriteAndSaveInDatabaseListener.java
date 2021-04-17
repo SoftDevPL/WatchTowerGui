@@ -2,7 +2,7 @@ package watchtowergui.wg.fileManager.sql.databaselisteners.logs.chat;
 
 import watchtowergui.wg.WatchTowerGui;
 import watchtowergui.wg.fileManager.configsutils.configs.DisabledCommandsForLogsConfig;
-import watchtowergui.wg.fileManager.sql.sqlUtils.databasescommands.AdminGuiDatabase;
+import watchtowergui.wg.fileManager.sql.sqlUtils.Database;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -14,14 +14,14 @@ import java.util.stream.Collectors;
 
 public class WriteAndSaveInDatabaseListener implements Listener {
 
-    private final AdminGuiDatabase adminGuiDatabase;
+    private final Database database;
     private final List<String> commandsList;
     public DisabledCommandsForLogsConfig disabledCommandsForLogsConfig;
 
     public WriteAndSaveInDatabaseListener(WatchTowerGui watchTowerGui) {
         watchTowerGui.getServer().getPluginManager().registerEvents(this, watchTowerGui);
         this.disabledCommandsForLogsConfig = watchTowerGui.configsManager.disabledCommandsForLogsConfig;
-        this.adminGuiDatabase = watchTowerGui.SQLmanager.database;
+        this.database = watchTowerGui.SQLmanager.database;
         commandsList = disabledCommandsForLogsConfig.getAllWordsFromConfig();
     }
 
@@ -50,7 +50,7 @@ public class WriteAndSaveInDatabaseListener implements Listener {
                 : playerChatEvent.getMessage();
         playerChatEvent.setMessage(chatMessage);
         java.sql.Timestamp sqlTime = returnSQLDate();
-        this.adminGuiDatabase.insertIntoChatLogsTable(
+        this.database.insertIntoChatLogsTable(
                 String.valueOf(playerChatEvent.getPlayer().getUniqueId()),
                 sqlTime,
                 chatMessage);

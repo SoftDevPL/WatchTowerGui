@@ -12,7 +12,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
 import watchtowergui.wg.WatchTowerGui;
 import watchtowergui.wg.fileManager.configsutils.configs.GuiLanguageConfig;
-import watchtowergui.wg.fileManager.sql.sqlUtils.databasescommands.AdminGuiDatabase;
+import watchtowergui.wg.fileManager.sql.sqlUtils.Database;
 import watchtowergui.wg.servercontrol.commandcontrol.events.*;
 import watchtowergui.wg.servercontrol.commandcontrol.utilities.CommandIdentifier;
 
@@ -30,7 +30,7 @@ public class CommandsControlListener implements Listener {
     private final Set<CommandIdentifier> unchangeableCommands = new HashSet<>();
     private CommandMap commandMap;
     private Map<String, Command> activeCommands = new HashMap<>();
-    private AdminGuiDatabase database;
+    private Database database;
     private GuiLanguageConfig glc;
 
     public void init() {

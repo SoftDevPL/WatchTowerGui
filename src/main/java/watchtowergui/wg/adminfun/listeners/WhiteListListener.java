@@ -3,7 +3,7 @@ package watchtowergui.wg.adminfun.listeners;
 import watchtowergui.wg.WatchTowerGui;
 import watchtowergui.wg.adminfun.guis.AdminFunGui;
 import watchtowergui.wg.fileManager.configsutils.configs.LanguageConfig;
-import watchtowergui.wg.fileManager.sql.sqlUtils.databasescommands.AdminGuiDatabase;
+import watchtowergui.wg.fileManager.sql.sqlUtils.Database;
 import watchtowergui.wg.managers.Permissions;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -25,7 +25,7 @@ public class WhiteListListener implements Listener {
     public boolean maintenanceMode;
     private int maintenanceSwitchedValue = 0;
     private List<String> maintenancePlayerList;
-    private AdminGuiDatabase adminGuiDatabase;
+    private Database database;
 
     private boolean MaintenanceSwitched() {
         return this.maintenanceSwitchedValue == 1;
@@ -34,10 +34,10 @@ public class WhiteListListener implements Listener {
     public void init() {
         WatchTowerGui watchTowerGui = WatchTowerGui.getInstance();
         permissions = watchTowerGui.permissions;
-        adminGuiDatabase = watchTowerGui.SQLmanager.database;
-        this.maintenanceSwitchedValue = this.adminGuiDatabase.getMaintenanceModeSwitched();
+        database = watchTowerGui.SQLmanager.database;
+        this.maintenanceSwitchedValue = this.database.getMaintenanceModeSwitched();
         this.maintenanceMode = MaintenanceSwitched();
-        maintenancePlayerList = adminGuiDatabase.getMaintenancePlayers();
+        maintenancePlayerList = database.getMaintenancePlayers();
         setItemMode();
         languageConfig = watchTowerGui.configsManager.languageConfig;
         watchTowerGui.getServer().getPluginManager().registerEvents(this, watchTowerGui);
@@ -47,7 +47,7 @@ public class WhiteListListener implements Listener {
                 if (maintenanceMode) {
                     if (!player.hasPermission(permissions.maintenancePerm)) {
                         maintenancePlayerList.remove(player.getUniqueId().toString());
-                        adminGuiDatabase.deleteMeintenencePlayers(player.getUniqueId().toString());
+                        database.deleteMeintenencePlayers(player.getUniqueId().toString());
                         player.kickPlayer(languageConfig.getMaintenanceModeMessage());
                     }
                 }
@@ -78,14 +78,14 @@ public class WhiteListListener implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     private void addPlayerToWhiteList(AddPlayerToWhiteListEvent e) {
-        adminGuiDatabase.insertIntoMaintenanceTable(e.getPlayer().getUniqueId().toString());
+        database.insertIntoMaintenanceTable(e.getPlayer().getUniqueId().toString());
         maintenancePlayerList.add(e.getPlayer().getUniqueId().toString());
     }
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     private void removePlayerFromWhiteList(RemovePlayerFromWhiteListEvent e) {
         maintenancePlayerList.remove(e.getPlayer().getUniqueId().toString());
-        adminGuiDatabase.deleteMeintenencePlayers(e.getPlayer().getUniqueId().toString());
+        database.deleteMeintenencePlayers(e.getPlayer().getUniqueId().toString());
         e.getPlayer().getPlayer().kickPlayer(languageConfig.getMaintenanceModeMessage());
     }
 
@@ -113,8 +113,8 @@ public class WhiteListListener implements Listener {
 
     @EventHandler
     private void whiteListOn(WhiteListOnEvent e) {
-        adminGuiDatabase.deleteMaintenanceSwitchValue();
-        adminGuiDatabase.insertIntoMaintenanceSwitchTable(1);
+        database.deleteMaintenanceSwitchValue();
+        database.insertIntoMaintenanceSwitchTable(1);
         maintenanceMode = true;
         for (AdminFunGui adminFunGui : adminFunGuis) {
             adminFunGui.setMaintenanceMode(AdminFunGui.ONN);
@@ -123,8 +123,8 @@ public class WhiteListListener implements Listener {
 
     @EventHandler
     private void whiteListOff(WhiteListOffEvent e) {
-        adminGuiDatabase.deleteMaintenanceSwitchValue();
-        adminGuiDatabase.insertIntoMaintenanceSwitchTable(0);
+        database.deleteMaintenanceSwitchValue();
+        database.insertIntoMaintenanceSwitchTable(0);
         maintenanceMode = false;
         for (AdminFunGui adminFunGui : adminFunGuis) {
             adminFunGui.setMaintenanceMode(AdminFunGui.OFF);

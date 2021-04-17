@@ -8,7 +8,7 @@ import watchtowergui.wg.chat.mute.events.PlayerGetMuteEvent;
 import watchtowergui.wg.chat.mute.events.PlayerRemoveMuteEvent;
 import watchtowergui.wg.fileManager.configsutils.configs.DisabledCommandsForLogsConfig;
 import watchtowergui.wg.fileManager.configsutils.configs.LanguageConfig;
-import watchtowergui.wg.fileManager.sql.sqlUtils.databasescommands.AdminGuiDatabase;
+import watchtowergui.wg.fileManager.sql.sqlUtils.Database;
 import watchtowergui.wg.servercontrol.commandcontrol.events.CommandEvent;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -22,7 +22,7 @@ import java.util.List;
 
 public class ExecuteCommandAndSaveInDatabaseListener implements Listener {
 
-    private final AdminGuiDatabase adminGuiDatabase;
+    private final Database database;
     private final List<String> commandsList;
     public LanguageConfig languageConfig;
     public DisabledCommandsForLogsConfig disabledCommandsForLogsConfig;
@@ -30,7 +30,7 @@ public class ExecuteCommandAndSaveInDatabaseListener implements Listener {
     public ExecuteCommandAndSaveInDatabaseListener(WatchTowerGui watchTowerGui) {
         this.languageConfig = watchTowerGui.configsManager.languageConfig;
         watchTowerGui.getServer().getPluginManager().registerEvents(this, watchTowerGui);
-        this.adminGuiDatabase = watchTowerGui.SQLmanager.database;
+        this.database = watchTowerGui.SQLmanager.database;
         this.disabledCommandsForLogsConfig = watchTowerGui.configsManager.disabledCommandsForLogsConfig;
         commandsList = disabledCommandsForLogsConfig.getAllWordsFromConfig();
     }
@@ -55,7 +55,7 @@ public class ExecuteCommandAndSaveInDatabaseListener implements Listener {
                 ? disabledCommandsForLogsConfig.getCommandExcludeResponse()
                 : playerCommandPreprocessEvent.getMessage();
         java.sql.Timestamp sqlTime = returnSQLDate();
-        this.adminGuiDatabase.insertIntoCommandsLogsTable(
+        this.database.insertIntoCommandsLogsTable(
                 String.valueOf(playerCommandPreprocessEvent.getPlayer().getUniqueId()),
                 sqlTime,
                 chatMessage);
@@ -67,7 +67,7 @@ public class ExecuteCommandAndSaveInDatabaseListener implements Listener {
                 ? disabledCommandsForLogsConfig.getCommandExcludeResponse()
                 : event.getCommand();
         java.sql.Timestamp sqlTime = returnSQLDate();
-        this.adminGuiDatabase.insertIntoCommandsLogsTable(
+        this.database.insertIntoCommandsLogsTable(
                 "Server",
                 sqlTime,
                 chatMessage);
@@ -76,7 +76,7 @@ public class ExecuteCommandAndSaveInDatabaseListener implements Listener {
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     private void catchPlayerBan(PlayerGetTempBanEvent e) {
         java.sql.Timestamp sqlTime = returnSQLDate();
-        this.adminGuiDatabase.insertIntoCommandsLogsTable(
+        this.database.insertIntoCommandsLogsTable(
                 String.valueOf(e.getBannedPlayer().getUniqueId()),
                 sqlTime,
                 e.getBannedPlayer().getName() + " banned by: " + e.getComment());
@@ -86,7 +86,7 @@ public class ExecuteCommandAndSaveInDatabaseListener implements Listener {
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     private void catchPlayerUnBan(PlayerRemoveTempBanEvent e) {
         java.sql.Timestamp sqlTime = returnSQLDate();
-        this.adminGuiDatabase.insertIntoCommandsLogsTable(
+        this.database.insertIntoCommandsLogsTable(
                 String.valueOf(e.getUnBannedPlayer().getUniqueId()),
                 sqlTime,
                 e.getUnBannedPlayer().getName() + " unbanned by: " + e.getWhoUnbanned().getName());
@@ -96,7 +96,7 @@ public class ExecuteCommandAndSaveInDatabaseListener implements Listener {
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     private void catchPlayerMute(PlayerGetMuteEvent e) {
         java.sql.Timestamp sqlTime = returnSQLDate();
-        this.adminGuiDatabase.insertIntoCommandsLogsTable(
+        this.database.insertIntoCommandsLogsTable(
                 String.valueOf(e.getMutedPlayer().getUniqueId()),
                 sqlTime,
                 e.getMutedPlayer().getName() + " muted by: " + e.getWhoMuted().getName());
@@ -106,7 +106,7 @@ public class ExecuteCommandAndSaveInDatabaseListener implements Listener {
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     private void catchPlayerUnMute(PlayerRemoveMuteEvent e) {
         java.sql.Timestamp sqlTime = returnSQLDate();
-        this.adminGuiDatabase.insertIntoCommandsLogsTable(
+        this.database.insertIntoCommandsLogsTable(
                 String.valueOf(e.getUnMutedPlayer().getUniqueId()),
                 sqlTime,
                 e.getUnMutedPlayer().getName() + " unmuted by: " + e.getWhoUnMuted().getName());
@@ -120,13 +120,13 @@ public class ExecuteCommandAndSaveInDatabaseListener implements Listener {
             Player player;
             if (e.getSender() instanceof Player) {
                 player = (Player) e.getSender();
-                this.adminGuiDatabase.insertIntoCommandsLogsTable(
+                this.database.insertIntoCommandsLogsTable(
                         String.valueOf(player.getUniqueId()),
                         sqlTime,
                         e.getDescription()
                 );
             } else {
-                this.adminGuiDatabase.insertIntoCommandsLogsTable(
+                this.database.insertIntoCommandsLogsTable(
                         "info",
                         sqlTime,
                         e.getDescription()
@@ -138,7 +138,7 @@ public class ExecuteCommandAndSaveInDatabaseListener implements Listener {
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     private void chatEnabled(ChatDisabledOnEvent event) {
         java.sql.Timestamp sqlTime = returnSQLDate();
-        this.adminGuiDatabase.insertIntoCommandsLogsTable(
+        this.database.insertIntoCommandsLogsTable(
                 String.valueOf(event.getPlayer().getUniqueId()),
                 sqlTime,
                 "enabled chat"
@@ -148,7 +148,7 @@ public class ExecuteCommandAndSaveInDatabaseListener implements Listener {
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     private void chatDisabled(ChatDisabledOFFEvent event) {
         java.sql.Timestamp sqlTime = returnSQLDate();
-        this.adminGuiDatabase.insertIntoCommandsLogsTable(
+        this.database.insertIntoCommandsLogsTable(
                 String.valueOf(event.getPlayer().getUniqueId()),
                 sqlTime,
                 "disabled chat"
@@ -158,7 +158,7 @@ public class ExecuteCommandAndSaveInDatabaseListener implements Listener {
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     private void maintenanceModeON(WhiteListOnEvent event) {
         java.sql.Timestamp sqlTime = returnSQLDate();
-        this.adminGuiDatabase.insertIntoCommandsLogsTable(
+        this.database.insertIntoCommandsLogsTable(
                 String.valueOf(event.getPlayer().getUniqueId()),
                 sqlTime,
                 "maintenanceMode updated to ON"
@@ -168,7 +168,7 @@ public class ExecuteCommandAndSaveInDatabaseListener implements Listener {
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     private void maintenanceModeOFF(WhiteListOffEvent event) {
         java.sql.Timestamp sqlTime = returnSQLDate();
-        this.adminGuiDatabase.insertIntoCommandsLogsTable(
+        this.database.insertIntoCommandsLogsTable(
                 String.valueOf(event.getPlayer().getUniqueId()),
                 sqlTime,
                 "maintenanceMode updated to OFF"
@@ -178,7 +178,7 @@ public class ExecuteCommandAndSaveInDatabaseListener implements Listener {
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     private void vanishON(PlayerHideEvent event) {
         java.sql.Timestamp sqlTime = returnSQLDate();
-        this.adminGuiDatabase.insertIntoCommandsLogsTable(
+        this.database.insertIntoCommandsLogsTable(
                 String.valueOf(event.getPlayer().getUniqueId()),
                 sqlTime,
                 "Player vanished"
@@ -188,7 +188,7 @@ public class ExecuteCommandAndSaveInDatabaseListener implements Listener {
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     private void vanishOFF(PlayerUnHideEvent event) {
         java.sql.Timestamp sqlTime = returnSQLDate();
-        this.adminGuiDatabase.insertIntoCommandsLogsTable(
+        this.database.insertIntoCommandsLogsTable(
                 String.valueOf(event.getPlayer().getUniqueId()),
                 sqlTime,
                 "Player appeared"

@@ -14,7 +14,7 @@ import watchtowergui.wg.WatchTowerGui;
 import watchtowergui.wg.adminfun.events.PlayerHideEvent;
 import watchtowergui.wg.adminfun.events.PlayerUnHideEvent;
 import watchtowergui.wg.fileManager.configsutils.configs.LanguageConfig;
-import watchtowergui.wg.fileManager.sql.sqlUtils.databasescommands.AdminGuiDatabase;
+import watchtowergui.wg.fileManager.sql.sqlUtils.Database;
 import watchtowergui.wg.managers.Permissions;
 
 import java.util.*;
@@ -25,7 +25,7 @@ public class HidingPlayerListener implements Listener {
     private final List<UUID> hiddenPlayers = new ArrayList<>();
     private WatchTowerGui plugin;
     private LanguageConfig languageConfig;
-    private AdminGuiDatabase database;
+    private Database database;
     private Permissions permissions;
 
     public void init() {

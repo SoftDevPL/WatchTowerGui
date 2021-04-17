@@ -9,7 +9,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import watchtowergui.wg.WatchTowerGui;
 import watchtowergui.wg.fileManager.configsutils.configs.LanguageConfig;
-import watchtowergui.wg.fileManager.sql.sqlUtils.databasescommands.AdminGuiDatabase;
+import watchtowergui.wg.fileManager.sql.sqlUtils.Database;
 import watchtowergui.wg.logs.guis.LogsGui;
 import watchtowergui.wg.logs.utils.ConsoleChatListener;
 import watchtowergui.wg.logs.utils.LogsYmlGenerator;
@@ -26,7 +26,7 @@ public class GetLogsFromDayAndUUID implements CommandExecutor {
 
     private final WatchTowerGui plugin;
     private final ConsoleChatListener consoleChatListener;
-    public AdminGuiDatabase adminGuiDatabase;
+    public Database database;
     public LogsYmlGenerator logsYmlGenerator;
     public LanguageConfig languageConfig;
 
@@ -35,10 +35,10 @@ public class GetLogsFromDayAndUUID implements CommandExecutor {
         this.consoleChatListener = this.plugin.listenersManager.consoleChatListener;
         this.logsYmlGenerator = this.plugin.configsManager.logsYmlGenerator;
         this.languageConfig = this.plugin.configsManager.languageConfig;
-        this.adminGuiDatabase = this.plugin.SQLmanager.database;
+        this.database = this.plugin.SQLmanager.database;
     }
 
-    private List<List<String>> getFromDatabase(String playerName, AdminGuiDatabase database, String StringDate, CommandSender sender) {
+    private List<List<String>> getFromDatabase(String playerName, Database database, String StringDate, CommandSender sender) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         Date date = null;
         try {
@@ -80,7 +80,7 @@ public class GetLogsFromDayAndUUID implements CommandExecutor {
                                 sender.sendMessage(languageConfig.getLogsGettingLogs());
                                 generateFilesWithLogs(getFromDatabase(
                                         dates.get(0),
-                                        adminGuiDatabase,
+                                        database,
                                         dates.get(1) + " 00:00:00",
                                         sender));
                                 logsYmlGenerator.taskFinished(sender);
@@ -132,7 +132,7 @@ public class GetLogsFromDayAndUUID implements CommandExecutor {
                     sender.sendMessage(languageConfig.getLogsGettingLogs());
                     generateFilesWithLogs(getFromDatabase(
                             args[0],
-                            adminGuiDatabase,
+                            database,
                             args[1] + " 00:00:00",
                             sender));
                     logsYmlGenerator.taskFinished(sender);

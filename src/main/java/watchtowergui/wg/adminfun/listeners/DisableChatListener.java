@@ -5,7 +5,7 @@ import watchtowergui.wg.adminfun.events.ChatDisabledOFFEvent;
 import watchtowergui.wg.adminfun.events.ChatDisabledOnEvent;
 import watchtowergui.wg.adminfun.guis.AdminFunGui;
 import watchtowergui.wg.fileManager.configsutils.configs.LanguageConfig;
-import watchtowergui.wg.fileManager.sql.sqlUtils.databasescommands.AdminGuiDatabase;
+import watchtowergui.wg.fileManager.sql.sqlUtils.Database;
 import watchtowergui.wg.managers.Permissions;
 import lombok.Getter;
 import org.bukkit.event.EventHandler;
@@ -19,7 +19,7 @@ public class DisableChatListener implements Listener {
 
     public LanguageConfig languageConfig;
     public Permissions permissions;
-    public AdminGuiDatabase adminGuiDatabase;
+    public Database database;
     public boolean disabledChat;
     List<AdminFunGui> openedGuis = new ArrayList<>();
     @Getter
@@ -29,8 +29,8 @@ public class DisableChatListener implements Listener {
     public void init() {
         this.watchTowerGui = WatchTowerGui.getInstance();
         permissions = watchTowerGui.permissions;
-        this.adminGuiDatabase = watchTowerGui.SQLmanager.database;
-        this.disableChatValue = this.adminGuiDatabase.getDisableChatSwitched();
+        this.database = watchTowerGui.SQLmanager.database;
+        this.disableChatValue = this.database.getDisableChatSwitched();
         this.disabledChat = isDisabledChatSwitched();
         setDisabledChatForEveryGui();
         languageConfig = watchTowerGui.configsManager.languageConfig;
@@ -70,8 +70,8 @@ public class DisableChatListener implements Listener {
 
     @EventHandler
     private void chatDisabledON(ChatDisabledOnEvent event) {
-        adminGuiDatabase.deleteDisableChatSwitchValue();
-        adminGuiDatabase.insertIntoDisableChatTableSwitchTable(1);
+        database.deleteDisableChatSwitchValue();
+        database.insertIntoDisableChatTableSwitchTable(1);
         disabledChat = true;
         for (AdminFunGui adminFunGui : openedGuis) {
             adminFunGui.setDisableCharMode(AdminFunGui.ONN);
@@ -80,8 +80,8 @@ public class DisableChatListener implements Listener {
 
     @EventHandler
     private void chatDisabledOFF(ChatDisabledOFFEvent event) {
-        adminGuiDatabase.deleteDisableChatSwitchValue();
-        adminGuiDatabase.insertIntoDisableChatTableSwitchTable(0);
+        database.deleteDisableChatSwitchValue();
+        database.insertIntoDisableChatTableSwitchTable(0);
         disabledChat = false;
         for (AdminFunGui adminFunGui : openedGuis) {
             adminFunGui.setDisableCharMode(AdminFunGui.OFF);

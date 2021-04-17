@@ -5,7 +5,7 @@ import watchtowergui.wg.WatchTowerGui;
 import watchtowergui.wg.chat.mute.events.PlayerRemoveMuteEvent;
 import watchtowergui.wg.chat.mute.listeners.MuteListener;
 import watchtowergui.wg.fileManager.configsutils.configs.LanguageConfig;
-import watchtowergui.wg.fileManager.sql.sqlUtils.databasescommands.AdminGuiDatabase;
+import watchtowergui.wg.fileManager.sql.sqlUtils.Database;
 import watchtowergui.wg.managers.staticclasses.CalendarCalculator;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
@@ -16,11 +16,11 @@ import org.bukkit.command.CommandSender;
 public class UnMuteCommand implements CommandExecutor {
 
     private final LanguageConfig languageConfig;
-    private final AdminGuiDatabase adminGuiDatabase;
+    private final Database database;
     private final MuteListener muteListener;
 
     public UnMuteCommand(WatchTowerGui watchTowerGui) {
-        this.adminGuiDatabase = watchTowerGui.SQLmanager.database;
+        this.database = watchTowerGui.SQLmanager.database;
         this.muteListener = watchTowerGui.listenersManager.muteListener;
         this.languageConfig = watchTowerGui.configsManager.languageConfig;
     }
@@ -34,7 +34,7 @@ public class UnMuteCommand implements CommandExecutor {
                 return true;
             }
             if (muteListener.isPlayerMuted(offlinePlayer.getUniqueId())) {
-                adminGuiDatabase.deleteBanFromPlayersMutesTable(CalendarCalculator.getOfflinePlayerUUID(args[0]));
+                database.deleteBanFromPlayersMutesTable(CalendarCalculator.getOfflinePlayerUUID(args[0]));
                 Bukkit.getPluginManager().callEvent(new PlayerRemoveMuteEvent(CalendarCalculator.getOfflinePlayerUU(args[0]), sender));
                 sender.sendMessage(languageConfig.getUnMutedPlayer(args[0]));
                 Bukkit.getPluginManager().callEvent(new PlayerRemoveMuteEvent(offlinePlayer, sender));

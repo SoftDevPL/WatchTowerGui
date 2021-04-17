@@ -4,7 +4,7 @@ import watchtowergui.wg.WatchTowerGui;
 import watchtowergui.wg.adminfun.events.PlayerFreezeEvent;
 import watchtowergui.wg.adminfun.events.PlayerUnfreezeEvent;
 import watchtowergui.wg.fileManager.configsutils.configs.LanguageConfig;
-import watchtowergui.wg.fileManager.sql.sqlUtils.tables.FrozenPlayersTable;
+import watchtowergui.wg.fileManager.sql.sqlUtils.FrozenPlayersTable;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

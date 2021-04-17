@@ -1,13 +1,15 @@
-package watchtowergui.wg.fileManager.sql.sqlUtils.databasescommands;
+package watchtowergui.wg.fileManager.sql.sqlUtils;
 
 import ad.guis.ultimateguis.engine.Pair;
-import watchtowergui.wg.fileManager.sql.sqlUtils.CustomSQLInterface;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.entity.Player;
+import watchtowergui.wg.adminfun.commands.controlPlayer.models.SpectatingPlayer;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-public class AdminGuiDatabase extends CustomSQLInterface {
+public class Database extends CustomSQLInterface {
 
     public static final Integer COMMANDS_LOGS = 0;
     public static final Integer CHAT_LOGS = 1;
@@ -148,6 +150,25 @@ public class AdminGuiDatabase extends CustomSQLInterface {
      */
     String disableChatTable = "disable_chat_table";
     String disableChatValue = "disableChatValue";
+    /**
+     * spectatingPlayersTable
+     */
+    String spectatingPlayersTable = "spectatingPlayersTable";
+    String spectatingPlayerUUID = "spectatingPlayerUUID";
+    String spectatorLastWorldUUID = "spectatorLastWorldUUID";
+    String lastGamemode = "lastGamemode";
+    String x = "x";
+    String y = "y";
+    String z = "z";
+    String pitch = "pitch";
+    String yaw = "yaw";
+    /**
+     * spectatingPlayersTable
+     */
+    String playersWithSpectatorsTable = "playersWithSpectatorsTable";
+    String playerWithSpectatorUUID = "playerWithSpectatorUUID";
+    String spectatorUUID = "spectatorUUID";
+
 
     public void init() {
         super.init("AdminGui");
@@ -168,6 +189,18 @@ public class AdminGuiDatabase extends CustomSQLInterface {
         createMaintenanceTable(maintenanceModeTable, playerUUID);
         createMaintenanceSwitchTable(maintenanceModeSwitchTable, maintMode);
         createDisableChatTable(disableChatTable, disableChatValue);
+        createSpectatingPlayersTable(spectatingPlayersTable, spectatingPlayerUUID,lastGamemode, spectatorLastWorldUUID, x, y, z ,pitch, yaw);
+        createPlayersWithSpectators(playersWithSpectatorsTable, playerWithSpectatorUUID, spectatorUUID);
+    }
+
+    private void createPlayersWithSpectators(String playersWithSpectatorsTable, String playerWithSpectatorUUID, String spectatorUUID) {
+        String saleable = "CREATE TABLE IF NOT EXISTS " + playersWithSpectatorsTable + " (" + playerWithSpectatorUUID + " wibblewibble NOT NULL, " + spectatorUUID + " wibblewibble NOT NULL );" ;
+        createTable(saleable, this.databaseUrl);
+    }
+
+    private void createSpectatingPlayersTable(String spectatingPlayersTable, String spectatingPlayerUUID, String lastGamemode,String spectatorLastWorldUUID, String x, String y, String z, String pitch, String yaw) {
+        String saleable = "CREATE TABLE IF NOT EXISTS " + spectatingPlayersTable + " (" + spectatingPlayerUUID + " wibblewibble NOT NULL, "+ lastGamemode + " TEXT NOT NULL, " + spectatorLastWorldUUID + " wibblewibble NOT NULL, "+ x + "  REAL NOT NULL, " + y + "  REAL NOT NULL, " + z + " REAL NOT NULL, " + pitch + "  REAL NOT NULL, " + yaw + "  REAL NOT NULL);" ;
+        createTable(saleable, this.databaseUrl);
     }
 
     private void createDisableChatTable(String disableChatTable, String disableChatValue) {
@@ -255,6 +288,28 @@ public class AdminGuiDatabase extends CustomSQLInterface {
     public void createPlayersMuteTable(String tableName, String playerUUID, String muter, String muteTime) {
         String saleable = "CREATE TABLE IF NOT EXISTS " + tableName + " (" + playerUUID + " TEXT NOT NULL , " + muter + " TEXT NOT NULL , " + muteTime + " INTEGER NOT NULL );";
         createTable(saleable, this.databaseUrl);
+    }
+
+    public void insertPlayerWithSpectator(Player playerWithSpectator, Player spectatingPlayer) {
+        String sql = "INSERT INTO " + playersWithSpectatorsTable + " (" + playerWithSpectatorUUID  + ", " + spectatorUUID + ") VALUES(?,?)";
+        insertSomething(pstmt -> {
+            pstmt.setString(1, playerWithSpectator.getUniqueId().toString());
+            pstmt.setString(2, spectatingPlayer.getUniqueId().toString());
+        }, sql);
+    }
+
+    public void insertSpectatingPlayer(Player player, Location location) {
+        String sql = "INSERT INTO " + spectatingPlayersTable + " (" + spectatingPlayerUUID + ", " + lastGamemode + ", " + spectatorLastWorldUUID + ", " + x + ", " + y + ", " + z + ", " + pitch + ", " + yaw + ") VALUES(?,?,?,?,?,?,?,?)";
+        insertSomething(pstmt -> {
+            pstmt.setString(1, player.getUniqueId().toString());
+            pstmt.setString(2, player.getGameMode().name());
+            pstmt.setString(3, String.valueOf(location.getWorld().getUID()));
+            pstmt.setDouble(4, location.getX());
+            pstmt.setDouble(5, location.getY());
+            pstmt.setDouble(6, location.getZ());
+            pstmt.setFloat(7, location.getPitch());
+            pstmt.setFloat(8, location.getYaw());
+        }, sql);
     }
 
     public void changeIntoCommandsLabelTable(String commandLabelId, String commandLabelAlias) {
@@ -542,6 +597,32 @@ public class AdminGuiDatabase extends CustomSQLInterface {
         }, sql);
     }
 
+    public Map<UUID, SpectatingPlayer> getAllSpectatingPlayers() {
+        String sql = "SELECT * FROM " + spectatingPlayersTable;
+        return new Worker<Map<UUID, SpectatingPlayer>>().getSomething(rs -> {
+            Map<UUID, SpectatingPlayer> spectatingPlayers = new HashMap<>();
+            while (rs.next()) {
+                UUID playerUUID = UUID.fromString(rs.getString(this.spectatingPlayerUUID));
+                Location location = new Location(
+                        Bukkit.getWorld(UUID.fromString(rs.getString(this.spectatorLastWorldUUID))),
+                        rs.getDouble(this.x),
+                        rs.getDouble(this.y),
+                        rs.getDouble(this.z),
+                        rs.getFloat(this.pitch),
+                        rs.getFloat(this.yaw)
+                );
+                SpectatingPlayer spectatingPlayer = new SpectatingPlayer(
+                        playerUUID,
+                        rs.getString(this.lastGamemode),
+                        location
+                );
+
+                spectatingPlayers.put(playerUUID, spectatingPlayer);
+            }
+            return spectatingPlayers;
+        },sql);
+    }
+
     public List<String> getJoinLogsByUuidAndDateInterval(String uuid, long startDate, long endDate) {
         String sql = "SELECT * FROM " + joinLogsTable + " WHERE " + joinLogDate + " BETWEEN " + startDate + " AND " + endDate + " AND " + this.joinLogUUID + " = " + "\"" + uuid + "\"";
         return new Worker<List<String>>().getSomething(rs -> {
@@ -688,6 +769,17 @@ public class AdminGuiDatabase extends CustomSQLInterface {
         return switched;
     }
 
+    public Map<UUID, UUID> getAllPlayersWithSpectators() {
+        String sql = "SELECT * FROM " + playersWithSpectatorsTable;
+        return new Worker<Map<UUID, UUID>>().getSomething(rs -> {
+            Map<UUID, UUID> uuidList = new HashMap<>();
+            while (rs.next()) {
+                uuidList.put(UUID.fromString(rs.getString(this.playerWithSpectatorUUID)), UUID.fromString(rs.getString(this.spectatorUUID)));
+            }
+            return uuidList;
+        },sql);
+    }
+
     public int getDisableChatSwitched() {
         String sql = "SELECT * FROM " + disableChatTable;
         int switched = 0;
@@ -817,6 +909,15 @@ public class AdminGuiDatabase extends CustomSQLInterface {
         delete(sql);
     }
 
+    public void deletePlayerWithSpectator(String playerUUID) {
+        String sql = "DELETE FROM " + playersWithSpectatorsTable + " WHERE " + this.playerWithSpectatorUUID + " = " + "\"" + playerUUID + "\"";
+        delete(sql);
+    }
+    public void deletePlayerWithSpectatorBySpectator(String playerUUID) {
+        String sql = "DELETE FROM " + playersWithSpectatorsTable + " WHERE " + this.spectatorUUID + " = " + "\"" + playerUUID + "\"";
+        delete(sql);
+    }
+
     public void deleteAllOldLogs(int days, long dateInMili) {
         deleteLogsFromCommands(days, dateInMili);
         deleteLogsFromChat(days, dateInMili);
@@ -884,8 +985,18 @@ public class AdminGuiDatabase extends CustomSQLInterface {
         delete(sql);
     }
 
+    public void deleteSpectatingPlayerData(String spectatingPlayerUUID) {
+        String sql = "DELETE FROM " + spectatingPlayersTable + " WHERE " + this.spectatingPlayerUUID + " = " + "\"" + spectatingPlayerUUID + "\"";
+        delete(sql);
+    }
+
+    public void deleteSpectatingPlayerDataByWorld(String spectatingPlayerWorldUUID) {
+        String sql = "DELETE FROM " + spectatingPlayersTable + " WHERE " + this.spectatorLastWorldUUID + " = " + "\"" + spectatingPlayerWorldUUID + "\"";
+        delete(sql);
+    }
+
     public void delete(String query) {
-        try (Connection conn = AdminGuiDatabase.this.connect();
+        try (Connection conn = Database.this.connect();
              PreparedStatement pstmt = conn.prepareStatement(query)) {
             pstmt.executeUpdate();
         } catch (SQLException e) {
@@ -894,7 +1005,7 @@ public class AdminGuiDatabase extends CustomSQLInterface {
     }
 
     public void insertSomething(DatabaseInsertion operation, String query) {
-        try (Connection conn = AdminGuiDatabase.this.connect();
+        try (Connection conn = Database.this.connect();
              PreparedStatement pstmt = conn.prepareStatement(query)) {
             operation.insert(pstmt);
             pstmt.executeUpdate();
@@ -926,7 +1037,7 @@ public class AdminGuiDatabase extends CustomSQLInterface {
     public class Worker<T> {
         public T getSomething(DatabaseOperation<T> operation, String query) {
             T temp = null;
-            try (Connection conn = AdminGuiDatabase.this.connect();
+            try (Connection conn = Database.this.connect();
                  PreparedStatement pstmt = conn.prepareStatement(query)) {
                 ResultSet rs = pstmt.executeQuery();
                 temp = operation.operate(rs);
