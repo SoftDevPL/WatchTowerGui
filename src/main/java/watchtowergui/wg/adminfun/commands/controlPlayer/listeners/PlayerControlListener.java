@@ -14,12 +14,13 @@ import org.bukkit.util.Vector;
 import watchtowergui.wg.WatchTowerGui;
 import watchtowergui.wg.adminfun.commands.controlPlayer.events.ControlOFFPlayerEvent;
 import watchtowergui.wg.adminfun.commands.controlPlayer.events.ControlOnPlayerEvent;
+import watchtowergui.wg.adminfun.commands.controlPlayer.events.SpectateOFFPlayerEvent;
+import watchtowergui.wg.adminfun.commands.controlPlayer.events.SpectateOnPlayerEvent;
 import watchtowergui.wg.adminfun.commands.controlPlayer.models.SpectatingPlayer;
 import watchtowergui.wg.fileManager.configsutils.configs.LanguageConfig;
 import watchtowergui.wg.fileManager.sql.sqlUtils.Database;
 
 import java.util.*;
-import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 
 public class PlayerControlListener implements Listener {
@@ -32,9 +33,9 @@ public class PlayerControlListener implements Listener {
     @Getter
     private WatchTowerGui watchTowerGui;
     @Getter
-    private Map<UUID, SpectatingPlayer> spectatingPlayerLocationMap = new HashMap<>();
+    private Map<UUID, SpectatingPlayer> controllingPlayerLocationMap = new HashMap<>();
     @Getter
-    private Map<UUID, UUID> playersWithSpectators = new HashMap<>();
+    private final Map<UUID, UUID> playersWithControllers = new HashMap<>();
 
     public void init() {
         watchTowerGui = WatchTowerGui.getInstance();
@@ -42,9 +43,15 @@ public class PlayerControlListener implements Listener {
         languageConfig = watchTowerGui.configsManager.languageConfig;
         Bukkit.getServer().getPluginManager().registerEvents(this, WatchTowerGui.getInstance());
         deleteAllNotExistingWorlds();
-        spectatingPlayerLocationMap = database.getAllSpectatingPlayers();
-        playersWithSpectators = setupControlledPlayers();
+        controllingPlayerLocationMap = database.getAllControlingPlayers();
+        setupControlledPlayers();
         lockAllPlayersOnReload();
+    }
+
+    private void setupControlledPlayers() {
+        for (Map.Entry<UUID, SpectatingPlayer> entry : controllingPlayerLocationMap.entrySet()) {
+            playersWithControllers.put(entry.getValue().getControlledPlayerUUID(), entry.getKey());
+        }
     }
 
     private List<UUID> returnRetailedList(List<UUID> mainList, List<UUID> listToRetail) {
@@ -54,34 +61,60 @@ public class PlayerControlListener implements Listener {
     private void deleteAllNotExistingWorlds() {
         List<UUID> homesWorldsUUIDS = new ArrayList<>();
 
-        for (Map.Entry<UUID, SpectatingPlayer> entry : database.getAllSpectatingPlayers().entrySet()) {
+        for (Map.Entry<UUID, SpectatingPlayer> entry : database.getAllControlingPlayers().entrySet()) {
             if (entry.getValue().getLocation().getWorld() == null) {
-                this.database.deleteSpectatingPlayerData(entry.getKey().toString());
+                this.database.deleteControllingPlayerData(entry.getKey().toString());
             } else {
                 homesWorldsUUIDS.add(entry.getValue().getLocation().getWorld().getUID());
             }
         }
 
         for (UUID uuid : returnRetailedList(Bukkit.getWorlds().stream().map(World::getUID).collect(Collectors.toList()), homesWorldsUUIDS)) {
-            this.database.deleteSpectatingPlayerDataByWorld(uuid.toString());
+            this.database.deleteControllingPlayerDataByWorld(uuid.toString());
         }
-    }
-
-    private Map<UUID, UUID> setupControlledPlayers() {
-        Map<UUID, UUID> players = new HashMap<>();
-        for (Map.Entry<UUID, SpectatingPlayer> entry : spectatingPlayerLocationMap.entrySet()) {
-            players.put(entry.getValue().getControlledPlayerUUID(), entry.getKey());
-        }
-        return players;
     }
 
     private void lockAllPlayersOnReload() {
-        for (Map.Entry<UUID, SpectatingPlayer> entry : spectatingPlayerLocationMap.entrySet()) {
+        for (Map.Entry<UUID, SpectatingPlayer> entry : controllingPlayerLocationMap.entrySet()) {
             Player playerToControl = Bukkit.getPlayer(entry.getValue().getControlledPlayerUUID());
             Player controller = Bukkit.getPlayer(entry.getKey());
             if (playerToControl != null && controller != null) {
-                lockPlayer(controller, playerToControl);
+                lockPlayer(controller, playerToControl, entry.getValue().getIsControlling());
             }
+        }
+    }
+
+    private void setupPlayerAfterDisabling(Player controller, Player controllingPlayer) {
+        controllingPlayer.setAllowFlight(false);
+        SpectatingPlayer spectatingPlayer = this.controllingPlayerLocationMap.get(controller.getUniqueId());
+        GameMode gameMode = spectatingPlayer.getLastGameMode().equals(GameMode.ADVENTURE.name()) ? GameMode.ADVENTURE
+                : spectatingPlayer.getLastGameMode().equals(GameMode.CREATIVE.name()) ? GameMode.CREATIVE
+                : spectatingPlayer.getLastGameMode().equals(GameMode.SURVIVAL.name()) ? GameMode.SURVIVAL
+                : spectatingPlayer.getLastGameMode().equals(GameMode.ADVENTURE.name()) ? GameMode.ADVENTURE : GameMode.CREATIVE;
+        controller.teleport(spectatingPlayer.getLocation());
+        controller.setGameMode(gameMode);
+        playersWithControllers.remove(controllingPlayer.getUniqueId());
+        database.deleteControllingPlayerData(controller.getUniqueId().toString());
+        controllingPlayerLocationMap.remove(controller.getUniqueId());
+        Bukkit.getServer().getScheduler().cancelTask(bukkitTasks.get(controller.getUniqueId()));
+        bukkitTasks.remove(controller.getUniqueId());
+    }
+
+    private void changeControllingValue(Player controller, Player controlledPlayer, Integer isControlled) {
+        if (!playersWithControllers.containsValue(controlledPlayer.getUniqueId())) {
+            this.database.insertControllingPlayer(controller, controlledPlayer, isControlled);
+            playersWithControllers.remove(controlledPlayer.getUniqueId());
+            playersWithControllers.put(controlledPlayer.getUniqueId(), controller.getUniqueId());
+            SpectatingPlayer spectatingPlayer = new SpectatingPlayer(
+                    controller.getUniqueId(),
+                    controlledPlayer.getUniqueId(),
+                    isControlled,
+                    controller.getGameMode().name(),
+                    controller.getLocation()
+            );
+            controllingPlayerLocationMap.remove(controller.getUniqueId());
+            controllingPlayerLocationMap.put(controller.getUniqueId(), spectatingPlayer);
+            lockPlayer(controller, controlledPlayer, isControlled);
         }
     }
 
@@ -91,40 +124,35 @@ public class PlayerControlListener implements Listener {
             e.getPlayer().sendMessage(WatchTowerGui.convertColors("&c&lYou can't control &f&lyourself"));
             return;
         }
-        if (playersWithSpectators.containsValue(e.getPlayer().getUniqueId()) || playersWithSpectators.containsKey(e.getControllingPlayer().getUniqueId())) {
+        if (playersWithControllers.containsValue(e.getPlayer().getUniqueId()) || playersWithControllers.containsKey(e.getControllingPlayer().getUniqueId())) {
             e.getPlayer().sendMessage(WatchTowerGui.convertColors("&c&lSomeone is controlling this player"));
             return;
         }
-        if (!playersWithSpectators.containsValue(e.getControllingPlayer().getUniqueId())) {
-            this.database.insertSpectatingPlayer(e.getPlayer(), e.getControllingPlayer());
-            playersWithSpectators.put(e.getControllingPlayer().getUniqueId(), e.getPlayer().getUniqueId());
-            SpectatingPlayer spectatingPlayer = new SpectatingPlayer(
-                    e.getPlayer().getUniqueId(),
-                    e.getControllingPlayer().getUniqueId(),
-                    e.getPlayer().getGameMode().name(),
-                    e.getPlayer().getLocation()
-            );
-            spectatingPlayerLocationMap.put(e.getPlayer().getUniqueId(), spectatingPlayer);
-            lockPlayer(e.getPlayer(), e.getControllingPlayer());
-        }
+        changeControllingValue(e.getPlayer(), e.getControllingPlayer(), 1);
     }
 
-    private synchronized BukkitTask runScheduler(Player controller, Player playerToControl) {
-        controller.sendMessage("elo");
+    private synchronized BukkitTask runScheduler(Player controller, Player playerToControl, Integer isControlling) {
         return Bukkit.getServer().getScheduler().runTaskTimer(this.watchTowerGui, () -> {
-            Location location = controller.getLocation();
-            Vector inverseDirectionVec = controller.getLocation().getDirection().normalize().multiply(-1);
-            location.add(inverseDirectionVec);
-            playerToControl.teleport(location);
+            if (isControlling == 1) {
+                Location location = controller.getLocation();
+                Vector inverseDirectionVec = controller.getLocation().getDirection().normalize().multiply(-1);
+                location.add(inverseDirectionVec);
+                playerToControl.teleport(location);
+            } else {
+                Location location = playerToControl.getLocation();
+                Vector inverseDirectionVec = playerToControl.getLocation().getDirection().normalize().multiply(+1);
+                location.add(inverseDirectionVec);
+                controller.teleport(location);
+            }
         }, 5, 2);
     }
 
-    private void lockPlayer(Player controller, Player playerToControl) {
+    private void lockPlayer(Player controller, Player playerToControl, Integer isControlled) {
         playerToControl.setAllowFlight(true);
         controller.setGameMode(GameMode.SPECTATOR);
-        Bukkit.getServer().getScheduler().runTaskAsynchronously(this.watchTowerGui, ()-> {
+        Bukkit.getServer().getScheduler().runTaskAsynchronously(this.watchTowerGui, () -> {
             controller.teleport(playerToControl.getLocation());
-            BukkitTask task = runScheduler(controller, playerToControl);
+            BukkitTask task = runScheduler(controller, playerToControl, isControlled);
             if (!bukkitTasks.containsKey(controller.getUniqueId())) {
                 bukkitTasks.put(controller.getUniqueId(), task.getTaskId());
             }
@@ -133,96 +161,36 @@ public class PlayerControlListener implements Listener {
 
     @EventHandler
     private void onQuit(PlayerQuitEvent event) {
-        Player controller = Bukkit.getPlayer(playersWithSpectators.get(event.getPlayer().getUniqueId()));
+        Player controller = Bukkit.getPlayer(playersWithControllers.get(event.getPlayer().getUniqueId()));
         Bukkit.getServer().getPluginManager().callEvent(new ControlOFFPlayerEvent(controller, event.getPlayer()));
     }
 
     @EventHandler
-    private void controlPlayerOFF(ControlOFFPlayerEvent e) {
-        e.getControllingPlayer().setAllowFlight(false);
-        SpectatingPlayer spectatingPlayer = this.spectatingPlayerLocationMap.get(e.getPlayer().getUniqueId());
-        GameMode gameMode = spectatingPlayer.getLastGameMode().equals(GameMode.ADVENTURE.name()) ? GameMode.ADVENTURE
-                : spectatingPlayer.getLastGameMode().equals(GameMode.CREATIVE.name()) ? GameMode.CREATIVE
-                : spectatingPlayer.getLastGameMode().equals(GameMode.SURVIVAL.name()) ? GameMode.SURVIVAL
-                : spectatingPlayer.getLastGameMode().equals(GameMode.ADVENTURE.name()) ? GameMode.ADVENTURE : GameMode.CREATIVE;
-        e.getPlayer().teleport(spectatingPlayer.getLocation());
-        e.getPlayer().setGameMode(gameMode);
-        playersWithSpectators.remove(e.getControllingPlayer().getUniqueId());
-        database.deleteSpectatingPlayerData(e.getPlayer().getUniqueId().toString());
-        spectatingPlayerLocationMap.remove(e.getPlayer().getUniqueId());
-        Bukkit.getServer().getScheduler().cancelTask(bukkitTasks.get(e.getPlayer().getUniqueId()));
-        bukkitTasks.remove(e.getPlayer().getUniqueId());
+    private void spectatePlayerOn(SpectateOnPlayerEvent e) {
+        if (e.getPlayer().equals(e.getControllingPlayer())) {
+            e.getPlayer().sendMessage(WatchTowerGui.convertColors("&c&lYou can't spectate &f&lyourself"));
+            return;
+        }
+        if (playersWithControllers.containsValue(e.getPlayer().getUniqueId()) || playersWithControllers.containsKey(e.getControllingPlayer().getUniqueId())) {
+            e.getPlayer().sendMessage(WatchTowerGui.convertColors("&c&lSomeone is spectating this player"));
+            return;
+        }
+        changeControllingValue(e.getPlayer(), e.getControllingPlayer(), 0);
     }
 
-//    private void addSpectatingPlayer(Player spectatingPlayer) {
-//        if (!this.spectatingPlayerLocationMap.containsKey(spectatingPlayer.getUniqueId())) {
-//            SpectatingPlayer spectatingPlayerModel = new SpectatingPlayer(
-//                    spectatingPlayer.getUniqueId(),
-//                    spectatingPlayer.getGameMode().name(),
-//                    spectatingPlayer.getLocation()
-//            );
-//            this.spectatingPlayerLocationMap.put(spectatingPlayer.getUniqueId(), spectatingPlayerModel);
-//            this.database.insertSpectatingPlayer(spectatingPlayer, spectatingPlayer.getLocation());
-//        }
-//    }
-//
-//    private void deleteSpectatingPlayer(Player spectatingPlayer) {
-//        this.spectatingPlayerLocationMap.remove(spectatingPlayer.getUniqueId());
-//        this.database.deleteSpectatingPlayerData(spectatingPlayer.getUniqueId().toString());
-//    }
-//
-//    @EventHandler
-//    private void SpectatePlayerOn(SpectateOnPlayerEvent e) {
-//        if (e.getPlayer().equals(e.getControllingPlayer())) {
-//            e.getPlayer().sendMessage("Nie mozesz siebie");
-//            return;
-//        }
-//        this.playersWithSpectators.put(e.getControllingPlayer().getUniqueId(), e.getPlayer().getUniqueId());
-//        this.database.insertPlayerWithSpectator(e.getControllingPlayer(), e.getPlayer());
-//        addSpectatingPlayer(e.getPlayer());
-//        e.getPlayer().setGameMode(GameMode.SPECTATOR);
-//        Bukkit.getServer().getScheduler().runTaskAsynchronously(this.watchTowerGui, ()-> {
-//            e.getPlayer().teleport(e.getControllingPlayer().getLocation(), PlayerTeleportEvent.TeleportCause.PLUGIN);
-//            Bukkit.getServer().getScheduler().runTaskAsynchronously(this.watchTowerGui, ()-> {
-//                e.getPlayer().setSpectatorTarget(e.getControllingPlayer());
-//            });
-//        });
-//    }
-//
-//    @EventHandler
-//    private void SpectatePlayerOFF(SpectateOFFPlayerEvent e) {
-//        SpectatingPlayer spectatingPlayer = this.spectatingPlayerLocationMap.get(e.getPlayer().getUniqueId());
-//        GameMode gameMode = spectatingPlayer.getLastGamemode().equals(GameMode.ADVENTURE.name()) ? GameMode.ADVENTURE
-//                : spectatingPlayer.getLastGamemode().equals(GameMode.CREATIVE.name()) ? GameMode.CREATIVE
-//                : spectatingPlayer.getLastGamemode().equals(GameMode.SURVIVAL.name()) ? GameMode.SURVIVAL
-//                : spectatingPlayer.getLastGamemode().equals(GameMode.ADVENTURE.name()) ? GameMode.ADVENTURE : GameMode.CREATIVE;
-//        e.getPlayer().teleport(spectatingPlayer.getLocation());
-//        e.getPlayer().leaveVehicle();
-//        e.getPlayer().setSpectatorTarget(null);
-//        e.getPlayer().setGameMode(gameMode);
-//        deleteSpectatingPlayer(e.getPlayer());
-//        this.playersWithSpectators.remove(e.getControllingPlayer().getUniqueId());
-//        this.database.deletePlayerWithSpectator(e.getControllingPlayer().getUniqueId().toString());
-//    }
-//
-//    @EventHandler
-//    private void OnQuit(PlayerQuitEvent event) {
-//        if (playersWithSpectators.containsKey(event.getPlayer().getUniqueId())) {
-//            Bukkit.getServer().getPluginManager().callEvent(new SpectateOFFPlayerEvent(Bukkit.getPlayer(playersWithSpectators.get(event.getPlayer().getUniqueId())), event.getPlayer()));
-//        }
-//    }
-//
-//    @EventHandler
-//    private void playerSneakEvent(PlayerToggleSneakEvent e) {
-//        deleteSpectatingPlayer(e.getPlayer());
-//        UUID spectatingPlayerUUID = playersWithSpectators.keySet()
-//                .parallelStream()
-//                .filter(key -> e.getPlayer().getUniqueId().equals(playersWithSpectators.get(key)))
-//                .findFirst().orElse(null);
-//        playersWithSpectators.remove(e.getPlayer().getUniqueId());
-//        this.database.deletePlayerWithSpectator(e.getPlayer().getUniqueId().toString());
-//        if (spectatingPlayerUUID != null) {
-//            this.database.deleteSpectatingPlayerData(spectatingPlayerUUID.toString());
-//        }
-//    }
+    @EventHandler
+    private void controlPlayerOFF(ControlOFFPlayerEvent e) {
+        setupPlayerAfterDisabling(e.getPlayer(), e.getControllingPlayer());
+        if (bukkitTasks.containsKey(e.getPlayer().getUniqueId())) {
+            Bukkit.getServer().getPluginManager().callEvent(new ControlOnPlayerEvent(e.getPlayer(), e.getControllingPlayer()));
+        }
+    }
+
+    @EventHandler
+    private void spectatePlayerOFF(SpectateOFFPlayerEvent e) {
+        setupPlayerAfterDisabling(e.getPlayer(), e.getControllingPlayer());
+        if (bukkitTasks.containsKey(e.getPlayer().getUniqueId())) {
+            Bukkit.getServer().getPluginManager().callEvent(new SpectateOnPlayerEvent(e.getPlayer(), e.getControllingPlayer()));
+        }
+    }
 }

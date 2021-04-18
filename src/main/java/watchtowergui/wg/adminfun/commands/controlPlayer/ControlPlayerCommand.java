@@ -38,7 +38,7 @@ public class ControlPlayerCommand implements CommandExecutor {
             return true;
         }
         Player player = (Player) sender;
-        if (playerControlListener.getBukkitTasks().containsKey(player.getUniqueId())) {
+      if (playerControlListener.getControllingPlayerLocationMap().containsKey(player.getUniqueId())) {
             Bukkit.getServer().getPluginManager().callEvent(new ControlOFFPlayerEvent(player, playerToControl));
         } else {
             Bukkit.getServer().getPluginManager().callEvent(new ControlOnPlayerEvent(player, playerToControl));

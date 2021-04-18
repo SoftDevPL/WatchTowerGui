@@ -38,7 +38,7 @@ public class SpectatePlayerCommand implements CommandExecutor {
             return true;
         }
         Player player = (Player) sender;
-        if (playerControlListener.getSpectatingPlayerLocationMap().containsKey(player.getUniqueId())) {
+        if (playerControlListener.getControllingPlayerLocationMap().containsKey(player.getUniqueId())) {
             Bukkit.getServer().getPluginManager().callEvent(new SpectateOFFPlayerEvent(player, playerToWatch));
         } else {
             Bukkit.getServer().getPluginManager().callEvent(new SpectateOnPlayerEvent(player, playerToWatch));

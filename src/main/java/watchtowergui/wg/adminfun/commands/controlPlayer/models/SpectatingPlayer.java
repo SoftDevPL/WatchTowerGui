@@ -14,6 +14,8 @@ public class SpectatingPlayer {
 
     private UUID spectatingPlayerUUID;
 
+    private Integer isControlling;
+
     private String lastGameMode;
 
     private Location location;

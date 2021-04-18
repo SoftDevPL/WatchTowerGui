@@ -151,13 +151,14 @@ public class Database extends CustomSQLInterface {
     String disableChatTable = "disable_chat_table";
     String disableChatValue = "disableChatValue";
     /**
-     * spectatingPlayersTable
+     * ControllingPlayersTable
      */
-    String spectatingPlayersTable = "spectatingPlayersTable";
-    String spectatingPlayerUUID = "spectatingPlayerUUID";
+    String controllingPlayersTable = "spectatingPlayersTable";
+    String controllingPlayerUUID = "spectatingPlayerUUID";
     String controlledPlayerUUID = "controlledPlayerUUID";
-    String spectatorLastWorldUUID = "spectatorLastWorldUUID";
-    String lastGamemode = "lastGamemode";
+    String controllerLastWorldUUID = "spectatorLastWorldUUID";
+    String isControlling = "isControlling";
+    String lastGameMode = "lastGamemode";
     String x = "x";
     String y = "y";
     String z = "z";
@@ -184,11 +185,11 @@ public class Database extends CustomSQLInterface {
         createMaintenanceTable(maintenanceModeTable, playerUUID);
         createMaintenanceSwitchTable(maintenanceModeSwitchTable, maintMode);
         createDisableChatTable(disableChatTable, disableChatValue);
-        createSpectatingPlayersTable(spectatingPlayersTable, spectatingPlayerUUID,controlledPlayerUUID, lastGamemode, spectatorLastWorldUUID, x, y, z ,pitch, yaw);
+        createControllingPlayersTable(controllingPlayersTable, controllingPlayerUUID,controlledPlayerUUID,isControlling, lastGameMode, controllerLastWorldUUID, x, y, z ,pitch, yaw);
     }
 
-    private void createSpectatingPlayersTable(String spectatingPlayersTable, String spectatingPlayerUUID,String controlledPlayerUUID, String lastGamemode,String spectatorLastWorldUUID, String x, String y, String z, String pitch, String yaw) {
-        String saleable = "CREATE TABLE IF NOT EXISTS " + spectatingPlayersTable + " (" + spectatingPlayerUUID + " wibblewibble NOT NULL, "+ controlledPlayerUUID + " wibblewibble NOT NULL, "+ lastGamemode + " TEXT NOT NULL, " + spectatorLastWorldUUID + " wibblewibble NOT NULL, "+ x + "  REAL NOT NULL, " + y + "  REAL NOT NULL, " + z + " REAL NOT NULL, " + pitch + "  REAL NOT NULL, " + yaw + "  REAL NOT NULL);" ;
+    private void createControllingPlayersTable(String spectatingPlayersTable, String spectatingPlayerUUID, String controlledPlayerUUID, String isControlling, String lastGamemode, String spectatorLastWorldUUID, String x, String y, String z, String pitch, String yaw) {
+        String saleable = "CREATE TABLE IF NOT EXISTS " + spectatingPlayersTable + " (" + spectatingPlayerUUID + " wibblewibble NOT NULL, "+ controlledPlayerUUID + " wibblewibble NOT NULL, " + isControlling + " INTEGER NOT NULL, " + lastGamemode + " TEXT NOT NULL, " + spectatorLastWorldUUID + " wibblewibble NOT NULL, "+ x + "  REAL NOT NULL, " + y + "  REAL NOT NULL, " + z + " REAL NOT NULL, " + pitch + "  REAL NOT NULL, " + yaw + "  REAL NOT NULL);" ;
         createTable(saleable, this.databaseUrl);
     }
 
@@ -279,19 +280,28 @@ public class Database extends CustomSQLInterface {
         createTable(saleable, this.databaseUrl);
     }
 
-    public void insertSpectatingPlayer(Player player, Player controlledPlayer) {
-        String sql = "INSERT INTO " + spectatingPlayersTable + " (" + spectatingPlayerUUID + ", " + controlledPlayerUUID + ", " + lastGamemode + ", " + spectatorLastWorldUUID + ", " + x + ", " + y + ", " + z + ", " + pitch + ", " + yaw + ") VALUES(?,?,?,?,?,?,?,?,?)";
+    public void insertControllingPlayer(Player player, Player controlledPlayer, Integer isControlling) {
+        String sql = "INSERT INTO " + controllingPlayersTable + " (" + controllingPlayerUUID + ", " + controlledPlayerUUID + ", " + this.isControlling +  ", " + lastGameMode + ", " + controllerLastWorldUUID + ", " + x + ", " + y + ", " + z + ", " + pitch + ", " + yaw + ") VALUES(?,?,?,?,?,?,?,?,?,?)";
         insertSomething(pstmt -> {
             pstmt.setString(1, player.getUniqueId().toString());
             pstmt.setString(2, controlledPlayer.getUniqueId().toString());
-            pstmt.setString(3, player.getGameMode().name());
-            pstmt.setString(4, String.valueOf(player.getLocation().getWorld().getUID()));
-            pstmt.setDouble(5, player.getLocation().getX());
-            pstmt.setDouble(6, player.getLocation().getY());
-            pstmt.setDouble(7, player.getLocation().getZ());
-            pstmt.setFloat(8, player.getLocation().getPitch());
-            pstmt.setFloat(9, player.getLocation().getYaw());
+            pstmt.setInt(3,isControlling);
+            pstmt.setString(4, player.getGameMode().name());
+            pstmt.setString(5, String.valueOf(player.getLocation().getWorld().getUID()));
+            pstmt.setDouble(6, player.getLocation().getX());
+            pstmt.setDouble(7, player.getLocation().getY());
+            pstmt.setDouble(8, player.getLocation().getZ());
+            pstmt.setFloat(9, player.getLocation().getPitch());
+            pstmt.setFloat(10, player.getLocation().getYaw());
         }, sql);
+    }
+
+    public void updateControllingPlayer(Player controlledPlayer, Integer isControlling) {
+        String sql = "UPDATE " + controllingPlayersTable + " SET " + this.isControlling + " = ? WHERE " + this.controlledPlayerUUID   + " = ?";
+        insertSomething(pstmt -> {
+            pstmt.setInt(1, isControlling);
+            pstmt.setString(2, controlledPlayer.getUniqueId().toString());
+        },sql);
     }
 
     public void changeIntoCommandsLabelTable(String commandLabelId, String commandLabelAlias) {
@@ -579,14 +589,14 @@ public class Database extends CustomSQLInterface {
         }, sql);
     }
 
-    public Map<UUID, SpectatingPlayer> getAllSpectatingPlayers() {
-        String sql = "SELECT * FROM " + spectatingPlayersTable;
+    public Map<UUID, SpectatingPlayer> getAllControlingPlayers() {
+        String sql = "SELECT * FROM " + controllingPlayersTable;
         return new Worker<Map<UUID, SpectatingPlayer>>().getSomething(rs -> {
             Map<UUID, SpectatingPlayer> spectatingPlayers = new HashMap<>();
             while (rs.next()) {
-                UUID playerUUID = UUID.fromString(rs.getString(this.spectatingPlayerUUID));
+                UUID playerUUID = UUID.fromString(rs.getString(this.controllingPlayerUUID));
                 Location location = new Location(
-                        Bukkit.getWorld(UUID.fromString(rs.getString(this.spectatorLastWorldUUID))),
+                        Bukkit.getWorld(UUID.fromString(rs.getString(this.controllerLastWorldUUID))),
                         rs.getDouble(this.x),
                         rs.getDouble(this.y),
                         rs.getDouble(this.z),
@@ -596,7 +606,8 @@ public class Database extends CustomSQLInterface {
                 SpectatingPlayer spectatingPlayer = new SpectatingPlayer(
                         UUID.fromString(rs.getString(this.controlledPlayerUUID)),
                         playerUUID,
-                        rs.getString(this.lastGamemode),
+                        rs.getInt(this.isControlling),
+                        rs.getString(this.lastGameMode),
                         location
                 );
 
@@ -948,13 +959,13 @@ public class Database extends CustomSQLInterface {
         delete(sql);
     }
 
-    public void deleteSpectatingPlayerData(String spectatingPlayerUUID) {
-        String sql = "DELETE FROM " + spectatingPlayersTable + " WHERE " + this.spectatingPlayerUUID + " = " + "\"" + spectatingPlayerUUID + "\"";
+    public void deleteControllingPlayerData(String spectatingPlayerUUID) {
+        String sql = "DELETE FROM " + controllingPlayersTable + " WHERE " + this.controllingPlayerUUID + " = " + "\"" + spectatingPlayerUUID + "\"";
         delete(sql);
     }
 
-    public void deleteSpectatingPlayerDataByWorld(String spectatingPlayerWorldUUID) {
-        String sql = "DELETE FROM " + spectatingPlayersTable + " WHERE " + this.spectatorLastWorldUUID + " = " + "\"" + spectatingPlayerWorldUUID + "\"";
+    public void deleteControllingPlayerDataByWorld(String spectatingPlayerWorldUUID) {
+        String sql = "DELETE FROM " + controllingPlayersTable + " WHERE " + this.controllerLastWorldUUID + " = " + "\"" + spectatingPlayerWorldUUID + "\"";
         delete(sql);
     }
 
