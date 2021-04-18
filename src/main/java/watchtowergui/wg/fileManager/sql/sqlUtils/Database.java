@@ -155,6 +155,7 @@ public class Database extends CustomSQLInterface {
      */
     String spectatingPlayersTable = "spectatingPlayersTable";
     String spectatingPlayerUUID = "spectatingPlayerUUID";
+    String controlledPlayerUUID = "controlledPlayerUUID";
     String spectatorLastWorldUUID = "spectatorLastWorldUUID";
     String lastGamemode = "lastGamemode";
     String x = "x";
@@ -162,12 +163,6 @@ public class Database extends CustomSQLInterface {
     String z = "z";
     String pitch = "pitch";
     String yaw = "yaw";
-    /**
-     * spectatingPlayersTable
-     */
-    String playersWithSpectatorsTable = "playersWithSpectatorsTable";
-    String playerWithSpectatorUUID = "playerWithSpectatorUUID";
-    String spectatorUUID = "spectatorUUID";
 
 
     public void init() {
@@ -189,17 +184,11 @@ public class Database extends CustomSQLInterface {
         createMaintenanceTable(maintenanceModeTable, playerUUID);
         createMaintenanceSwitchTable(maintenanceModeSwitchTable, maintMode);
         createDisableChatTable(disableChatTable, disableChatValue);
-        createSpectatingPlayersTable(spectatingPlayersTable, spectatingPlayerUUID,lastGamemode, spectatorLastWorldUUID, x, y, z ,pitch, yaw);
-        createPlayersWithSpectators(playersWithSpectatorsTable, playerWithSpectatorUUID, spectatorUUID);
+        createSpectatingPlayersTable(spectatingPlayersTable, spectatingPlayerUUID,controlledPlayerUUID, lastGamemode, spectatorLastWorldUUID, x, y, z ,pitch, yaw);
     }
 
-    private void createPlayersWithSpectators(String playersWithSpectatorsTable, String playerWithSpectatorUUID, String spectatorUUID) {
-        String saleable = "CREATE TABLE IF NOT EXISTS " + playersWithSpectatorsTable + " (" + playerWithSpectatorUUID + " wibblewibble NOT NULL, " + spectatorUUID + " wibblewibble NOT NULL );" ;
-        createTable(saleable, this.databaseUrl);
-    }
-
-    private void createSpectatingPlayersTable(String spectatingPlayersTable, String spectatingPlayerUUID, String lastGamemode,String spectatorLastWorldUUID, String x, String y, String z, String pitch, String yaw) {
-        String saleable = "CREATE TABLE IF NOT EXISTS " + spectatingPlayersTable + " (" + spectatingPlayerUUID + " wibblewibble NOT NULL, "+ lastGamemode + " TEXT NOT NULL, " + spectatorLastWorldUUID + " wibblewibble NOT NULL, "+ x + "  REAL NOT NULL, " + y + "  REAL NOT NULL, " + z + " REAL NOT NULL, " + pitch + "  REAL NOT NULL, " + yaw + "  REAL NOT NULL);" ;
+    private void createSpectatingPlayersTable(String spectatingPlayersTable, String spectatingPlayerUUID,String controlledPlayerUUID, String lastGamemode,String spectatorLastWorldUUID, String x, String y, String z, String pitch, String yaw) {
+        String saleable = "CREATE TABLE IF NOT EXISTS " + spectatingPlayersTable + " (" + spectatingPlayerUUID + " wibblewibble NOT NULL, "+ controlledPlayerUUID + " wibblewibble NOT NULL, "+ lastGamemode + " TEXT NOT NULL, " + spectatorLastWorldUUID + " wibblewibble NOT NULL, "+ x + "  REAL NOT NULL, " + y + "  REAL NOT NULL, " + z + " REAL NOT NULL, " + pitch + "  REAL NOT NULL, " + yaw + "  REAL NOT NULL);" ;
         createTable(saleable, this.databaseUrl);
     }
 
@@ -290,25 +279,18 @@ public class Database extends CustomSQLInterface {
         createTable(saleable, this.databaseUrl);
     }
 
-    public void insertPlayerWithSpectator(Player playerWithSpectator, Player spectatingPlayer) {
-        String sql = "INSERT INTO " + playersWithSpectatorsTable + " (" + playerWithSpectatorUUID  + ", " + spectatorUUID + ") VALUES(?,?)";
-        insertSomething(pstmt -> {
-            pstmt.setString(1, playerWithSpectator.getUniqueId().toString());
-            pstmt.setString(2, spectatingPlayer.getUniqueId().toString());
-        }, sql);
-    }
-
-    public void insertSpectatingPlayer(Player player, Location location) {
-        String sql = "INSERT INTO " + spectatingPlayersTable + " (" + spectatingPlayerUUID + ", " + lastGamemode + ", " + spectatorLastWorldUUID + ", " + x + ", " + y + ", " + z + ", " + pitch + ", " + yaw + ") VALUES(?,?,?,?,?,?,?,?)";
+    public void insertSpectatingPlayer(Player player, Player controlledPlayer) {
+        String sql = "INSERT INTO " + spectatingPlayersTable + " (" + spectatingPlayerUUID + ", " + controlledPlayerUUID + ", " + lastGamemode + ", " + spectatorLastWorldUUID + ", " + x + ", " + y + ", " + z + ", " + pitch + ", " + yaw + ") VALUES(?,?,?,?,?,?,?,?,?)";
         insertSomething(pstmt -> {
             pstmt.setString(1, player.getUniqueId().toString());
-            pstmt.setString(2, player.getGameMode().name());
-            pstmt.setString(3, String.valueOf(location.getWorld().getUID()));
-            pstmt.setDouble(4, location.getX());
-            pstmt.setDouble(5, location.getY());
-            pstmt.setDouble(6, location.getZ());
-            pstmt.setFloat(7, location.getPitch());
-            pstmt.setFloat(8, location.getYaw());
+            pstmt.setString(2, controlledPlayer.getUniqueId().toString());
+            pstmt.setString(3, player.getGameMode().name());
+            pstmt.setString(4, String.valueOf(player.getLocation().getWorld().getUID()));
+            pstmt.setDouble(5, player.getLocation().getX());
+            pstmt.setDouble(6, player.getLocation().getY());
+            pstmt.setDouble(7, player.getLocation().getZ());
+            pstmt.setFloat(8, player.getLocation().getPitch());
+            pstmt.setFloat(9, player.getLocation().getYaw());
         }, sql);
     }
 
@@ -608,10 +590,11 @@ public class Database extends CustomSQLInterface {
                         rs.getDouble(this.x),
                         rs.getDouble(this.y),
                         rs.getDouble(this.z),
-                        rs.getFloat(this.pitch),
-                        rs.getFloat(this.yaw)
+                        rs.getFloat(this.yaw),
+                        rs.getFloat(this.pitch)
                 );
                 SpectatingPlayer spectatingPlayer = new SpectatingPlayer(
+                        UUID.fromString(rs.getString(this.controlledPlayerUUID)),
                         playerUUID,
                         rs.getString(this.lastGamemode),
                         location
@@ -769,17 +752,6 @@ public class Database extends CustomSQLInterface {
         return switched;
     }
 
-    public Map<UUID, UUID> getAllPlayersWithSpectators() {
-        String sql = "SELECT * FROM " + playersWithSpectatorsTable;
-        return new Worker<Map<UUID, UUID>>().getSomething(rs -> {
-            Map<UUID, UUID> uuidList = new HashMap<>();
-            while (rs.next()) {
-                uuidList.put(UUID.fromString(rs.getString(this.playerWithSpectatorUUID)), UUID.fromString(rs.getString(this.spectatorUUID)));
-            }
-            return uuidList;
-        },sql);
-    }
-
     public int getDisableChatSwitched() {
         String sql = "SELECT * FROM " + disableChatTable;
         int switched = 0;
@@ -906,15 +878,6 @@ public class Database extends CustomSQLInterface {
 
     public void deleteCommandIdentifiersRemovedName(String commandIdentifierName) {
         String sql = "DELETE FROM " + this.commandRemovedNameTable + " WHERE " + this.commandRemovedNameIdentifier + " = " + "\"" + commandIdentifierName + "\"";
-        delete(sql);
-    }
-
-    public void deletePlayerWithSpectator(String playerUUID) {
-        String sql = "DELETE FROM " + playersWithSpectatorsTable + " WHERE " + this.playerWithSpectatorUUID + " = " + "\"" + playerUUID + "\"";
-        delete(sql);
-    }
-    public void deletePlayerWithSpectatorBySpectator(String playerUUID) {
-        String sql = "DELETE FROM " + playersWithSpectatorsTable + " WHERE " + this.spectatorUUID + " = " + "\"" + playerUUID + "\"";
         delete(sql);
     }
 

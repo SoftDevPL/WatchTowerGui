@@ -6,16 +6,20 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import watchtowergui.wg.WatchTowerGui;
+import watchtowergui.wg.adminfun.commands.controlPlayer.events.ControlOFFPlayerEvent;
 import watchtowergui.wg.adminfun.commands.controlPlayer.events.ControlOnPlayerEvent;
+import watchtowergui.wg.adminfun.commands.controlPlayer.listeners.PlayerControlListener;
 import watchtowergui.wg.fileManager.configsutils.configs.LanguageConfig;
 import watchtowergui.wg.managers.CommandsManager;
 
 public class ControlPlayerCommand implements CommandExecutor {
 
     public LanguageConfig languageConfig;
+    public PlayerControlListener playerControlListener;
 
     public ControlPlayerCommand(WatchTowerGui plugin) {
         this.languageConfig = plugin.configsManager.languageConfig;
+        this.playerControlListener = plugin.listenersManager.playerControlListener;
     }
 
     @Override
@@ -34,7 +38,11 @@ public class ControlPlayerCommand implements CommandExecutor {
             return true;
         }
         Player player = (Player) sender;
-        Bukkit.getServer().getPluginManager().callEvent(new ControlOnPlayerEvent(player, playerToControl));
+        if (playerControlListener.getBukkitTasks().containsKey(player.getUniqueId())) {
+            Bukkit.getServer().getPluginManager().callEvent(new ControlOFFPlayerEvent(player, playerToControl));
+        } else {
+            Bukkit.getServer().getPluginManager().callEvent(new ControlOnPlayerEvent(player, playerToControl));
+        }
         return true;
     }
 }
