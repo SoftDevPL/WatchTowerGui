@@ -16,6 +16,7 @@ import watchtowergui.wg.adminfun.commands.controlPlayer.events.ControlOFFPlayerE
 import watchtowergui.wg.adminfun.commands.controlPlayer.events.ControlOnPlayerEvent;
 import watchtowergui.wg.adminfun.commands.controlPlayer.events.SpectateOFFPlayerEvent;
 import watchtowergui.wg.adminfun.commands.controlPlayer.events.SpectateOnPlayerEvent;
+import watchtowergui.wg.adminfun.commands.controlPlayer.models.SpectatingModes;
 import watchtowergui.wg.adminfun.commands.controlPlayer.models.SpectatingPlayer;
 import watchtowergui.wg.fileManager.configsutils.configs.LanguageConfig;
 import watchtowergui.wg.fileManager.sql.sqlUtils.Database;
@@ -36,6 +37,8 @@ public class PlayerControlListener implements Listener {
     private Map<UUID, SpectatingPlayer> controllingPlayerLocationMap = new HashMap<>();
     @Getter
     private final Map<UUID, UUID> playersWithControllers = new HashMap<>();
+    @Getter
+    private final Map<UUID, SpectatingModes> spectatorControllerMap = new HashMap<>();
 
     public void init() {
         watchTowerGui = WatchTowerGui.getInstance();
@@ -118,22 +121,10 @@ public class PlayerControlListener implements Listener {
         }
     }
 
-    @EventHandler
-    private void controlPlayerOn(ControlOnPlayerEvent e) {
-        if (e.getPlayer().equals(e.getControllingPlayer())) {
-            e.getPlayer().sendMessage(WatchTowerGui.convertColors("&c&lYou can't control &f&lyourself"));
-            return;
-        }
-        if (playersWithControllers.containsValue(e.getPlayer().getUniqueId()) || playersWithControllers.containsKey(e.getControllingPlayer().getUniqueId())) {
-            e.getPlayer().sendMessage(WatchTowerGui.convertColors("&c&lSomeone is controlling this player"));
-            return;
-        }
-        changeControllingValue(e.getPlayer(), e.getControllingPlayer(), 1);
-    }
-
     private synchronized BukkitTask runScheduler(Player controller, Player playerToControl, Integer isControlling) {
         return Bukkit.getServer().getScheduler().runTaskTimer(this.watchTowerGui, () -> {
             if (isControlling == 1) {
+                playerToControl.setAllowFlight(true);
                 Location location = controller.getLocation();
                 Vector inverseDirectionVec = controller.getLocation().getDirection().normalize().multiply(-1);
                 location.add(inverseDirectionVec);
@@ -148,7 +139,6 @@ public class PlayerControlListener implements Listener {
     }
 
     private void lockPlayer(Player controller, Player playerToControl, Integer isControlled) {
-        playerToControl.setAllowFlight(true);
         controller.setGameMode(GameMode.SPECTATOR);
         Bukkit.getServer().getScheduler().runTaskAsynchronously(this.watchTowerGui, () -> {
             controller.teleport(playerToControl.getLocation());
@@ -166,6 +156,21 @@ public class PlayerControlListener implements Listener {
     }
 
     @EventHandler
+    private void controlPlayerOn(ControlOnPlayerEvent e) {
+        if (e.getPlayer().equals(e.getControllingPlayer())) {
+            e.getPlayer().sendMessage(WatchTowerGui.convertColors("&c&lYou can't control &f&lyourself"));
+            return;
+        }
+        if (playersWithControllers.containsValue(e.getPlayer().getUniqueId()) || playersWithControllers.containsKey(e.getControllingPlayer().getUniqueId())) {
+            e.getPlayer().sendMessage(WatchTowerGui.convertColors("&c&lSomeone is controlling this player"));
+            return;
+        }
+        spectatorControllerMap.remove(e.getControllingPlayer().getUniqueId());
+        spectatorControllerMap.put(e.getControllingPlayer().getUniqueId(), new SpectatingModes(false, true));
+        changeControllingValue(e.getPlayer(), e.getControllingPlayer(), 1);
+    }
+
+    @EventHandler
     private void spectatePlayerOn(SpectateOnPlayerEvent e) {
         if (e.getPlayer().equals(e.getControllingPlayer())) {
             e.getPlayer().sendMessage(WatchTowerGui.convertColors("&c&lYou can't spectate &f&lyourself"));
@@ -175,21 +180,29 @@ public class PlayerControlListener implements Listener {
             e.getPlayer().sendMessage(WatchTowerGui.convertColors("&c&lSomeone is spectating this player"));
             return;
         }
+        spectatorControllerMap.remove(e.getControllingPlayer().getUniqueId());
+        spectatorControllerMap.put(e.getControllingPlayer().getUniqueId(), new SpectatingModes(true, false));
         changeControllingValue(e.getPlayer(), e.getControllingPlayer(), 0);
     }
 
     @EventHandler
     private void controlPlayerOFF(ControlOFFPlayerEvent e) {
+        SpectatingModes oldSpectatingPlayer = spectatorControllerMap.get(e.getControllingPlayer().getUniqueId());
+        spectatorControllerMap.remove(e.getControllingPlayer().getUniqueId());
+        spectatorControllerMap.put(e.getControllingPlayer().getUniqueId(), new SpectatingModes(false, false));
         setupPlayerAfterDisabling(e.getPlayer(), e.getControllingPlayer());
-        if (bukkitTasks.containsKey(e.getPlayer().getUniqueId())) {
+        if ((oldSpectatingPlayer.getSpectatorOn() && !oldSpectatingPlayer.getControllerOn())) {
             Bukkit.getServer().getPluginManager().callEvent(new ControlOnPlayerEvent(e.getPlayer(), e.getControllingPlayer()));
         }
     }
 
     @EventHandler
     private void spectatePlayerOFF(SpectateOFFPlayerEvent e) {
+        SpectatingModes oldSpectatingPlayer = spectatorControllerMap.get(e.getControllingPlayer().getUniqueId());
+        spectatorControllerMap.remove(e.getControllingPlayer().getUniqueId());
+        spectatorControllerMap.put(e.getControllingPlayer().getUniqueId(), new SpectatingModes(false, false));
         setupPlayerAfterDisabling(e.getPlayer(), e.getControllingPlayer());
-        if (bukkitTasks.containsKey(e.getPlayer().getUniqueId())) {
+        if ((!oldSpectatingPlayer.getSpectatorOn() && oldSpectatingPlayer.getControllerOn())) {
             Bukkit.getServer().getPluginManager().callEvent(new SpectateOnPlayerEvent(e.getPlayer(), e.getControllingPlayer()));
         }
     }
