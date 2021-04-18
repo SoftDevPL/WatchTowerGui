@@ -1,7 +1,6 @@
 package watchtowergui.wg.adminfun.commands.controlPlayer.listeners;
 
 import lombok.Getter;
-import lombok.SneakyThrows;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
@@ -12,10 +11,7 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerEvent;
-import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.util.Vector;
@@ -29,7 +25,6 @@ import watchtowergui.wg.adminfun.commands.controlPlayer.models.SpectatingPlayer;
 import watchtowergui.wg.fileManager.configsutils.configs.LanguageConfig;
 import watchtowergui.wg.fileManager.sql.sqlUtils.Database;
 
-import java.lang.reflect.Field;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -98,19 +93,21 @@ public class PlayerControlListener implements Listener {
     }
 
     private void setupPlayerAfterDisabling(Player controller, Player controllingPlayer) {
-        controllingPlayer.setAllowFlight(false);
-        SpectatingPlayer spectatingPlayer = this.controllingPlayerLocationMap.get(controller.getUniqueId());
-        GameMode gameMode = spectatingPlayer.getLastGameMode().equals(GameMode.ADVENTURE.name()) ? GameMode.ADVENTURE
-                : spectatingPlayer.getLastGameMode().equals(GameMode.CREATIVE.name()) ? GameMode.CREATIVE
-                : spectatingPlayer.getLastGameMode().equals(GameMode.SURVIVAL.name()) ? GameMode.SURVIVAL
-                : spectatingPlayer.getLastGameMode().equals(GameMode.ADVENTURE.name()) ? GameMode.ADVENTURE : GameMode.CREATIVE;
-        controller.teleport(spectatingPlayer.getLocation());
-        controller.setGameMode(gameMode);
-        playersWithControllers.remove(controllingPlayer.getUniqueId());
-        database.deleteControllingPlayerData(controller.getUniqueId().toString());
-        controllingPlayerLocationMap.remove(controller.getUniqueId());
-        Bukkit.getServer().getScheduler().cancelTask(bukkitTasks.get(controller.getUniqueId()));
-        bukkitTasks.remove(controller.getUniqueId());
+        if (controller != null) {
+            controllingPlayer.setAllowFlight(false);
+            SpectatingPlayer spectatingPlayer = this.controllingPlayerLocationMap.get(controller.getUniqueId());
+            GameMode gameMode = spectatingPlayer.getLastGameMode().equals(GameMode.ADVENTURE.name()) ? GameMode.ADVENTURE
+                    : spectatingPlayer.getLastGameMode().equals(GameMode.CREATIVE.name()) ? GameMode.CREATIVE
+                    : spectatingPlayer.getLastGameMode().equals(GameMode.SURVIVAL.name()) ? GameMode.SURVIVAL
+                    : spectatingPlayer.getLastGameMode().equals(GameMode.ADVENTURE.name()) ? GameMode.ADVENTURE : GameMode.CREATIVE;
+            controller.teleport(spectatingPlayer.getLocation());
+            controller.setGameMode(gameMode);
+            playersWithControllers.remove(controllingPlayer.getUniqueId());
+            database.deleteControllingPlayerData(controller.getUniqueId().toString());
+            controllingPlayerLocationMap.remove(controller.getUniqueId());
+            Bukkit.getServer().getScheduler().cancelTask(bukkitTasks.get(controller.getUniqueId()));
+            bukkitTasks.remove(controller.getUniqueId());
+        }
     }
 
     private void changeControllingValue(Player controller, Player controlledPlayer, Integer isControlled) {
