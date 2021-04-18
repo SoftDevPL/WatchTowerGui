@@ -1,5 +1,6 @@
 package watchtowergui.wg.adminfun.listeners;
 
+import org.bukkit.Bukkit;
 import watchtowergui.wg.WatchTowerGui;
 import watchtowergui.wg.adminfun.events.PlayerFreezeEvent;
 import watchtowergui.wg.adminfun.events.PlayerUnfreezeEvent;

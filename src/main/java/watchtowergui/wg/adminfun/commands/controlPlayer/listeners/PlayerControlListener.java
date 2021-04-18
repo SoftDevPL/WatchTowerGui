@@ -1,6 +1,7 @@
 package watchtowergui.wg.adminfun.commands.controlPlayer.listeners;
 
 import lombok.Getter;
+import lombok.SneakyThrows;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
@@ -11,7 +12,10 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.util.Vector;
@@ -25,6 +29,7 @@ import watchtowergui.wg.adminfun.commands.controlPlayer.models.SpectatingPlayer;
 import watchtowergui.wg.fileManager.configsutils.configs.LanguageConfig;
 import watchtowergui.wg.fileManager.sql.sqlUtils.Database;
 
+import java.lang.reflect.Field;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -136,7 +141,7 @@ public class PlayerControlListener implements Listener {
                 playerToControl.teleport(location);
             } else {
                 Location location = playerToControl.getLocation();
-                Vector inverseDirectionVec = playerToControl.getLocation().getDirection().normalize().multiply(+1);
+                Vector inverseDirectionVec = playerToControl.getLocation().getDirection().normalize().multiply(+0.5);
                 location.add(inverseDirectionVec);
                 controller.teleport(location);
             }
@@ -238,6 +243,6 @@ public class PlayerControlListener implements Listener {
                 Bukkit.getServer().getPluginManager().callEvent(new SpectateOnPlayerEvent(e.getPlayer(), e.getControllingPlayer()));
             }
         }
-
     }
+
 }
