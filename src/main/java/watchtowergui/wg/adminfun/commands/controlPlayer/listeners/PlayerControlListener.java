@@ -1,6 +1,10 @@
 package watchtowergui.wg.adminfun.commands.controlPlayer.listeners;
 
 import lombok.Getter;
+import net.md_5.bungee.api.chat.ClickEvent;
+import net.md_5.bungee.api.chat.ComponentBuilder;
+import net.md_5.bungee.api.chat.HoverEvent;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
@@ -28,6 +32,10 @@ public class PlayerControlListener implements Listener {
     @Getter
     private final Map<UUID, Integer> bukkitTasks = new HashMap<>();
     @Getter
+    private final Map<UUID, UUID> playersWithControllers = new HashMap<>();
+    @Getter
+    private final Map<UUID, SpectatingModes> spectatorControllerMap = new HashMap<>();
+    @Getter
     private LanguageConfig languageConfig;
     @Getter
     private Database database;
@@ -35,10 +43,6 @@ public class PlayerControlListener implements Listener {
     private WatchTowerGui watchTowerGui;
     @Getter
     private Map<UUID, SpectatingPlayer> controllingPlayerLocationMap = new HashMap<>();
-    @Getter
-    private final Map<UUID, UUID> playersWithControllers = new HashMap<>();
-    @Getter
-    private final Map<UUID, SpectatingModes> spectatorControllerMap = new HashMap<>();
 
     public void init() {
         watchTowerGui = WatchTowerGui.getInstance();
@@ -139,8 +143,23 @@ public class PlayerControlListener implements Listener {
         }, 5, 2);
     }
 
+    private void setupClickableMessage(Player controller, Player playerToControl, Integer isControlled) {
+        TextComponent block;
+        if (isControlled == 1) {
+            block = new TextComponent(WatchTowerGui.convertColors("[SPECTATE]"));
+            block.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("/spectate " + playerToControl.getName()).create()));
+            block.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/spectate " + playerToControl.getName()));
+        } else {
+            block = new TextComponent(WatchTowerGui.convertColors("[CONTROL]"));
+            block.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("/control " + playerToControl.getName()).create()));
+            block.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/control " + playerToControl.getName()));
+        }
+        controller.spigot().sendMessage(new ComponentBuilder(block).create());
+    }
+
     private void lockPlayer(Player controller, Player playerToControl, Integer isControlled) {
         controller.setGameMode(GameMode.SPECTATOR);
+        setupClickableMessage(controller, playerToControl, isControlled);
         Bukkit.getServer().getScheduler().runTaskAsynchronously(this.watchTowerGui, () -> {
             controller.teleport(playerToControl.getLocation());
             BukkitTask task = runScheduler(controller, playerToControl, isControlled);
@@ -153,7 +172,10 @@ public class PlayerControlListener implements Listener {
     @EventHandler
     private void onQuit(PlayerQuitEvent event) {
         Player controller = Bukkit.getPlayer(playersWithControllers.get(event.getPlayer().getUniqueId()));
-        Bukkit.getServer().getPluginManager().callEvent(new ControlOFFPlayerEvent(controller, event.getPlayer()));
+
+        spectatorControllerMap.remove(event.getPlayer().getUniqueId());
+        spectatorControllerMap.put(event.getPlayer().getUniqueId(), new SpectatingModes(false, false));
+        setupPlayerAfterDisabling(controller, event.getPlayer());
     }
 
     @EventHandler
