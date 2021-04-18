@@ -54,6 +54,7 @@ public class PlayerControlListener implements Listener {
     private void setupControlledPlayers() {
         for (Map.Entry<UUID, SpectatingPlayer> entry : controllingPlayerLocationMap.entrySet()) {
             playersWithControllers.put(entry.getValue().getControlledPlayerUUID(), entry.getKey());
+            spectatorControllerMap.put(entry.getValue().getControlledPlayerUUID(), new SpectatingModes(entry.getValue().getIsControlling() == 0, entry.getValue().getIsControlling() == 1));
         }
     }
 
@@ -191,8 +192,10 @@ public class PlayerControlListener implements Listener {
         spectatorControllerMap.remove(e.getControllingPlayer().getUniqueId());
         spectatorControllerMap.put(e.getControllingPlayer().getUniqueId(), new SpectatingModes(false, false));
         setupPlayerAfterDisabling(e.getPlayer(), e.getControllingPlayer());
-        if ((oldSpectatingPlayer.getSpectatorOn() && !oldSpectatingPlayer.getControllerOn())) {
-            Bukkit.getServer().getPluginManager().callEvent(new ControlOnPlayerEvent(e.getPlayer(), e.getControllingPlayer()));
+        if (oldSpectatingPlayer != null) {
+            if ((oldSpectatingPlayer.getSpectatorOn() && !oldSpectatingPlayer.getControllerOn())) {
+                Bukkit.getServer().getPluginManager().callEvent(new ControlOnPlayerEvent(e.getPlayer(), e.getControllingPlayer()));
+            }
         }
     }
 
@@ -202,8 +205,11 @@ public class PlayerControlListener implements Listener {
         spectatorControllerMap.remove(e.getControllingPlayer().getUniqueId());
         spectatorControllerMap.put(e.getControllingPlayer().getUniqueId(), new SpectatingModes(false, false));
         setupPlayerAfterDisabling(e.getPlayer(), e.getControllingPlayer());
-        if ((!oldSpectatingPlayer.getSpectatorOn() && oldSpectatingPlayer.getControllerOn())) {
-            Bukkit.getServer().getPluginManager().callEvent(new SpectateOnPlayerEvent(e.getPlayer(), e.getControllingPlayer()));
+        if (oldSpectatingPlayer != null) {
+            if ((!oldSpectatingPlayer.getSpectatorOn() && oldSpectatingPlayer.getControllerOn())) {
+                Bukkit.getServer().getPluginManager().callEvent(new SpectateOnPlayerEvent(e.getPlayer(), e.getControllingPlayer()));
+            }
         }
+
     }
 }
