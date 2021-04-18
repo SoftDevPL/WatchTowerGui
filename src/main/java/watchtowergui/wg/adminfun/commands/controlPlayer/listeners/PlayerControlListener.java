@@ -145,16 +145,23 @@ public class PlayerControlListener implements Listener {
 
     private void setupClickableMessage(Player controller, Player playerToControl, Integer isControlled) {
         TextComponent block;
+        TextComponent block2;
         if (isControlled == 1) {
-            block = new TextComponent(WatchTowerGui.convertColors("[SPECTATE]"));
+            block = new TextComponent(WatchTowerGui.convertColors("&a&l[SPECTATE]"));
             block.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("/spectate " + playerToControl.getName()).create()));
             block.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/spectate " + playerToControl.getName()));
+            block2 = new TextComponent(WatchTowerGui.convertColors("&c&l[CANCEL]"));
+            block2.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("Cancel spectating " + playerToControl.getName()).create()));
+            block2.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/spectate " + playerToControl.getName()));
         } else {
-            block = new TextComponent(WatchTowerGui.convertColors("[CONTROL]"));
+            block = new TextComponent(WatchTowerGui.convertColors("&2&l[CONTROL]"));
             block.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("/control " + playerToControl.getName()).create()));
             block.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/control " + playerToControl.getName()));
+            block2 = new TextComponent(WatchTowerGui.convertColors("&c&l[CANCEL]"));
+            block2.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("Cancel spectating " + playerToControl.getName()).create()));
+            block2.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/control " + playerToControl.getName()));
         }
-        controller.spigot().sendMessage(new ComponentBuilder(block).create());
+        controller.spigot().sendMessage(new ComponentBuilder(block).append("\n").append(block2).create());
     }
 
     private void lockPlayer(Player controller, Player playerToControl, Integer isControlled) {
@@ -225,7 +232,6 @@ public class PlayerControlListener implements Listener {
     private void spectatePlayerOFF(SpectateOFFPlayerEvent e) {
         SpectatingModes oldSpectatingPlayer = spectatorControllerMap.get(e.getControllingPlayer().getUniqueId());
         spectatorControllerMap.remove(e.getControllingPlayer().getUniqueId());
-        spectatorControllerMap.put(e.getControllingPlayer().getUniqueId(), new SpectatingModes(false, false));
         setupPlayerAfterDisabling(e.getPlayer(), e.getControllingPlayer());
         if (oldSpectatingPlayer != null) {
             if ((!oldSpectatingPlayer.getSpectatorOn() && oldSpectatingPlayer.getControllerOn())) {
