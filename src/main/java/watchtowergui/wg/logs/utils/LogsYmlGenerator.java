@@ -1,6 +1,7 @@
 package watchtowergui.wg.logs.utils;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
 import watchtowergui.wg.WatchTowerGui;
@@ -23,6 +24,18 @@ public class LogsYmlGenerator {
     public static List<String> quitLogsList;
     public LanguageConfig languageConfig;
     private File folder;
+
+    private String getProgressBar(int current, int max, int totalBars, char symbol, ChatColor completedColor, ChatColor notCompletedColor) {
+        float percent = (float) current / max;
+        int progressBars = (int) (totalBars * percent);
+        return new String(new char[progressBars]).replace("\0", "" + completedColor + symbol)
+                + new String(new char[totalBars - progressBars]).replace("\0", "" + notCompletedColor + symbol);
+    }
+
+    public void showProgressBar(CommandSender sender, int current) {
+        sender.sendMessage("§8[§r" + getProgressBar(current, 100, 40, '|', ChatColor.YELLOW, ChatColor.GRAY) + "§8]" + " §7§l=> §e§l" + Math.round((current * 100 / 100) * 10.0) / 10.0);
+    }
+
 
     public void sendTypedMessageToSender(CommandSender sender, String string) {
         sender.sendMessage(string);
@@ -51,6 +64,7 @@ public class LogsYmlGenerator {
         deleteFiles();
         makeLogsFolderIfNotExists();
         commandsLogList = logs.get(COMMANDS_LOGS);
+
         chatLogList = logs.get(CHAT_LOGS);
         joinLogList = logs.get(JOIN_LOGS);
         quitLogsList = logs.get(QUIT_LOGS);
