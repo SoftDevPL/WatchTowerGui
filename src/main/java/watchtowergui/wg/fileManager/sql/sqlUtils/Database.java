@@ -1,13 +1,10 @@
 package watchtowergui.wg.fileManager.sql.sqlUtils;
 
 import ad.guis.ultimateguis.engine.Pair;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.entity.Player;
-import watchtowergui.wg.adminfun.commands.controlPlayer.models.SpectatingPlayer;
 
 import java.sql.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Database extends CustomSQLInterface {
 
@@ -150,20 +147,6 @@ public class Database extends CustomSQLInterface {
      */
     String disableChatTable = "disable_chat_table";
     String disableChatValue = "disableChatValue";
-    /**
-     * ControllingPlayersTable
-     */
-    String controllingPlayersTable = "spectatingPlayersTable";
-    String controllingPlayerUUID = "spectatingPlayerUUID";
-    String controlledPlayerUUID = "controlledPlayerUUID";
-    String controllerLastWorldUUID = "spectatorLastWorldUUID";
-    String isControlling = "isControlling";
-    String lastGameMode = "lastGamemode";
-    String x = "x";
-    String y = "y";
-    String z = "z";
-    String pitch = "pitch";
-    String yaw = "yaw";
 
 
     public void init() {
@@ -185,12 +168,6 @@ public class Database extends CustomSQLInterface {
         createMaintenanceTable(maintenanceModeTable, playerUUID);
         createMaintenanceSwitchTable(maintenanceModeSwitchTable, maintMode);
         createDisableChatTable(disableChatTable, disableChatValue);
-        createControllingPlayersTable(controllingPlayersTable, controllingPlayerUUID,controlledPlayerUUID,isControlling, lastGameMode, controllerLastWorldUUID, x, y, z ,pitch, yaw);
-    }
-
-    private void createControllingPlayersTable(String spectatingPlayersTable, String spectatingPlayerUUID, String controlledPlayerUUID, String isControlling, String lastGamemode, String spectatorLastWorldUUID, String x, String y, String z, String pitch, String yaw) {
-        String saleable = "CREATE TABLE IF NOT EXISTS " + spectatingPlayersTable + " (" + spectatingPlayerUUID + " wibblewibble NOT NULL, "+ controlledPlayerUUID + " wibblewibble NOT NULL, " + isControlling + " INTEGER NOT NULL, " + lastGamemode + " TEXT NOT NULL, " + spectatorLastWorldUUID + " wibblewibble NOT NULL, "+ x + "  REAL NOT NULL, " + y + "  REAL NOT NULL, " + z + " REAL NOT NULL, " + pitch + "  REAL NOT NULL, " + yaw + "  REAL NOT NULL);" ;
-        createTable(saleable, this.databaseUrl);
     }
 
     private void createDisableChatTable(String disableChatTable, String disableChatValue) {
@@ -278,30 +255,6 @@ public class Database extends CustomSQLInterface {
     public void createPlayersMuteTable(String tableName, String playerUUID, String muter, String muteTime) {
         String saleable = "CREATE TABLE IF NOT EXISTS " + tableName + " (" + playerUUID + " TEXT NOT NULL , " + muter + " TEXT NOT NULL , " + muteTime + " INTEGER NOT NULL );";
         createTable(saleable, this.databaseUrl);
-    }
-
-    public void insertControllingPlayer(Player player, Player controlledPlayer, Integer isControlling) {
-        String sql = "INSERT INTO " + controllingPlayersTable + " (" + controllingPlayerUUID + ", " + controlledPlayerUUID + ", " + this.isControlling +  ", " + lastGameMode + ", " + controllerLastWorldUUID + ", " + x + ", " + y + ", " + z + ", " + pitch + ", " + yaw + ") VALUES(?,?,?,?,?,?,?,?,?,?)";
-        insertSomething(pstmt -> {
-            pstmt.setString(1, player.getUniqueId().toString());
-            pstmt.setString(2, controlledPlayer.getUniqueId().toString());
-            pstmt.setInt(3,isControlling);
-            pstmt.setString(4, player.getGameMode().name());
-            pstmt.setString(5, String.valueOf(player.getLocation().getWorld().getUID()));
-            pstmt.setDouble(6, player.getLocation().getX());
-            pstmt.setDouble(7, player.getLocation().getY());
-            pstmt.setDouble(8, player.getLocation().getZ());
-            pstmt.setFloat(9, player.getLocation().getPitch());
-            pstmt.setFloat(10, player.getLocation().getYaw());
-        }, sql);
-    }
-
-    public void updateControllingPlayer(Player controlledPlayer, Integer isControlling) {
-        String sql = "UPDATE " + controllingPlayersTable + " SET " + this.isControlling + " = ? WHERE " + this.controlledPlayerUUID   + " = ?";
-        insertSomething(pstmt -> {
-            pstmt.setInt(1, isControlling);
-            pstmt.setString(2, controlledPlayer.getUniqueId().toString());
-        },sql);
     }
 
     public void changeIntoCommandsLabelTable(String commandLabelId, String commandLabelAlias) {
@@ -587,34 +540,6 @@ public class Database extends CustomSQLInterface {
             }
             return chatLogs;
         }, sql);
-    }
-
-    public Map<UUID, SpectatingPlayer> getAllControlingPlayers() {
-        String sql = "SELECT * FROM " + controllingPlayersTable;
-        return new Worker<Map<UUID, SpectatingPlayer>>().getSomething(rs -> {
-            Map<UUID, SpectatingPlayer> spectatingPlayers = new HashMap<>();
-            while (rs.next()) {
-                UUID playerUUID = UUID.fromString(rs.getString(this.controllingPlayerUUID));
-                Location location = new Location(
-                        Bukkit.getWorld(UUID.fromString(rs.getString(this.controllerLastWorldUUID))),
-                        rs.getDouble(this.x),
-                        rs.getDouble(this.y),
-                        rs.getDouble(this.z),
-                        rs.getFloat(this.yaw),
-                        rs.getFloat(this.pitch)
-                );
-                SpectatingPlayer spectatingPlayer = new SpectatingPlayer(
-                        UUID.fromString(rs.getString(this.controlledPlayerUUID)),
-                        playerUUID,
-                        rs.getInt(this.isControlling),
-                        rs.getString(this.lastGameMode),
-                        location
-                );
-
-                spectatingPlayers.put(playerUUID, spectatingPlayer);
-            }
-            return spectatingPlayers;
-        },sql);
     }
 
     public List<String> getJoinLogsByUuidAndDateInterval(String uuid, long startDate, long endDate) {
@@ -956,16 +881,6 @@ public class Database extends CustomSQLInterface {
 
     public void deleteBanFromPlayersMutesTable(String playerUUID) {
         String sql = "DELETE FROM " + this.playersMutesTable + " WHERE " + this.playerUUID + " = " + "\"" + playerUUID + "\"";
-        delete(sql);
-    }
-
-    public void deleteControllingPlayerData(String spectatingPlayerUUID) {
-        String sql = "DELETE FROM " + controllingPlayersTable + " WHERE " + this.controllingPlayerUUID + " = " + "\"" + spectatingPlayerUUID + "\"";
-        delete(sql);
-    }
-
-    public void deleteControllingPlayerDataByWorld(String spectatingPlayerWorldUUID) {
-        String sql = "DELETE FROM " + controllingPlayersTable + " WHERE " + this.controllerLastWorldUUID + " = " + "\"" + spectatingPlayerWorldUUID + "\"";
         delete(sql);
     }
 
