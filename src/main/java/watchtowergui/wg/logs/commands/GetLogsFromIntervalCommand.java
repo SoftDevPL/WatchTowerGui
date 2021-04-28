@@ -5,6 +5,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitTask;
 import watchtowergui.wg.WatchTowerGui;
 import watchtowergui.wg.fileManager.configsutils.configs.LanguageConfig;
 import watchtowergui.wg.fileManager.sql.sqlUtils.Database;
@@ -44,15 +45,15 @@ public class GetLogsFromIntervalCommand implements CommandExecutor {
             consoleChatListener.setTask(sender, (chatMessage, chatSender) -> {
                 List<String> dates = getDatesFromString(chatMessage);
                 if (dates.size() == 4) {
+                    BukkitTask task = logsYmlGenerator.displayCurrentSec(languageConfig.getLogsGettingLogs(), sender, this.plugin);
                     Bukkit.getScheduler().runTaskAsynchronously(this.plugin,
                             () -> {
-                                sender.sendMessage(languageConfig.getLogsGettingLogs());
                                 generateFilesWithLogs(getFromDatabase(
                                         database,
                                         dates.get(0) + " " + dates.get(1),
                                         dates.get(2) + " " + dates.get(3),
                                         sender));
-                                logsYmlGenerator.taskFinished(sender);
+                                logsYmlGenerator.taskFinished(sender, task);
                             });
                 } else {
                     logsYmlGenerator.sendTypedMessageToSender(chatSender, languageConfig.getLogsWrongMessageForDate());
@@ -105,16 +106,16 @@ public class GetLogsFromIntervalCommand implements CommandExecutor {
             changeActionForPlayerNull(sender);
             return true;
         }
-        if (args.length == 4 && checkDate(args[0], args[1]) && checkDate(args[2],args[3])) {
+        if (args.length == 4 && checkDate(args[0], args[1]) && checkDate(args[2], args[3])) {
+            BukkitTask task = logsYmlGenerator.displayCurrentSec(languageConfig.getLogsGettingLogs(), sender, this.plugin);
             Bukkit.getScheduler().runTaskAsynchronously(this.plugin,
                     () -> {
-                        sender.sendMessage(languageConfig.getLogsGettingLogs());
                         generateFilesWithLogs(getFromDatabase(
                                 database,
                                 args[0] + " " + args[1],
                                 args[2] + " " + args[3],
                                 sender));
-                        logsYmlGenerator.taskFinished(sender);
+                        logsYmlGenerator.taskFinished(sender, task);
                     });
         } else {
             logsYmlGenerator.sendTypedMessageToSender(sender, languageConfig.getLogsWrongMessageForDate());

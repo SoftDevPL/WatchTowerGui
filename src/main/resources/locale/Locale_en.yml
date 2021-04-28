@@ -62,7 +62,7 @@ General:
       playerNotFound: '&4&lPlayer &f&l[playerName] &4&lnot found'
       onlyPlayer: '&4&lOnly &f&lplayer &4&lcan execute this command!'
     logs:
-      gettingLogs: '&e&lGetting Logs'
+      gettingLogs: '&f&lGetting Logs:'
       successfullyDownloaded: '&2&lLogs created &4&l!!&f&lCheck plugins/MainAD/Logs'
       enterMessageForDay: "&6&lEnter day: \n <yyyy/MM/dd>"
       enterMessageForDayAndUUID: "&6&lEnter date: \n <playerName> <yyyy/MM/dd>"

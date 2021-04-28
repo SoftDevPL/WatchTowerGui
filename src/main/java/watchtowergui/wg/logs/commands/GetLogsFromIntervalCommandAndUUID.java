@@ -7,6 +7,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitTask;
 import watchtowergui.wg.WatchTowerGui;
 import watchtowergui.wg.fileManager.configsutils.configs.LanguageConfig;
 import watchtowergui.wg.fileManager.sql.sqlUtils.Database;
@@ -60,16 +61,16 @@ public class GetLogsFromIntervalCommandAndUUID implements CommandExecutor {
                     return true;
                 }
                 if (dates.size() == 5) {
+                    BukkitTask task = logsYmlGenerator.displayCurrentSec(languageConfig.getLogsGettingLogs(), sender, this.plugin);
                     Bukkit.getScheduler().runTaskAsynchronously(this.plugin,
                             () -> {
-                                sender.sendMessage(languageConfig.getLogsGettingLogs());
                                 generateFilesWithLogs(getFromDatabase(
                                         dates.get(0),
                                         database,
                                         dates.get(1) + " " + dates.get(2),
                                         dates.get(3) + " " + dates.get(4),
                                         sender));
-                                logsYmlGenerator.taskFinished(sender);
+                                logsYmlGenerator.taskFinished(sender, task);
                             });
                 } else {
                     sendTypedMessageToSender(chatSender, languageConfig.getLogsWrongMessageForDateAndUUID());
@@ -139,16 +140,16 @@ public class GetLogsFromIntervalCommandAndUUID implements CommandExecutor {
             return true;
         }
         if (args.length == 5 && checkDate(args[1], args[2]) && checkDate(args[3], args[4])) {
+            BukkitTask task = logsYmlGenerator.displayCurrentSec(languageConfig.getLogsGettingLogs(), sender, this.plugin);
             Bukkit.getScheduler().runTaskAsynchronously(this.plugin,
                     () -> {
-                        sender.sendMessage(languageConfig.getLogsGettingLogs());
                         generateFilesWithLogs(getFromDatabase(
                                 args[0],
                                 database,
                                 args[1] + " " + args[2],
                                 args[3] + " " + args[4],
                                 sender));
-                        logsYmlGenerator.taskFinished(sender);
+                        logsYmlGenerator.taskFinished(sender, task);
                     });
         } else {
             sendTypedMessageToSender(sender, languageConfig.getLogsWrongMessageForDateAndUUID());
