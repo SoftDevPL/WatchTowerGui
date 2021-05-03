@@ -7,6 +7,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitTask;
 import watchtowergui.wg.WatchTowerGui;
 import watchtowergui.wg.fileManager.configsutils.configs.LanguageConfig;
 import watchtowergui.wg.fileManager.sql.sqlUtils.Database;
@@ -75,15 +76,15 @@ public class GetLogsFromDayAndUUID implements CommandExecutor {
                     return true;
                 }
                 if (dates.size() == 2) {
+                    BukkitTask task = logsYmlGenerator.displayCurrentSec(languageConfig.getLogsGettingLogs(), sender, this.plugin);
                     Bukkit.getScheduler().runTaskAsynchronously(this.plugin,
                             () -> {
-                                sender.sendMessage(languageConfig.getLogsGettingLogs());
                                 generateFilesWithLogs(getFromDatabase(
                                         dates.get(0),
                                         database,
                                         dates.get(1) + " 00:00:00",
                                         sender));
-                                logsYmlGenerator.taskFinished(sender);
+                                logsYmlGenerator.taskFinished(sender, task);
                             });
                 } else {
                     logsYmlGenerator.sendTypedMessageToSender(chatSender, languageConfig.getLogsWrongMessageForDayAndUUID());
@@ -127,15 +128,15 @@ public class GetLogsFromDayAndUUID implements CommandExecutor {
             logsYmlGenerator.sendTypedMessageToSender(sender, languageConfig.getLogsWrongMessageForDayAndUUID());
             return true;
         }
+        BukkitTask task = logsYmlGenerator.displayCurrentSec(languageConfig.getLogsGettingLogs(), sender, this.plugin);
         Bukkit.getScheduler().runTaskAsynchronously(this.plugin,
                 () -> {
-                    sender.sendMessage(languageConfig.getLogsGettingLogs());
                     generateFilesWithLogs(getFromDatabase(
                             args[0],
                             database,
                             args[1] + " 00:00:00",
                             sender));
-                    logsYmlGenerator.taskFinished(sender);
+                    logsYmlGenerator.taskFinished(sender, task);
                 });
         return true;
     }

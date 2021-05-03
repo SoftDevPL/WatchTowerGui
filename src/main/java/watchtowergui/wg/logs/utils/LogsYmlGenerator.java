@@ -1,9 +1,13 @@
 package watchtowergui.wg.logs.utils;
 
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitTask;
 import watchtowergui.wg.WatchTowerGui;
 import watchtowergui.wg.fileManager.configsutils.configs.LanguageConfig;
 
@@ -11,6 +15,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class LogsYmlGenerator {
 
@@ -36,19 +41,36 @@ public class LogsYmlGenerator {
         sender.sendMessage("§8[§r" + getProgressBar(current, 100, 40, '|', ChatColor.YELLOW, ChatColor.GRAY) + "§8]" + " §7§l=> §e§l" + Math.round((current * 100 / 100) * 10.0) / 10.0);
     }
 
-
     public void sendTypedMessageToSender(CommandSender sender, String string) {
         sender.sendMessage(string);
     }
 
-    public synchronized void taskFinished(CommandSender sender) {
+    public synchronized void taskFinished(CommandSender sender, BukkitTask task) {
         sendTypedMessageToSender(sender, languageConfig.getLogsSuccessfullyDownloaded());
+        Bukkit.getScheduler().cancelTask(task.getTaskId());
     }
 
     public void init() {
         WatchTowerGui plugin = WatchTowerGui.getInstance();
         this.folder = new File(plugin.getDataFolder() + "/logs");
         this.languageConfig = plugin.configsManager.languageConfig;
+    }
+
+    public BukkitTask displayCurrentSec(String message, CommandSender sender, WatchTowerGui plugin) {
+        AtomicInteger timer = new AtomicInteger(0);
+        return Bukkit.getScheduler().runTaskTimer(plugin, ()-> {
+            int currentTime = timer.incrementAndGet();
+            int p1 = currentTime % 60;
+            int p2 = currentTime / 60;
+            int p3 = p2 % 60;
+            p2 = p2 / 60;
+            if (sender instanceof Player) {
+                Player player = (Player) sender;
+                player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(message + " §e§l"+ p2 + "§7§l:" + "§e§l"+ p3 +  "§7§l:" + "§e§l" + p1));
+            } else {
+                sender.sendMessage(message + " §e§l"+ p2 + "§7§l:" + "§e§l"+ p3 +  "§7§l:" + "§e§l" + p1);
+            }
+        }, 1,20);
     }
 
     private void deleteFiles() {
