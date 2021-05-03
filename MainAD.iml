@@ -15,6 +15,7 @@
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/target/generated-sources/annotations" isTestSource="false" generated="true" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="inheritedJdk" />
@@ -35,7 +36,25 @@
     <orderEntry type="module-library">
       <library name="Maven: ad.guis:ultimateguis:RELEASE">
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/UltimateGuis.jar!/" />
+          <root url="jar://$MODULE_DIR$/../UltimateGuis.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Maven: ad.annotation.processors:ConfigAnnotationProcessor:1.0">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/libs/ConfigAnnotationProcessor1.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Maven: ad.codeGenerator:JavaCodeParser:1.0">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/libs/JavaCodeParser.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

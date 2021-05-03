@@ -10,7 +10,7 @@ public class DisabledCommandsForLogsConfig extends ConfigAccessor {
     private String commandExcludeResponse;
 
     public void init() {
-        super.init("CommandsConfig", "configuration/");
+        super.init("CommandsConfig", "configuration");
         this.commandExcludeResponse = getStringPath(this.path + ".command_exclude_response");
     }
 

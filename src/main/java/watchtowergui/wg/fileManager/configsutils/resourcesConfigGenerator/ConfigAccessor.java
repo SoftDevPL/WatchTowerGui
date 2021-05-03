@@ -1,30 +1,47 @@
 package watchtowergui.wg.fileManager.configsutils.resourcesConfigGenerator;
 
+import lombok.Getter;
 import watchtowergui.wg.WatchTowerGui;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ConfigAccessor {
 
     protected WatchTowerGui plugin;
-    private YamlConfiguration yml;
+    protected YamlConfiguration yml;
     private File file;
 
     public void init(String filename, String path) {
         this.initConfig(filename, path);
     }
 
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     private void initConfig(String filename, String path) {
         this.plugin = WatchTowerGui.getInstance();
-        file = new File(this.plugin.getDataFolder(), "/"+ path + filename + ".yml");
-        if (file.exists()) {
-            yml = YamlConfiguration.loadConfiguration(file);
+        file = new File(this.plugin.getDataFolder(), path);
+        file.mkdirs();
+        file = new File(this.plugin.getDataFolder(), path + File.separator + filename + ".yml");
+        try {
+            file.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+        yml = YamlConfiguration.loadConfiguration(file);
+    }
+
+    public boolean save(){
+        try {
+            this.yml.save(file);
+        } catch (IOException e) {
+            return false;
+        }
+        return true;
     }
 
     public String getStringPath(String path) {
@@ -63,4 +80,5 @@ public class ConfigAccessor {
         }
         return yml.getStringList(path);
     }
+
 }

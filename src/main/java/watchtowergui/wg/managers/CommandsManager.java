@@ -7,6 +7,7 @@ import watchtowergui.wg.adminfun.commands.*;
 import watchtowergui.wg.adminfun.commands.sudo.SudoCommand;
 import watchtowergui.wg.bans.command.BanCommand;
 import watchtowergui.wg.bans.command.UnBanCommand;
+import watchtowergui.wg.chat.ClearChatCommand;
 import watchtowergui.wg.chat.mute.commands.MuteCommand;
 import watchtowergui.wg.chat.mute.commands.UnMuteCommand;
 import watchtowergui.wg.logs.commands.GetLogsFromDay;
@@ -73,5 +74,6 @@ public class CommandsManager {
         new PluginMenuCommand(plugin.getCommand("pluginmenu"));
         plugin.getCommand("resetallcommands").setExecutor(new ResetAllCommandsCommand());
         new SudoCommand(plugin.getCommand("sudo"));
+        new ClearChatCommand(plugin.getCommand("clearchat"));
     }
 }

@@ -76,7 +76,7 @@ public class LogsGui extends BasicGui {
 
             secCalendarGui.setCalendarGuiAction((secondDate, player, cGui3) -> {
                 if (secondDate.equals(firstDate)) return;
-                cGui3.setSecondSpecialDate(new SpecialDate(secondDate, glc.getEndDate()));
+                cGui3.setSecondSpecialDate(new SpecialDate(secondDate, glc.getCalendarGuiEndDate()));
                 cGui3.setAcceptAction(player3 -> {
                     player3.performCommand(command.replaceFirst("###", format.format(firstDate)).
                             replaceFirst("###", format.format(secondDate)));
@@ -84,7 +84,7 @@ public class LogsGui extends BasicGui {
                 });
             });
 
-            secCalendarGui.setFirstSpecialDate(new SpecialDate(firstDate, glc.getFirstDate()));
+            secCalendarGui.setFirstSpecialDate(new SpecialDate(firstDate, glc.getCalendarGuiFirstDate()));
             secCalendarGui.open(player1);
 
         }, glc.getFirstCalendarGuiTitle(), previousGui);

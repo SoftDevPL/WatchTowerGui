@@ -1,5 +1,8 @@
 package watchtowergui.wg;
 
+import org.bukkit.configuration.MemorySection;
+import org.bukkit.configuration.file.YamlConfiguration;
+import watchtowergui.wg.fileManager.configsutils.configs.LanguageConfig;
 import watchtowergui.wg.managers.CommandsManager;
 import watchtowergui.wg.fileManager.configsutils.ConfigsManager;
 import watchtowergui.wg.fileManager.sql.sqlUtils.SQLManager;
@@ -11,7 +14,11 @@ import org.bukkit.ChatColor;
 import org.bukkit.Server;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
+import watchtowergui.wg.fileManager.configsutils.configs.*;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.Map;
 import java.util.logging.Logger;
 
 import static ad.guis.ultimateguis.ANSIColors.*;
@@ -74,6 +81,7 @@ public final class WatchTowerGui extends JavaPlugin {
     public void onEnable() {
         instance = this;
         initAll();
+
     }
 
     @Override

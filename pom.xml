@@ -126,7 +126,21 @@
             <artifactId>ultimateguis</artifactId>
             <version>RELEASE</version>
             <scope>system</scope>
-            <systemPath>${basedir}/UltimateGuis.jar</systemPath>
+            <systemPath>${basedir}/../UltimateGuis.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>ad.annotation.processors</groupId>
+            <artifactId>ConfigAnnotationProcessor</artifactId>
+            <scope>system</scope>
+            <version>1.0</version>
+            <systemPath>${basedir}/libs/ConfigAnnotationProcessor1.0.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>ad.codeGenerator</groupId>
+            <artifactId>JavaCodeParser</artifactId>
+            <scope>system</scope>
+            <version>1.0</version>
+            <systemPath>${basedir}/libs/JavaCodeParser.jar</systemPath>
         </dependency>
     </dependencies>
 </project>

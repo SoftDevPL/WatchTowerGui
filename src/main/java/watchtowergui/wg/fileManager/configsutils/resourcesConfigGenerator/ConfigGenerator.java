@@ -21,7 +21,7 @@ public class ConfigGenerator {
 
     public void init() {
         this.pluginInstance = WatchTowerGui.getInstance();
-        generateAllConfigs("locale");
+       // generateAllConfigs("locale");
         generateAllConfigs("configuration");
     }
 

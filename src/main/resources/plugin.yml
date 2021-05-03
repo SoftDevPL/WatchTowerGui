@@ -8,72 +8,76 @@ commands:
   gluday:
     usage: /gluday
     description: Get Logs From Day By UUID
-    permission: watchTowerGui.commands.admin.gluday
+    permission: watchTowerGui.commands.gluday
   gludate:
     usage: /gldate
     description: Get Logs From Date Interval By UUID
-    permission: watchTowerGui.commands.admin.gludate
+    permission: watchTowerGui.commands.gludate
   glday:
     usage: /glday
     description: Get Logs From Day
-    permission: watchTowerGui.commands.admin.glday
+    permission: watchTowerGui.commands.glday
   gldate:
     usage: /gldate
     description: Get Logs From Date Interval
-    permission: watchTowerGui.commands.admin.gldate
+    permission: watchTowerGui.commands.gldate
   mmode:
     usage: /mmode
     description: turn ON / OFF Maintenance Mode
-    permission: watchTowerGui.commands.admin.maintenancePerm
+    permission: watchTowerGui.commands.maintenancePerm
   unmute:
     usage: /unmute [player]
     description: unmute player
-    permission: watchTowerGui.commands.admin.unmute
+    permission: watchTowerGui.commands.unmute
   mute:
     usage: /mute [player]
     description: mute player
-    permission: watchTowerGui.commands.admin.mute
+    permission: watchTowerGui.commands.mute
   tmunban:
     usage: /tmunban
     description: unban player
-    permission: watchTowerGui.commands.admin.tmunban
+    permission: watchTowerGui.commands.tmunban
   tmban:
     usage: /tmban [player]
     description: ban player
-    permission: watchTowerGui.commands.admin.tmban
+    permission: watchTowerGui.commands.tmban
   ad:
     usage: /ad
     description: admin interface
-    permission: watchTowerGui.commands.admin.ad
+    permission: watchTowerGui.commands.ad
   freeze:
     usage: /freeze [player]
     description: freeze or unfreeze player
-    permission: watchTowerGui.commands.admin.freeze
+    permission: watchTowerGui.commands.freeze
   playerMenu:
     usage: /playerMenu [player]
     description: open player edit menu
-    permission: watchTowerGui.commands.admin.playerMenu
+    permission: watchTowerGui.commands.playerMenu
   hide:
     usage: /hide <player>
     description: hide yourself or another player
-    permission: watchTowerGui.commands.admin.hideplayer
+    permission: watchTowerGui.commands.hideplayer
   sudo:
     usage: /sudo [player] [command_and_arguments]
     description: execute command as another player
-    permission: watchTowerGui.commands.admin.sudo
+    permission: watchTowerGui.commands.sudo
   pluginmenu:
     usage: /pluginmenu <plugin>
     description: open gui with information about given plugin, note that plugin_name is case sensitive
-    permission: watchTowerGui.commands.admin.pluginmenu
+    permission: watchTowerGui.commands.pluginmenu
   commandmenu:
     usage: /commandmenu <command_name>
     description: open gui with tools for given enabled command
-    permission: watchTowerGui.commands.admin.commandmenu
+    permission: watchTowerGui.commands.commandmenu
   resetAllCommands:
     usage: /resetallcommands
     description: reset commands settings like aliases and labels to default
-    permission: watchTowerGui.commands.admin.resetallcommands
+    permission: watchTowerGui.commands.resetallcommands
+  clearChat:
+    usage: /clearchat
+    description: clear chat
+    permission: watchTowerGui.commands.clearchat
   test:
     usage: /test
     description: test
-    permission: watchTowerGui.commands.admin.test
+    permission: watchTowerGui.commands.test
