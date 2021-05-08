@@ -15,7 +15,7 @@ public class ConfigAccessor {
 
     protected WatchTowerGui plugin;
     protected YamlConfiguration yml;
-    private File file;
+    protected File file;
 
     public void init(String filename, String path) {
         this.initConfig(filename, path);
@@ -80,5 +80,6 @@ public class ConfigAccessor {
         }
         return yml.getStringList(path);
     }
+
 
 }

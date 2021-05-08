@@ -71,18 +71,18 @@ public class PlayerActionGui extends BasicGui {
         if (activity == ONLINE) {
             wool = new ItemStack(Material.WOOL, 1, (short) 13);
             meta = wool.getItemMeta();
-            meta.setDisplayName(glc.getSinglePlayerGuiStatus_online());
+            meta.setDisplayName(glc.getSinglePlayerGuiStatusOnline());
         } else if (activity == OFFLINE) {
             wool = new ItemStack(Material.WOOL, 1, (short) 14);
             meta = wool.getItemMeta();
-            meta.setDisplayName(glc.getSinglePlayerGuiStatus_offline());
+            meta.setDisplayName(glc.getSinglePlayerGuiStatusOffline());
             if (calculatedTime < 0) {
                 //calc time in background
                 new Operation<>(offlinePlayer::getLastPlayed).syncSubscribe(value -> {
                     setActivity(toActivity(offlinePlayer.isOnline()), value);
                 }).run();
             } else if (calculatedTime == 0) {
-                meta.setLore(splitLore(glc.getSinglePlayerGuiStatus_offline_never_player_before() + "\n", 30));
+                meta.setLore(splitLore(glc.getSinglePlayerGuiStatusOfflineNeverPlayerBefore() + "\n", 30));
             } else {
                 meta.setLore(splitLore(glc.getSinglePlayerGuiLastActivity(
                         CalendarCalculator.standardDateFormat(calculatedTime)) + "\n", 30));
@@ -100,11 +100,11 @@ public class PlayerActionGui extends BasicGui {
     private void setupGui() {
         if (!initFirstTime) return;
         vanishOnItem = BasicGui.createItem(Material.GLASS, glc.getSinglePlayerGuiHidePlayer(),
-                BasicGui.splitLore(glc.getSinglePlayerGuiHidePlayer_current()
+                BasicGui.splitLore(glc.getSinglePlayerGuiHidePlayerCurrent()
                         + ChatColor.GREEN + "" + ChatColor.BOLD + "ON", 25));
 
         vanishOffItem = BasicGui.createItem(Material.GLASS, glc.getSinglePlayerGuiHidePlayer(),
-                BasicGui.splitLore(glc.getSinglePlayerGuiHidePlayer_current()
+                BasicGui.splitLore(glc.getSinglePlayerGuiHidePlayerCurrent()
                         + ChatColor.RED + "" + ChatColor.BOLD + "OFF", 25));
 
         kill = BasicGui.createItem(Material.SKULL_ITEM, glc.getSinglePlayerGuiKillPlayer(), (short) 0);

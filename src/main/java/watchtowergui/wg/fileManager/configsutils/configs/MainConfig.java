@@ -2,7 +2,11 @@ package watchtowergui.wg.fileManager.configsutils.configs;
 
 import app.annotations.ConfigYml;
 import lombok.ToString;
+import org.bukkit.configuration.Configuration;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import watchtowergui.wg.fileManager.configsutils.resourcesConfigGenerator.ConfigAccessor;
+
 import java.util.Map;
 
 @ConfigYml
@@ -14,16 +18,29 @@ public class MainConfig extends ConfigAccessor {
     boolean allowBadWords = false;
     int countOfTriesToBan = 3;
     String banTime = "%S10 %Mi0 %H0 %D0 %W0 %Mo0 %Y0";
+    String siema_elo_lol_csgo_adrian_ere_gfdfgfd = "sfdfd";
+    String siema_elo_csgo_gfdgfd = "asdsd";
+    String siema_elo_stone = "1223";
+    String arek_zbyszek_lolek_bolek = "gfd";
+    String arek_kuba = "gdrgdf";
 
     public void init() {
         super.init("Config", "configuration");
         this.yml.addDefaults(this.serialize());
         this.yml.options().copyDefaults(true);
         this.save();
-        watchtowergui.wg.fileManager.configsutils.configs.MainConfigSerializator
-                .injectTo(this, this.yml.getConfigurationSection("").getValues(true));
+
+        Map<String, Object> defaults = this.yml.getDefaults().getValues(true);
+        this.yml = YamlConfiguration.loadConfiguration(this.file);
+
+        Map<String, Object> map = this.yml.getConfigurationSection("").getValues(true);
+        watchtowergui.wg.fileManager.configsutils.configs.MainConfigSerializator.injectTo(this, map,defaults, this.yml);
+        this.save();
+
         System.out.println(this);
     }
+
+
 
     public int getCountOfTriesToBan() {
         return countOfTriesToBan;

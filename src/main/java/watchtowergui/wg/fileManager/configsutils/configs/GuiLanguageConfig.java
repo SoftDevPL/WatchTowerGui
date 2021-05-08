@@ -1,14 +1,13 @@
 package watchtowergui.wg.fileManager.configsutils.configs;
 
 import app.annotations.ConfigYml;
-import lombok.ToString;
+import org.bukkit.configuration.file.YamlConfiguration;
 import watchtowergui.wg.fileManager.configsutils.resourcesConfigGenerator.ConfigAccessor;
 import watchtowergui.wg.fileManager.configsutils.resourcesConfigGenerator.LiteralType;
 
 import java.util.Map;
 
 @ConfigYml
-@ToString
 public class GuiLanguageConfig extends ConfigAccessor {
 
     String adminStaffGuiDisableChat = "§b§lDisable chat for all players";
@@ -25,7 +24,7 @@ public class GuiLanguageConfig extends ConfigAccessor {
     String singlePlayerGuiPlayerLocationClickToTeleportToPlayer = "§a§lClick to teleport to player";
     String singlePlayerGuiPlayerLocationLocationPlayersOffline = "§2§lLocation: §f§lPlayer is offline";
     String singlePlayerGuiPlayerInfoMuted = "§a§lThis player is muted";
-    String singlePlayerGuiStatus_offline_never_player_before = "§e§lPlayer has never played before";
+    String singlePlayerGuiStatusOfflineNeverPlayerBefore = "§e§lPlayer has never played before";
     String worldToolsGuiSelectPlayer = "§2§lSelect player";
     String serverControlGuiGuiTitle = "§5§lManage your server";
     String serverControlGuiPluginListName = "§e§lPlugins list";
@@ -43,8 +42,8 @@ public class GuiLanguageConfig extends ConfigAccessor {
     String singlePluginGuiCreateWebsiteItemLore = "§2[pluginWebsite]";
     String singlePluginGuiCreateWebsiteItemNotSpecified = "§cNot specified";
     String singlePluginGuiCreatePluginCommandsItemName = "§2§lPlugin commands";
-    String singlePluginGuiCreatePluginCommandsItemCommands_lore = "§dClick to manage this plugin commands";
-    String singlePluginGuiCreatePluginCommandsItemNo_commands_lore = "§dThis plugin do not have commands";
+    String singlePluginGuiCreatePluginCommandsItemCommandsLore = "§dClick to manage this plugin commands";
+    String singlePluginGuiCreatePluginCommandsItemNoCommandsLore = "§dThis plugin do not have commands";
     String singlePluginGuiCreateDependItemName = "§aPlugins required for this plugin:";
     String singlePluginGuiCreateDependItemLore = "§aPlugins that give full functionalities:";
     String pluginControlGuiGetDescriptionItemLore = "§2§lClick for details";
@@ -81,8 +80,8 @@ public class GuiLanguageConfig extends ConfigAccessor {
     String singleCommandGuiCreatePermissionItemName = "§f§lPermission for this command: §9§l[commandPermission]";
     String singleCommandGuiCreatePermissionNotSpecified = "§c§lNot specified";
     String singleCommandGuiCreateNameItemName = "§f§lName: §1§l[commandName]";
-    String singleCommandGuiCreateNameItemLore_1 = "§f§lLabel: §e§l[commandLabel]";
-    String singleCommandGuiCreateNameItemLore_2 = "§f§lClick to change label §c§l(not recommended)";
+    String singleCommandGuiCreateNameItemLore1 = "§f§lLabel: §e§l[commandLabel]";
+    String singleCommandGuiCreateNameItemLore2 = "§f§lClick to change label §c§l(not recommended)";
     String singleCommandGuiCreateAliasesItemName = "§5§lAliases:";
     String singleCommandGuiCreateAliasesItemLore = "§b§lClick to add/remove alias";
     String singleCommandGuiCreatePluginItemNameSpecified = "§f§lCommand received from: §5§l[commandName] §f§l-> Click to see plugin";
@@ -131,7 +130,7 @@ public class GuiLanguageConfig extends ConfigAccessor {
     String bansGuiHiddenPlayers = "§b§lHidden Players";
     String adminStaffGuiPageName = "§2§lAdminStaff";
     String adminStaffGuiVanish = "§6§lVanish";
-    String adminStaffGuiVanish_current = "'§fCurrent:";
+    String adminStaffGuiVanishCurrent = "§fCurrent:";
     String adminStaffGuiMaintenance = "§7§lMaintenance Mode";
     String adminStaffGuiAdminTools = "§b§lAdmin Tools";
     String adminToolsGuiPageName = "§b§lAdmin Tools";
@@ -141,8 +140,8 @@ public class GuiLanguageConfig extends ConfigAccessor {
     String adminToolsGuiAdminSword = "§c§lAdmin Sword";
     String adminToolsGuiAdminBow = "§d§lAdmin Bow";
     String adminToolsGuiAdminHoe = "§b§lAdmin... Hoe???";
-    String singlePlayerGuiStatus_online = "§a§lPlayer is online";
-    String singlePlayerGuiStatus_offline = "§c§lPlayer is offline";
+    String singlePlayerGuiStatusOnline = "§a§lPlayer is online";
+    String singlePlayerGuiStatusOffline = "§c§lPlayer is offline";
     String singlePlayerGuiKillPlayer = "§4§lKill Player";
     String singlePlayerGuiFreezePlayer = "§9§lFreeze Player";
     String singlePlayerGuiTeleportPlayer = "§2§lTeleport Player";
@@ -152,7 +151,7 @@ public class GuiLanguageConfig extends ConfigAccessor {
     String singlePlayerGuiInventory = "§2§lInventory";
     String singlePlayerGuiEnderChest = "§5§lEnder Chest";
     String singlePlayerGuiHidePlayer = "§f§lHide Player";
-    String singlePlayerGuiHidePlayer_current = "§f§lCurrent: ";
+    String singlePlayerGuiHidePlayerCurrent = "§f§lCurrent: ";
     String singlePlayerGuiKickPlayer = "§d§lKick Player";
     String singlePlayerGuiTemporaryBanPlayer = "§8§lTemporary Ban Player";
     String singlePlayerGuiBanGuiPageName = "§0§lBan §6§l[playerName]?";
@@ -160,7 +159,7 @@ public class GuiLanguageConfig extends ConfigAccessor {
     String singlePlayerGuiReleasePlayer = "§c§lRelease Player";
     String chooseTimeGuiPageName = "§0§lChoose Time";
     String chooseTimeGuiSecond = "§7§lSecond";
-    String chooseTimeGuiMinute = "§9§lMinute'";
+    String chooseTimeGuiMinute = "§9§lMinute";
     String chooseTimeGuiHour = "§b§lHour";
     String chooseTimeGuiDay = "§d§lDay";
     String chooseTimeGuiWeek = "§5§lWeek";
@@ -285,9 +284,14 @@ public class GuiLanguageConfig extends ConfigAccessor {
         this.yml.addDefaults(this.serialize());
         this.yml.options().copyDefaults(true);
         this.save();
-        watchtowergui.wg.fileManager.configsutils.configs.GuiLanguageConfigSerializator
-                .injectTo(this, this.yml.getConfigurationSection("").getValues(true));
-        System.out.println(this.toString());
+
+        Map<String, Object> defaults = this.yml.getDefaults().getValues(true);
+        this.yml = YamlConfiguration.loadConfiguration(this.file);
+
+        Map<String, Object> map = this.yml.getConfigurationSection("").getValues(true);
+        watchtowergui.wg.fileManager.configsutils.configs.GuiLanguageConfigSerializator.injectTo(this,
+                map,defaults, this.yml);
+        this.save();
     }
 
     public Map<String, Object> serialize(){
@@ -422,12 +426,12 @@ public class GuiLanguageConfig extends ConfigAccessor {
         return singlePluginGuiCreatePluginCommandsItemName;
     }
 
-    public String getSinglePluginGuiCreatePluginCommandsItemCommands_lore() {
-        return singlePluginGuiCreatePluginCommandsItemCommands_lore;
+    public String getSinglePluginGuiCreatePluginCommandsItemCommandsLore() {
+        return singlePluginGuiCreatePluginCommandsItemCommandsLore;
     }
 
-    public String getSinglePluginGuiCreatePluginCommandsItemNo_commands_lore() {
-        return singlePluginGuiCreatePluginCommandsItemNo_commands_lore;
+    public String getSinglePluginGuiCreatePluginCommandsItemNoCommandsLore() {
+        return singlePluginGuiCreatePluginCommandsItemNoCommandsLore;
     }
 
     public String getSinglePluginGuiCreateDependItemName() {
@@ -542,11 +546,11 @@ public class GuiLanguageConfig extends ConfigAccessor {
     }
 
     public String getSingleCommandGuiCreateNameItemLore_1(String word) {
-        return singleCommandGuiCreateNameItemLore_1.replaceAll(LiteralType.COMMAND_LABEL, word);
+        return singleCommandGuiCreateNameItemLore1.replaceAll(LiteralType.COMMAND_LABEL, word);
     }
 
-    public String getSingleCommandGuiCreateNameItemLore_2() {
-        return singleCommandGuiCreateNameItemLore_2;
+    public String getSingleCommandGuiCreateNameItemLore2() {
+        return singleCommandGuiCreateNameItemLore2;
     }
 
     public String getSingleCommandGuiCreateAliasesItemName() {
@@ -1166,12 +1170,12 @@ public class GuiLanguageConfig extends ConfigAccessor {
         return singlePlayerGuiPageName.replaceAll(LiteralType.PLAYER_NAME, player);
     }
 
-    public String getSinglePlayerGuiStatus_online() {
-        return singlePlayerGuiStatus_online;
+    public String getSinglePlayerGuiStatusOnline() {
+        return singlePlayerGuiStatusOnline;
     }
 
-    public String getSinglePlayerGuiStatus_offline() {
-        return singlePlayerGuiStatus_offline;
+    public String getSinglePlayerGuiStatusOffline() {
+        return singlePlayerGuiStatusOffline;
     }
 
     public String getSinglePlayerGuiKillPlayer() {
@@ -1210,8 +1214,8 @@ public class GuiLanguageConfig extends ConfigAccessor {
         return singlePlayerGuiHidePlayer;
     }
 
-    public String getSinglePlayerGuiHidePlayer_current() {
-        return singlePlayerGuiHidePlayer_current;
+    public String getSinglePlayerGuiHidePlayerCurrent() {
+        return singlePlayerGuiHidePlayerCurrent;
     }
 
     public String getSinglePlayerGuiKickPlayer() {
@@ -1258,8 +1262,8 @@ public class GuiLanguageConfig extends ConfigAccessor {
         return adminStaffGuiVanish;
     }
 
-    public String getAdminStaffGuiVanish_current() {
-        return adminStaffGuiVanish_current;
+    public String getAdminStaffGuiVanishCurrent() {
+        return adminStaffGuiVanishCurrent;
     }
 
     public String getAdminStaffGuiMaintenance() {
@@ -1362,8 +1366,8 @@ public class GuiLanguageConfig extends ConfigAccessor {
         return calendarGuiEndDate;
     }
 
-    public String getSinglePlayerGuiStatus_offline_never_player_before() {
-        return singlePlayerGuiStatus_offline_never_player_before;
+    public String getSinglePlayerGuiStatusOfflineNeverPlayerBefore() {
+        return singlePlayerGuiStatusOfflineNeverPlayerBefore;
     }
 
     public String getAdminGuiWorldToolsGuiEnterMessageInChat() {

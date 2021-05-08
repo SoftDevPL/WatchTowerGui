@@ -88,7 +88,7 @@ public class SingleCommandGui extends BasicGui {
     private ItemStack createNameItem() {
         List<String> lore = simpleSplitLore(
                 glc.getSingleCommandGuiCreateNameItemLore_1(command.getLabel()));
-        lore.addAll(splitLore(glc.getSingleCommandGuiCreateNameItemLore_2(), 25));
+        lore.addAll(splitLore(glc.getSingleCommandGuiCreateNameItemLore2(), 25));
         return BasicGui.createItem(Material.PAPER, glc.getSingleCommandGuiCreateNameItemName(command.getName()), lore);
     }
 

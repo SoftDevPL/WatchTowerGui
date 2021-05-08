@@ -2,6 +2,7 @@ package watchtowergui.wg.fileManager.configsutils.configs;
 
 import app.annotations.ConfigYml;
 import lombok.Getter;
+import org.bukkit.configuration.file.YamlConfiguration;
 import watchtowergui.wg.fileManager.configsutils.resourcesConfigGenerator.ConfigAccessor;
 import watchtowergui.wg.fileManager.configsutils.resourcesConfigGenerator.LiteralType;
 
@@ -14,15 +15,15 @@ public class LanguageConfig extends ConfigAccessor {
     String basicPlayerNotFound = "§4§lPlayer §f§l[playerName] §4§lnot found";
     String basicOnlyPlayerCanExecuteThisCommand = "§4§lOnly §f§lplayer §4§lcan execute this command!";
     String mesToFrozenPlayer = "§9§lYou have been frozen by §f§l[playerName]!";
-    String mesToFreezer = "§9§lYou''ve frozen §f§l[playerName]";
+    String mesToFreezer = "§9§lYou've frozen §f§l[playerName]";
     String mesToReleasedPlayer = "§c§lYou have been released by §f§l[playerName]!";
-    String mesToReleaser = "§c§lYou''ve released §f§l[playerName]";
+    String mesToReleaser = "§c§lYou've released §f§l[playerName]";
     String mesPlayerOffline = "§4§lWARNING: §f§l[playerName] §e§lis offline!";
     String mesToPlayerWhoIsFrozen = "§9§lYou are frozen!";
     String bannedPlayer = "§f§lPlayer §2§l[playerName] §f§lhas been banned";
     String valueNotANumber = "§c§lWrong arguments, §f§lvalue not a number";
     String banMustBeGreaterThan0 = "§c§lBan time must be greater than 0";
-    String banComment = "§f§lYou are banned to §6§l[banTime] \\n §f§lReason: §c§l[comment]";
+    String banComment = "§f§lYou are banned to §6§l[banTime] \n §f§lReason: §c§l[comment]";
     String enterBanComment = "§e§lEnter ban comment";
     String banCommentCanceled = "§c§lCanceled";
     String thisPlayerIsNotBanned = "§f§lThis player §c§lis §f§lnot banned!";
@@ -43,14 +44,14 @@ public class LanguageConfig extends ConfigAccessor {
     String youAreMutedMessage = "§4§lSORRY!! §e§lYou are muted";
     String logsGettingLogs = "§e§lGetting Logs";
     String logsSuccessfullyDownloaded = "§2§lLogs created §4§l!!§f§lCheck plugins/MainAD/Logs";
-    String logsEnterMessageForDay = "§6§lEnter day: \\n <yyyy/MM/dd>";
-    String logsEnterMessageForDate = "§6§lEnter date: \\n <yyyy/MM/dd HH:mm:ss> <yyyy/MM/dd HH:mm:ss>";
-    String logsEnterMessageForDayAndUUID = "§6§lEnter date: \\n <playerName> <yyyy/MM/dd>";
-    String logsEnterMessageForDateAndUUID = "§6§lEnter date: \\n <playerName> <yyyy/MM/dd HH:mm:ss> <yyyy/MM/dd HH:mm:ss>";
-    String logsWrongMessageForDay = "§c§lWrong format: \\n §f§l<yyyy/MM/dd>";
-    String logsWrongMessageForDate = "§c§lWrong format: \\n §f§l<yyyy/MM/dd HH:mm:ss> <yyyy/MM/dd/HH:mm:ss>";
-    String logsWrongMessageForDayAndUUID = "§c§lWrong format: \\n §f§l<playerName> <yyyy/MM/dd>";
-    String logsWrongMessageForDateAndUUID = "§c§lWrong format: \\n §f§l<playerName> <yyyy/MM/dd HH:mm:ss> <yyyy/MM/dd HH:mm:ss>";
+    String logsEnterMessageForDay = "§6§lEnter day: \n <yyyy/MM/dd>";
+    String logsEnterMessageForDate = "§6§lEnter date: \n <yyyy/MM/dd HH:mm:ss> <yyyy/MM/dd HH:mm:ss>";
+    String logsEnterMessageForDayAndUUID = "§6§lEnter date: \n <playerName> <yyyy/MM/dd>";
+    String logsEnterMessageForDateAndUUID = "§6§lEnter date: \n <playerName> <yyyy/MM/dd HH:mm:ss> <yyyy/MM/dd HH:mm:ss>";
+    String logsWrongMessageForDay = "§c§lWrong format: \n §f§l<yyyy/MM/dd>";
+    String logsWrongMessageForDate = "§c§lWrong format: \n §f§l<yyyy/MM/dd HH:mm:ss> <yyyy/MM/dd/HH:mm:ss>";
+    String logsWrongMessageForDayAndUUID = "§c§lWrong format: \n §f§l<playerName> <yyyy/MM/dd>";
+    String logsWrongMessageForDateAndUUID = "§c§lWrong format: \n §f§l<playerName> <yyyy/MM/dd HH:mm:ss> <yyyy/MM/dd HH:mm:ss>";
     String disabledChat = "§7§lChat has been disabled!";
     String commandMenuCommandsHasBeenReset = "§f§lCommands has been reset reload your server by typing §a§l /reload §f§lto apply changes";
     String commandMenuResetAllCommandsWarning = "§d§lCalling this command will reset all your commands setting like aliases and labels, this cannot be undo. Type §f§l[commandLabel] yes. §d§lIf you really want it";
@@ -59,7 +60,7 @@ public class LanguageConfig extends ConfigAccessor {
     String playerNotHidden = "§f§lPlayer §2§l[playerName] §f§lis visible now!";
     String youAreHidden = "§f§lYou §e§lare hidden §f§lnow!";
     String youAreNotHidden = "§f§lYou §2§lare not hidden §f§lnow!";
-    String maintenanceModeKickMessage = "§c§lSORRY! \\n §6§lServer §f§lencountered an unprecedented problem \\n §a§lTry again later!";
+    String maintenanceModeKickMessage = "§c§lSORRY! \n §6§lServer §f§lencountered an unprecedented problem \n §a§lTry again later!";
     String maintenanceModeOn = "§6§lMaintenance mode is §2§loff!";
     String youAreHiddenNow = "§f§lYou §4§lcan not §f§lbe hidden twice!";
     String playerIsHiddenNow = "§4§lPlayer §f§l[playerName] §4§lis already hidden!";
@@ -75,7 +76,14 @@ public class LanguageConfig extends ConfigAccessor {
         this.yml.addDefaults(this.serialize());
         this.yml.options().copyDefaults(true);
         this.save();
-        watchtowergui.wg.fileManager.configsutils.configs.LanguageConfigSerializator.injectTo(this, this.yml.getConfigurationSection("").getValues(true));
+
+        Map<String, Object> defaults = this.yml.getDefaults().getValues(true);
+        this.yml = YamlConfiguration.loadConfiguration(this.file);
+
+        Map<String, Object> map = this.yml.getConfigurationSection("").getValues(true);
+        watchtowergui.wg.fileManager.configsutils.configs.LanguageConfigSerializator.injectTo(this, map,defaults, this.yml);
+        this.save();
+
     }
 
     public Map<String, Object> serialize(){

@@ -50,11 +50,11 @@ public class AdminFunGui extends BasicGui {
     private void setupGuiItems() {
         worldToolsGui = BasicGui.createItem(Material.JUKEBOX, glc.getAdminGuiWorldToolsGuiWorldToolsGuiPageName());
         vanishOn = BasicGui.createItem(Material.GLASS, glc.getAdminStaffGuiVanish(),
-                BasicGui.splitLore(glc.getAdminStaffGuiVanish_current() + ChatColor.GREEN + ChatColor.BOLD + " ON"
+                BasicGui.splitLore(glc.getAdminStaffGuiVanishCurrent() + ChatColor.GREEN + ChatColor.BOLD + " ON"
                         , 20));
 
         vanishOff = BasicGui.createItem(Material.GLASS, glc.getAdminStaffGuiVanish(),
-                BasicGui.splitLore(glc.getAdminStaffGuiVanish_current() + ChatColor.RED + ChatColor.BOLD + " OFF"
+                BasicGui.splitLore(glc.getAdminStaffGuiVanishCurrent() + ChatColor.RED + ChatColor.BOLD + " OFF"
                         , 20));
 
         close = BasicGui.createItem(Material.BARRIER, glc.getAdminGuiClose());

@@ -74,8 +74,8 @@ public class SinglePluginGui extends BasicGui {
                 .collect(Collectors.toList());
 
         return BasicGui.createItem(Material.BOOK, glc.getSinglePluginGuiCreatePluginCommandsItemName(),
-                splitLore(!pluginCommands.isEmpty() ? glc.getSinglePluginGuiCreatePluginCommandsItemCommands_lore()
-                        : glc.getSinglePluginGuiCreatePluginCommandsItemNo_commands_lore(), 25));
+                splitLore(!pluginCommands.isEmpty() ? glc.getSinglePluginGuiCreatePluginCommandsItemCommandsLore()
+                        : glc.getSinglePluginGuiCreatePluginCommandsItemNoCommandsLore(), 25));
     }
 
     private ItemStack createDependItem() {
