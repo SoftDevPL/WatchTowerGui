@@ -10,7 +10,6 @@ import watchtowergui.wg.fileManager.configsutils.resourcesConfigGenerator.Config
 import java.util.Map;
 
 @ConfigYml
-@ToString
 public class MainConfig extends ConfigAccessor {
 
     int countOfTries = 4;
@@ -36,8 +35,6 @@ public class MainConfig extends ConfigAccessor {
         Map<String, Object> map = this.yml.getConfigurationSection("").getValues(true);
         watchtowergui.wg.fileManager.configsutils.configs.MainConfigSerializator.injectTo(this, map,defaults, this.yml);
         this.save();
-
-        System.out.println(this);
     }
 
 
