@@ -52,12 +52,12 @@ public class AliasesGui extends ListGui<String> {
 
     private ItemStack createAddItem() {
         return BasicGui.createItem(Material.INK_SACK,
-                glc.getAliasGuiAddAliasItemName(), (short) 10);
+                glc.getGuiLocale_aliasGui_addAliasItemName(), (short) 10);
     }
 
     private ItemStack createAliasItem(String alias) {
         return BasicGui.createItem(Material.PAPER, ChatColor.GOLD + "" + ChatColor.BOLD + alias,
-                BasicGui.splitLore(glc.getAliasGuiRemoveAliasItemName(), 100));
+                BasicGui.splitLore(glc.getGuiLocale_aliasGui_removeAliasItemName(), 100));
     }
 
 
@@ -90,7 +90,7 @@ public class AliasesGui extends ListGui<String> {
     private boolean setAliasFromChat(String chatMessage, Player player) {
 
         if (chatMessage.equals(CANCEL_PHRASE)) {
-            player.sendMessage(glc.getAliasGuiCancelPhrase());
+            player.sendMessage(glc.getGuiLocale_aliasGui_cancelPhrase());
             this.open(player);
         } else {
             setWaitingStatus(player);
@@ -114,9 +114,9 @@ public class AliasesGui extends ListGui<String> {
     public void receiveAliasRemoved(boolean isSuccessful, String alias) {
         if (!isWaitingForResult()) return;
         if (isSuccessful) {
-            this.actualPlayer.sendMessage(glc.getAliasGuiAliasRemoved());
+            this.actualPlayer.sendMessage(glc.getGuiLocale_aliasGui_aliasRemoved());
             this.open(actualPlayer);
-        } else this.actualPlayer.sendMessage(glc.getAliasGuiCantRemovedAlias());
+        } else this.actualPlayer.sendMessage(glc.getGuiLocale_aliasGui_canNotRemovedAlias());
         resetWaitingStatus();
     }
 

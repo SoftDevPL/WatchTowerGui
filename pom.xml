@@ -126,7 +126,7 @@
             <artifactId>ultimateguis</artifactId>
             <version>RELEASE</version>
             <scope>system</scope>
-            <systemPath>${basedir}/../UltimateGuis.jar</systemPath>
+            <systemPath>${basedir}/libs/UltimateGuis.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>ad.annotation.processors</groupId>

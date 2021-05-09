@@ -168,9 +168,9 @@ public class HidingPlayerListener implements Listener {
             //assert sender instanceof Player;
             addPlayerToHideList((Player) event.getPlayer());
             if (senderIsHidingPlayer) {
-                event.getSender().sendMessage(languageConfig.getYouAreHidden());
+                event.getSender().sendMessage(languageConfig.getCommandsLocale_hide_youAreHidden());
             } else {
-                event.getSender().sendMessage(languageConfig.getPlayerHidden(event.getPlayer().getName()));
+                event.getSender().sendMessage(languageConfig.getCommandsLocale_hide_playerIsAlreadyHidden(event.getPlayer().getName()));
             }
         }
     }
@@ -183,9 +183,9 @@ public class HidingPlayerListener implements Listener {
            // assert sender instanceof Player;
             removePlayerFromHideList((Player) event.getPlayer());
             if (senderIsHidingPlayer) {
-                event.getSender().sendMessage(languageConfig.getYouAreNotHidden());
+                event.getSender().sendMessage(languageConfig.getCommandsLocale_hide_youAreNotHidden());
             } else {
-                event.getSender().sendMessage(languageConfig.getPlayerNotHidden(event.getPlayer().getName()));
+                event.getSender().sendMessage(languageConfig.getCommandsLocale_hide_playerNotHidden(event.getPlayer().getName()));
             }
         }
     }

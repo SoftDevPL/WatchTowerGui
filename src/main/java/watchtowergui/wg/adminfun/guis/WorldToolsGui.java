@@ -7,7 +7,6 @@ import ad.guis.ultimateguis.examples.PlayersGui;
 import watchtowergui.wg.WatchTowerGui;
 import watchtowergui.wg.chat.chatguard.ChatManager;
 import watchtowergui.wg.fileManager.configsutils.configs.GuiLanguageConfig;
-import watchtowergui.wg.managers.CommandsManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -40,7 +39,7 @@ public class WorldToolsGui extends BasicGui {
     public WatchTowerGui watchTowerGui;
 
     public WorldToolsGui(BasicGui previousGui) throws IllegalArgumentException {
-        super(3, WatchTowerGui.getInstance().configsManager.guiLanguageConfig.getAdminGuiWorldToolsGuiWorldToolsGuiPageName(), previousGui);
+        super(3, WatchTowerGui.getInstance().configsManager.guiLanguageConfig.getGuiLocale_adminGuiWorldToolsGui_worldToolsGuiPageName(), previousGui);
         this.watchTowerGui = WatchTowerGui.getInstance();
         glc = watchTowerGui.configsManager.guiLanguageConfig;
         chatManager = watchTowerGui.listenersManager.chatManager;
@@ -51,65 +50,65 @@ public class WorldToolsGui extends BasicGui {
     private void setupGuiItems() {
         if (!initFirstTime) return;
         initFirstTime = false;
-        close = BasicGui.createItem(Material.BARRIER, glc.getAdminGuiClose());
-        back = BasicGui.createItem(Material.ARROW, glc.getAdminGuiBack());
+        close = BasicGui.createItem(Material.BARRIER, glc.getGuiLocale_adminGui_close());
+        back = BasicGui.createItem(Material.ARROW, glc.getGuiLocale_adminGui_back());
         backGroundBlack = BasicGui.createBackground(Colors.BLACK);
         defaultGamemode = BasicGui.createItem(
                 Material.HOPPER,
-                glc.getAdminGuiWorldToolsGuiDefaultGamemodeName(),
-                BasicGui.splitLore(glc.getAdminGuiWorldToolsGuiDefaultGamemodeLore(), 25));
+                glc.getGuiLocale_adminGuiWorldToolsGui_defaultGamemodeName(),
+                BasicGui.splitLore(glc.getGuiLocale_adminGuiWorldToolsGui_defaultGamemodeLore(), 25));
         difficulty = BasicGui.createItem(
                 Material.CHEST,
-                glc.getAdminGuiWorldToolsGuiWorldDifficultyName(),
-                BasicGui.splitLore(glc.getAdminGuiWorldToolsGuiWorldDifficultyLore(), 25));
+                glc.getGuiLocale_adminGuiWorldToolsGui_worldDifficultyName(),
+                BasicGui.splitLore(glc.getGuiLocale_adminGuiWorldToolsGui_worldDifficultyLore(), 25));
         gamemode = BasicGui.createItem(
                 Material.ANVIL,
-                glc.getAdminGuiWorldToolsGuiGamemodeName(),
-                BasicGui.splitLore(glc.getAdminGuiWorldToolsGuiGamemodeLore(), 25));
+                glc.getGuiLocale_adminGuiWorldToolsGui_gamemodeName(),
+                BasicGui.splitLore(glc.getGuiLocale_adminGuiWorldToolsGui_gamemodeLore(), 25));
         reload = BasicGui.createItem(
                 Material.LEVER,
-                glc.getAdminGuiWorldToolsGuiReloadName(),
-                BasicGui.splitLore(glc.getAdminGuiWorldToolsGuiReloadLore(), 25));
+                glc.getGuiLocale_adminGuiWorldToolsGui_reloadName(),
+                BasicGui.splitLore(glc.getGuiLocale_adminGuiWorldToolsGui_reloadLore(), 25));
         say = BasicGui.createItem(
                 Material.PAPER,
-                glc.getAdminGuiWorldToolsGuiSayName(),
-                BasicGui.splitLore(glc.getAdminGuiWorldToolsGuiSayLore(), 25));
+                glc.getGuiLocale_adminGuiWorldToolsGui_sayName(),
+                BasicGui.splitLore(glc.getGuiLocale_adminGuiWorldToolsGui_sayLore(), 25));
         seed = BasicGui.createItem(
                 Material.GRASS,
-                glc.getAdminGuiWorldToolsGuiSeedName(),
-                BasicGui.splitLore(glc.getAdminGuiWorldToolsGuiSeedLore(), 25));
+                glc.getGuiLocale_adminGuiWorldToolsGui_seedName(),
+                BasicGui.splitLore(glc.getGuiLocale_adminGuiWorldToolsGui_seedLore(), 25));
         setWorldSpawn = BasicGui.createItem(
                 Material.BEDROCK,
-                glc.getAdminGuiWorldToolsGuiSetWorldSpawnName(),
-                BasicGui.splitLore(glc.getAdminGuiWorldToolsGuiSetWorldSpawnLore(), 25));
+                glc.getGuiLocale_adminGuiWorldToolsGui_setWorldSpawnName(),
+                BasicGui.splitLore(glc.getGuiLocale_adminGuiWorldToolsGui_setWorldSpawnLore(), 25));
         spawnPoint = BasicGui.createItem(
                 Material.COMPASS,
-                glc.getAdminGuiWorldToolsGuiSpawnPointName(),
-                BasicGui.splitLore(glc.getAdminGuiWorldToolsGuiSpawnPointLore(), 25));
+                glc.getGuiLocale_adminGuiWorldToolsGui_spawnPointName(),
+                BasicGui.splitLore(glc.getGuiLocale_adminGuiWorldToolsGui_spawnPointLore(), 25));
         time = BasicGui.createItem(
                 Material.WATCH,
-                glc.getAdminGuiWorldToolsGuiTimeName(),
-                BasicGui.splitLore(glc.getAdminGuiWorldToolsGuiTimeLore(), 25));
+                glc.getGuiLocale_adminGuiWorldToolsGui_timeName(),
+                BasicGui.splitLore(glc.getGuiLocale_adminGuiWorldToolsGui_timeLore(), 25));
         weather = BasicGui.createItem(
                 Material.WATER_LILY,
-                glc.getAdminGuiWorldToolsGuiWeatherName(),
-                BasicGui.splitLore(glc.getAdminGuiWorldToolsGuiWeatherLore(), 25));
+                glc.getGuiLocale_adminGuiWorldToolsGui_weatherName(),
+                BasicGui.splitLore(glc.getGuiLocale_adminGuiWorldToolsGui_weatherLore(), 25));
         worldBorder = BasicGui.createItem(
                 Material.IRON_BARDING,
-                glc.getAdminGuiWorldToolsGuiWorldBorderName(),
-                BasicGui.splitLore(glc.getAdminGuiWorldToolsGuiWorldBorderLore(), 25));
+                glc.getGuiLocale_adminGuiWorldToolsGui_worldBorderName(),
+                BasicGui.splitLore(glc.getGuiLocale_adminGuiWorldToolsGui_worldBorderLore(), 25));
         xp = BasicGui.createItem(
                 Material.EXP_BOTTLE,
-                glc.getAdminGuiWorldToolsGuiXpName(),
-                BasicGui.splitLore(glc.getAdminGuiWorldToolsGuiXpLore(), 25));
+                glc.getGuiLocale_adminGuiWorldToolsGui_xpName(),
+                BasicGui.splitLore(glc.getGuiLocale_adminGuiWorldToolsGui_xpLore(), 25));
         title = BasicGui.createItem(
                 Material.JACK_O_LANTERN,
-                glc.getAdminGuiWorldToolsGuiTitleName(),
-                BasicGui.splitLore(glc.getAdminGuiWorldToolsGuiTitleLore(), 25));
+                glc.getGuiLocale_adminGuiWorldToolsGui_titleName(),
+                BasicGui.splitLore(glc.getGuiLocale_adminGuiWorldToolsGui_titleLore(), 25));
         tell = BasicGui.createItem(
                 Material.ENDER_PEARL,
-                glc.getAdminGuiWorldToolsGuiTellName(),
-                BasicGui.splitLore(glc.getAdminGuiWorldToolsGuiTellLore(), 25));
+                glc.getGuiLocale_adminGuiWorldToolsGui_tellName(),
+                BasicGui.splitLore(glc.getGuiLocale_adminGuiWorldToolsGui_tellLore(), 25));
     }
 
     protected void init() {
@@ -119,38 +118,38 @@ public class WorldToolsGui extends BasicGui {
         this.setItem(2, 2, gamemode, player -> new GamemodeGui(WorldToolsGui.this).open(player));
 
         this.setItem(3, 0, reload,
-                player -> player.performCommand(CommandsManager.getAnyCommand("bukkit:reload")));
+                player -> player.performCommand(watchtowergui.wg.manager.CommandsManager.getAnyCommand("bukkit:reload")));
         this.setItem(3, 1, say, player -> {
             player.closeInventory();
-            player.sendMessage(glc.getAdminGuiWorldToolsGuiEnterMessageInChat());
+            player.sendMessage(glc.getGuiLocale_adminGuiWorldToolsGui_enterMessageInChat());
             chatManager.setTask(player.getUniqueId(), (chatMessage, chatPlayer) -> {
-                chatPlayer.performCommand(CommandsManager.getMCCommand("say") + " " + chatMessage);
+                chatPlayer.performCommand(watchtowergui.wg.manager.CommandsManager.getMCCommand("say") + " " + chatMessage);
                 new WorldToolsGui(WorldToolsGui.this).open(chatPlayer);
                 return true;
             });
         });
         this.setItem(3, 2, seed,
-                player -> player.performCommand(CommandsManager.getMCCommand("seed")));
+                player -> player.performCommand(watchtowergui.wg.manager.CommandsManager.getMCCommand("seed")));
 
         this.setItem(4, 0, setWorldSpawn,
-                player -> player.performCommand(CommandsManager.getMCCommand("setworldspawn")));
+                player -> player.performCommand(watchtowergui.wg.manager.CommandsManager.getMCCommand("setworldspawn")));
 
         this.setItem(5, 0, spawnPoint,
-                player -> player.performCommand(CommandsManager.getMCCommand("setspawnpoint")));
+                player -> player.performCommand(watchtowergui.wg.manager.CommandsManager.getMCCommand("setspawnpoint")));
         this.setItem(5, 1, time, player -> new TimeGui(WorldToolsGui.this).open(player));
         this.setItem(5, 2, weather, player -> new WeatherGui(WorldToolsGui.this).open(player));
 
         this.setItem(6, 0, xp, player -> {
-            PlayersGui playersGui = new OnlinePlayersGui(this, glc.getWorldToolsGuiSelectPlayer());
+            PlayersGui playersGui = new OnlinePlayersGui(this, glc.getGuiLocale_worldToolsGui_selectPlayer());
             playersGui.setAction(offlinePlayer -> {
                 player.sendMessage(glc.getAdminGuiWorldToolsGuiXpChatMessage("\"###\""));
                 player.closeInventory();
                 chatManager.setTask(player.getUniqueId(), (chatMessage, player1) -> {
                     if (chatMessage.equals("###")) {
-                        player1.sendMessage(glc.getAdminGuiWorldToolsGuiXpChatCanceledMessage());
+                        player1.sendMessage(glc.getGuiLocale_adminGuiWorldToolsGui_xpChatCanceledMessage());
                         return true;
                     }
-                    player1.performCommand(CommandsManager.getMCCommand("xp")
+                    player1.performCommand(watchtowergui.wg.manager.CommandsManager.getMCCommand("xp")
                             + " " + chatMessage + "L " + Bukkit.getOfflinePlayer(offlinePlayer).getName());
                     return true;
                 });
@@ -158,18 +157,18 @@ public class WorldToolsGui extends BasicGui {
             playersGui.open(player);
         });
         this.setItem(6, 1, title, player -> {
-            PlayersGui playersGui = new OnlinePlayersGui(this, glc.getWorldToolsGuiSelectPlayer());
+            PlayersGui playersGui = new OnlinePlayersGui(this, glc.getGuiLocale_worldToolsGui_selectPlayer());
             playersGui.setAction(offlinePlayer -> {
                 player.sendMessage(glc.getAdminGuiWorldToolsGuiTitleChatMessage("\"###\""));
                 player.closeInventory();
                 chatManager.setTask(player.getUniqueId(), (chatMessage, player1) -> {
                     if (chatMessage.equals("###")) {
-                        player1.sendMessage(glc.getAdminGuiWorldToolsGuiTitleChatCanceledMessage());
+                        player1.sendMessage(glc.getGuiLocale_adminGuiWorldToolsGui_titleChatCanceledMessage());
                         return true;
                     }
                     Player onlinePlayer = Bukkit.getPlayer(offlinePlayer);
                     if (onlinePlayer == null) {
-                        player.sendMessage(glc.getPlayerIsOffline());
+                        player.sendMessage(glc.getGuiLocale_singlePlayerGui_playerIsOffline());
                         return true;
                     }
                     onlinePlayer.sendTitle(
@@ -180,16 +179,16 @@ public class WorldToolsGui extends BasicGui {
             playersGui.open(player);
         });
         this.setItem(6, 2, tell, player -> {
-            PlayersGui playersGui = new OnlinePlayersGui(this, glc.getWorldToolsGuiSelectPlayer());
+            PlayersGui playersGui = new OnlinePlayersGui(this, glc.getGuiLocale_worldToolsGui_selectPlayer());
             playersGui.setAction(offlinePlayer -> {
                 player.sendMessage(glc.getAdminGuiWorldToolsGuiTellChatMessage("\"###\""));
                 player.closeInventory();
                 chatManager.setTask(player.getUniqueId(), (chatMessage, player1) -> {
                     if (chatMessage.equals("###")) {
-                        player1.sendMessage(glc.getAdminGuiWorldToolsGuiTellChatCanceledMessage());
+                        player1.sendMessage(glc.getGuiLocale_adminGuiWorldToolsGui_tellChatCanceledMessage());
                         return true;
                     }
-                    player.performCommand(CommandsManager.getMCCommand("tell")
+                    player.performCommand(watchtowergui.wg.manager.CommandsManager.getMCCommand("tell")
                             + " " + Bukkit.getOfflinePlayer(offlinePlayer).getName() + " "
                             + ChatColor.translateAlternateColorCodes('&', chatMessage));
                     return true;

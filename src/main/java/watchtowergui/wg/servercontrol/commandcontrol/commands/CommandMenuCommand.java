@@ -5,7 +5,6 @@ import org.bukkit.entity.Player;
 import watchtowergui.wg.WatchTowerGui;
 import watchtowergui.wg.fileManager.configsutils.configs.GuiLanguageConfig;
 import watchtowergui.wg.fileManager.configsutils.configs.LanguageConfig;
-import watchtowergui.wg.managers.CommandsManager;
 import watchtowergui.wg.servercontrol.commandcontrol.CommandsControlListener;
 import watchtowergui.wg.servercontrol.commandcontrol.guis.CommandsControlGui;
 import watchtowergui.wg.servercontrol.commandcontrol.guis.SingleCommandGui;
@@ -30,16 +29,16 @@ public class CommandMenuCommand implements CommandExecutor, TabCompleter {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player)) {
-            sender.sendMessage(lg.getBasicOnlyPlayerCanExecuteThisCommand());
+            sender.sendMessage(lg.getCommandsLocale_basic_onlyPlayerCanExecuteThisCommand());
             return true;
         }
         if (args.length == 0) {
-            new CommandsControlGui(glc.getCommandMenuPageName()).open(((Player) sender));
+            new CommandsControlGui(glc.getGuiLocale_commandMenu_pageName()).open(((Player) sender));
             return true;
         }
         Command cmd = getCommand(args[0]);
         if (cmd == null) {
-            sender.sendMessage(lg.getCommandMenuCommandNotFound());
+            sender.sendMessage(lg.getCommandsLocale_commandMenu_CommandNotFound());
             return true;
         }
         new SingleCommandGui(cmd, null).open(((Player) sender));
@@ -53,7 +52,7 @@ public class CommandMenuCommand implements CommandExecutor, TabCompleter {
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
         if (args.length != 1) return new ArrayList<>(0);
-        return CommandsManager.mergeTabCompleter(new ArrayList<>(
+        return watchtowergui.wg.manager.CommandsManager.mergeTabCompleter(new ArrayList<>(
                 this.commandsControlListener.getActiveLabels()), args[0]);
     }
 }

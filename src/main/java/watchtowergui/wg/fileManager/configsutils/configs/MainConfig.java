@@ -1,9 +1,6 @@
 package watchtowergui.wg.fileManager.configsutils.configs;
 
 import app.annotations.ConfigYml;
-import lombok.ToString;
-import org.bukkit.configuration.Configuration;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import watchtowergui.wg.fileManager.configsutils.resourcesConfigGenerator.ConfigAccessor;
 
@@ -17,11 +14,10 @@ public class MainConfig extends ConfigAccessor {
     boolean allowBadWords = false;
     int countOfTriesToBan = 3;
     String banTime = "%S10 %Mi0 %H0 %D0 %W0 %Mo0 %Y0";
-    String siema_elo_lol_csgo_adrian_ere_gfdfgfd = "sfdfd";
-    String siema_elo_csgo_gfdgfd = "asdsd";
-    String siema_elo_stone = "1223";
-    String arek_zbyszek_lolek_bolek = "gfd";
-    String arek_kuba = "gdrgdf";
+
+    public static MainConfig deserialize(Map<String, Object> map) {
+        return watchtowergui.wg.fileManager.configsutils.configs.MainConfigSerializator.deserialize(map);
+    }
 
     public void init() {
         super.init("Config", "configuration");
@@ -33,11 +29,9 @@ public class MainConfig extends ConfigAccessor {
         this.yml = YamlConfiguration.loadConfiguration(this.file);
 
         Map<String, Object> map = this.yml.getConfigurationSection("").getValues(true);
-        watchtowergui.wg.fileManager.configsutils.configs.MainConfigSerializator.injectTo(this, map,defaults, this.yml);
+        watchtowergui.wg.fileManager.configsutils.configs.MainConfigSerializator.injectTo(this, map, defaults, this.yml);
         this.save();
     }
-
-
 
     public int getCountOfTriesToBan() {
         return countOfTriesToBan;
@@ -59,11 +53,7 @@ public class MainConfig extends ConfigAccessor {
         return this.cooldown;
     }
 
-    public Map<String, Object> serialize(){
+    public Map<String, Object> serialize() {
         return watchtowergui.wg.fileManager.configsutils.configs.MainConfigSerializator.serialize(this);
-    }
-
-    public static MainConfig deserialize(Map<String, Object> map){
-        return watchtowergui.wg.fileManager.configsutils.configs.MainConfigSerializator.deserialize(map);
     }
 }

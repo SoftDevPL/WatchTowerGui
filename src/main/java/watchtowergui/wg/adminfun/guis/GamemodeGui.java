@@ -4,7 +4,6 @@ import ad.guis.ultimateguis.Colors;
 import ad.guis.ultimateguis.engine.basics.BasicGui;
 import watchtowergui.wg.WatchTowerGui;
 import watchtowergui.wg.fileManager.configsutils.configs.GuiLanguageConfig;
-import watchtowergui.wg.managers.CommandsManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Server;
@@ -29,7 +28,7 @@ public class GamemodeGui extends BasicGui {
     private String commandHardcore;
 
     public GamemodeGui(BasicGui previousGui) throws IllegalArgumentException {
-        super(3, WatchTowerGui.getInstance().configsManager.guiLanguageConfig.getAdminGuiGamemodeGuiGamemodeGuiPageName(), previousGui);
+        super(3, WatchTowerGui.getInstance().configsManager.guiLanguageConfig.getGuiLocale_gameModeGui_gameModeGuiPageName(), previousGui);
         this.watchTowerGui = WatchTowerGui.getInstance();
         glc = watchTowerGui.configsManager.guiLanguageConfig;
         setSpecificCommandVersion();
@@ -45,14 +44,14 @@ public class GamemodeGui extends BasicGui {
     }
 
     private void setupGuiItems() {
-        close = BasicGui.createItem(Material.BARRIER, glc.getAdminGuiClose());
-        back = BasicGui.createItem(Material.ARROW, glc.getAdminGuiBack());
+        close = BasicGui.createItem(Material.BARRIER, glc.getGuiLocale_adminGui_close());
+        back = BasicGui.createItem(Material.ARROW, glc.getGuiLocale_adminGui_back());
         backGroundGreen = BasicGui.createBackground(Colors.GREEN);
         backGroundBlack = BasicGui.createBackground(Colors.BLACK);
-        survival = BasicGui.createItem(Material.IRON_BLOCK, glc.getAdminGuiGamemodeGuiSurvival());
-        creative = BasicGui.createItem(Material.GOLD_BLOCK, glc.getAdminGuiGamemodeGuiCreative());
-        hardcore = BasicGui.createItem(Material.MOSSY_COBBLESTONE, glc.getAdminGuiGamemodeGuiHardcore());
-        spectator = BasicGui.createItem(Material.DIAMOND_BLOCK, glc.getAdminGuiGamemodeGuiSpectator());
+        survival = BasicGui.createItem(Material.IRON_BLOCK, glc.getGuiLocale_gameModeGui_survival());
+        creative = BasicGui.createItem(Material.GOLD_BLOCK, glc.getGuiLocale_gameModeGui_creative());
+        hardcore = BasicGui.createItem(Material.MOSSY_COBBLESTONE, glc.getGuiLocale_gameModeGui_hardcore());
+        spectator = BasicGui.createItem(Material.DIAMOND_BLOCK, glc.getGuiLocale_gameModeGui_spectator());
     }
 
     private void setSpecificCommandVersion() {
@@ -68,13 +67,13 @@ public class GamemodeGui extends BasicGui {
 
     protected void init() {
         this.setItem(3, 1, survival,
-                player -> player.performCommand(CommandsManager.getMCCommand("gamemode") + " " + this.commandSurvival));
+                player -> player.performCommand(watchtowergui.wg.manager.CommandsManager.getMCCommand("gamemode") + " " + this.commandSurvival));
         this.setItem(4, 1, creative,
-                player -> player.performCommand(CommandsManager.getMCCommand("gamemode") + " " + this.commandCreative));
+                player -> player.performCommand(watchtowergui.wg.manager.CommandsManager.getMCCommand("gamemode") + " " + this.commandCreative));
         this.setItem(5, 1, hardcore,
-                player -> player.performCommand(CommandsManager.getMCCommand("gamemode") + " " + this.commandHardcore));
+                player -> player.performCommand(watchtowergui.wg.manager.CommandsManager.getMCCommand("gamemode") + " " + this.commandHardcore));
         this.setItem(2, 1, spectator,
-                player -> player.performCommand(CommandsManager.getMCCommand("gamemode") + " " + this.commandSpectator));
+                player -> player.performCommand(watchtowergui.wg.manager.CommandsManager.getMCCommand("gamemode") + " " + this.commandSpectator));
         this.setItem(8, 0, close, HumanEntity::closeInventory);
         this.setItem(8, 2, back, player -> {
             if (previousGui != null) {

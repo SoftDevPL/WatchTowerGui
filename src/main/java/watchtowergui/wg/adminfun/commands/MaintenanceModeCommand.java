@@ -32,10 +32,10 @@ public class MaintenanceModeCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         isWhitelist = whiteListListener.maintenanceMode;
         if (isWhitelist) {
-            sender.sendMessage(languageConfig.getMaintenanceModeOn());
+            sender.sendMessage(languageConfig.getSpecialLocale_adminStaff_maintenanceMode_maintenanceModeOn());
             Bukkit.getPluginManager().callEvent(new WhiteListOffEvent((Player) sender));
         } else {
-            sender.sendMessage(languageConfig.getMaintenanceModeOff());
+            sender.sendMessage(languageConfig.getSpecialLocale_adminStaff_maintenanceMode_maintenanceModeOff());
             Bukkit.getPluginManager().callEvent(new WhiteListOnEvent((Player) sender));
         }
         for (Player playerToWhitelist : Bukkit.getOnlinePlayers()) {

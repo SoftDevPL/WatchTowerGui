@@ -45,7 +45,7 @@ public class GetLogsFromDayAndUUID implements CommandExecutor {
         try {
             date = sdf.parse(StringDate);
         } catch (ParseException e) {
-            logsYmlGenerator.sendTypedMessageToSender(sender, languageConfig.getLogsWrongMessageForDayAndUUID());
+            logsYmlGenerator.sendTypedMessageToSender(sender, languageConfig.getCommandsLocale_logs_logsWrongMessageForDayAndUUID());
             e.printStackTrace();
         }
         assert date != null;
@@ -63,20 +63,20 @@ public class GetLogsFromDayAndUUID implements CommandExecutor {
             Player player = (Player) sender;
             LogsGui.logsOneDayForPlayer(player.getName(), null).open(player);
         } else {
-            logsYmlGenerator.sendTypedMessageToSender(sender, languageConfig.getLogsEnterMessageForDayAndUUID());
+            logsYmlGenerator.sendTypedMessageToSender(sender, languageConfig.getCommandsLocale_logs_logsEnterMessageForDayAndUUID());
             consoleChatListener.setTask(sender, (chatMessage, chatSender) -> {
                 List<String> dates = getDatesFromString(chatMessage);
                 OfflinePlayer playerToBan = UltimateGuis.getOfflinePlayer(dates.get(0));
                 if (dates.size() < 2) {
-                    logsYmlGenerator.sendTypedMessageToSender(chatSender, languageConfig.getLogsEnterMessageForDayAndUUID());
+                    logsYmlGenerator.sendTypedMessageToSender(chatSender, languageConfig.getCommandsLocale_logs_logsEnterMessageForDayAndUUID());
                     return true;
                 }
                 if (playerToBan == null) {
-                    logsYmlGenerator.sendTypedMessageToSender(chatSender, languageConfig.getBasicPlayerNotFound(dates.get(0)));
+                    logsYmlGenerator.sendTypedMessageToSender(chatSender, languageConfig.getCommandsLocale_basic_playerNotFoundWithPlayerName(dates.get(0)));
                     return true;
                 }
                 if (dates.size() == 2) {
-                    BukkitTask task = logsYmlGenerator.displayCurrentSec(languageConfig.getLogsGettingLogs(), sender, this.plugin);
+                    BukkitTask task = logsYmlGenerator.displayCurrentSec(languageConfig.getCommandsLocale_logs_logsGettingLogs(), sender, this.plugin);
                     Bukkit.getScheduler().runTaskAsynchronously(this.plugin,
                             () -> {
                                 generateFilesWithLogs(getFromDatabase(
@@ -87,7 +87,7 @@ public class GetLogsFromDayAndUUID implements CommandExecutor {
                                 logsYmlGenerator.taskFinished(sender, task);
                             });
                 } else {
-                    logsYmlGenerator.sendTypedMessageToSender(chatSender, languageConfig.getLogsWrongMessageForDayAndUUID());
+                    logsYmlGenerator.sendTypedMessageToSender(chatSender, languageConfig.getCommandsLocale_logs_logsWrongMessageForDayAndUUID());
                 }
                 return true;
             });
@@ -117,7 +117,7 @@ public class GetLogsFromDayAndUUID implements CommandExecutor {
         }
         OfflinePlayer playerToBan = UltimateGuis.getOfflinePlayer(args[0]);
         if (playerToBan == null) {
-            logsYmlGenerator.sendTypedMessageToSender(sender, languageConfig.getBasicPlayerNotFound(args[0]));
+            logsYmlGenerator.sendTypedMessageToSender(sender, languageConfig.getCommandsLocale_basic_playerNotFoundWithPlayerName(args[0]));
             return true;
         }
         if (args.length == 1) {
@@ -125,10 +125,10 @@ public class GetLogsFromDayAndUUID implements CommandExecutor {
             return true;
         }
         if (!checkDate(args[1])) {
-            logsYmlGenerator.sendTypedMessageToSender(sender, languageConfig.getLogsWrongMessageForDayAndUUID());
+            logsYmlGenerator.sendTypedMessageToSender(sender, languageConfig.getCommandsLocale_logs_logsWrongMessageForDayAndUUID());
             return true;
         }
-        BukkitTask task = logsYmlGenerator.displayCurrentSec(languageConfig.getLogsGettingLogs(), sender, this.plugin);
+        BukkitTask task = logsYmlGenerator.displayCurrentSec(languageConfig.getCommandsLocale_logs_logsGettingLogs(), sender, this.plugin);
         Bukkit.getScheduler().runTaskAsynchronously(this.plugin,
                 () -> {
                     generateFilesWithLogs(getFromDatabase(

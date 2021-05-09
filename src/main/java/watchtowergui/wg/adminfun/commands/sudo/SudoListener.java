@@ -23,9 +23,9 @@ public class SudoListener implements Listener {
         }
         String command = stringBuilder.toString();
         if (event.getPlayerToExecute().performCommand(command)) {
-            event.getWho().sendMessage(this.languageConfig.getSudoSuccess());
+            event.getWho().sendMessage(this.languageConfig.getCommandsLocale_basic_sudoSuccess());
         } else {
-            event.getWho().sendMessage(this.languageConfig.getSudoFailed());
+            event.getWho().sendMessage(this.languageConfig.getCommandsLocale_basic_sudoFailed());
         }
     }
 }

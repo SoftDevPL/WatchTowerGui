@@ -13,7 +13,7 @@ public class LogsTimeRangeGui extends BasicGui {
     private final GuiLanguageConfig glc;
 
     public LogsTimeRangeGui(BasicGui previousGui) {
-        super(3, WatchTowerGui.getInstance().configsManager.guiLanguageConfig.getLogsTimeGuiTitle(), previousGui);
+        super(3, WatchTowerGui.getInstance().configsManager.guiLanguageConfig.getGuiLocale_logsGui_logsTimeGuiTitle(), previousGui);
         glc = WatchTowerGui.getInstance().configsManager.guiLanguageConfig;
         init();
     }
@@ -23,12 +23,12 @@ public class LogsTimeRangeGui extends BasicGui {
     }
 
     protected void init() {
-        ItemStack oneDayItem = createItem(Material.WATCH, glc.getLogsTimeOneDay());
-        ItemStack multiDayItem = createItem(Material.BEACON, glc.getLogsTimeMultiDay());
+        ItemStack oneDayItem = createItem(Material.WATCH, glc.getGuiLocale_logsGui_logsTimeOneDay());
+        ItemStack multiDayItem = createItem(Material.BEACON, glc.getGuiLocale_logsGui_logsTimeMultiDay());
         ItemStack yellowBackGround = createBackground(Colors.YELLOW);
         ItemStack redBackground = createBackground(Colors.RED);
-        ItemStack exit = createItem(Material.BARRIER, glc.getAdminGuiClose());
-        ItemStack back = createItem(Material.WOOD_DOOR, glc.getAdminGuiBack());
+        ItemStack exit = createItem(Material.BARRIER, glc.getGuiLocale_adminGui_close());
+        ItemStack back = createItem(Material.WOOD_DOOR, glc.getGuiLocale_adminGui_back());
 
         this.setItem(5, 1, oneDayItem, player -> {
             new LogsGui(LogsGui.ONE_DAY, LogsTimeRangeGui.this).open(player);

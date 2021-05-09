@@ -6,7 +6,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import watchtowergui.wg.WatchTowerGui;
 import watchtowergui.wg.fileManager.configsutils.configs.LanguageConfig;
-import watchtowergui.wg.managers.CommandsManager;
 import watchtowergui.wg.servercontrol.plugincontrol.guis.PluginControlGui;
 import watchtowergui.wg.servercontrol.plugincontrol.guis.SinglePluginGui;
 
@@ -26,7 +25,7 @@ public class PluginMenuCommand implements CommandExecutor, TabCompleter {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, final String[] args) {
         if (!(sender instanceof Player)) {
-            sender.sendMessage(languageConfig.getBasicOnlyPlayerCanExecuteThisCommand());
+            sender.sendMessage(languageConfig.getCommandsLocale_basic_onlyPlayerCanExecuteThisCommand());
             return true;
         }
         if (args.length <= 0) {
@@ -37,7 +36,7 @@ public class PluginMenuCommand implements CommandExecutor, TabCompleter {
         Plugin plugin;
         List<Plugin> pluginList = findPluginIgnoreCase(args[0]);
         if (pluginList.isEmpty()) {
-            sender.sendMessage(languageConfig.getPluginMenuNotExists());
+            sender.sendMessage(languageConfig.getCommandsLocale_pluginMenu_pluginMenuNotExists());
             return true;
         } else if (pluginList.size() == 1) {
             plugin = pluginList.get(0);
@@ -64,7 +63,7 @@ public class PluginMenuCommand implements CommandExecutor, TabCompleter {
 
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
-        return CommandsManager.mergeTabCompleter(Arrays.stream(Bukkit.getPluginManager().getPlugins())
+        return watchtowergui.wg.manager.CommandsManager.mergeTabCompleter(Arrays.stream(Bukkit.getPluginManager().getPlugins())
                 .map(Plugin::getName).collect(Collectors.toList()), args[0]);
     }
 }

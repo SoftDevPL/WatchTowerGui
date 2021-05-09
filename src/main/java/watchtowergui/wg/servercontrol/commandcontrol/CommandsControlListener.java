@@ -406,7 +406,7 @@ public class CommandsControlListener implements Listener {
 
     private Pair<Boolean, String> enableCommand(final Command command) {
         if (this.activeCommands.containsValue(command)) {
-            return new Pair<>(false, glc.getCommandControlListenerEnableCommandCommandAlreadyExists());
+            return new Pair<>(false, glc.getGuiLocale_commandControlListener_enableCommandCommandAlreadyExists());
         }
         String prefix = this.getCommandPrefix(command);
 
@@ -430,7 +430,7 @@ public class CommandsControlListener implements Listener {
 
         allAliasesAndLabel.forEach(alias -> this.activeCommands.put(alias, command));
         this.disableCommands.remove(command);
-        commentBuilder.append(glc.getCommandControlListenerAliasAlreadyExistsSuccessfullyEnabled());
+        commentBuilder.append(glc.getGuiLocale_commandControlListener_aliasAlreadyExistsSuccessfullyEnabled());
 
         return new Pair<>(true, commentBuilder.toString());
     }
@@ -466,7 +466,7 @@ public class CommandsControlListener implements Listener {
 
     private Pair<Boolean, String> changeLabel(CommandIdentifier identifier, String newLabel) {
         Command cmd = this.getCommand(identifier);
-        return (cmd == null) ? new Pair<>(false, glc.getCommandControlListenerChangeLabelNotExists())
+        return (cmd == null) ? new Pair<>(false, glc.getGuiLocale_commandControlListener_changeLabelNotExists())
                 : changeLabel(cmd, newLabel);
     }
 
@@ -474,14 +474,14 @@ public class CommandsControlListener implements Listener {
     //LABELS AND ALIASES
     private Pair<Boolean, String> changeLabel(final Command command, String newLabel) {
         if (unchangeableCommands.contains(new CommandIdentifier(command)))
-            return new Pair<>(false, glc.getCommandControlListenerChangeLabelCanNotBeChanged());
+            return new Pair<>(false, glc.getGuiLocale_commandControlListener_changeLabelCanNotBeChanged());
 
         newLabel = newLabel.toLowerCase();
         Pair<Boolean, String> result = addAliasOrLabelToMap(command, newLabel, true);
         if (!result.getFirsValue()) return result;
 
         changeLabelReflection(command, newLabel);
-        return new Pair<>(true, glc.getCommandControlListenerChangeLabelSuccessfullyChanged());
+        return new Pair<>(true, glc.getGuiLocale_commandControlListener_changeLabelSuccessfullyChanged());
     }
 
     private void changeLabelReflection(Command command, String newLabel) {
@@ -496,7 +496,7 @@ public class CommandsControlListener implements Listener {
 
     private Pair<Boolean, String> addAlias(final CommandIdentifier identifier, String newAlias) {
         Command cmd = this.getCommand(identifier);
-        return (cmd == null) ? new Pair<>(false, glc.getCommandControlListenerAddAliasNotExists())
+        return (cmd == null) ? new Pair<>(false, glc.getGuiLocale_commandControlListener_addAliasNotExists())
                 : this.addAlias(cmd, newAlias);
     }
 
@@ -506,7 +506,7 @@ public class CommandsControlListener implements Listener {
         if (!result.getFirsValue()) return result;
 
         command.getAliases().add(newAlias);
-        return new Pair<>(true, glc.getCommandControlListenerAddAliasSuccessfullyAdded());
+        return new Pair<>(true, glc.getGuiLocale_commandControlListener_addAliasSuccessfullyAdded());
     }
 
     private Pair<Boolean, String> addAliasOrLabelToMap(final Command command, String newAlias, boolean removeOldLabel) {
@@ -563,7 +563,7 @@ public class CommandsControlListener implements Listener {
     }
 
     private String getCommandHasThatAliasOrLabel() {
-        return glc.getCommandControlListenerCommandHasThatAliasOrLabel();
+        return glc.getGuiLocale_commandControlListener_commandHasThatAliasOrLabel();
     }
 
     private String getCommandHasThatAlias(String label) {

@@ -26,7 +26,7 @@ public class ActiveMuteGui extends ListGui<PlayerMuteData> {
     public WatchTowerGui plugin;
 
     public ActiveMuteGui(BasicGui previousGui) {
-        super(previousGui, WatchTowerGui.getInstance().configsManager.guiLanguageConfig.getBansGuiMutedPlayers());
+        super(previousGui, WatchTowerGui.getInstance().configsManager.guiLanguageConfig.getGuiLocale_bansGui_mutedPlayers());
         this.plugin = WatchTowerGui.getInstance();
         glc = plugin.configsManager.guiLanguageConfig;
         this.setRefreshFunction(this::refreshFunction);

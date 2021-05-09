@@ -14,34 +14,34 @@ public class ServerControlGui extends BasicGui {
     GuiLanguageConfig glc;
 
     public ServerControlGui(BasicGui previousGui) {
-        super(3, WatchTowerGui.getInstance().configsManager.guiLanguageConfig.getServerControlGuiGuiTitle(), previousGui);
+        super(3, WatchTowerGui.getInstance().configsManager.guiLanguageConfig.getGuiLocale_serverControlGui_guiTitle(), previousGui);
         glc = WatchTowerGui.getInstance().configsManager.guiLanguageConfig;
         this.init();
     }
 
     public void init() {
         ItemStack managePluginsItem = BasicGui.createItem(Material.BOOKSHELF,
-                glc.getServerControlGuiPluginListName(),
-                splitLore(glc.getServerControlGuiPluginListLore(), 25));
+                glc.getGuiLocale_serverControlGui_pluginListName(),
+                splitLore(glc.getGuiLocale_serverControlGui_pluginListLore(), 25));
         ItemStack manageCommandsItem = BasicGui.createItem(Material.PAPER,
-                glc.getServerControlGuiManageCommandsName(),
-                splitLore(glc.getServerControlGuiManageCommandsLore(),
+                glc.getGuiLocale_serverControlGui_manageCommandsName(),
+                splitLore(glc.getGuiLocale_serverControlGui_manageCommandsLore(),
                         25));
         ItemStack backgroundRed = BasicGui.createBackground(Colors.RED);
         ItemStack backgroundOrange = BasicGui.createBackground(Colors.ORANGE);
-        ItemStack closeItem = BasicGui.createItem(Material.BARRIER, glc.getAdminGuiClose());
+        ItemStack closeItem = BasicGui.createItem(Material.BARRIER, glc.getGuiLocale_adminGui_close());
 
         this.setItem(3, 1, manageCommandsItem, player -> new CommandsControlGui(CommandsControlGui.DEFAULT_FILTERS,
-                ServerControlGui.this, glc.getServerControlGuiManageCommandsName()).open(player));
+                ServerControlGui.this, glc.getGuiLocale_serverControlGui_manageCommandsName()).open(player));
 
         this.setItem(5, 1, managePluginsItem, player ->
-                new PluginControlGui(ServerControlGui.this, glc.getServerControlGuiPluginListName()).open(player));
+                new PluginControlGui(ServerControlGui.this, glc.getGuiLocale_serverControlGui_pluginListName()).open(player));
 
 
         this.setItem(8, 0, closeItem, HumanEntity::closeInventory);
 
         if (previousGui != null) {
-            ItemStack backItem = BasicGui.createItem(Material.WOOD_DOOR, glc.getAdminGuiBack());
+            ItemStack backItem = BasicGui.createItem(Material.WOOD_DOOR, glc.getGuiLocale_adminGui_back());
             this.setItem(8, 1, backItem, p -> previousGui.open(p));
         }
 

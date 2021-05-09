@@ -25,10 +25,10 @@ public class ResetAllCommandsCommand implements CommandExecutor, TabCompleter {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (args.length == 0 || !args[0].equalsIgnoreCase(APPLY_PHRASE)) {
-            sender.sendMessage(lg.getCommandMenuResetAllCommandsWarning(label));
+            sender.sendMessage(lg.getCommandsLocale_commandMenu_ResetAllCommandsWarning(label));
         } else {
             this.commandsControlListener.resetAllCommands();
-            sender.sendMessage(lg.getCommandMenuCommandsHasBeenReset());
+            sender.sendMessage(lg.getCommandsLocale_commandMenu_CommandsHasBeenReset());
         }
         return true;
     }

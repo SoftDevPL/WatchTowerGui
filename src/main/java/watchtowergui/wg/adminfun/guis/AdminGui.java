@@ -17,20 +17,20 @@ public class AdminGui extends BasicGui {
     public GuiLanguageConfig glc;
 
     public AdminGui(BasicGui previousGui) {
-        super(3, WatchTowerGui.getInstance().configsManager.guiLanguageConfig.getMainGuiPageName(), previousGui);
+        super(3, WatchTowerGui.getInstance().configsManager.guiLanguageConfig.getGuiLocale_mainGui_pageName(), previousGui);
         glc = WatchTowerGui.getInstance().configsManager.guiLanguageConfig;
         init();
     }
 
     protected void init() {
-        ItemStack ban = BasicGui.createItem(Material.REDSTONE_BLOCK, glc.getMainGuiBans());
-        ItemStack staffAdminMenu = BasicGui.createItem(Material.ENCHANTMENT_TABLE, glc.getMainGuiAdminStaff());
-        ItemStack playersGuiItem = BasicGui.createItem(Material.SKULL_ITEM, glc.getMainGuiPlayers(), (short) 3);
-        ItemStack close = BasicGui.createItem(Material.BARRIER, glc.getAdminGuiClose());
+        ItemStack ban = BasicGui.createItem(Material.REDSTONE_BLOCK, glc.getGuiLocale_mainGui_bans());
+        ItemStack staffAdminMenu = BasicGui.createItem(Material.ENCHANTMENT_TABLE, glc.getGuiLocale_mainGui_adminStaff());
+        ItemStack playersGuiItem = BasicGui.createItem(Material.SKULL_ITEM, glc.getGuiLocale_mainGui_players(), (short) 3);
+        ItemStack close = BasicGui.createItem(Material.BARRIER, glc.getGuiLocale_adminGui_close());
         ItemStack backgroundBlack = BasicGui.createBackground(Colors.BLACK);
         ItemStack backgroundRed = BasicGui.createBackground(Colors.RED);
-        ItemStack logsItem = BasicGui.createItem(Material.BOOK_AND_QUILL, glc.getLogsName());
-        ItemStack manageServer = BasicGui.createItem(Material.REDSTONE_COMPARATOR, glc.getAdminGuiMainGuiManageServer());
+        ItemStack logsItem = BasicGui.createItem(Material.BOOK_AND_QUILL, glc.getGuiLocale_logsGui_logsName());
+        ItemStack manageServer = BasicGui.createItem(Material.REDSTONE_COMPARATOR, glc.getGuiLocale_adminGui_mainGuiManageServer());
 
         this.setItem(2, 1, ban, player ->
                 new BansGui(AdminGui.this).open(player));
@@ -41,7 +41,7 @@ public class AdminGui extends BasicGui {
         });
 
         this.setItem(4, 1, playersGuiItem, playerWhoClicked -> {
-            AllPlayersGui playersGui = new AllPlayersGui(AdminGui.this, glc.getPlayersGuiPageName() + ChatColor.BOLD + "" + ChatColor.RED);
+            AllPlayersGui playersGui = new AllPlayersGui(AdminGui.this, glc.getGuiLocale_playersGui_pageName() + ChatColor.BOLD + "" + ChatColor.RED);
             playersGui.setAction(playerFromHead -> {
                 PlayerActionGui playerActionGui = new PlayerActionGui(Bukkit.getOfflinePlayer(playerFromHead),
                         playersGui);

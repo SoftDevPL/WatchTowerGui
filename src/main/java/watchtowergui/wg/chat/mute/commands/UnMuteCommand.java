@@ -30,19 +30,19 @@ public class UnMuteCommand implements CommandExecutor {
         if (args.length == 1) {
             OfflinePlayer offlinePlayer = UltimateGuis.getOfflinePlayer(args[0]);
             if (offlinePlayer == null) {
-                sender.sendMessage(languageConfig.getBasicPlayerNotFound(args[0]));
+                sender.sendMessage(languageConfig.getCommandsLocale_basic_playerNotFoundWithPlayerName(args[0]));
                 return true;
             }
             if (muteListener.isPlayerMuted(offlinePlayer.getUniqueId())) {
                 database.deleteBanFromPlayersMutesTable(CalendarCalculator.getOfflinePlayerUUID(args[0]));
                 Bukkit.getPluginManager().callEvent(new PlayerRemoveMuteEvent(CalendarCalculator.getOfflinePlayerUU(args[0]), sender));
-                sender.sendMessage(languageConfig.getUnMutedPlayer(args[0]));
+                sender.sendMessage(languageConfig.getCommandsLocale_mutes_unmute_unMutedPlayer(args[0]));
                 Bukkit.getPluginManager().callEvent(new PlayerRemoveMuteEvent(offlinePlayer, sender));
             } else {
-                sender.sendMessage(languageConfig.getUnMutedEarlier(offlinePlayer.getName()));
+                sender.sendMessage(languageConfig.getCommandsLocale_mutes_unmute_unMutedEarlier(offlinePlayer.getName()));
             }
         } else {
-            sender.sendMessage(languageConfig.getBanUnBadArgs());
+            sender.sendMessage(languageConfig.getCommandsLocale_bans_unban_unbanUnBadArgs());
         }
         return true;
     }

@@ -8,7 +8,6 @@ import watchtowergui.wg.bans.event.PlayerGetTempBanEvent;
 import watchtowergui.wg.bans.guis.CustomBansGui;
 import watchtowergui.wg.chat.chatguard.ChatManager;
 import watchtowergui.wg.fileManager.configsutils.configs.LanguageConfig;
-import watchtowergui.wg.managers.CommandsManager;
 import watchtowergui.wg.managers.staticclasses.CalendarCalculator;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
@@ -41,7 +40,7 @@ public class BanCommand extends OfflinePlayerTabCompleter implements CommandExec
         if (args.length > 0) {
             OfflinePlayer playerToBan = UltimateGuis.getOfflinePlayer(args[0]);
             if (playerToBan == null) {
-                sender.sendMessage(languageConfig.getBasicPlayerNotFound(args[0]));
+                sender.sendMessage(languageConfig.getCommandsLocale_basic_playerNotFoundWithPlayerName(args[0]));
                 return true;
             }
             if (!this.watchTowerGui.listenersManager.tempBanListener.isPlayerBanned(playerToBan.getUniqueId())) {
@@ -50,7 +49,7 @@ public class BanCommand extends OfflinePlayerTabCompleter implements CommandExec
                     if (sender instanceof Player) {
                         new CustomBansGui(playerToBan, null).open((Player) sender);
                     } else {
-                        sender.sendMessage(languageConfig.getBanEnterTime());
+                        sender.sendMessage(languageConfig.getCommandsLocale_bans_ban_banEnterTime());
                     }
                     return true;
                 }
@@ -65,12 +64,12 @@ public class BanCommand extends OfflinePlayerTabCompleter implements CommandExec
                     }
                     banTime = CalendarCalculator.calcMilliseconds(val[0], val[1], val[2], val[3], val[4], val[5], val[6]);
                 } catch (NumberFormatException e) {
-                    sender.sendMessage(languageConfig.getValueNotANumber());
+                    sender.sendMessage(languageConfig.getCommandsLocale_bans_ban_valueNotANumber());
                 }
                 if (banTime > 0) {
                     if (sender instanceof Player) {
                         Player player = (Player) sender;
-                        player.sendMessage(languageConfig.getEnterBanComment());
+                        player.sendMessage(languageConfig.getCommandsLocale_bans_ban_enterBanComment());
                         long finalBanTime = banTime;
                         chatManager.setTask(player.getUniqueId(), (chatMessage, chatPlayer) -> {
                             new ConfirmGui("Ban " + playerToBan.getName() + "?", playerWhoAccept -> {
@@ -78,7 +77,7 @@ public class BanCommand extends OfflinePlayerTabCompleter implements CommandExec
                                         sender, System.currentTimeMillis(), chatMessage));
                                 playerWhoAccept.closeInventory();
                             }, playerWhoDenied -> {
-                                playerWhoDenied.sendMessage(languageConfig.getBanCommentCanceled());
+                                playerWhoDenied.sendMessage(languageConfig.getCommandsLocale_bans_ban_banCommentCanceled());
                                 playerWhoDenied.closeInventory();
                             }).open(chatPlayer);
                             return true;
@@ -86,15 +85,15 @@ public class BanCommand extends OfflinePlayerTabCompleter implements CommandExec
                     } else {
                         Bukkit.getPluginManager().callEvent(new PlayerGetTempBanEvent(playerToBan, banTime, sender,
                                 System.currentTimeMillis(), (args.length >= 8) ? args[8] : "."));
-                        sender.sendMessage(languageConfig.getBannedPlayer(args[0]));
+                        sender.sendMessage(languageConfig.getCommandsLocale_bans_ban_bannedPlayer(args[0]));
                     }
                 }
             } else {
-                sender.sendMessage(languageConfig.getBanMustBeGreaterThan0());
+                sender.sendMessage(languageConfig.getCommandsLocale_bans_ban_banMustBeGreaterThan0());
             }
 
         } else {
-            sender.sendMessage(CommandsManager.getDescription(label, command));
+            sender.sendMessage(watchtowergui.wg.manager.CommandsManager.getDescription(label, command));
         }
         return true;
     }
@@ -102,7 +101,7 @@ public class BanCommand extends OfflinePlayerTabCompleter implements CommandExec
     @EventHandler(priority = EventPriority.MONITOR)
     private void infoAboutTempBan(PlayerGetTempBanEvent e) {
         if (e.getBanExecutor() == null) return;
-        e.getBanExecutor().sendMessage(languageConfig.getBannedPlayer(e.getBannedPlayer().getName()));
+        e.getBanExecutor().sendMessage(languageConfig.getCommandsLocale_bans_ban_bannedPlayer(e.getBannedPlayer().getName()));
     }
 
 }

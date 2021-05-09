@@ -72,7 +72,7 @@ public class MuteListener implements Listener {
         for (PlayerMuteData playerMuteData : muteDataList) {
             if (playerMuteData.MutedPlayer.equals(event.getPlayer().getUniqueId())) {
                 event.setCancelled(true);
-                event.getPlayer().sendMessage(languageConfig.getYouAreMutedMessage());
+                event.getPlayer().sendMessage(languageConfig.getCommandsLocale_mutes_mute_youAreMutedMessage());
             } else {
                 event.setCancelled(false);
             }
@@ -90,7 +90,7 @@ public class MuteListener implements Listener {
 
             if (event.getMutedPlayer() instanceof Player) {
                 Player playerToMute = (Player) event.getMutedPlayer();
-                String message = languageConfig.getMuteMessage(playerMuteData.whoMuted, time);
+                String message = languageConfig.getCommandsLocale_mutes_mute_muteMessage(playerMuteData.whoMuted, time);
                 playerToMute.sendMessage(message);
             }
         }

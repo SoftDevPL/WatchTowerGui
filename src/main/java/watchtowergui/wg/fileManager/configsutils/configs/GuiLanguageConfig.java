@@ -10,274 +10,306 @@ import java.util.Map;
 @ConfigYml
 public class GuiLanguageConfig extends ConfigAccessor {
 
-    String adminStaffGuiDisableChat = "§b§lDisable chat for all players";
-    String adminStaffGuiDisableChatCurrent = "§fCurrent:";
-    String singlePlayerGuiUnbanPlayer = "§4§lThis player is banned §f§lClick to unban";
-    String singlePlayerGuiTempUnbanPlayer = "§c§lThis player is banned temporary §f§lClick to remove temp-ban";
-    String singlePlayerGuiUnMutePlayer = "§e§lThis player is muted §f§lClick to unmute";
-    String adminStaffGuiMaintenanceCurrent = "§fCurrent:";
-    String singlePlayerGuiLastActivity = "§7§lMaintenance Mode";
-    String singlePlayerGuiPlayerLocationName = "§d§lCurrent location";
-    String singlePlayerGuiPlayerLocationX = "§c§lX: §f§l[X]";
-    String singlePlayerGuiPlayerLocationY = "§b§lY: §f§l[Y]";
-    String singlePlayerGuiPlayerLocationZ = "§e§lZ: §f§l[Z]";
-    String singlePlayerGuiPlayerLocationClickToTeleportToPlayer = "§a§lClick to teleport to player";
-    String singlePlayerGuiPlayerLocationLocationPlayersOffline = "§2§lLocation: §f§lPlayer is offline";
-    String singlePlayerGuiPlayerInfoMuted = "§a§lThis player is muted";
-    String singlePlayerGuiStatusOfflineNeverPlayerBefore = "§e§lPlayer has never played before";
-    String worldToolsGuiSelectPlayer = "§2§lSelect player";
-    String serverControlGuiGuiTitle = "§5§lManage your server";
-    String serverControlGuiPluginListName = "§e§lPlugins list";
-    String serverControlGuiPluginListLore = "§f§lShow information about installed plugins";
-    String serverControlGuiManageCommandsName = "§6§lManage commands";
-    String serverControlGuiManageCommandsLore = "§f§lShow or edit information and usage of this server commands";
-    String singlePluginGuiCreatePluginNameItemVersion = "§5§lVersion: §f§l[pluginVersion]";
-    String singlePluginGuiCreatePluginDescriptionItemDescription = "§6§lDescription:";
-    String singlePluginGuiCreatePluginDescriptionItemLore = "§d[pluginDescription]";
-    String singlePluginGuiCreatePluginDescriptionItemNotSpecified = "§cNot specified";
-    String singlePluginGuiCreateAuthorsItemAuthors = "§e§lAuthors:";
-    String singlePluginGuiCreateAuthorsItemLore = "§9[pluginAuthors]";
-    String singlePluginGuiCreateAuthorsItemNotSpecified = "§cNot specified";
-    String singlePluginGuiCreateWebsiteItemWebsite = "§b§LWebsite:";
-    String singlePluginGuiCreateWebsiteItemLore = "§2[pluginWebsite]";
-    String singlePluginGuiCreateWebsiteItemNotSpecified = "§cNot specified";
-    String singlePluginGuiCreatePluginCommandsItemName = "§2§lPlugin commands";
-    String singlePluginGuiCreatePluginCommandsItemCommandsLore = "§dClick to manage this plugin commands";
-    String singlePluginGuiCreatePluginCommandsItemNoCommandsLore = "§dThis plugin do not have commands";
-    String singlePluginGuiCreateDependItemName = "§aPlugins required for this plugin:";
-    String singlePluginGuiCreateDependItemLore = "§aPlugins that give full functionalities:";
-    String pluginControlGuiGetDescriptionItemLore = "§2§lClick for details";
-    String aliasGuiCommandNameAliasesPageName = "§6§l[commandName] aliases";
-    String aliasGuiAddAliasItemName = "§a§lAdd alias";
-    String aliasGuiRemoveAliasItemName = "§c§lClick to remove";
-    String aliasGuiTypeNewAlias = "§dType new alias on chat (\"[cancelModel]\" to cancel)";
-    String aliasGuiEnterAliasAgain = "§dEnter alias again (\"[cancelModel]\" to cancel)";
-    String aliasGuiAliasRemoved = "§a§lAlias successfully removed!";
-    String aliasGuiCantRemovedAlias = "§c§lRemoving alias failed!";
-    String aliasGuiCancelPhrase = "§c§lCanceled";
-    String commandControlGuiPageName = "§5§lManage §2§l[commandName] §5§lcommands";
-    String commandControlGuiFilterOn = "§f§lCurrent: §a§lON";
-    String commandControlGuiFilterOff = "§f§lCurrent: §c§lOFF";
-    String commandControlGuiGetUsage = "§f§lUsage: §2§l[commandUsage]";
-    String commandControlGuiGetLabel = "§f§lLabel: §b§l[commandLabel]";
-    String commandControlGuiStatusOn = "§f§lStatus: §a§lactive";
-    String commandControlGuiStatusOff = "§f§lStatus: §c§ldisabled";
-    String commandControlGuiGetAliases = "§6§lAliases:";
-    String commandControlGuiGetPlugin = "§f§lPlugin: §d§l[pluginName]";
-    String commandControlGuiGetEditLabel = "§b§lClick to edit";
-    String commandControlGuiActiveCommandsFilterItem = "§2§lShow active commands";
-    String commandControlGuiDisabledCommandsFilterItem = "§4§lShow disabled commands";
-    String commandControlGuiAlphabeticOrderFilterItem = "§b§lSort in alphabetic order";
-    String commandControlGuiPluginOrderFilterItem = "§9§lSort in plugin order";
-    String commandControlGuiVanillaCommandsFilterItem = "§e§lShow default commands";
-    String commandControlGuiPluginCommandsFilterItem = "§d§lShow plugins commands";
-    String singleCommandGuiAreYouSure = "§e§lAre you sure?";
-    String singleCommandGuiReceiveChangeLabelResult = "§f§lEnter label again or cancel with §d§l[cancelModel]";
-    String singleCommandGuiCheckIsLabelEnterCancelCancelPhrase = "§c§lCanceled";
-    String singleCommandGuiReceiveDisableResultCanNotDisable = "§c§lCan not disable this command";
-    String singleCommandGuiReceiveDisableResultSuccessfullyDisabled = "§a§lCommand successfully disabled";
-    String singleCommandGuiSetCommandEnableEnterNewLabel = "§f§lEnter new label §c§l([cancelModel] to cancel)";
-    String singleCommandGuiCreatePermissionItemName = "§f§lPermission for this command: §9§l[commandPermission]";
-    String singleCommandGuiCreatePermissionNotSpecified = "§c§lNot specified";
-    String singleCommandGuiCreateNameItemName = "§f§lName: §1§l[commandName]";
-    String singleCommandGuiCreateNameItemLore1 = "§f§lLabel: §e§l[commandLabel]";
-    String singleCommandGuiCreateNameItemLore2 = "§f§lClick to change label §c§l(not recommended)";
-    String singleCommandGuiCreateAliasesItemName = "§5§lAliases:";
-    String singleCommandGuiCreateAliasesItemLore = "§b§lClick to add/remove alias";
-    String singleCommandGuiCreatePluginItemNameSpecified = "§f§lCommand received from: §5§l[commandName] §f§l-> Click to see plugin";
-    String singleCommandGuiCreatePluginItemNameNotSpecified = "§d§lThis command is default server command or plugin can not be specified";
-    String singleCommandGuiCreateUsageItemName = "§f§lUsage: §d§l[commandUsage]";
-    String singleCommandGuiCreateUsageItemNotSpecified = "§c§lNot specified";
-    String singleCommandGuiCreateDescriptionItemName = "§f§lDescription: §b§l[commandDescription]";
-    String singleCommandGuiCreateActiveStatusItemName = "§e§lThis command is enabled. §f§lClick to disable this command";
-    String singleCommandGuiCreateDisableStatusItemName = "§c§lThis command is disabled. §f§lClick to enable this command";
-    String commandControlListenerShowError = "§c§lSomething is wrong check command: [commandName]";
-    String commandControlListenerNewCommandAlias = "§e§lIt seems like you have new command with alias or label: §f§l[commandLabel] §e§lCommand §f§l[commandName] §e§lhas return to original label";
-    String commandControlListenerLoadAddedAliases = "§c§lAlias: §f§l[commandAlias] §c§lcan not be added to §f§l[commandName] §c§lit is probably because you have new command with that alias or label";
-    String commandControlListenerEnableCommandNotExists = "§c§lCommand: §6§l[commandName] §c§ldoes not exist";
-    String commandControlListenerEnableCommandCommandAlreadyExists = "§e§lCommand already is enabled";
-    String commandControlListenerAliasAlreadyExistsAlreadyExists = "§c§lAlias/label: §f§l[commandAlias] §c§lis already use by: §f§l[commandName]";
-    String commandControlListenerAliasAlreadyExistsSuccessfullyEnabled = "§2§lCommand enabled successfully";
-    String commandControlListenerChangeLabelNotExists = "§c§lCommand does not exist";
-    String commandControlListenerChangeLabelCanNotBeChanged = "§4§lThis label can not be changed";
-    String commandControlListenerChangeLabelSuccessfullyChanged = "§2§lLabel change successfully";
-    String commandControlListenerAddAliasNotExists = "§c§lCommand does not exists";
-    String commandControlListenerAddAliasSuccessfullyAdded = "§2§lAlias added successfully";
-    String commandControlListenerOnlyViableAliasMessage = "§e§lOnly viable prefix for this command is: §f§l[commandPrefix]";
-    String commandControlListenerCommandHasThatAliasOrLabel = "§c§lThis command already has that alias or label";
-    String commandControlListenerCommandHasThatAlias = "§c§lCommand: §f§l[commandName] §c§lalready has that alias or label!";
-    String commandMenuPageName = "§5§lManage Commands";
-    String singlePlayerGuiHomesList = "§6§lShow this player homes";
-    String adminGuiPlayersGuiShowOfflinePlayersName = "";
-    String adminGuiPlayersGuiShowOfflinePlayersON = "§f§lCurrent: §a§lON";
-    String adminGuiPlayersGuiShowOfflinePlayersOFF = "§f§lCurrent: §c§lOFF";
-    String mainGuiPlayers = "§1§lPlayers";
-    String adminGuiMainGuiManageServer = "§5§lManage Server";
-    String adminGuiUnknownStatus = "§c§lUnknown status";
-    String adminGuiBack = "§f§lGo Back";
-    String adminGuiClose = "§c§lClose";
-    String adminGuiExecute = "§a§lExecute §f§l[title]";
-    String adminGuiExpiredTime = "§6§lExpired Time";
-    String mainGuiPageName = "§6§lAdmin Gui";
-    String mainGuiBans = "§c§lBans";
-    String mainGuiAdminStaff = "§6§lAdmin Staff";
-    String playersGuiPageName = "§5§lPlayers";
-    String bansGuiPageName = "§c§lBans";
-    String bansGuiBannedPlayersList = "§7§lBanned Players List";
-    String bansGuiTemporaryBannedPlayersList = "§e§lTmBanned Players";
-    String bansGuiMutedPlayers = "§d§lMuted Players";
-    String bansGuiFrozenPlayersList = "§1§lFrozen Players List";
-    String bansGuiHiddenPlayers = "§b§lHidden Players";
-    String adminStaffGuiPageName = "§2§lAdminStaff";
-    String adminStaffGuiVanish = "§6§lVanish";
-    String adminStaffGuiVanishCurrent = "§fCurrent:";
-    String adminStaffGuiMaintenance = "§7§lMaintenance Mode";
-    String adminStaffGuiAdminTools = "§b§lAdmin Tools";
-    String adminToolsGuiPageName = "§b§lAdmin Tools";
-    String adminToolsGuiAdminAxe = "§e§lAdmin Axe";
-    String adminToolsGuiAdminPickAxe = "§9§lAdmin Pickaxe";
-    String adminToolsGuiAdminShovel = "§2§lAdmin Shovel";
-    String adminToolsGuiAdminSword = "§c§lAdmin Sword";
-    String adminToolsGuiAdminBow = "§d§lAdmin Bow";
-    String adminToolsGuiAdminHoe = "§b§lAdmin... Hoe???";
-    String singlePlayerGuiStatusOnline = "§a§lPlayer is online";
-    String singlePlayerGuiStatusOffline = "§c§lPlayer is offline";
-    String singlePlayerGuiKillPlayer = "§4§lKill Player";
-    String singlePlayerGuiFreezePlayer = "§9§lFreeze Player";
-    String singlePlayerGuiTeleportPlayer = "§2§lTeleport Player";
-    String singlePlayerGuiTeleportToPlayer = "§2§lTeleport To Player";
-    String singlePlayerGuiBanPlayer = "§6§lBan Player";
-    String singlePlayerGuiMutePlayer = "§a§lMute Player";
-    String singlePlayerGuiInventory = "§2§lInventory";
-    String singlePlayerGuiEnderChest = "§5§lEnder Chest";
-    String singlePlayerGuiHidePlayer = "§f§lHide Player";
-    String singlePlayerGuiHidePlayerCurrent = "§f§lCurrent: ";
-    String singlePlayerGuiKickPlayer = "§d§lKick Player";
-    String singlePlayerGuiTemporaryBanPlayer = "§8§lTemporary Ban Player";
-    String singlePlayerGuiBanGuiPageName = "§0§lBan §6§l[playerName]?";
-    String singlePlayerGuiPageName = "§6§l[playerName]";
-    String singlePlayerGuiReleasePlayer = "§c§lRelease Player";
-    String chooseTimeGuiPageName = "§0§lChoose Time";
-    String chooseTimeGuiSecond = "§7§lSecond";
-    String chooseTimeGuiMinute = "§9§lMinute";
-    String chooseTimeGuiHour = "§b§lHour";
-    String chooseTimeGuiDay = "§d§lDay";
-    String chooseTimeGuiWeek = "§5§lWeek";
-    String chooseTimeGuiMonth = "§e§lMonth";
-    String chooseTimeGuiYear = "§6§lYear";
-    String chooseTimeGuiSeconds = "§7§lSeconds";
-    String chooseTimeGuiMinutes = "§9§lMinutes";
-    String chooseTimeGuiHours = "§b§lHours";
-    String chooseTimeGuiDays = "§d§lDays";
-    String chooseTimeGuiWeeks = "§5§lWeeks";
-    String chooseTimeGuiMonths = "§e§lMonths";
-    String chooseTimeGuiYears = "§6§lYears";
-    String chooseTimeGuiExit = "§c§lExit";
-    String bansGuiUnban = "§6§lUnban §5§L[playerName]?";
-    String banDescriptionBannedBy = "§6§lBanned by: §f§l[date]";
-    String banDescriptionBannedDate = "§6§lBan date: §f§l[date]";
-    String banDescriptionExpiredDate = "§6§lExpired date: §f§l[date]";
-    String banDescriptionComment = "§7§lComment: §c§l[comment]";
-    String mutesGuiMutedBy = "§f§lMuted by: [playerName]";
-    String mutesGuiExpiredDate = "§f§lExpired date: [date]";
-    String mutesGuiUnmute = "§f§lUnmute: [playerName]";
-    String bansGuiSelectTime = "§c§lSelect Time";
-    String logsName = "§e§lLogs";
-    String logsGuiSelectPlayer = "§e§lSelect Player";
-    String logsGuiTitle = "§b§lChoose time range";
-    String logsForAll = "§5§lLogs for all players";
-    String logsForOnePlayer = "§2§lGet logs for specified player";
-    String firstCalendarGuiTitle = "§d§lSelect first date";
-    String secondCalendarGuiTitle = "§5§lSelect second date";
-    String calendarGuiTitle = "§a§lSelect date";
-    String logsTimeGuiTitle = "§b§lChoose time range";
-    String logsTimeOneDay = "§2§lMerge logs from one day";
-    String logsTimeMultiDay = "§5§lMerge logs from many days";
-    String calendarGuiFirstDate = "§2§lFirst Date";
-    String calendarGuiEndDate = "§e§lEnd Date";
-    String logsFromDay = "§b§lGet logs from specific day";
-    String logsFromDateInterval = "§3§lGet logs from date interval";
-    String adminGuiWorldToolsGuiEnterMessageInChat = "§e§lEnter message in chat";
-    String adminGuiWorldToolsGuiWorldToolsGuiPageName = "§2§lSelect player";
-    String adminGuiWorldToolsGuiDefaultGamemodeName = "§b§lSet default gamemode";
-    String adminGuiWorldToolsGuiDefaultGamemodeLore = "§f§lBy clicking this you can set default gamemode type for every player: [survival, creative, spectator, hardcore]";
-    String adminGuiWorldToolsGuiWorldDifficultyName = "§c§lSet difficulty";
-    String adminGuiWorldToolsGuiWorldDifficultyLore = "§f§lBy clicking this you can set world difficulty: [peaceful, easy, medium, hard]";
-    String adminGuiWorldToolsGuiGamemodeName = "§e§lGamemode";
-    String adminGuiWorldToolsGuiGamemodeLore = "§f§lSet your gamemode: [survival, creative, spectator, hardcore]";
-    String adminGuiWorldToolsGuiReloadName = "§a§lReload server";
-    String adminGuiWorldToolsGuiReloadLore = "§f§lBy clicking this you can reload your server";
-    String adminGuiWorldToolsGuiSayName = "§9§lSay globally";
-    String adminGuiWorldToolsGuiSayLore = "§f§lBy clicking this you can write in chat to say something globally";
-    String adminGuiWorldToolsGuiSeedName = "§2§lGet world seed";
-    String adminGuiWorldToolsGuiSeedLore = "§f§lBy clicking this you can display world seed";
-    String adminGuiWorldToolsGuiSetWorldSpawnName = "§6§lSet worldspawn";
-    String adminGuiWorldToolsGuiSetWorldSpawnLore = "§f§l(provided by Minecraft) By clicking this you can set world spawn in position when you are staying";
-    String adminGuiWorldToolsGuiSpawnPointName = "§4§lSet set spawn point";
-    String adminGuiWorldToolsGuiSpawnPointLore = "§f§l(provided by Minecraft) By clicking this you can set spawn point to yourself in position when you are staying";
-    String adminGuiWorldToolsGuiTimeName = "§d§lSet time";
-    String adminGuiWorldToolsGuiTimeLore = "§f§lBy clicking this you can change your world time";
-    String adminGuiWorldToolsGuiWeatherName = "§5§lSet weather";
-    String adminGuiWorldToolsGuiWeatherLore = "§f§lBy clicking this you can set your world weather";
-    String adminGuiWorldToolsGuiWorldBorderName = "§7§lSet world border";
-    String adminGuiWorldToolsGuiWorldBorderLore = "§f§lBy clicking this you can set you world border";
-    String adminGuiWorldToolsGuiXpName = "§4§lGive xp";
-    String adminGuiWorldToolsGuiXpLore = "§f§lBy clicking this you can add xp";
-    String adminGuiWorldToolsGuiXpChatMessage = "§f§lEnter xp amount §c§l([cancelModel] to cancel)";
-    String adminGuiWorldToolsGuiXpChatCanceledMessage = "§c§lCanceled";
-    String adminGuiWorldToolsGuiTitleName = "§5§lDisplay title to player";
-    String adminGuiWorldToolsGuiTitleLore = "§f§lBy clicking this you can send a screen title to specific player";
-    String adminGuiWorldToolsGuiTitleChatMessage = "§f§lEnter message to player §c§l([cancelModel] to cancel)";
-    String adminGuiWorldToolsGuiTitleChatCanceledMessage = "§c§lCanceled";
-    String adminGuiWorldToolsGuiTellName = "§1§lSend private message";
-    String adminGuiWorldToolsGuiTellLore = "§f§lby clicking this you can send a private message to a specific player";
-    String adminGuiWorldToolsGuiTellChatMessage = "§f§lEnter message to player §c§l([cancelModel] to cancel)";
-    String adminGuiWorldToolsGuiTellChatCanceledMessage = "§c§lCanceled";
-    String adminGuiWeatherGuiWeatherGuiPageName = "§b§lSet weather";
-    String adminGuiWeatherGuiSunny = "§e§lSunny";
-    String adminGuiWeatherGuiRainy = "§9§lRainy";
-    String adminGuiWeatherGuiThunder = "§7§lThunder";
-    String adminGuiTimeGuiPageName = "§5§lSelect Time";
-    String adminGuiTimeGuiDay = "§b§lDay";
-    String adminGuiTimeGuiNoon = "§e§lNoon";
-    String adminGuiTimeGuiMidNight = "§a§lMidnight";
-    String adminGuiTimeGuiNight = "§9§lNight";
-    String adminGuiTimeGuiNumber = "§f§lTime value";
-    String adminGuiTimeGuiChatResponse = "§f§lWrite message in chat";
-    String adminGuiDifficultyGuiDifficultyGuiPageName = "§d§lSet difficulty";
-    String adminGuiDifficultyGuiPeaceful = "§a§lPeaceful";
-    String adminGuiDifficultyGuiEasy = "§2§lEasy";
-    String adminGuiDifficultyGuiMedium = "§e§lNormal";
-    String adminGuiDifficultyGuiHard = "§4§lHard";
-    String adminGuiGamemodeGuiGamemodeGuiPageName = "§9§lSet your gamemode";
-    String adminGuiGamemodeGuiSurvival = "§2§lSurvival";
-    String adminGuiGamemodeGuiCreative = "§b§lCreative";
-    String adminGuiGamemodeGuiHardcore = "§c§lHardcore";
-    String adminGuiGamemodeGuiSpectator = "§6§lSpectator";
-    String adminGuiDefaultGamemodeGuiDefaultGamemodeGuiPageName = "§5§lSet default gamemode";
-    String adminGuiDefaultGamemodeGuiSurvival = "§2§lSurvival";
-    String adminGuiDefaultGamemodeGuiCreative = "§b§lCreative";
-    String adminGuiDefaultGamemodeGuiHardcore = "§c§lHardcore";
-    String adminGuiDefaultGamemodeGuiSpectator = "§6§lSpectator";
-    String adminGuiWorldBorderGuiWorldBorderGuiPageName = "§2§lConfigure your world border";
-    String adminGuiWorldBorderGuiAddToWorldBorderName = "§a§lAdd";
-    String adminGuiWorldBorderGuiAddToWorldBorderLore = "§f§l/worldborder add <sizeInBlocks> [timeInSeconds]";
-    String adminGuiWorldBorderGuiAddToWorldBorderChatMessage = "§f§lWrite message in chat";
-    String adminGuiWorldBorderGuiGetWorldBorderName = "§f§lActual border:";
-    String adminGuiWorldBorderGuiGetWorldBorderLore = "§f§lworldborder size: §6§l[worldBorderSize]";
-    String adminGuiWorldBorderGuiWorldBorderWarningName = "§e§lWarning";
-    String adminGuiWorldBorderGuiWorldBorderWarningLore = "§f§l/worldborder warning time §e§l<timeInSeconds>";
-    String adminGuiWorldBorderGuiWorldBorderWarningChatMessage = "§f§lWrite message in chat";
-    String adminGuiWorldBorderGuiWorldBorderDamageName = "§c§lDamage";
-    String adminGuiWorldBorderGuiWorldBorderDamageLore = "§f§l/worldborder damage buffer §d§l<sizeInBlocks>";
-    String adminGuiWorldBorderGuiWorldBorderDamageChatMessage = "§f§lWrite message in chat";
-    String adminGuiWorldBorderGuiCenterWorldBorderName = "§d§lCenter";
-    String adminGuiWorldBorderGuiCenterWorldBorderLore = "§f§l/worldborder center §c§l<x> <z>";
-    String adminGuiWorldBorderGuiCenterWorldBorderChatMessage = "§f§lWrite message in chat";
-    String adminGuiWorldBorderGuiSetWorldBorderName = "§3§lSet";
-    String adminGuiWorldBorderGuiSetWorldBorderLore = "§f§l/worldborder set §c§l<sizeInBlocks> [timeInSeconds]";
-    String adminGuiWorldBorderGuiSetWorldBorderChatMessage = "§f§lWrite message in chat";
-    String playerIsOffline = "§c§lPlayer is offline";
+    String guiLocale_adminStaffGui_disableChat = "&b&lDisable chat for all players";
+    String guiLocale_adminStaffGui_disableChatCurrent = "&fCurrent:";
+    String guiLocale_adminStaffGui_maintenanceCurrent = "&fCurrent:";
+
+    String guiLocale_singlePlayerGui_unbanPlayer = "&4&lThis player is banned &f&lClick to unban";
+    String guiLocale_singlePlayerGui_tempUnbanPlayer = "&c&lThis player is banned temporary &f&lClick to remove temp-ban";
+    String guiLocale_singlePlayerGui_unMutePlayer = "&e&lThis player is muted &f&lClick to unmute";
+    String guiLocale_singlePlayerGui_lastActivity = "&7&lMaintenance Mode";
+    String guiLocale_singlePlayerGui_playerLocationName = "&d&lCurrent location";
+    String guiLocale_singlePlayerGui_playerLocationX = "&c&lX: &f&l[X]";
+    String guiLocale_singlePlayerGui_playerLocationY = "&b&lY: &f&l[Y]";
+    String guiLocale_singlePlayerGui_playerLocationZ = "&e&lZ: &f&l[Z]";
+    String guiLocale_singlePlayerGui_playerLocationClickToTeleportToPlayer = "&a&lClick to teleport to player";
+    String guiLocale_singlePlayerGui_playerLocationLocationPlayersOffline = "&2&lLocation: &f&lPlayer is offline";
+    String guiLocale_singlePlayerGui_playerInfoMuted = "&a&lThis player is muted";
+    String guiLocale_singlePlayerGui_statusOfflineNeverPlayerBefore = "&e&lPlayer has never played before";
+
+    String guiLocale_serverControlGui_guiTitle = "&5&lManage your server";
+    String guiLocale_serverControlGui_pluginListName = "&e&lPlugins list";
+    String guiLocale_serverControlGui_pluginListLore = "&f&lShow information about installed plugins";
+    String guiLocale_serverControlGui_manageCommandsName = "&6&lManage commands";
+    String guiLocale_serverControlGui_manageCommandsLore = "&f&lShow or edit information and usage of this server commands";
+
+    String guiLocale_singlePluginGui_createPluginNameItemVersion = "&5&lVersion: &f&l[pluginVersion]";
+    String guiLocale_singlePluginGui_createPluginDescriptionItemDescription = "&6&lDescription:";
+    String guiLocale_singlePluginGui_createPluginDescriptionItemLore = "&d[pluginDescription]";
+    String guiLocale_singlePluginGui_createPluginDescriptionItemNotSpecified = "&cNot specified";
+    String guiLocale_singlePluginGui_createAuthorsItemAuthors = "&e&lAuthors:";
+    String guiLocale_singlePluginGui_createAuthorsItemLore = "&9[pluginAuthors]";
+    String guiLocale_singlePluginGui_createAuthorsItemNotSpecified = "&cNot specified";
+    String guiLocale_singlePluginGui_createWebsiteItemWebsite = "&b&LWebsite:";
+    String guiLocale_singlePluginGui_createWebsiteItemLore = "&2[pluginWebsite]";
+    String guiLocale_singlePluginGui_createWebsiteItemNotSpecified = "&cNot specified";
+    String guiLocale_singlePluginGui_createPluginCommandsItemName = "&2&lPlugin commands";
+    String guiLocale_singlePluginGui_createPluginCommandsItemCommandsLore = "&dClick to manage this plugin commands";
+    String guiLocale_singlePluginGui_createPluginCommandsItemNoCommandsLore = "&dThis plugin do not have commands";
+    String guiLocale_singlePluginGui_createDependItemName = "&aPlugins required for this plugin:";
+    String guiLocale_singlePluginGui_createDependItemLore = "&aPlugins that give full functionalities:";
+
+    String guiLocale_pluginControlGui_getDescriptionItemLore = "&2&lClick for details";
+
+    String guiLocale_aliasGui_commandNameAliasesPageName = "&6&l[commandName] aliases";
+    String guiLocale_aliasGui_addAliasItemName = "&a&lAdd alias";
+    String guiLocale_aliasGui_removeAliasItemName = "&c&lClick to remove";
+    String guiLocale_aliasGui_typeNewAlias = "&dType new alias on chat (\"[cancelModel]\" to cancel)";
+    String guiLocale_aliasGui_enterAliasAgain = "&dEnter alias again (\"[cancelModel]\" to cancel)";
+    String guiLocale_aliasGui_aliasRemoved = "&a&lAlias successfully removed!";
+    String guiLocale_aliasGui_canNotRemovedAlias = "&c&lRemoving alias failed!";
+    String guiLocale_aliasGui_cancelPhrase = "&c&lCanceled";
+
+    String guiLocale_commandControlGui_pageName = "&5&lManage &2&l[commandName] &5&lcommands";
+    String guiLocale_commandControlGui_filterOn = "&f&lCurrent: &a&lON";
+    String guiLocale_commandControlGui_filterOff = "&f&lCurrent: &c&lOFF";
+    String guiLocale_commandControlGui_getUsage = "&f&lUsage: &2&l[commandUsage]";
+    String guiLocale_commandControlGui_getLabel = "&f&lLabel: &b&l[commandLabel]";
+    String guiLocale_commandControlGui_statusOn = "&f&lStatus: &a&lactive";
+    String guiLocale_commandControlGui_statusOff = "&f&lStatus: &c&ldisabled";
+    String guiLocale_commandControlGui_getAliases = "&6&lAliases:";
+    String guiLocale_commandControlGui_getPlugin = "&f&lPlugin: &d&l[pluginName]";
+    String guiLocale_commandControlGui_getEditLabel = "&b&lClick to edit";
+    String guiLocale_commandControlGui_activeCommandsFilterItem = "&2&lShow active commands";
+    String guiLocale_commandControlGui_disabledCommandsFilterItem = "&4&lShow disabled commands";
+    String guiLocale_commandControlGui_alphabeticOrderFilterItem = "&b&lSort in alphabetic order";
+    String guiLocale_commandControlGui_pluginOrderFilterItem = "&9&lSort in plugin order";
+    String guiLocale_commandControlGui_vanillaCommandsFilterItem = "&e&lShow default commands";
+    String guiLocale_commandControlGui_pluginCommandsFilterItem = "&d&lShow plugins commands";
+
+    String guiLocale_singleCommandGui_areYouSure = "&e&lAre you sure?";
+    String guiLocale_singleCommandGui_receiveChangeLabelResult = "&f&lEnter label again or cancel with &d&l[cancelModel]";
+    String guiLocale_singleCommandGui_checkIsLabelEnterCancelCancelPhrase = "&c&lCanceled";
+    String guiLocale_singleCommandGui_receiveDisableResultCanNotDisable = "&c&lCan not disable this command";
+    String guiLocale_singleCommandGui_receiveDisableResultSuccessfullyDisabled = "&a&lCommand successfully disabled";
+    String guiLocale_singleCommandGui_setCommandEnableEnterNewLabel = "&f&lEnter new label &c&l([cancelModel] to cancel)";
+    String guiLocale_singleCommandGui_createPermissionItemName = "&f&lPermission for this command: &9&l[commandPermission]";
+    String guiLocale_singleCommandGui_createPermissionNotSpecified = "&c&lNot specified";
+    String guiLocale_singleCommandGui_createNameItemName = "&f&lName: &1&l[commandName]";
+    String guiLocale_singleCommandGui_createNameItemLore1 = "&f&lLabel: &e&l[commandLabel]";
+    String guiLocale_singleCommandGui_createNameItemLore2 = "&f&lClick to change label &c&l(not recommended)";
+    String guiLocale_singleCommandGui_createAliasesItemName = "&5&lAliases:";
+    String guiLocale_singleCommandGui_createAliasesItemLore = "&b&lClick to add/remove alias";
+    String guiLocale_singleCommandGui_createPluginItemNameSpecified = "&f&lCommand received from: &5&l[commandName] &f&l-> Click to see plugin";
+    String guiLocale_singleCommandGui_createPluginItemNameNotSpecified = "&d&lThis command is default server command or plugin can not be specified";
+    String guiLocale_singleCommandGui_createUsageItemName = "&f&lUsage: &d&l[commandUsage]";
+    String guiLocale_singleCommandGui_createUsageItemNotSpecified = "&c&lNot specified";
+    String guiLocale_singleCommandGui_createDescriptionItemName = "&f&lDescription: &b&l[commandDescription]";
+    String guiLocale_singleCommandGui_createActiveStatusItemName = "&e&lThis command is enabled. &f&lClick to disable this command";
+    String guiLocale_singleCommandGui_createDisableStatusItemName = "&c&lThis command is disabled. &f&lClick to enable this command";
+
+    String guiLocale_commandControlListener_showError = "&c&lSomething is wrong check command: [commandName]";
+    String guiLocale_commandControlListener_newCommandAlias = "&e&lIt seems like you have new command with alias or label: &f&l[commandLabel] &e&lCommand &f&l[commandName] &e&lhas return to original label";
+    String guiLocale_commandControlListener_loadAddedAliases = "&c&lAlias: &f&l[commandAlias] &c&lcan not be added to &f&l[commandName] &c&lit is probably because you have new command with that alias or label";
+    String guiLocale_commandControlListener_enableCommandNotExists = "&c&lCommand: &6&l[commandName] &c&ldoes not exist";
+    String guiLocale_commandControlListener_enableCommandCommandAlreadyExists = "&e&lCommand already is enabled";
+    String guiLocale_commandControlListener_aliasAlreadyExistsAlreadyExists = "&c&lAlias/label: &f&l[commandAlias] &c&lis already use by: &f&l[commandName]";
+    String guiLocale_commandControlListener_aliasAlreadyExistsSuccessfullyEnabled = "&2&lCommand enabled successfully";
+    String guiLocale_commandControlListener_changeLabelNotExists = "&c&lCommand does not exist";
+    String guiLocale_commandControlListener_changeLabelCanNotBeChanged = "&4&lThis label can not be changed";
+    String guiLocale_commandControlListener_changeLabelSuccessfullyChanged = "&2&lLabel change successfully";
+    String guiLocale_commandControlListener_addAliasNotExists = "&c&lCommand does not exists";
+    String guiLocale_commandControlListener_addAliasSuccessfullyAdded = "&2&lAlias added successfully";
+    String guiLocale_commandControlListener_onlyViableAliasMessage = "&e&lOnly viable prefix for this command is: &f&l[commandPrefix]";
+    String guiLocale_commandControlListener_commandHasThatAliasOrLabel = "&c&lThis command already has that alias or label";
+    String guiLocale_commandControlListener_commandHasThatAlias = "&c&lCommand: &f&l[commandName] &c&lalready has that alias or label!";
+
+    String guiLocale_commandMenu_pageName = "&5&lManage Commands";
+
+
+    String guiLocale_adminGui_playersGuiShowOfflinePlayersName = "";
+    String guiLocale_adminGui_playersGuiShowOfflinePlayersON = "&f&lCurrent: &a&lON";
+    String guiLocale_adminGui_playersGuiShowOfflinePlayersOFF = "&f&lCurrent: &c&lOFF";
+    String guiLocale_adminGui_mainGuiManageServer = "&5&lManage Server";
+    String guiLocale_adminGui_unknownStatus = "&c&lUnknown status";
+    String guiLocale_adminGui_back = "&f&lGo Back";
+    String guiLocale_adminGui_close = "&c&lClose";
+    String guiLocale_adminGui_execute = "&a&lExecute &f&l[title]";
+    String guiLocale_adminGui_expiredTime = "&6&lExpired Time";
+
+    String guiLocale_mainGui_players = "&1&lPlayers";
+    String guiLocale_mainGui_pageName = "&6&lAdmin Gui";
+    String guiLocale_mainGui_bans = "&c&lBans";
+    String guiLocale_mainGui_adminStaff = "&6&lAdmin Staff";
+
+    String guiLocale_playersGui_pageName = "&5&lPlayers";
+
+    String guiLocale_bansGui_pageName = "&c&lBans";
+    String guiLocale_bansGui_bannedPlayersList = "&7&lBanned Players List";
+    String guiLocale_bansGui_temporaryBannedPlayersList = "&e&lTmBanned Players";
+    String guiLocale_bansGui_mutedPlayers = "&d&lMuted Players";
+    String guiLocale_bansGui_frozenPlayersList = "&1&lFrozen Players List";
+    String guiLocale_bansGui_hiddenPlayers = "&b&lHidden Players";
+
+    String guiLocale_adminStaff_guiPageName = "&2&lAdminStaff";
+    String guiLocale_adminStaff_guiVanish = "&6&lVanish";
+    String guiLocale_adminStaff_guiVanishCurrent = "&fCurrent:";
+    String guiLocale_adminStaff_guiMaintenance = "&7&lMaintenance Mode";
+    String guiLocale_adminStaff_adminTools = "&b&lAdmin Tools";
+
+    String guiLocale_adminToolsGui_pageName = "&b&lAdmin Tools";
+    String guiLocale_adminToolsGui_adminAxe = "&e&lAdmin Axe";
+    String guiLocale_adminToolsGui_adminPickAxe = "&9&lAdmin Pickaxe";
+    String guiLocale_adminToolsGui_adminShovel = "&2&lAdmin Shovel";
+    String guiLocale_adminToolsGui_adminSword = "&c&lAdmin Sword";
+    String guiLocale_adminToolsGui_adminBow = "&d&lAdmin Bow";
+    String guiLocale_adminToolsGui_adminHoe = "&b&lAdmin... Hoe???";
+
+    String guiLocale_singlePlayerGui_statusOnline = "&a&lPlayer is online";
+    String guiLocale_singlePlayerGui_statusOffline = "&c&lPlayer is offline";
+    String guiLocale_singlePlayerGui_killPlayer = "&4&lKill Player";
+    String guiLocale_singlePlayerGui_freezePlayer = "&9&lFreeze Player";
+    String guiLocale_singlePlayerGui_teleportPlayer = "&2&lTeleport Player";
+    String guiLocale_singlePlayerGui_teleportToPlayer = "&2&lTeleport To Player";
+    String guiLocale_singlePlayerGui_banPlayer = "&6&lBan Player";
+    String guiLocale_singlePlayerGui_mutePlayer = "&a&lMute Player";
+    String guiLocale_singlePlayerGui_inventory = "&2&lInventory";
+    String guiLocale_singlePlayerGui_enderChest = "&5&lEnder Chest";
+    String guiLocale_singlePlayerGui_hidePlayer = "&f&lHide Player";
+    String guiLocale_singlePlayerGui_hidePlayerCurrent = "&f&lCurrent: ";
+    String guiLocale_singlePlayerGui_kickPlayer = "&d&lKick Player";
+    String guiLocale_singlePlayerGui_temporaryBanPlayer = "&8&lTemporary Ban Player";
+    String guiLocale_singlePlayerGui_banGuiPageName = "&0&lBan &6&l[playerName]?";
+    String guiLocale_singlePlayerGui_pageName = "&6&l[playerName]";
+    String guiLocale_singlePlayerGui_releasePlayer = "&c&lRelease Player";
+
+    String guiLocale_chooseTimeGui_pageName = "&0&lChoose Time";
+    String guiLocale_chooseTimeGui_second = "&7&lSecond";
+    String guiLocale_chooseTimeGui_minute = "&9&lMinute";
+    String guiLocale_chooseTimeGui_hour = "&b&lHour";
+    String guiLocale_chooseTimeGui_day = "&d&lDay";
+    String guiLocale_chooseTimeGui_week = "&5&lWeek";
+    String guiLocale_chooseTimeGui_month = "&e&lMonth";
+    String guiLocale_chooseTimeGui_year = "&6&lYear";
+    String guiLocale_chooseTimeGui_seconds = "&7&lSeconds";
+    String guiLocale_chooseTimeGui_minutes = "&9&lMinutes";
+    String guiLocale_chooseTimeGui_hours = "&b&lHours";
+    String guiLocale_chooseTimeGui_days = "&d&lDays";
+    String guiLocale_chooseTimeGui_weeks = "&5&lWeeks";
+    String guiLocale_chooseTimeGui_months = "&e&lMonths";
+    String guiLocale_chooseTimeGui_years = "&6&lYears";
+    String guiLocale_chooseTimeGui_exit = "&c&lExit";
+
+    String guiLocale_bansGui_unban = "&6&lUnban &5&L[playerName]?";
+    String guiLocale_bansGui_selectTime = "&c&lSelect Time";
+
+    String guiLocale_bansGui_banDescriptionBannedBy = "&6&lBanned by: &f&l[date]";
+    String guiLocale_bansGui_banDescriptionBannedDate = "&6&lBan date: &f&l[date]";
+    String guiLocale_bansGui_banDescriptionExpiredDate = "&6&lExpired date: &f&l[date]";
+    String guiLocale_bansGui_banDescriptionComment = "&7&lComment: &c&l[comment]";
+
+    String guiLocale_mutesGui_mutedBy = "&f&lMuted by: [playerName]";
+    String guiLocale_mutesGui_expiredDate = "&f&lExpired date: [date]";
+    String guiLocale_mutesGui_unMute = "&f&lUnmute: [playerName]";
+
+
+    String guiLocale_logsGui_logsName = "&e&lLogs";
+    String guiLocale_logsGui_selectPlayer = "&e&lSelect Player";
+    String guiLocale_logsGui_title = "&b&lChoose time range";
+    String guiLocale_logsGui_logsForAll = "&5&lLogs for all players";
+    String guiLocale_logsGui_logsForOnePlayer = "&2&lGet logs for specified player";
+    String guiLocale_logsGui_logsTimeGuiTitle = "&b&lChoose time range";
+    String guiLocale_logsGui_logsTimeOneDay = "&2&lMerge logs from one day";
+    String guiLocale_logsGui_logsTimeMultiDay = "&5&lMerge logs from many days";
+    String guiLocale_logsGui_logsFromDay = "&b&lGet logs from specific day";
+    String guiLocale_logsGui_logsFromDateInterval = "&3&lGet logs from date interval";
+
+    String guiLocale_calendarGui_firstCalendarGuiTitle = "&d&lSelect first date";
+    String guiLocale_calendarGui_secondCalendarGuiTitle = "&5&lSelect second date";
+    String guiLocale_calendarGui_title = "&a&lSelect date";
+    String guiLocale_calendarGui_firstDate = "&2&lFirst Date";
+    String guiLocale_calendarGui_endDate = "&e&lEnd Date";
+
+    String guiLocale_adminGuiWorldToolsGui_enterMessageInChat = "&e&lEnter message in chat";
+    String guiLocale_adminGuiWorldToolsGui_worldToolsGuiPageName = "&2&lSelect player";
+    String guiLocale_adminGuiWorldToolsGui_defaultGamemodeName = "&b&lSet default gamemode";
+    String guiLocale_adminGuiWorldToolsGui_defaultGamemodeLore = "&f&lBy clicking this you can set default gamemode type for every player: [survival, creative, spectator, hardcore]";
+    String guiLocale_adminGuiWorldToolsGui_worldDifficultyName = "&c&lSet difficulty";
+    String guiLocale_adminGuiWorldToolsGui_worldDifficultyLore = "&f&lBy clicking this you can set world difficulty: [peaceful, easy, medium, hard]";
+    String guiLocale_adminGuiWorldToolsGui_gamemodeName = "&e&lGamemode";
+    String guiLocale_adminGuiWorldToolsGui_gamemodeLore = "&f&lSet your gamemode: [survival, creative, spectator, hardcore]";
+    String guiLocale_adminGuiWorldToolsGui_reloadName = "&a&lReload server";
+    String guiLocale_adminGuiWorldToolsGui_reloadLore = "&f&lBy clicking this you can reload your server";
+    String guiLocale_adminGuiWorldToolsGui_sayName = "&9&lSay globally";
+    String guiLocale_adminGuiWorldToolsGui_sayLore = "&f&lBy clicking this you can write in chat to say something globally";
+    String guiLocale_adminGuiWorldToolsGui_seedName = "&2&lGet world seed";
+    String guiLocale_adminGuiWorldToolsGui_seedLore = "&f&lBy clicking this you can display world seed";
+    String guiLocale_adminGuiWorldToolsGui_setWorldSpawnName = "&6&lSet worldspawn";
+    String guiLocale_adminGuiWorldToolsGui_setWorldSpawnLore = "&f&l(provided by Minecraft) By clicking this you can set world spawn in position when you are staying";
+    String guiLocale_adminGuiWorldToolsGui_spawnPointName = "&4&lSet set spawn point";
+    String guiLocale_adminGuiWorldToolsGui_spawnPointLore = "&f&l(provided by Minecraft) By clicking this you can set spawn point to yourself in position when you are staying";
+    String guiLocale_adminGuiWorldToolsGui_timeName = "&d&lSet time";
+    String guiLocale_adminGuiWorldToolsGui_timeLore = "&f&lBy clicking this you can change your world time";
+    String guiLocale_adminGuiWorldToolsGui_weatherName = "&5&lSet weather";
+    String guiLocale_adminGuiWorldToolsGui_weatherLore = "&f&lBy clicking this you can set your world weather";
+    String guiLocale_adminGuiWorldToolsGui_worldBorderName = "&7&lSet world border";
+    String guiLocale_adminGuiWorldToolsGui_worldBorderLore = "&f&lBy clicking this you can set you world border";
+    String guiLocale_adminGuiWorldToolsGui_xpName = "&4&lGive xp";
+    String guiLocale_adminGuiWorldToolsGui_xpLore = "&f&lBy clicking this you can add xp";
+    String guiLocale_adminGuiWorldToolsGui_xpChatMessage = "&f&lEnter xp amount &c&l([cancelModel] to cancel)";
+    String guiLocale_adminGuiWorldToolsGui_xpChatCanceledMessage = "&c&lCanceled";
+    String guiLocale_adminGuiWorldToolsGui_titleName = "&5&lDisplay title to player";
+    String guiLocale_adminGuiWorldToolsGui_titleLore = "&f&lBy clicking this you can send a screen title to specific player";
+    String guiLocale_adminGuiWorldToolsGui_titleChatMessage = "&f&lEnter message to player &c&l([cancelModel] to cancel)";
+    String guiLocale_adminGuiWorldToolsGui_titleChatCanceledMessage = "&c&lCanceled";
+    String guiLocale_adminGuiWorldToolsGui_tellName = "&1&lSend private message";
+    String guiLocale_adminGuiWorldToolsGui_tellLore = "&f&lby clicking this you can send a private message to a specific player";
+    String guiLocale_adminGuiWorldToolsGui_tellChatMessage = "&f&lEnter message to player &c&l([cancelModel] to cancel)";
+    String guiLocale_adminGuiWorldToolsGui_tellChatCanceledMessage = "&c&lCanceled";
+
+    String guiLocale_worldToolsGui_selectPlayer = "&2&lSelect player";
+
+    String guiLocale_adminGuiWeatherGui_weatherGuiPageName = "&b&lSet weather";
+    String guiLocale_adminGuiWeatherGui_sunny = "&e&lSunny";
+    String guiLocale_adminGuiWeatherGui_rainy = "&9&lRainy";
+    String guiLocale_adminGuiWeatherGui_thunder = "&7&lThunder";
+
+    String guiLocale_timeGui_pageName = "&5&lSelect Time";
+    String guiLocale_timeGui_day = "&b&lDay";
+    String guiLocale_timeGui_noon = "&e&lNoon";
+    String guiLocale_timeGui_midNight = "&a&lMidnight";
+    String guiLocale_timeGui_night = "&9&lNight";
+    String guiLocale_timeGui_number = "&f&lTime value";
+    String guiLocale_timeGui_chatResponse = "&f&lWrite message in chat";
+
+    String guiLocale_adminGuiDifficulty_guiDifficultyGuiPageName = "&d&lSet difficulty";
+    String guiLocale_adminGuiDifficulty_peaceful = "&a&lPeaceful";
+    String guiLocale_adminGuiDifficulty_easy = "&2&lEasy";
+    String guiLocale_adminGuiDifficulty_medium = "&e&lNormal";
+    String guiLocale_adminGuiDifficulty_hard = "&4&lHard";
+
+    String guiLocale_gameModeGui_gameModeGuiPageName = "&9&lSet your gamemode";
+    String guiLocale_gameModeGui_survival = "&2&lSurvival";
+    String guiLocale_gameModeGui_creative = "&b&lCreative";
+    String guiLocale_gameModeGui_hardcore = "&c&lHardcore";
+    String guiLocale_gameModeGui_spectator = "&6&lSpectator";
+
+    String guiLocale_defaultGameModeGui_defaultGameModeGuiPageName = "&5&lSet default gamemode";
+    String guiLocale_defaultGameModeGui_survival = "&2&lSurvival";
+    String guiLocale_defaultGameModeGui_creative = "&b&lCreative";
+    String guiLocale_defaultGameModeGui_hardcore = "&c&lHardcore";
+    String guiLocale_defaultGameModeGui_spectator = "&6&lSpectator";
+
+    String guiLocale_worldBorderGui_worldBorderGuiPageName = "&2&lConfigure your world border";
+    String guiLocale_worldBorderGui_addToWorldBorderName = "&a&lAdd";
+    String guiLocale_worldBorderGui_addToWorldBorderLore = "&f&l/worldborder add <sizeInBlocks> [timeInSeconds]";
+    String guiLocale_worldBorderGui_addToWorldBorderChatMessage = "&f&lWrite message in chat";
+    String guiLocale_worldBorderGui_getWorldBorderName = "&f&lActual border:";
+    String guiLocale_worldBorderGui_getWorldBorderLore = "&f&lworldborder size: &6&l[worldBorderSize]";
+    String guiLocale_worldBorderGui_worldBorderWarningName = "&e&lWarning";
+    String guiLocale_worldBorderGui_worldBorderWarningLore = "&f&l/worldborder warning time &e&l<timeInSeconds>";
+    String guiLocale_worldBorderGui_worldBorderWarningChatMessage = "&f&lWrite message in chat";
+    String guiLocale_worldBorderGui_worldBorderDamageName = "&c&lDamage";
+    String guiLocale_worldBorderGui_worldBorderDamageLore = "&f&l/worldborder damage buffer &d&l<sizeInBlocks>";
+    String guiLocale_worldBorderGui_worldBorderDamageChatMessage = "&f&lWrite message in chat";
+    String guiLocale_worldBorderGui_centerWorldBorderName = "&d&lCenter";
+    String guiLocale_worldBorderGui_centerWorldBorderLore = "&f&l/worldborder center &c&l<x> <z>";
+    String guiLocale_worldBorderGui_centerWorldBorderChatMessage = "&f&lWrite message in chat";
+    String guiLocale_worldBorderGui_setWorldBorderName = "&3&lSet";
+    String guiLocale_worldBorderGui_setWorldBorderLore = "&f&l/worldborder set &c&l<sizeInBlocks> [timeInSeconds]";
+    String guiLocale_worldBorderGui_setWorldBorderChatMessage = "&f&lWrite message in chat";
+
+    String guiLocale_singlePlayerGui_playerIsOffline = "&c&lPlayer is offline";
 
     public void init() {
         super.init("GuiLocale_en", "locale");
@@ -298,1079 +330,1075 @@ public class GuiLanguageConfig extends ConfigAccessor {
         return watchtowergui.wg.fileManager.configsutils.configs.GuiLanguageConfigSerializator.serialize(this);
     }
 
-    public String getPlayerIsOffline() {
-        return playerIsOffline;
+    public String getGuiLocale_singlePlayerGui_playerIsOffline() {
+        return guiLocale_singlePlayerGui_playerIsOffline;
     }
 
-    public String getAdminStaffGuiDisableChat() {
-        return adminStaffGuiDisableChat;
+    public String getGuiLocale_adminStaffGui_disableChat() {
+        return guiLocale_adminStaffGui_disableChat;
     }
 
-    public String getAdminStaffGuiDisableChatCurrent() {
-        return adminStaffGuiDisableChatCurrent;
+    public String getGuiLocale_adminStaffGui_disableChatCurrent() {
+        return guiLocale_adminStaffGui_disableChatCurrent;
     }
 
-    public String getAdminStaffGuiMaintenanceCurrent() {
-        return adminStaffGuiMaintenanceCurrent;
+    public String getGuiLocale_adminStaffGui_maintenanceCurrent() {
+        return guiLocale_adminStaffGui_maintenanceCurrent;
     }
 
-    public String getSinglePlayerGuiUnbanPlayer() {
-        return singlePlayerGuiUnbanPlayer;
+    public String getGuiLocale_singlePlayerGui_unbanPlayer() {
+        return guiLocale_singlePlayerGui_unbanPlayer;
     }
 
-    public String getSinglePlayerGuiTempUnbanPlayer() {
-        return singlePlayerGuiTempUnbanPlayer;
+    public String getGuiLocale_singlePlayerGui_tempUnbanPlayer() {
+        return guiLocale_singlePlayerGui_tempUnbanPlayer;
     }
 
-    public String getSinglePlayerGuiUnMutePlayer() {
-        return singlePlayerGuiUnMutePlayer;
+    public String getGuiLocale_singlePlayerGui_unMutePlayer() {
+        return guiLocale_singlePlayerGui_unMutePlayer;
     }
 
     public String getSinglePlayerGuiLastActivity(String word) {
-        return singlePlayerGuiLastActivity.replaceAll(LiteralType.LAST_ACTIVITY, word);
+        return guiLocale_singlePlayerGui_lastActivity.replaceAll(LiteralType.LAST_ACTIVITY, word);
     }
 
-    public String getSinglePlayerGuiPlayerLocationName() {
-        return singlePlayerGuiPlayerLocationName;
+    public String getGuiLocale_singlePlayerGui_playerLocationName() {
+        return guiLocale_singlePlayerGui_playerLocationName;
     }
 
     public String getSinglePlayerGuiPlayerLocationX(String word) {
-        return singlePlayerGuiPlayerLocationX.replaceAll(LiteralType.X, word);
+        return guiLocale_singlePlayerGui_playerLocationX.replaceAll(LiteralType.X, word);
     }
 
     public String getSinglePlayerGuiPlayerLocationY(String word) {
-        return singlePlayerGuiPlayerLocationY.replaceAll(LiteralType.Y, word);
+        return guiLocale_singlePlayerGui_playerLocationY.replaceAll(LiteralType.Y, word);
     }
 
     public String getSinglePlayerGuiPlayerLocationZ(String word) {
-        return singlePlayerGuiPlayerLocationZ.replaceAll(LiteralType.Z, word);
+        return guiLocale_singlePlayerGui_playerLocationZ.replaceAll(LiteralType.Z, word);
     }
 
-    public String getSinglePlayerGuiPlayerLocationClickToTeleportToPlayer() {
-        return singlePlayerGuiPlayerLocationClickToTeleportToPlayer;
+    public String getGuiLocale_singlePlayerGui_playerLocationClickToTeleportToPlayer() {
+        return guiLocale_singlePlayerGui_playerLocationClickToTeleportToPlayer;
     }
 
-    public String getSinglePlayerGuiPlayerLocationLocationPlayersOffline() {
-        return singlePlayerGuiPlayerLocationLocationPlayersOffline;
+    public String getGuiLocale_singlePlayerGui_playerLocationLocationPlayersOffline() {
+        return guiLocale_singlePlayerGui_playerLocationLocationPlayersOffline;
     }
 
-    public String getSinglePlayerGuiPlayerInfoMuted() {
-        return singlePlayerGuiPlayerInfoMuted;
+    public String getGuiLocale_singlePlayerGui_playerInfoMuted() {
+        return guiLocale_singlePlayerGui_playerInfoMuted;
     }
 
-    public String getWorldToolsGuiSelectPlayer() {
-        return worldToolsGuiSelectPlayer;
+    public String getGuiLocale_worldToolsGui_selectPlayer() {
+        return guiLocale_worldToolsGui_selectPlayer;
     }
 
-    public String getServerControlGuiGuiTitle() {
-        return serverControlGuiGuiTitle;
+    public String getGuiLocale_serverControlGui_guiTitle() {
+        return guiLocale_serverControlGui_guiTitle;
     }
 
-    public String getServerControlGuiPluginListName() {
-        return serverControlGuiPluginListName;
+    public String getGuiLocale_serverControlGui_pluginListName() {
+        return guiLocale_serverControlGui_pluginListName;
     }
 
-    public String getServerControlGuiPluginListLore() {
-        return serverControlGuiPluginListLore;
+    public String getGuiLocale_serverControlGui_pluginListLore() {
+        return guiLocale_serverControlGui_pluginListLore;
     }
 
-    public String getServerControlGuiManageCommandsName() {
-        return serverControlGuiManageCommandsName;
+    public String getGuiLocale_serverControlGui_manageCommandsName() {
+        return guiLocale_serverControlGui_manageCommandsName;
     }
 
-    public String getServerControlGuiManageCommandsLore() {
-        return serverControlGuiManageCommandsLore;
+    public String getGuiLocale_serverControlGui_manageCommandsLore() {
+        return guiLocale_serverControlGui_manageCommandsLore;
     }
 
     public String getSinglePluginGuiCreatePluginDescriptionItemLore(String word) {
-        return singlePluginGuiCreatePluginDescriptionItemLore.replaceAll(LiteralType.PLUGIN_DESCRIPTION, word);
+        return guiLocale_singlePluginGui_createPluginDescriptionItemLore.replaceAll(LiteralType.PLUGIN_DESCRIPTION, word);
     }
 
     public String getSinglePluginGuiCreateAuthorsItemLore(String word) {
-        return singlePluginGuiCreateAuthorsItemLore.replaceAll(LiteralType.PLUGIN_AUTHORS, word);
+        return guiLocale_singlePluginGui_createAuthorsItemLore.replaceAll(LiteralType.PLUGIN_AUTHORS, word);
     }
 
     public String getSinglePluginGuiCreateWebsiteItemLore(String word) {
-        return singlePluginGuiCreateWebsiteItemLore.replaceAll(LiteralType.PLUGIN_WEBSITE, word);
+        return guiLocale_singlePluginGui_createWebsiteItemLore.replaceAll(LiteralType.PLUGIN_WEBSITE, word);
     }
 
     public String getSinglePluginGuiCreatePluginNameItemVersion(String word) {
-        return singlePluginGuiCreatePluginNameItemVersion.replaceAll(LiteralType.PLUGIN_VERSION, word);
+        return guiLocale_singlePluginGui_createPluginNameItemVersion.replaceAll(LiteralType.PLUGIN_VERSION, word);
     }
 
-    public String getSinglePluginGuiCreatePluginDescriptionItemDescription() {
-        return singlePluginGuiCreatePluginDescriptionItemDescription;
+    public String getGuiLocale_singlePluginGui_createPluginDescriptionItemDescription() {
+        return guiLocale_singlePluginGui_createPluginDescriptionItemDescription;
     }
 
-    public String getSinglePluginGuiCreatePluginDescriptionItemNotSpecified() {
-        return singlePluginGuiCreatePluginDescriptionItemNotSpecified;
+    public String getGuiLocale_singlePluginGui_createPluginDescriptionItemNotSpecified() {
+        return guiLocale_singlePluginGui_createPluginDescriptionItemNotSpecified;
     }
 
-    public String getSinglePluginGuiCreateAuthorsItemAuthors() {
-        return singlePluginGuiCreateAuthorsItemAuthors;
+    public String getGuiLocale_singlePluginGui_createAuthorsItemAuthors() {
+        return guiLocale_singlePluginGui_createAuthorsItemAuthors;
     }
 
-    public String getSinglePluginGuiCreateAuthorsItemNotSpecified() {
-        return singlePluginGuiCreateAuthorsItemNotSpecified;
+    public String getGuiLocale_singlePluginGui_createAuthorsItemNotSpecified() {
+        return guiLocale_singlePluginGui_createAuthorsItemNotSpecified;
     }
 
-    public String getSinglePluginGuiCreateWebsiteItemWebsite() {
-        return singlePluginGuiCreateWebsiteItemWebsite;
+    public String getGuiLocale_singlePluginGui_createWebsiteItemWebsite() {
+        return guiLocale_singlePluginGui_createWebsiteItemWebsite;
     }
 
-    public String getSinglePluginGuiCreateWebsiteItemNotSpecified() {
-        return singlePluginGuiCreateWebsiteItemNotSpecified;
+    public String getGuiLocale_singlePluginGui_createWebsiteItemNotSpecified() {
+        return guiLocale_singlePluginGui_createWebsiteItemNotSpecified;
     }
 
-    public String getSinglePluginGuiCreatePluginCommandsItemName() {
-        return singlePluginGuiCreatePluginCommandsItemName;
+    public String getGuiLocale_singlePluginGui_createPluginCommandsItemName() {
+        return guiLocale_singlePluginGui_createPluginCommandsItemName;
     }
 
-    public String getSinglePluginGuiCreatePluginCommandsItemCommandsLore() {
-        return singlePluginGuiCreatePluginCommandsItemCommandsLore;
+    public String getGuiLocale_singlePluginGui_createPluginCommandsItemCommandsLore() {
+        return guiLocale_singlePluginGui_createPluginCommandsItemCommandsLore;
     }
 
-    public String getSinglePluginGuiCreatePluginCommandsItemNoCommandsLore() {
-        return singlePluginGuiCreatePluginCommandsItemNoCommandsLore;
+    public String getGuiLocale_singlePluginGui_createPluginCommandsItemNoCommandsLore() {
+        return guiLocale_singlePluginGui_createPluginCommandsItemNoCommandsLore;
     }
 
-    public String getSinglePluginGuiCreateDependItemName() {
-        return singlePluginGuiCreateDependItemName;
+    public String getGuiLocale_singlePluginGui_createDependItemName() {
+        return guiLocale_singlePluginGui_createDependItemName;
     }
 
-    public String getSinglePluginGuiCreateDependItemLore() {
-        return singlePluginGuiCreateDependItemLore;
+    public String getGuiLocale_singlePluginGui_createDependItemLore() {
+        return guiLocale_singlePluginGui_createDependItemLore;
     }
 
-    public String getPluginControlGuiGetDescriptionItemLore() {
-        return pluginControlGuiGetDescriptionItemLore;
+    public String getGuiLocale_pluginControlGui_getDescriptionItemLore() {
+        return guiLocale_pluginControlGui_getDescriptionItemLore;
     }
 
     public String getCommandControlListenerShowError(String word) {
-        return commandControlListenerShowError.replaceAll(LiteralType.COMMAND_NAME, word);
+        return guiLocale_commandControlListener_showError.replaceAll(LiteralType.COMMAND_NAME, word);
     }
 
     public String getCommandControlListenerNewCommandAlias(String word1, String word2) {
-        String str1 = commandControlListenerNewCommandAlias.replace(LiteralType.COMMAND_ALIAS, word1);
+        String str1 = guiLocale_commandControlListener_newCommandAlias.replace(LiteralType.COMMAND_ALIAS, word1);
         return str1.replaceAll(LiteralType.COMMAND_NAME, word2);
     }
 
     public String getCommandControlListenerLoadAddedAliases(String word1, String word2) {
-        String str1 = commandControlListenerLoadAddedAliases.replaceAll(LiteralType.COMMAND_ALIAS, word1);
+        String str1 = guiLocale_commandControlListener_loadAddedAliases.replaceAll(LiteralType.COMMAND_ALIAS, word1);
         return str1.replaceAll(LiteralType.COMMAND_NAME, word2);
     }
 
     public String getCommandControlListenerEnableCommandNotExists(String word) {
-        return commandControlListenerEnableCommandNotExists.replaceAll(LiteralType.COMMAND_NAME, word);
+        return guiLocale_commandControlListener_enableCommandNotExists.replaceAll(LiteralType.COMMAND_NAME, word);
     }
 
-    public String getCommandControlListenerEnableCommandCommandAlreadyExists() {
-        return commandControlListenerEnableCommandCommandAlreadyExists;
+    public String getGuiLocale_commandControlListener_enableCommandCommandAlreadyExists() {
+        return guiLocale_commandControlListener_enableCommandCommandAlreadyExists;
     }
 
     public String getCommandControlListenerAliasAlreadyExistsAlreadyExists(String word1, String word2) {
-        String str1 = commandControlListenerAliasAlreadyExistsAlreadyExists.replaceAll(LiteralType.COMMAND_ALIAS, word1);
+        String str1 = guiLocale_commandControlListener_aliasAlreadyExistsAlreadyExists.replaceAll(LiteralType.COMMAND_ALIAS, word1);
         return str1.replaceAll(LiteralType.COMMAND_NAME, word2);
     }
 
-    public String getCommandControlListenerAliasAlreadyExistsSuccessfullyEnabled() {
-        return commandControlListenerAliasAlreadyExistsSuccessfullyEnabled;
+    public String getGuiLocale_commandControlListener_aliasAlreadyExistsSuccessfullyEnabled() {
+        return guiLocale_commandControlListener_aliasAlreadyExistsSuccessfullyEnabled;
     }
 
-    public String getCommandControlListenerChangeLabelNotExists() {
-        return commandControlListenerChangeLabelNotExists;
+    public String getGuiLocale_commandControlListener_changeLabelNotExists() {
+        return guiLocale_commandControlListener_changeLabelNotExists;
     }
 
-    public String getCommandControlListenerChangeLabelCanNotBeChanged() {
-        return commandControlListenerChangeLabelCanNotBeChanged;
+    public String getGuiLocale_commandControlListener_changeLabelCanNotBeChanged() {
+        return guiLocale_commandControlListener_changeLabelCanNotBeChanged;
     }
 
-    public String getCommandControlListenerChangeLabelSuccessfullyChanged() {
-        return commandControlListenerChangeLabelSuccessfullyChanged;
+    public String getGuiLocale_commandControlListener_changeLabelSuccessfullyChanged() {
+        return guiLocale_commandControlListener_changeLabelSuccessfullyChanged;
     }
 
-    public String getCommandControlListenerAddAliasNotExists() {
-        return commandControlListenerAddAliasNotExists;
+    public String getGuiLocale_commandControlListener_addAliasNotExists() {
+        return guiLocale_commandControlListener_addAliasNotExists;
     }
 
-    public String getCommandControlListenerAddAliasSuccessfullyAdded() {
-        return commandControlListenerAddAliasSuccessfullyAdded;
+    public String getGuiLocale_commandControlListener_addAliasSuccessfullyAdded() {
+        return guiLocale_commandControlListener_addAliasSuccessfullyAdded;
     }
 
     public String getCommandControlListenerOnlyViableAliasMessage(String word) {
-        return commandControlListenerOnlyViableAliasMessage.replaceAll(LiteralType.COMMAND_PREFIX, word);
+        return guiLocale_commandControlListener_onlyViableAliasMessage.replaceAll(LiteralType.COMMAND_PREFIX, word);
     }
 
-    public String getCommandControlListenerCommandHasThatAliasOrLabel() {
-        return commandControlListenerCommandHasThatAliasOrLabel;
+    public String getGuiLocale_commandControlListener_commandHasThatAliasOrLabel() {
+        return guiLocale_commandControlListener_commandHasThatAliasOrLabel;
     }
 
     public String getCommandControlListenerCommandHasThatAlias(String word) {
-        return commandControlListenerCommandHasThatAlias.replaceAll(LiteralType.COMMAND_NAME, word);
+        return guiLocale_commandControlListener_commandHasThatAlias.replaceAll(LiteralType.COMMAND_NAME, word);
     }
 
-    public String getSingleCommandGuiAreYouSure() {
-        return singleCommandGuiAreYouSure;
+    public String getGuiLocale_singleCommandGui_areYouSure() {
+        return guiLocale_singleCommandGui_areYouSure;
     }
 
     public String getSingleCommandGuiReceiveChangeLabelResult(String word) {
-        return singleCommandGuiReceiveChangeLabelResult.replaceAll(LiteralType.CANCEL_MODEL, word);
+        return guiLocale_singleCommandGui_receiveChangeLabelResult.replaceAll(LiteralType.CANCEL_MODEL, word);
     }
 
-    public String getSingleCommandGuiCheckIsLabelEnterCancelCancelPhrase() {
-        return singleCommandGuiCheckIsLabelEnterCancelCancelPhrase;
+    public String getGuiLocale_singleCommandGui_checkIsLabelEnterCancelCancelPhrase() {
+        return guiLocale_singleCommandGui_checkIsLabelEnterCancelCancelPhrase;
     }
 
-    public String getSingleCommandGuiReceiveDisableResultCanNotDisable() {
-        return singleCommandGuiReceiveDisableResultCanNotDisable;
+    public String getGuiLocale_singleCommandGui_receiveDisableResultCanNotDisable() {
+        return guiLocale_singleCommandGui_receiveDisableResultCanNotDisable;
     }
 
-    public String getSingleCommandGuiReceiveDisableResultSuccessfullyDisabled() {
-        return singleCommandGuiReceiveDisableResultSuccessfullyDisabled;
+    public String getGuiLocale_singleCommandGui_receiveDisableResultSuccessfullyDisabled() {
+        return guiLocale_singleCommandGui_receiveDisableResultSuccessfullyDisabled;
     }
 
     public String getSingleCommandGuiSetCommandEnableEnterNewLabel(String word) {
-        return singleCommandGuiSetCommandEnableEnterNewLabel.replaceAll(LiteralType.CANCEL_MODEL, word);
+        return guiLocale_singleCommandGui_setCommandEnableEnterNewLabel.replaceAll(LiteralType.CANCEL_MODEL, word);
     }
 
     public String getSingleCommandGuiCreatePermissionItemName(String word) {
-        return singleCommandGuiCreatePermissionItemName.replaceAll(LiteralType.COMMAND_PERMISSION, word);
+        return guiLocale_singleCommandGui_createPermissionItemName.replaceAll(LiteralType.COMMAND_PERMISSION, word);
     }
 
-    public String getSingleCommandGuiCreatePermissionNotSpecified() {
-        return singleCommandGuiCreatePermissionNotSpecified;
+    public String getGuiLocale_singleCommandGui_createPermissionNotSpecified() {
+        return guiLocale_singleCommandGui_createPermissionNotSpecified;
     }
 
     public String getSingleCommandGuiCreateNameItemName(String word) {
-        return singleCommandGuiCreateNameItemName.replaceAll(LiteralType.COMMAND_NAME, word);
+        return guiLocale_singleCommandGui_createNameItemName.replaceAll(LiteralType.COMMAND_NAME, word);
     }
 
     public String getSingleCommandGuiCreateNameItemLore_1(String word) {
-        return singleCommandGuiCreateNameItemLore1.replaceAll(LiteralType.COMMAND_LABEL, word);
+        return guiLocale_singleCommandGui_createNameItemLore1.replaceAll(LiteralType.COMMAND_LABEL, word);
     }
 
-    public String getSingleCommandGuiCreateNameItemLore2() {
-        return singleCommandGuiCreateNameItemLore2;
+    public String getGuiLocale_singleCommandGui_createNameItemLore2() {
+        return guiLocale_singleCommandGui_createNameItemLore2;
     }
 
-    public String getSingleCommandGuiCreateAliasesItemName() {
-        return singleCommandGuiCreateAliasesItemName;
+    public String getGuiLocale_singleCommandGui_createAliasesItemName() {
+        return guiLocale_singleCommandGui_createAliasesItemName;
     }
 
-    public String getSingleCommandGuiCreateAliasesItemLore() {
-        return singleCommandGuiCreateAliasesItemLore;
+    public String getGuiLocale_singleCommandGui_createAliasesItemLore() {
+        return guiLocale_singleCommandGui_createAliasesItemLore;
     }
 
     public String getSingleCommandGuiCreatePluginItemNameSpecified(String word) {
-        return singleCommandGuiCreatePluginItemNameSpecified.replaceAll(LiteralType.COMMAND_NAME, word);
+        return guiLocale_singleCommandGui_createPluginItemNameSpecified.replaceAll(LiteralType.COMMAND_NAME, word);
     }
 
-    public String getSingleCommandGuiCreatePluginItemNameNotSpecified() {
-        return singleCommandGuiCreatePluginItemNameNotSpecified;
+    public String getGuiLocale_singleCommandGui_createPluginItemNameNotSpecified() {
+        return guiLocale_singleCommandGui_createPluginItemNameNotSpecified;
     }
 
     public String getSingleCommandGuiCreateUsageItemName(String word) {
-        return singleCommandGuiCreateUsageItemName.replaceAll(LiteralType.COMMAND_USAGE, word);
+        return guiLocale_singleCommandGui_createUsageItemName.replaceAll(LiteralType.COMMAND_USAGE, word);
     }
 
-    public String getSingleCommandGuiCreateUsageItemNotSpecified() {
-        return singleCommandGuiCreateUsageItemNotSpecified;
+    public String getGuiLocale_singleCommandGui_createUsageItemNotSpecified() {
+        return guiLocale_singleCommandGui_createUsageItemNotSpecified;
     }
 
     public String getSingleCommandGuiCreateDescriptionItemName(String word) {
-        return singleCommandGuiCreateDescriptionItemName.replaceAll(LiteralType.COMMAND_DESCRIPTION, word);
+        return guiLocale_singleCommandGui_createDescriptionItemName.replaceAll(LiteralType.COMMAND_DESCRIPTION, word);
     }
 
-    public String getSingleCommandGuiCreateActiveStatusItemName() {
-        return singleCommandGuiCreateActiveStatusItemName;
+    public String getGuiLocale_singleCommandGui_createActiveStatusItemName() {
+        return guiLocale_singleCommandGui_createActiveStatusItemName;
     }
 
-    public String getSingleCommandGuiCreateDisableStatusItemName() {
-        return singleCommandGuiCreateDisableStatusItemName;
+    public String getGuiLocale_singleCommandGui_createDisableStatusItemName() {
+        return guiLocale_singleCommandGui_createDisableStatusItemName;
     }
 
 
     public String getCommandControlGuiGetUsage(String word) {
-        return commandControlGuiGetUsage.replaceAll(LiteralType.COMMAND_USAGE, word);
+        return guiLocale_commandControlGui_getUsage.replaceAll(LiteralType.COMMAND_USAGE, word);
     }
 
     public String getCommandControlGuiGetLabel(String word) {
-        return commandControlGuiGetLabel.replaceAll(LiteralType.COMMAND_LABEL, word);
+        return guiLocale_commandControlGui_getLabel.replaceAll(LiteralType.COMMAND_LABEL, word);
     }
 
-    public String getCommandControlGuiStatusOn() {
-        return commandControlGuiStatusOn;
+    public String getGuiLocale_commandControlGui_statusOn() {
+        return guiLocale_commandControlGui_statusOn;
     }
 
-    public String getCommandControlGuiStatusOff() {
-        return commandControlGuiStatusOff;
+    public String getGuiLocale_commandControlGui_statusOff() {
+        return guiLocale_commandControlGui_statusOff;
     }
 
-    public String getCommandControlGuiGetAliases() {
-        return commandControlGuiGetAliases;
+    public String getGuiLocale_commandControlGui_getAliases() {
+        return guiLocale_commandControlGui_getAliases;
     }
 
     public String getCommandControlGuiGetPlugin(String word) {
-        return commandControlGuiGetPlugin.replaceAll(LiteralType.PLUGIN_NAME, word);
+        return guiLocale_commandControlGui_getPlugin.replaceAll(LiteralType.PLUGIN_NAME, word);
     }
 
-    public String getCommandControlGuiGetEditLabel() {
-        return commandControlGuiGetEditLabel;
+    public String getGuiLocale_commandControlGui_getEditLabel() {
+        return guiLocale_commandControlGui_getEditLabel;
     }
 
-    public String getCommandControlGuiActiveCommandsFilterItem() {
-        return commandControlGuiActiveCommandsFilterItem;
+    public String getGuiLocale_commandControlGui_activeCommandsFilterItem() {
+        return guiLocale_commandControlGui_activeCommandsFilterItem;
     }
 
-    public String getCommandControlGuiDisabledCommandsFilterItem() {
-        return commandControlGuiDisabledCommandsFilterItem;
+    public String getGuiLocale_commandControlGui_disabledCommandsFilterItem() {
+        return guiLocale_commandControlGui_disabledCommandsFilterItem;
     }
 
-    public String getCommandControlGuiAlphabeticOrderFilterItem() {
-        return commandControlGuiAlphabeticOrderFilterItem;
+    public String getGuiLocale_commandControlGui_alphabeticOrderFilterItem() {
+        return guiLocale_commandControlGui_alphabeticOrderFilterItem;
     }
 
-    public String getCommandControlGuiPluginOrderFilterItem() {
-        return commandControlGuiPluginOrderFilterItem;
+    public String getGuiLocale_commandControlGui_pluginOrderFilterItem() {
+        return guiLocale_commandControlGui_pluginOrderFilterItem;
     }
 
-    public String getCommandControlGuiVanillaCommandsFilterItem() {
-        return commandControlGuiVanillaCommandsFilterItem;
+    public String getGuiLocale_commandControlGui_vanillaCommandsFilterItem() {
+        return guiLocale_commandControlGui_vanillaCommandsFilterItem;
     }
 
-    public String getCommandControlGuiPluginCommandsFilterItem() {
-        return commandControlGuiPluginCommandsFilterItem;
+    public String getGuiLocale_commandControlGui_pluginCommandsFilterItem() {
+        return guiLocale_commandControlGui_pluginCommandsFilterItem;
     }
 
     public String getCommandControlGuiPageName(String word) {
-        return commandControlGuiPageName.replaceAll(LiteralType.COMMAND_NAME, word);
+        return guiLocale_commandControlGui_pageName.replaceAll(LiteralType.COMMAND_NAME, word);
     }
 
-    public String getCommandControlGuiFilterOn() {
-        return commandControlGuiFilterOn;
+    public String getGuiLocale_commandControlGui_filterOn() {
+        return guiLocale_commandControlGui_filterOn;
     }
 
-    public String getCommandControlGuiFilterOff() {
-        return commandControlGuiFilterOff;
+    public String getGuiLocale_commandControlGui_filterOff() {
+        return guiLocale_commandControlGui_filterOff;
     }
 
     public String getAliasGuiCommandNameAliasesPageName(String word) {
-        return aliasGuiCommandNameAliasesPageName.replaceAll(LiteralType.COMMAND_NAME, word);
+        return guiLocale_aliasGui_commandNameAliasesPageName.replaceAll(LiteralType.COMMAND_NAME, word);
     }
 
-    public String getAliasGuiAddAliasItemName() {
-        return aliasGuiAddAliasItemName;
+    public String getGuiLocale_aliasGui_addAliasItemName() {
+        return guiLocale_aliasGui_addAliasItemName;
     }
 
-    public String getAliasGuiRemoveAliasItemName() {
-        return aliasGuiRemoveAliasItemName;
+    public String getGuiLocale_aliasGui_removeAliasItemName() {
+        return guiLocale_aliasGui_removeAliasItemName;
     }
 
     public String getAliasGuiTypeNewAlias(String word) {
-        return aliasGuiTypeNewAlias.replaceAll(LiteralType.CANCEL_MODEL, word);
+        return guiLocale_aliasGui_typeNewAlias.replaceAll(LiteralType.CANCEL_MODEL, word);
     }
 
     public String getAliasGuiEnterAliasAgain(String word) {
-        return aliasGuiEnterAliasAgain.replaceAll(LiteralType.CANCEL_MODEL, word);
+        return guiLocale_aliasGui_enterAliasAgain.replaceAll(LiteralType.CANCEL_MODEL, word);
     }
 
-    public String getAliasGuiAliasRemoved() {
-        return aliasGuiAliasRemoved;
+    public String getGuiLocale_aliasGui_aliasRemoved() {
+        return guiLocale_aliasGui_aliasRemoved;
     }
 
-    public String getAliasGuiCantRemovedAlias() {
-        return aliasGuiCantRemovedAlias;
+    public String getGuiLocale_aliasGui_canNotRemovedAlias() {
+        return guiLocale_aliasGui_canNotRemovedAlias;
     }
 
-    public String getAliasGuiCancelPhrase() {
-        return aliasGuiCancelPhrase;
+    public String getGuiLocale_aliasGui_cancelPhrase() {
+        return guiLocale_aliasGui_cancelPhrase;
     }
 
-    public String getCommandMenuPageName() {
-        return commandMenuPageName;
+    public String getGuiLocale_commandMenu_pageName() {
+        return guiLocale_commandMenu_pageName;
     }
 
-    public String getLogsGuiSelectPlayer() {
-        return logsGuiSelectPlayer;
+    public String getGuiLocale_logsGui_selectPlayer() {
+        return guiLocale_logsGui_selectPlayer;
     }
 
-    public String getSinglePlayerGuiHomesList() {
-        return singlePlayerGuiHomesList;
+    public String getGuiLocale_adminGui_playersGuiShowOfflinePlayersName() {
+        return guiLocale_adminGui_playersGuiShowOfflinePlayersName;
     }
 
-    public String getAdminGuiPlayersGuiShowOfflinePlayersName() {
-        return adminGuiPlayersGuiShowOfflinePlayersName;
+    public String getGuiLocale_adminGui_playersGuiShowOfflinePlayersON() {
+        return guiLocale_adminGui_playersGuiShowOfflinePlayersON;
     }
 
-    public String getAdminGuiPlayersGuiShowOfflinePlayersON() {
-        return adminGuiPlayersGuiShowOfflinePlayersON;
+    public String getGuiLocale_adminGui_playersGuiShowOfflinePlayersOFF() {
+        return guiLocale_adminGui_playersGuiShowOfflinePlayersOFF;
     }
 
-    public String getAdminGuiPlayersGuiShowOfflinePlayersOFF() {
-        return adminGuiPlayersGuiShowOfflinePlayersOFF;
+    public String getGuiLocale_mainGui_players() {
+        return guiLocale_mainGui_players;
     }
 
-    public String getMainGuiPlayers() {
-        return mainGuiPlayers;
+    public String getGuiLocale_adminGui_mainGuiManageServer() {
+        return guiLocale_adminGui_mainGuiManageServer;
     }
 
-    public String getAdminGuiMainGuiManageServer() {
-        return adminGuiMainGuiManageServer;
+    public String getGuiLocale_worldBorderGui_addToWorldBorderChatMessage() {
+        return guiLocale_worldBorderGui_addToWorldBorderChatMessage;
     }
 
-    public String getAdminGuiWorldBorderGuiAddToWorldBorderChatMessage() {
-        return adminGuiWorldBorderGuiAddToWorldBorderChatMessage;
+    public String getGuiLocale_worldBorderGui_worldBorderWarningChatMessage() {
+        return guiLocale_worldBorderGui_worldBorderWarningChatMessage;
     }
 
-    public String getAdminGuiWorldBorderGuiWorldBorderWarningChatMessage() {
-        return adminGuiWorldBorderGuiWorldBorderWarningChatMessage;
+    public String getGuiLocale_worldBorderGui_worldBorderDamageChatMessage() {
+        return guiLocale_worldBorderGui_worldBorderDamageChatMessage;
     }
 
-    public String getAdminGuiWorldBorderGuiWorldBorderDamageChatMessage() {
-        return adminGuiWorldBorderGuiWorldBorderDamageChatMessage;
+    public String getGuiLocale_worldBorderGui_centerWorldBorderChatMessage() {
+        return guiLocale_worldBorderGui_centerWorldBorderChatMessage;
     }
 
-    public String getAdminGuiWorldBorderGuiCenterWorldBorderChatMessage() {
-        return adminGuiWorldBorderGuiCenterWorldBorderChatMessage;
+    public String getGuiLocale_worldBorderGui_setWorldBorderChatMessage() {
+        return guiLocale_worldBorderGui_setWorldBorderChatMessage;
     }
 
-    public String getAdminGuiWorldBorderGuiSetWorldBorderChatMessage() {
-        return adminGuiWorldBorderGuiSetWorldBorderChatMessage;
+    public String getGuiLocale_worldBorderGui_worldBorderGuiPageName() {
+        return guiLocale_worldBorderGui_worldBorderGuiPageName;
     }
 
-    public String getAdminGuiWorldBorderGuiWorldBorderGuiPageName() {
-        return adminGuiWorldBorderGuiWorldBorderGuiPageName;
+    public String getGuiLocale_worldBorderGui_addToWorldBorderName() {
+        return guiLocale_worldBorderGui_addToWorldBorderName;
     }
 
-    public String getAdminGuiWorldBorderGuiAddToWorldBorderName() {
-        return adminGuiWorldBorderGuiAddToWorldBorderName;
+    public String getGuiLocale_worldBorderGui_addToWorldBorderLore() {
+        return guiLocale_worldBorderGui_addToWorldBorderLore;
     }
 
-    public String getAdminGuiWorldBorderGuiAddToWorldBorderLore() {
-        return adminGuiWorldBorderGuiAddToWorldBorderLore;
-    }
-
-    public String getAdminGuiWorldBorderGuiGetWorldBorderName() {
-        return adminGuiWorldBorderGuiGetWorldBorderName;
+    public String getGuiLocale_worldBorderGui_getWorldBorderName() {
+        return guiLocale_worldBorderGui_getWorldBorderName;
     }
 
     public String getAdminGuiWorldBorderGuiGetWorldBorderLore(String message) {
-        return adminGuiWorldBorderGuiGetWorldBorderLore.replaceAll(LiteralType.WORLD_BORDER_SIZE, message);
+        return guiLocale_worldBorderGui_getWorldBorderLore.replaceAll(LiteralType.WORLD_BORDER_SIZE, message);
     }
 
-    public String getAdminGuiWorldBorderGuiWorldBorderWarningName() {
-        return adminGuiWorldBorderGuiWorldBorderWarningName;
+    public String getGuiLocale_worldBorderGui_worldBorderWarningName() {
+        return guiLocale_worldBorderGui_worldBorderWarningName;
     }
 
-    public String getAdminGuiWorldBorderGuiWorldBorderWarningLore() {
-        return adminGuiWorldBorderGuiWorldBorderWarningLore;
+    public String getGuiLocale_worldBorderGui_worldBorderWarningLore() {
+        return guiLocale_worldBorderGui_worldBorderWarningLore;
     }
 
-    public String getAdminGuiWorldBorderGuiWorldBorderDamageName() {
-        return adminGuiWorldBorderGuiWorldBorderDamageName;
+    public String getGuiLocale_worldBorderGui_worldBorderDamageName() {
+        return guiLocale_worldBorderGui_worldBorderDamageName;
     }
 
-    public String getAdminGuiWorldBorderGuiWorldBorderDamageLore() {
-        return adminGuiWorldBorderGuiWorldBorderDamageLore;
+    public String getGuiLocale_worldBorderGui_worldBorderDamageLore() {
+        return guiLocale_worldBorderGui_worldBorderDamageLore;
     }
 
-    public String getAdminGuiWorldBorderGuiCenterWorldBorderName() {
-        return adminGuiWorldBorderGuiCenterWorldBorderName;
+    public String getGuiLocale_worldBorderGui_centerWorldBorderName() {
+        return guiLocale_worldBorderGui_centerWorldBorderName;
     }
 
-    public String getAdminGuiWorldBorderGuiCenterWorldBorderLore() {
-        return adminGuiWorldBorderGuiCenterWorldBorderLore;
+    public String getGuiLocale_worldBorderGui_centerWorldBorderLore() {
+        return guiLocale_worldBorderGui_centerWorldBorderLore;
     }
 
-    public String getAdminGuiWorldBorderGuiSetWorldBorderName() {
-        return adminGuiWorldBorderGuiSetWorldBorderName;
+    public String getGuiLocale_worldBorderGui_setWorldBorderName() {
+        return guiLocale_worldBorderGui_setWorldBorderName;
     }
 
-    public String getAdminGuiWorldBorderGuiSetWorldBorderLore() {
-        return adminGuiWorldBorderGuiSetWorldBorderLore;
+    public String getGuiLocale_worldBorderGui_setWorldBorderLore() {
+        return guiLocale_worldBorderGui_setWorldBorderLore;
     }
 
-    public String getAdminGuiDefaultGamemodeGuiDefaultGamemodeGuiPageName() {
-        return adminGuiDefaultGamemodeGuiDefaultGamemodeGuiPageName;
+    public String getGuiLocale_defaultGameModeGui_defaultGameModeGuiPageName() {
+        return guiLocale_defaultGameModeGui_defaultGameModeGuiPageName;
     }
 
-    public String getAdminGuiDefaultGamemodeGuiSurvival() {
-        return adminGuiDefaultGamemodeGuiSurvival;
+    public String getGuiLocale_defaultGameModeGui_survival() {
+        return guiLocale_defaultGameModeGui_survival;
     }
 
-    public String getAdminGuiDefaultGamemodeGuiCreative() {
-        return adminGuiDefaultGamemodeGuiCreative;
+    public String getGuiLocale_defaultGameModeGui_creative() {
+        return guiLocale_defaultGameModeGui_creative;
     }
 
-    public String getAdminGuiDefaultGamemodeGuiHardcore() {
-        return adminGuiDefaultGamemodeGuiHardcore;
+    public String getGuiLocale_defaultGameModeGui_hardcore() {
+        return guiLocale_defaultGameModeGui_hardcore;
     }
 
-    public String getAdminGuiDefaultGamemodeGuiSpectator() {
-        return adminGuiDefaultGamemodeGuiSpectator;
+    public String getGuiLocale_defaultGameModeGui_spectator() {
+        return guiLocale_defaultGameModeGui_spectator;
     }
 
-    public String getAdminGuiGamemodeGuiGamemodeGuiPageName() {
-        return adminGuiGamemodeGuiGamemodeGuiPageName;
+    public String getGuiLocale_gameModeGui_gameModeGuiPageName() {
+        return guiLocale_gameModeGui_gameModeGuiPageName;
     }
 
-    public String getAdminGuiGamemodeGuiSurvival() {
-        return adminGuiGamemodeGuiSurvival;
+    public String getGuiLocale_gameModeGui_survival() {
+        return guiLocale_gameModeGui_survival;
     }
 
-    public String getAdminGuiGamemodeGuiCreative() {
-        return adminGuiGamemodeGuiCreative;
+    public String getGuiLocale_gameModeGui_creative() {
+        return guiLocale_gameModeGui_creative;
     }
 
-    public String getAdminGuiGamemodeGuiHardcore() {
-        return adminGuiGamemodeGuiHardcore;
+    public String getGuiLocale_gameModeGui_hardcore() {
+        return guiLocale_gameModeGui_hardcore;
     }
 
-    public String getAdminGuiGamemodeGuiSpectator() {
-        return adminGuiGamemodeGuiSpectator;
+    public String getGuiLocale_gameModeGui_spectator() {
+        return guiLocale_gameModeGui_spectator;
     }
 
-    public String getAdminGuiDifficultyGuiDifficultyGuiPageName() {
-        return adminGuiDifficultyGuiDifficultyGuiPageName;
+    public String getGuiLocale_adminGuiDifficulty_guiDifficultyGuiPageName() {
+        return guiLocale_adminGuiDifficulty_guiDifficultyGuiPageName;
     }
 
-    public String getAdminGuiDifficultyGuiPeaceful() {
-        return adminGuiDifficultyGuiPeaceful;
+    public String getGuiLocale_adminGuiDifficulty_peaceful() {
+        return guiLocale_adminGuiDifficulty_peaceful;
     }
 
-    public String getAdminGuiDifficultyGuiEasy() {
-        return adminGuiDifficultyGuiEasy;
+    public String getGuiLocale_adminGuiDifficulty_easy() {
+        return guiLocale_adminGuiDifficulty_easy;
     }
 
-    public String getAdminGuiDifficultyGuiMedium() {
-        return adminGuiDifficultyGuiMedium;
+    public String getGuiLocale_adminGuiDifficulty_medium() {
+        return guiLocale_adminGuiDifficulty_medium;
     }
 
-    public String getAdminGuiDifficultyGuiHard() {
-        return adminGuiDifficultyGuiHard;
+    public String getGuiLocale_adminGuiDifficulty_hard() {
+        return guiLocale_adminGuiDifficulty_hard;
     }
 
-    public String getAdminGuiTimeGuiChatResponse() {
-        return adminGuiTimeGuiChatResponse;
+    public String getGuiLocale_timeGui_chatResponse() {
+        return guiLocale_timeGui_chatResponse;
     }
 
-    public String getAdminGuiTimeGuiPageName() {
-        return adminGuiTimeGuiPageName;
+    public String getGuiLocale_timeGui_pageName() {
+        return guiLocale_timeGui_pageName;
     }
 
-    public String getAdminGuiTimeGuiDay() {
-        return adminGuiTimeGuiDay;
+    public String getGuiLocale_timeGui_day() {
+        return guiLocale_timeGui_day;
     }
 
-    public String getAdminGuiTimeGuiNoon() {
-        return adminGuiTimeGuiNoon;
+    public String getGuiLocale_timeGui_noon() {
+        return guiLocale_timeGui_noon;
     }
 
-    public String getAdminGuiTimeGuiMidNight() {
-        return adminGuiTimeGuiMidNight;
+    public String getGuiLocale_timeGui_midNight() {
+        return guiLocale_timeGui_midNight;
     }
 
-    public String getAdminGuiTimeGuiNight() {
-        return adminGuiTimeGuiNight;
+    public String getGuiLocale_timeGui_night() {
+        return guiLocale_timeGui_night;
     }
 
-    public String getAdminGuiTimeGuiNumber() {
-        return adminGuiTimeGuiNumber;
+    public String getGuiLocale_timeGui_number() {
+        return guiLocale_timeGui_number;
     }
 
-    public String getAdminGuiWeatherGuiWeatherGuiPageName() {
-        return adminGuiWeatherGuiWeatherGuiPageName;
+    public String getGuiLocale_adminGuiWeatherGui_weatherGuiPageName() {
+        return guiLocale_adminGuiWeatherGui_weatherGuiPageName;
     }
 
-    public String getAdminGuiWeatherGuiSunny() {
-        return adminGuiWeatherGuiSunny;
+    public String getGuiLocale_adminGuiWeatherGui_sunny() {
+        return guiLocale_adminGuiWeatherGui_sunny;
     }
 
-    public String getAdminGuiWeatherGuiRainy() {
-        return adminGuiWeatherGuiRainy;
+    public String getGuiLocale_adminGuiWeatherGui_rainy() {
+        return guiLocale_adminGuiWeatherGui_rainy;
     }
 
-    public String getAdminGuiWeatherGuiThunder() {
-        return adminGuiWeatherGuiThunder;
+    public String getGuiLocale_adminGuiWeatherGui_thunder() {
+        return guiLocale_adminGuiWeatherGui_thunder;
     }
 
-    public String getAdminGuiWorldToolsGuiWorldToolsGuiPageName() {
-        return adminGuiWorldToolsGuiWorldToolsGuiPageName;
+    public String getGuiLocale_adminGuiWorldToolsGui_worldToolsGuiPageName() {
+        return guiLocale_adminGuiWorldToolsGui_worldToolsGuiPageName;
     }
 
-    public String getAdminGuiWorldToolsGuiDefaultGamemodeName() {
-        return adminGuiWorldToolsGuiDefaultGamemodeName;
+    public String getGuiLocale_adminGuiWorldToolsGui_defaultGamemodeName() {
+        return guiLocale_adminGuiWorldToolsGui_defaultGamemodeName;
     }
 
-    public String getAdminGuiWorldToolsGuiDefaultGamemodeLore() {
-        return adminGuiWorldToolsGuiDefaultGamemodeLore;
+    public String getGuiLocale_adminGuiWorldToolsGui_defaultGamemodeLore() {
+        return guiLocale_adminGuiWorldToolsGui_defaultGamemodeLore;
     }
 
-    public String getAdminGuiWorldToolsGuiWorldDifficultyName() {
-        return adminGuiWorldToolsGuiWorldDifficultyName;
+    public String getGuiLocale_adminGuiWorldToolsGui_worldDifficultyName() {
+        return guiLocale_adminGuiWorldToolsGui_worldDifficultyName;
     }
 
-    public String getAdminGuiWorldToolsGuiWorldDifficultyLore() {
-        return adminGuiWorldToolsGuiWorldDifficultyLore;
+    public String getGuiLocale_adminGuiWorldToolsGui_worldDifficultyLore() {
+        return guiLocale_adminGuiWorldToolsGui_worldDifficultyLore;
     }
 
-    public String getAdminGuiWorldToolsGuiGamemodeName() {
-        return adminGuiWorldToolsGuiGamemodeName;
+    public String getGuiLocale_adminGuiWorldToolsGui_gamemodeName() {
+        return guiLocale_adminGuiWorldToolsGui_gamemodeName;
     }
 
-    public String getAdminGuiWorldToolsGuiGamemodeLore() {
-        return adminGuiWorldToolsGuiGamemodeLore;
+    public String getGuiLocale_adminGuiWorldToolsGui_gamemodeLore() {
+        return guiLocale_adminGuiWorldToolsGui_gamemodeLore;
     }
 
-    public String getAdminGuiWorldToolsGuiReloadName() {
-        return adminGuiWorldToolsGuiReloadName;
+    public String getGuiLocale_adminGuiWorldToolsGui_reloadName() {
+        return guiLocale_adminGuiWorldToolsGui_reloadName;
     }
 
-    public String getAdminGuiWorldToolsGuiReloadLore() {
-        return adminGuiWorldToolsGuiReloadLore;
+    public String getGuiLocale_adminGuiWorldToolsGui_reloadLore() {
+        return guiLocale_adminGuiWorldToolsGui_reloadLore;
     }
 
-    public String getAdminGuiWorldToolsGuiSayName() {
-        return adminGuiWorldToolsGuiSayName;
+    public String getGuiLocale_adminGuiWorldToolsGui_sayName() {
+        return guiLocale_adminGuiWorldToolsGui_sayName;
     }
 
-    public String getAdminGuiWorldToolsGuiSayLore() {
-        return adminGuiWorldToolsGuiSayLore;
+    public String getGuiLocale_adminGuiWorldToolsGui_sayLore() {
+        return guiLocale_adminGuiWorldToolsGui_sayLore;
     }
 
-    public String getAdminGuiWorldToolsGuiSeedName() {
-        return adminGuiWorldToolsGuiSeedName;
+    public String getGuiLocale_adminGuiWorldToolsGui_seedName() {
+        return guiLocale_adminGuiWorldToolsGui_seedName;
     }
 
-    public String getAdminGuiWorldToolsGuiSeedLore() {
-        return adminGuiWorldToolsGuiSeedLore;
+    public String getGuiLocale_adminGuiWorldToolsGui_seedLore() {
+        return guiLocale_adminGuiWorldToolsGui_seedLore;
     }
 
-    public String getAdminGuiWorldToolsGuiSetWorldSpawnName() {
-        return adminGuiWorldToolsGuiSetWorldSpawnName;
+    public String getGuiLocale_adminGuiWorldToolsGui_setWorldSpawnName() {
+        return guiLocale_adminGuiWorldToolsGui_setWorldSpawnName;
     }
 
-    public String getAdminGuiWorldToolsGuiSetWorldSpawnLore() {
-        return adminGuiWorldToolsGuiSetWorldSpawnLore;
+    public String getGuiLocale_adminGuiWorldToolsGui_setWorldSpawnLore() {
+        return guiLocale_adminGuiWorldToolsGui_setWorldSpawnLore;
     }
 
-    public String getAdminGuiWorldToolsGuiSpawnPointName() {
-        return adminGuiWorldToolsGuiSpawnPointName;
+    public String getGuiLocale_adminGuiWorldToolsGui_spawnPointName() {
+        return guiLocale_adminGuiWorldToolsGui_spawnPointName;
     }
 
-    public String getAdminGuiWorldToolsGuiSpawnPointLore() {
-        return adminGuiWorldToolsGuiSpawnPointLore;
+    public String getGuiLocale_adminGuiWorldToolsGui_spawnPointLore() {
+        return guiLocale_adminGuiWorldToolsGui_spawnPointLore;
     }
 
-    public String getAdminGuiWorldToolsGuiTimeName() {
-        return adminGuiWorldToolsGuiTimeName;
+    public String getGuiLocale_adminGuiWorldToolsGui_timeName() {
+        return guiLocale_adminGuiWorldToolsGui_timeName;
     }
 
-    public String getAdminGuiWorldToolsGuiTimeLore() {
-        return adminGuiWorldToolsGuiTimeLore;
+    public String getGuiLocale_adminGuiWorldToolsGui_timeLore() {
+        return guiLocale_adminGuiWorldToolsGui_timeLore;
     }
 
-    public String getAdminGuiWorldToolsGuiWeatherName() {
-        return adminGuiWorldToolsGuiWeatherName;
+    public String getGuiLocale_adminGuiWorldToolsGui_weatherName() {
+        return guiLocale_adminGuiWorldToolsGui_weatherName;
     }
 
-    public String getAdminGuiWorldToolsGuiWeatherLore() {
-        return adminGuiWorldToolsGuiWeatherLore;
+    public String getGuiLocale_adminGuiWorldToolsGui_weatherLore() {
+        return guiLocale_adminGuiWorldToolsGui_weatherLore;
     }
 
-    public String getAdminGuiWorldToolsGuiWorldBorderName() {
-        return adminGuiWorldToolsGuiWorldBorderName;
+    public String getGuiLocale_adminGuiWorldToolsGui_worldBorderName() {
+        return guiLocale_adminGuiWorldToolsGui_worldBorderName;
     }
 
-    public String getAdminGuiWorldToolsGuiWorldBorderLore() {
-        return adminGuiWorldToolsGuiWorldBorderLore;
+    public String getGuiLocale_adminGuiWorldToolsGui_worldBorderLore() {
+        return guiLocale_adminGuiWorldToolsGui_worldBorderLore;
     }
 
-    public String getAdminGuiWorldToolsGuiXpName() {
-        return adminGuiWorldToolsGuiXpName;
+    public String getGuiLocale_adminGuiWorldToolsGui_xpName() {
+        return guiLocale_adminGuiWorldToolsGui_xpName;
     }
 
-    public String getAdminGuiWorldToolsGuiXpLore() {
-        return adminGuiWorldToolsGuiXpLore;
+    public String getGuiLocale_adminGuiWorldToolsGui_xpLore() {
+        return guiLocale_adminGuiWorldToolsGui_xpLore;
     }
 
     public String getAdminGuiWorldToolsGuiXpChatMessage(String message) {
-        return adminGuiWorldToolsGuiXpChatMessage.replaceAll(LiteralType.CANCEL_MODEL, message);
+        return guiLocale_adminGuiWorldToolsGui_xpChatMessage.replaceAll(LiteralType.CANCEL_MODEL, message);
     }
 
-    public String getAdminGuiWorldToolsGuiXpChatCanceledMessage() {
-        return adminGuiWorldToolsGuiXpChatCanceledMessage;
+    public String getGuiLocale_adminGuiWorldToolsGui_xpChatCanceledMessage() {
+        return guiLocale_adminGuiWorldToolsGui_xpChatCanceledMessage;
     }
 
-    public String getAdminGuiWorldToolsGuiTitleName() {
-        return adminGuiWorldToolsGuiTitleName;
+    public String getGuiLocale_adminGuiWorldToolsGui_titleName() {
+        return guiLocale_adminGuiWorldToolsGui_titleName;
     }
 
-    public String getAdminGuiWorldToolsGuiTitleLore() {
-        return adminGuiWorldToolsGuiTitleLore;
+    public String getGuiLocale_adminGuiWorldToolsGui_titleLore() {
+        return guiLocale_adminGuiWorldToolsGui_titleLore;
     }
 
     public String getAdminGuiWorldToolsGuiTitleChatMessage(String message) {
-        return adminGuiWorldToolsGuiTitleChatMessage.replaceAll(LiteralType.CANCEL_MODEL, message);
+        return guiLocale_adminGuiWorldToolsGui_titleChatMessage.replaceAll(LiteralType.CANCEL_MODEL, message);
     }
 
-    public String getAdminGuiWorldToolsGuiTitleChatCanceledMessage() {
-        return adminGuiWorldToolsGuiTitleChatCanceledMessage;
+    public String getGuiLocale_adminGuiWorldToolsGui_titleChatCanceledMessage() {
+        return guiLocale_adminGuiWorldToolsGui_titleChatCanceledMessage;
     }
 
-    public String getAdminGuiWorldToolsGuiTellName() {
-        return adminGuiWorldToolsGuiTellName;
+    public String getGuiLocale_adminGuiWorldToolsGui_tellName() {
+        return guiLocale_adminGuiWorldToolsGui_tellName;
     }
 
-    public String getAdminGuiWorldToolsGuiTellLore() {
-        return adminGuiWorldToolsGuiTellLore;
+    public String getGuiLocale_adminGuiWorldToolsGui_tellLore() {
+        return guiLocale_adminGuiWorldToolsGui_tellLore;
     }
 
     public String getAdminGuiWorldToolsGuiTellChatMessage(String message) {
-        return adminGuiWorldToolsGuiTellChatMessage.replaceAll(LiteralType.CANCEL_MODEL, message);
+        return guiLocale_adminGuiWorldToolsGui_tellChatMessage.replaceAll(LiteralType.CANCEL_MODEL, message);
     }
 
-    public String getAdminGuiWorldToolsGuiTellChatCanceledMessage() {
-        return adminGuiWorldToolsGuiTellChatCanceledMessage;
+    public String getGuiLocale_adminGuiWorldToolsGui_tellChatCanceledMessage() {
+        return guiLocale_adminGuiWorldToolsGui_tellChatCanceledMessage;
     }
 
-    public String getLogsFromDay() {
-        return logsFromDay;
+    public String getGuiLocale_logsGui_logsFromDay() {
+        return guiLocale_logsGui_logsFromDay;
     }
 
-    public String getLogsFromDateInterval() {
-        return logsFromDateInterval;
+    public String getGuiLocale_logsGui_logsFromDateInterval() {
+        return guiLocale_logsGui_logsFromDateInterval;
     }
 
-    public String getBansGuiSelectTime() {
-        return bansGuiSelectTime;
+    public String getGuiLocale_bansGui_selectTime() {
+        return guiLocale_bansGui_selectTime;
     }
 
-    public String getChooseTimeGuiSeconds() {
-        return chooseTimeGuiSeconds;
+    public String getGuiLocale_chooseTimeGui_seconds() {
+        return guiLocale_chooseTimeGui_seconds;
     }
 
-    public String getChooseTimeGuiMinutes() {
-        return chooseTimeGuiMinutes;
+    public String getGuiLocale_chooseTimeGui_minutes() {
+        return guiLocale_chooseTimeGui_minutes;
     }
 
-    public String getChooseTimeGuiHours() {
-        return chooseTimeGuiHours;
+    public String getGuiLocale_chooseTimeGui_hours() {
+        return guiLocale_chooseTimeGui_hours;
     }
 
-    public String getChooseTimeGuiDays() {
-        return chooseTimeGuiDays;
+    public String getGuiLocale_chooseTimeGui_days() {
+        return guiLocale_chooseTimeGui_days;
     }
 
-    public String getChooseTimeGuiWeeks() {
-        return chooseTimeGuiWeeks;
+    public String getGuiLocale_chooseTimeGui_weeks() {
+        return guiLocale_chooseTimeGui_weeks;
     }
 
-    public String getChooseTimeGuiMonths() {
-        return chooseTimeGuiMonths;
+    public String getGuiLocale_chooseTimeGui_months() {
+        return guiLocale_chooseTimeGui_months;
     }
 
-    public String getChooseTimeGuiYears() {
-        return chooseTimeGuiYears;
+    public String getGuiLocale_chooseTimeGui_years() {
+        return guiLocale_chooseTimeGui_years;
     }
 
-    public String getSinglePlayerGuiReleasePlayer() {
-        return singlePlayerGuiReleasePlayer;
+    public String getGuiLocale_singlePlayerGui_releasePlayer() {
+        return guiLocale_singlePlayerGui_releasePlayer;
     }
 
     public String getMutesGuiMutedBy(String player) {
-        return mutesGuiMutedBy.replaceAll(LiteralType.PLAYER_NAME, player);
+        return guiLocale_mutesGui_mutedBy.replaceAll(LiteralType.PLAYER_NAME, player);
     }
 
     public String getMutesGuiExpiredDate(String date) {
-        return mutesGuiExpiredDate.replaceAll(LiteralType.DATE, date);
+        return guiLocale_mutesGui_expiredDate.replaceAll(LiteralType.DATE, date);
     }
 
     public String getMutesGuiUnmute(String player) {
-        return mutesGuiUnmute.replaceAll(LiteralType.PLAYER_NAME, player);
+        return guiLocale_mutesGui_unMute.replaceAll(LiteralType.PLAYER_NAME, player);
     }
 
     public String getBanDescriptionBannedBy(String date) {
-        return banDescriptionBannedBy.replaceAll(LiteralType.DATE, date);
+        return guiLocale_bansGui_banDescriptionBannedBy.replaceAll(LiteralType.DATE, date);
     }
 
     public String getBanDescriptionBannedDate(String date) {
-        return banDescriptionBannedDate.replaceAll(LiteralType.DATE, date);
+        return guiLocale_bansGui_banDescriptionBannedDate.replaceAll(LiteralType.DATE, date);
     }
 
     public String getBanDescriptionExpiredDate(String date) {
-        return banDescriptionExpiredDate.replaceAll(LiteralType.DATE, date);
+        return guiLocale_bansGui_banDescriptionExpiredDate.replaceAll(LiteralType.DATE, date);
     }
 
-    public String getLogsName() {
-        return logsName;
+    public String getGuiLocale_logsGui_logsName() {
+        return guiLocale_logsGui_logsName;
     }
 
     public String getBanDescriptionComment(String comment) {
-        return banDescriptionComment.replaceAll(LiteralType.COMMENT, comment);
+        return guiLocale_bansGui_banDescriptionComment.replaceAll(LiteralType.COMMENT, comment);
     }
 
     public String getBansGuiUnban(String player) {
-        return bansGuiUnban.replaceAll(LiteralType.PLAYER_NAME, player);
+        return guiLocale_bansGui_unban.replaceAll(LiteralType.PLAYER_NAME, player);
     }
 
-    public String getChooseTimeGuiExit() {
-        return chooseTimeGuiExit;
+    public String getGuiLocale_chooseTimeGui_exit() {
+        return guiLocale_chooseTimeGui_exit;
     }
 
-    public String getAdminGuiUnknownStatus() {
-        return adminGuiUnknownStatus;
+    public String getGuiLocale_adminGui_unknownStatus() {
+        return guiLocale_adminGui_unknownStatus;
     }
 
-    public String getChooseTimeGuiPageName() {
-        return chooseTimeGuiPageName;
+    public String getGuiLocale_chooseTimeGui_pageName() {
+        return guiLocale_chooseTimeGui_pageName;
     }
 
-    public String getChooseTimeGuiSecond() {
-        return chooseTimeGuiSecond;
+    public String getGuiLocale_chooseTimeGui_second() {
+        return guiLocale_chooseTimeGui_second;
     }
 
-    public String getChooseTimeGuiMinute() {
-        return chooseTimeGuiMinute;
+    public String getGuiLocale_chooseTimeGui_minute() {
+        return guiLocale_chooseTimeGui_minute;
     }
 
-    public String getChooseTimeGuiHour() {
-        return chooseTimeGuiHour;
+    public String getGuiLocale_chooseTimeGui_hour() {
+        return guiLocale_chooseTimeGui_hour;
     }
 
-    public String getChooseTimeGuiDay() {
-        return chooseTimeGuiDay;
+    public String getGuiLocale_chooseTimeGui_day() {
+        return guiLocale_chooseTimeGui_day;
     }
 
-    public String getChooseTimeGuiWeek() {
-        return chooseTimeGuiWeek;
+    public String getGuiLocale_chooseTimeGui_week() {
+        return guiLocale_chooseTimeGui_week;
     }
 
-    public String getChooseTimeGuiMonth() {
-        return chooseTimeGuiMonth;
+    public String getGuiLocale_chooseTimeGui_month() {
+        return guiLocale_chooseTimeGui_month;
     }
 
-    public String getChooseTimeGuiYear() {
-        return chooseTimeGuiYear;
+    public String getGuiLocale_chooseTimeGui_year() {
+        return guiLocale_chooseTimeGui_year;
     }
 
-    public String getAdminGuiExpiredTime() {
-        return adminGuiExpiredTime;
+    public String getGuiLocale_adminGui_expiredTime() {
+        return guiLocale_adminGui_expiredTime;
     }
 
     public String getAdminGuiExecute(String title) {
-        return adminGuiExecute.replaceAll(LiteralType.TITLE, title);
+        return guiLocale_adminGui_execute.replaceAll(LiteralType.TITLE, title);
     }
 
     public String getSinglePlayerGuiBanGuiPageName(String player) {
-        return singlePlayerGuiBanGuiPageName.replaceAll(LiteralType.PLAYER_NAME, player);
+        return guiLocale_singlePlayerGui_banGuiPageName.replaceAll(LiteralType.PLAYER_NAME, player);
     }
 
     public String getSinglePlayerGuiPageName(String player) {
-        return singlePlayerGuiPageName.replaceAll(LiteralType.PLAYER_NAME, player);
+        return guiLocale_singlePlayerGui_pageName.replaceAll(LiteralType.PLAYER_NAME, player);
     }
 
-    public String getSinglePlayerGuiStatusOnline() {
-        return singlePlayerGuiStatusOnline;
+    public String getGuiLocale_singlePlayerGui_statusOnline() {
+        return guiLocale_singlePlayerGui_statusOnline;
     }
 
-    public String getSinglePlayerGuiStatusOffline() {
-        return singlePlayerGuiStatusOffline;
+    public String getGuiLocale_singlePlayerGui_statusOffline() {
+        return guiLocale_singlePlayerGui_statusOffline;
     }
 
-    public String getSinglePlayerGuiKillPlayer() {
-        return singlePlayerGuiKillPlayer;
+    public String getGuiLocale_singlePlayerGui_killPlayer() {
+        return guiLocale_singlePlayerGui_killPlayer;
     }
 
-    public String getSinglePlayerGuiFreezePlayer() {
-        return singlePlayerGuiFreezePlayer;
+    public String getGuiLocale_singlePlayerGui_freezePlayer() {
+        return guiLocale_singlePlayerGui_freezePlayer;
     }
 
-    public String getSinglePlayerGuiTeleportPlayer() {
-        return singlePlayerGuiTeleportPlayer;
+    public String getGuiLocale_singlePlayerGui_teleportPlayer() {
+        return guiLocale_singlePlayerGui_teleportPlayer;
     }
 
-    public String getSinglePlayerGuiTeleportToPlayer() {
-        return singlePlayerGuiTeleportToPlayer;
+    public String getGuiLocale_singlePlayerGui_teleportToPlayer() {
+        return guiLocale_singlePlayerGui_teleportToPlayer;
     }
 
-    public String getSinglePlayerGuiBanPlayer() {
-        return singlePlayerGuiBanPlayer;
+    public String getGuiLocale_singlePlayerGui_banPlayer() {
+        return guiLocale_singlePlayerGui_banPlayer;
     }
 
-    public String getSinglePlayerGuiMutePlayer() {
-        return singlePlayerGuiMutePlayer;
+    public String getGuiLocale_singlePlayerGui_mutePlayer() {
+        return guiLocale_singlePlayerGui_mutePlayer;
     }
 
-    public String getSinglePlayerGuiInventory() {
-        return singlePlayerGuiInventory;
+    public String getGuiLocale_singlePlayerGui_inventory() {
+        return guiLocale_singlePlayerGui_inventory;
     }
 
-    public String getSinglePlayerGuiEnderChest() {
-        return singlePlayerGuiEnderChest;
+    public String getGuiLocale_singlePlayerGui_enderChest() {
+        return guiLocale_singlePlayerGui_enderChest;
     }
 
-    public String getSinglePlayerGuiHidePlayer() {
-        return singlePlayerGuiHidePlayer;
+    public String getGuiLocale_singlePlayerGui_hidePlayer() {
+        return guiLocale_singlePlayerGui_hidePlayer;
     }
 
-    public String getSinglePlayerGuiHidePlayerCurrent() {
-        return singlePlayerGuiHidePlayerCurrent;
+    public String getGuiLocale_singlePlayerGui_hidePlayerCurrent() {
+        return guiLocale_singlePlayerGui_hidePlayerCurrent;
     }
 
-    public String getSinglePlayerGuiKickPlayer() {
-        return singlePlayerGuiKickPlayer;
+    public String getGuiLocale_singlePlayerGui_kickPlayer() {
+        return guiLocale_singlePlayerGui_kickPlayer;
     }
 
-    public String getSinglePlayerGuiTemporaryBanPlayer() {
-        return singlePlayerGuiTemporaryBanPlayer;
+    public String getGuiLocale_singlePlayerGui_temporaryBanPlayer() {
+        return guiLocale_singlePlayerGui_temporaryBanPlayer;
     }
 
-    public String getAdminToolsGuiPageName() {
-        return adminToolsGuiPageName;
+    public String getGuiLocale_adminToolsGui_pageName() {
+        return guiLocale_adminToolsGui_pageName;
     }
 
-    public String getAdminToolsGuiAdminAxe() {
-        return adminToolsGuiAdminAxe;
+    public String getGuiLocale_adminToolsGui_adminAxe() {
+        return guiLocale_adminToolsGui_adminAxe;
     }
 
-    public String getAdminToolsGuiAdminPickAxe() {
-        return adminToolsGuiAdminPickAxe;
+    public String getGuiLocale_adminToolsGui_adminPickAxe() {
+        return guiLocale_adminToolsGui_adminPickAxe;
     }
 
-    public String getAdminToolsGuiAdminShovel() {
-        return adminToolsGuiAdminShovel;
+    public String getGuiLocale_adminToolsGui_adminShovel() {
+        return guiLocale_adminToolsGui_adminShovel;
     }
 
-    public String getAdminToolsGuiAdminSword() {
-        return adminToolsGuiAdminSword;
+    public String getGuiLocale_adminToolsGui_adminSword() {
+        return guiLocale_adminToolsGui_adminSword;
     }
 
-    public String getAdminToolsGuiAdminBow() {
-        return adminToolsGuiAdminBow;
+    public String getGuiLocale_adminToolsGui_adminBow() {
+        return guiLocale_adminToolsGui_adminBow;
     }
 
-    public String getAdminToolsGuiAdminHoe() {
-        return adminToolsGuiAdminHoe;
+    public String getGuiLocale_adminToolsGui_adminHoe() {
+        return guiLocale_adminToolsGui_adminHoe;
     }
 
-    public String getAdminStaffGuiPageName() {
-        return adminStaffGuiPageName;
+    public String getGuiLocale_adminStaff_guiPageName() {
+        return guiLocale_adminStaff_guiPageName;
     }
 
-    public String getAdminStaffGuiVanish() {
-        return adminStaffGuiVanish;
+    public String getGuiLocale_adminStaff_guiVanish() {
+        return guiLocale_adminStaff_guiVanish;
     }
 
-    public String getAdminStaffGuiVanishCurrent() {
-        return adminStaffGuiVanishCurrent;
+    public String getGuiLocale_adminStaff_guiVanishCurrent() {
+        return guiLocale_adminStaff_guiVanishCurrent;
     }
 
-    public String getAdminStaffGuiMaintenance() {
-        return adminStaffGuiMaintenance;
+    public String getGuiLocale_adminStaff_guiMaintenance() {
+        return guiLocale_adminStaff_guiMaintenance;
     }
 
-    public String getAdminStaffGuiAdminTools() {
-        return adminStaffGuiAdminTools;
+    public String getGuiLocale_adminStaff_adminTools() {
+        return guiLocale_adminStaff_adminTools;
     }
 
-    public String getBansGuiPageName() {
-        return bansGuiPageName;
+    public String getGuiLocale_bansGui_pageName() {
+        return guiLocale_bansGui_pageName;
     }
 
     public String getBansGuiBannedPlayersList() {
-        return bansGuiBannedPlayersList;
+        return guiLocale_bansGui_bannedPlayersList;
     }
 
-    public String getBansGuiTemporaryBannedPlayersList() {
-        return bansGuiTemporaryBannedPlayersList;
+    public String getGuiLocale_bansGui_temporaryBannedPlayersList() {
+        return guiLocale_bansGui_temporaryBannedPlayersList;
     }
 
-    public String getBansGuiMutedPlayers() {
-        return bansGuiMutedPlayers;
+    public String getGuiLocale_bansGui_mutedPlayers() {
+        return guiLocale_bansGui_mutedPlayers;
     }
 
-    public String getBansGuiFrozenPlayersList() {
-        return bansGuiFrozenPlayersList;
+    public String getGuiLocale_bansGui_frozenPlayersList() {
+        return guiLocale_bansGui_frozenPlayersList;
     }
 
-    public String getBansGuiHiddenPlayers() {
-        return bansGuiHiddenPlayers;
+    public String getGuiLocale_bansGui_hiddenPlayers() {
+        return guiLocale_bansGui_hiddenPlayers;
     }
 
-    public String getMainGuiPageName() {
-        return mainGuiPageName;
+    public String getGuiLocale_mainGui_pageName() {
+        return guiLocale_mainGui_pageName;
     }
 
-    public String getMainGuiBans() {
-        return mainGuiBans;
+    public String getGuiLocale_mainGui_bans() {
+        return guiLocale_mainGui_bans;
     }
 
-    public String getMainGuiAdminStaff() {
-        return mainGuiAdminStaff;
+    public String getGuiLocale_mainGui_adminStaff() {
+        return guiLocale_mainGui_adminStaff;
     }
 
-    public String getPlayersGuiPageName() {
-        return playersGuiPageName;
+    public String getGuiLocale_playersGui_pageName() {
+        return guiLocale_playersGui_pageName;
     }
 
-    public String getAdminGuiBack() {
-        return adminGuiBack;
+    public String getGuiLocale_adminGui_back() {
+        return guiLocale_adminGui_back;
     }
 
-    public String getAdminGuiClose() {
-        return adminGuiClose;
+    public String getGuiLocale_adminGui_close() {
+        return guiLocale_adminGui_close;
     }
 
-    public String getLogsTimeGuiTitle() {
-        return logsTimeGuiTitle;
+    public String getGuiLocale_logsGui_logsTimeGuiTitle() {
+        return guiLocale_logsGui_logsTimeGuiTitle;
     }
 
-    public String getLogsTimeOneDay() {
-        return logsTimeOneDay;
+    public String getGuiLocale_logsGui_logsTimeOneDay() {
+        return guiLocale_logsGui_logsTimeOneDay;
     }
 
-    public String getLogsTimeMultiDay() {
-        return logsTimeMultiDay;
+    public String getGuiLocale_logsGui_logsTimeMultiDay() {
+        return guiLocale_logsGui_logsTimeMultiDay;
     }
 
-    public String getFirstCalendarGuiTitle() {
-        return firstCalendarGuiTitle;
+    public String getGuiLocale_calendarGui_firstCalendarGuiTitle() {
+        return guiLocale_calendarGui_firstCalendarGuiTitle;
     }
 
-    public String getSecondCalendarGuiTitle() {
-        return secondCalendarGuiTitle;
+    public String getGuiLocale_calendarGui_secondCalendarGuiTitle() {
+        return guiLocale_calendarGui_secondCalendarGuiTitle;
     }
 
-    public String getCalendarGuiTitle() {
-        return calendarGuiTitle;
+    public String getGuiLocale_calendarGui_title() {
+        return guiLocale_calendarGui_title;
     }
 
-    public String getLogsGuiTitle() {
-        return logsGuiTitle;
+    public String getGuiLocale_logsGui_title() {
+        return guiLocale_logsGui_title;
     }
 
-    public String getLogsForAll() {
-        return logsForAll;
+    public String getGuiLocale_logsGui_logsForAll() {
+        return guiLocale_logsGui_logsForAll;
     }
 
-    public String getLogsForOnePlayer() {
-        return logsForOnePlayer;
+    public String getGuiLocale_logsGui_logsForOnePlayer() {
+        return guiLocale_logsGui_logsForOnePlayer;
     }
 
-    public String getCalendarGuiFirstDate() {
-        return calendarGuiFirstDate;
+    public String getGuiLocale_calendarGui_firstDate() {
+        return guiLocale_calendarGui_firstDate;
     }
 
-    public String getCalendarGuiEndDate() {
-        return calendarGuiEndDate;
+    public String getGuiLocale_calendarGui_endDate() {
+        return guiLocale_calendarGui_endDate;
     }
 
-    public String getSinglePlayerGuiStatusOfflineNeverPlayerBefore() {
-        return singlePlayerGuiStatusOfflineNeverPlayerBefore;
+    public String getGuiLocale_singlePlayerGui_statusOfflineNeverPlayerBefore() {
+        return guiLocale_singlePlayerGui_statusOfflineNeverPlayerBefore;
     }
 
-    public String getAdminGuiWorldToolsGuiEnterMessageInChat() {
-        return adminGuiWorldToolsGuiEnterMessageInChat;
+    public String getGuiLocale_adminGuiWorldToolsGui_enterMessageInChat() {
+        return guiLocale_adminGuiWorldToolsGui_enterMessageInChat;
     }
 }

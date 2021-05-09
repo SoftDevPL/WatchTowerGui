@@ -20,7 +20,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class GetLogsFromDay implements CommandExecutor {
 
@@ -44,7 +43,7 @@ public class GetLogsFromDay implements CommandExecutor {
         try {
             date = sdf.parse(StringDate);
         } catch (ParseException e) {
-            logsYmlGenerator.sendTypedMessageToSender(sender, languageConfig.getLogsWrongMessageForDay());
+            logsYmlGenerator.sendTypedMessageToSender(sender, languageConfig.getCommandsLocale_logs_logsWrongMessageForDay());
             e.printStackTrace();
         }
         assert date != null;
@@ -60,11 +59,11 @@ public class GetLogsFromDay implements CommandExecutor {
         if (sender instanceof Player) {
             LogsGui.logsOneDay(null).open((Player) sender);
         } else {
-            logsYmlGenerator.sendTypedMessageToSender(sender, languageConfig.getLogsEnterMessageForDay());
+            logsYmlGenerator.sendTypedMessageToSender(sender, languageConfig.getCommandsLocale_logs_logsEnterMessageForDay());
             consoleChatListener.setTask(sender, (chatMessage, chatSender) -> {
                 List<String> dates = getDatesFromString(chatMessage);
                 if (dates.size() == 1) {
-                    BukkitTask task = logsYmlGenerator.displayCurrentSec(languageConfig.getLogsGettingLogs(), sender, this.plugin);
+                    BukkitTask task = logsYmlGenerator.displayCurrentSec(languageConfig.getCommandsLocale_logs_logsGettingLogs(), sender, this.plugin);
                     Bukkit.getScheduler().runTaskAsynchronously(this.plugin,
                             () -> {
                                 generateFilesWithLogs(getFromDatabase(
@@ -74,7 +73,7 @@ public class GetLogsFromDay implements CommandExecutor {
                                 logsYmlGenerator.taskFinished(sender, task);
                             });
                 } else {
-                    logsYmlGenerator.sendTypedMessageToSender(sender, languageConfig.getLogsWrongMessageForDay());
+                    logsYmlGenerator.sendTypedMessageToSender(sender, languageConfig.getCommandsLocale_logs_logsWrongMessageForDay());
                 }
                 return true;
             });
@@ -103,10 +102,10 @@ public class GetLogsFromDay implements CommandExecutor {
             return true;
         }
         if (!checkDate(args[0])) {
-            logsYmlGenerator.sendTypedMessageToSender(sender, languageConfig.getLogsWrongMessageForDay());
+            logsYmlGenerator.sendTypedMessageToSender(sender, languageConfig.getCommandsLocale_logs_logsWrongMessageForDay());
             return true;
         }
-        BukkitTask task = logsYmlGenerator.displayCurrentSec(languageConfig.getLogsGettingLogs(), sender, this.plugin);
+        BukkitTask task = logsYmlGenerator.displayCurrentSec(languageConfig.getCommandsLocale_logs_logsGettingLogs(), sender, this.plugin);
         Bukkit.getScheduler().runTaskAsynchronously(this.plugin,
                 () -> {
                     generateFilesWithLogs(getFromDatabase(

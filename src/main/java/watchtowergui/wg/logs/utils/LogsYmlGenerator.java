@@ -46,7 +46,7 @@ public class LogsYmlGenerator {
     }
 
     public synchronized void taskFinished(CommandSender sender, BukkitTask task) {
-        sendTypedMessageToSender(sender, languageConfig.getLogsSuccessfullyDownloaded());
+        sendTypedMessageToSender(sender, languageConfig.getCommandsLocale_logs_logsSuccessfullyDownloaded());
         Bukkit.getScheduler().cancelTask(task.getTaskId());
     }
 

@@ -72,8 +72,8 @@ public class SingleCommandGui extends BasicGui {
     }
 
     public void initPassiveItems() {
-        backItem = BasicGui.createItem(Material.WOOD_DOOR, glc.getAdminGuiBack());
-        exitItem = BasicGui.createItem(Material.BARRIER, glc.getAdminGuiClose());
+        backItem = BasicGui.createItem(Material.WOOD_DOOR, glc.getGuiLocale_adminGui_back());
+        exitItem = BasicGui.createItem(Material.BARRIER, glc.getGuiLocale_adminGui_close());
         statusItemActive = createActiveStatusItem();
         statusItemDisable = createDisableStatusItem();
     }
@@ -81,34 +81,34 @@ public class SingleCommandGui extends BasicGui {
     private ItemStack createPermissionItem() {
         return BasicGui.createSegmentedItem(Material.TRIPWIRE_HOOK,
                 ((command.getPermission() == null) ?
-                        glc.getSingleCommandGuiCreatePermissionNotSpecified() :
+                        glc.getGuiLocale_singleCommandGui_createPermissionNotSpecified() :
                         glc.getSingleCommandGuiCreatePermissionItemName(command.getPermission())));
     }
 
     private ItemStack createNameItem() {
         List<String> lore = simpleSplitLore(
                 glc.getSingleCommandGuiCreateNameItemLore_1(command.getLabel()));
-        lore.addAll(splitLore(glc.getSingleCommandGuiCreateNameItemLore2(), 25));
+        lore.addAll(splitLore(glc.getGuiLocale_singleCommandGui_createNameItemLore2(), 25));
         return BasicGui.createItem(Material.PAPER, glc.getSingleCommandGuiCreateNameItemName(command.getName()), lore);
     }
 
     private ItemStack createAliasesItem() {
         List<String> lore = new ArrayList<>(command.getAliases().size() + 1);
         command.getAliases().forEach(alias -> lore.add(ChatColor.GREEN + alias));
-        lore.add(glc.getSingleCommandGuiCreateAliasesItemLore());
-        return BasicGui.createItem(Material.SIGN, glc.getSingleCommandGuiCreateAliasesItemName(), lore);
+        lore.add(glc.getGuiLocale_singleCommandGui_createAliasesItemLore());
+        return BasicGui.createItem(Material.SIGN, glc.getGuiLocale_singleCommandGui_createAliasesItemName(), lore);
     }
 
     private ItemStack createPluginItem() {
         if (command instanceof PluginIdentifiableCommand && ((PluginIdentifiableCommand) command).getPlugin() != null)
             return BasicGui.createSegmentedItem(Material.BOOKSHELF, glc.getSingleCommandGuiCreatePluginItemNameSpecified(((PluginIdentifiableCommand) command).getPlugin().getName()));
         else
-            return BasicGui.createSegmentedItem(Material.BOOKSHELF, glc.getSingleCommandGuiCreatePluginItemNameNotSpecified());
+            return BasicGui.createSegmentedItem(Material.BOOKSHELF, glc.getGuiLocale_singleCommandGui_createPluginItemNameNotSpecified());
     }
 
     private ItemStack createUsageItem() {
         return BasicGui.createSegmentedItem(Material.BOOK_AND_QUILL,
-                ((command.getUsage().isEmpty()) ? glc.getSingleCommandGuiCreateUsageItemNotSpecified() : glc.getSingleCommandGuiCreateUsageItemName(command.getUsage())));
+                ((command.getUsage().isEmpty()) ? glc.getGuiLocale_singleCommandGui_createUsageItemNotSpecified() : glc.getSingleCommandGuiCreateUsageItemName(command.getUsage())));
     }
 
     private ItemStack createDescriptionItem() {
@@ -116,11 +116,11 @@ public class SingleCommandGui extends BasicGui {
     }
 
     private ItemStack createActiveStatusItem() {
-        return BasicGui.createSegmentedItem(Material.WOOL, glc.getSingleCommandGuiCreateActiveStatusItemName(), Colors.GREEN);
+        return BasicGui.createSegmentedItem(Material.WOOL, glc.getGuiLocale_singleCommandGui_createActiveStatusItemName(), Colors.GREEN);
     }
 
     private ItemStack createDisableStatusItem() {
-        return BasicGui.createSegmentedItem(Material.WOOL, glc.getSingleCommandGuiCreateDisableStatusItemName(), Colors.RED);
+        return BasicGui.createSegmentedItem(Material.WOOL, glc.getGuiLocale_singleCommandGui_createDisableStatusItemName(), Colors.RED);
     }
 
     public void initItems() {
@@ -166,7 +166,7 @@ public class SingleCommandGui extends BasicGui {
             Bukkit.getPluginManager().callEvent(new CommandEnableEvent(command, player));
 
         };
-        Action disableAction = player -> new ConfirmGui(glc.getSingleCommandGuiAreYouSure(), p -> {
+        Action disableAction = player -> new ConfirmGui(glc.getGuiLocale_singleCommandGui_areYouSure(), p -> {
             singleCommandGuiListener.addGui(this);
             this.setWaitingStatus(p);
             Bukkit.getPluginManager().callEvent(new CommandDisableEvent(command, p));
@@ -194,9 +194,9 @@ public class SingleCommandGui extends BasicGui {
     public void receiveDisableResult(boolean result) {
         if (!isWaitingForResult()) return;
         if (!result)
-            this.actualPlayer.sendMessage(glc.getSingleCommandGuiReceiveDisableResultCanNotDisable());
+            this.actualPlayer.sendMessage(glc.getGuiLocale_singleCommandGui_receiveDisableResultCanNotDisable());
         else
-            this.actualPlayer.sendMessage(glc.getSingleCommandGuiReceiveDisableResultSuccessfullyDisabled());
+            this.actualPlayer.sendMessage(glc.getGuiLocale_singleCommandGui_receiveDisableResultSuccessfullyDisabled());
         resetWaitingStatus();
         reinit();
     }
@@ -223,7 +223,7 @@ public class SingleCommandGui extends BasicGui {
     private boolean checkIsLabelEnterCancel(String message, Player player) {
         if (message.equals(AliasesGui.CANCEL_PHRASE)) {
             this.chatActionReturnValue = true;
-            player.sendMessage(glc.getSingleCommandGuiCheckIsLabelEnterCancelCancelPhrase());
+            player.sendMessage(glc.getGuiLocale_singleCommandGui_checkIsLabelEnterCancelCancelPhrase());
             SingleCommandGui.this.open(player);
             return true;
         }

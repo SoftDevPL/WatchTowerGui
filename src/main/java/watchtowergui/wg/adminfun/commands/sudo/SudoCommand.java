@@ -5,7 +5,6 @@ import org.bukkit.command.*;
 import org.bukkit.entity.Player;
 import watchtowergui.wg.WatchTowerGui;
 import watchtowergui.wg.fileManager.configsutils.configs.LanguageConfig;
-import watchtowergui.wg.managers.CommandsManager;
 import watchtowergui.wg.managers.Permissions;
 import watchtowergui.wg.servercontrol.commandcontrol.CommandsControlListener;
 
@@ -32,7 +31,7 @@ public class SudoCommand implements CommandExecutor, TabCompleter {
         if (args.length >= 2) {
             Player playerToExecute = Bukkit.getPlayer(args[0]);
             if (playerToExecute == null) {
-                sender.sendMessage(languageConfig.getMesPlayerOffline(args[0]));
+                sender.sendMessage(languageConfig.getCommandsLocale_freeze_messagePlayerOffline(args[0]));
                 return true;
             }
             String sudoLabel = args[1];
@@ -41,20 +40,20 @@ public class SudoCommand implements CommandExecutor, TabCompleter {
             Bukkit.getPluginManager().callEvent(new SudoEvent(sender, playerToExecute, sudoLabel, sudoArgs));
             return true;
         }
-        sender.sendMessage(CommandsManager.getDescription(label, command));
+        sender.sendMessage(watchtowergui.wg.manager.CommandsManager.getDescription(label, command));
         return true;
     }
 
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
         if (args.length == 1)
-            return CommandsManager.mergeTabCompleter(Bukkit.getOnlinePlayers().stream()
+            return watchtowergui.wg.manager.CommandsManager.mergeTabCompleter(Bukkit.getOnlinePlayers().stream()
                     .map(Player::getName).collect(Collectors.toList()), args[0]);
 
         Player player = Bukkit.getPlayer(args[0]);
         if (player == null) return new ArrayList<>(0);
 
-        if (args.length == 2) return CommandsManager.mergeTabCompleter(
+        if (args.length == 2) return watchtowergui.wg.manager.CommandsManager.mergeTabCompleter(
                 new ArrayList<>(this.commandsControlListener.getActiveLabels()), args[1]);
         else {
             Command cmd = this.commandsControlListener.getActiveCommand(args[1]);

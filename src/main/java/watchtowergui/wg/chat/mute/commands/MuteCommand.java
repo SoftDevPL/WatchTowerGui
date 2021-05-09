@@ -6,7 +6,6 @@ import watchtowergui.wg.bans.guis.CustomBansGui;
 import watchtowergui.wg.chat.mute.events.PlayerGetMuteEvent;
 import watchtowergui.wg.fileManager.configsutils.configs.LanguageConfig;
 import watchtowergui.wg.fileManager.sql.sqlUtils.Database;
-import watchtowergui.wg.managers.CommandsManager;
 import watchtowergui.wg.managers.staticclasses.CalendarCalculator;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
@@ -27,19 +26,19 @@ public class MuteCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (args.length == 0) {
-            sender.sendMessage(CommandsManager.getDescription(label, command));
+            sender.sendMessage(watchtowergui.wg.manager.CommandsManager.getDescription(label, command));
             return true;
         }
         OfflinePlayer player = UltimateGuis.getOfflinePlayer(args[0]);
         if (player == null) {
-            sender.sendMessage(languageConfig.getBasicPlayerNotFound(args[0]));
+            sender.sendMessage(languageConfig.getCommandsLocale_basic_playerNotFoundWithPlayerName(args[0]));
             return true;
         }
         if (args.length == 1) {
             if (sender instanceof Player) {
                 new CustomBansGui(player, null, CustomBansGui.MUTE_GUI).open((Player) sender);
             } else {
-                sender.sendMessage(languageConfig.getMuteEnterTime());
+                sender.sendMessage(languageConfig.getCommandsLocale_mutes_mute_muteEnterTime());
             }
             return true;
         }
@@ -56,13 +55,13 @@ public class MuteCommand implements CommandExecutor {
                 }
                 banTime = CalendarCalculator.calcMilliseconds(val[0], val[1], val[2], val[3], val[4], val[5], val[6]);
             } catch (NumberFormatException e) {
-                sender.sendMessage(languageConfig.getMuteValueNotANumber());
+                sender.sendMessage(languageConfig.getCommandsLocale_mutes_mute_muteValueNotANumber());
             }
         }
         if (banTime > 0) {
             database.insertDataIntoPlayersMutesTable(player.getUniqueId().toString(), sender.getName(), banTime);
             Bukkit.getPluginManager().callEvent(new PlayerGetMuteEvent(player, sender, banTime));
-            sender.sendMessage(languageConfig.getMutedPlayer(args[0]));
+            sender.sendMessage(languageConfig.getCommandsLocale_mutes_mute_mutedPlayer(args[0]));
         }
         return true;
     }

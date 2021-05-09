@@ -27,7 +27,7 @@ public class BansGui extends BasicGui {
     public WatchTowerGui plugin;
 
     public BansGui(BasicGui previousGui) {
-        super(3, WatchTowerGui.getInstance().configsManager.guiLanguageConfig.getBansGuiPageName(), previousGui);
+        super(3, WatchTowerGui.getInstance().configsManager.guiLanguageConfig.getGuiLocale_bansGui_pageName(), previousGui);
         this.plugin = WatchTowerGui.getInstance();
         glc = WatchTowerGui.getInstance().configsManager.guiLanguageConfig;
         setupGuis();
@@ -35,15 +35,15 @@ public class BansGui extends BasicGui {
     }
 
     private void setupGuis() {
-        hiddenPlayersItem = BasicGui.createItem(Material.GLASS, glc.getBansGuiHiddenPlayers());
-        tempBanItem = BasicGui.createItem(Material.WATCH, glc.getBansGuiTemporaryBannedPlayersList());
-        mutedPlayersItem = BasicGui.createItem(Material.PAPER, glc.getBansGuiMutedPlayers());
+        hiddenPlayersItem = BasicGui.createItem(Material.GLASS, glc.getGuiLocale_bansGui_hiddenPlayers());
+        tempBanItem = BasicGui.createItem(Material.WATCH, glc.getGuiLocale_bansGui_temporaryBannedPlayersList());
+        mutedPlayersItem = BasicGui.createItem(Material.PAPER, glc.getGuiLocale_bansGui_mutedPlayers());
     }
 
     protected void init() {
-        ItemStack frozenPlayers = BasicGui.createItem(Material.PACKED_ICE, glc.getBansGuiFrozenPlayersList());
+        ItemStack frozenPlayers = BasicGui.createItem(Material.PACKED_ICE, glc.getGuiLocale_bansGui_frozenPlayersList());
         ItemStack banPlayers = BasicGui.createItem(Material.SKULL_ITEM, glc.getBansGuiBannedPlayersList(), (short) 1);
-        ItemStack previous = BasicGui.createItem(Material.ARROW, glc.getAdminGuiBack());
+        ItemStack previous = BasicGui.createItem(Material.ARROW, glc.getGuiLocale_adminGui_back());
 
         this.setItem(2, 1, banPlayers, player -> {
             PlayersGui playersGui = new PlayersGui(this, glc.getBansGuiBannedPlayersList());
@@ -75,7 +75,7 @@ public class BansGui extends BasicGui {
                 });
 
         this.setItem(5, 1, frozenPlayers, player -> {
-            PlayersGui frozenPlayersGui = new PlayersGui(this, glc.getBansGuiFrozenPlayersList());
+            PlayersGui frozenPlayersGui = new PlayersGui(this, glc.getGuiLocale_bansGui_frozenPlayersList());
             frozenPlayersGui.setAction(playerFromHead ->
                     new PlayerActionGui(Bukkit.getOfflinePlayer(playerFromHead), frozenPlayersGui).open(player));
             frozenPlayersGui.setRefreshFunction(() ->
@@ -92,7 +92,7 @@ public class BansGui extends BasicGui {
         }
 
         this.setItem(6, 1, hiddenPlayersItem, player -> {
-            PlayersGui hiddenPlayersGui = new PlayersGui(BansGui.this, glc.getBansGuiHiddenPlayers());
+            PlayersGui hiddenPlayersGui = new PlayersGui(BansGui.this, glc.getGuiLocale_bansGui_hiddenPlayers());
             hiddenPlayersGui.setRefreshFunction(() ->
                     sortedPlayers(WatchTowerGui.getInstance().listenersManager.hidingPlayerListener.getHiddenPlayers()));
             hiddenPlayersGui.setAction(playerFromHead -> new PlayerActionGui(Bukkit.getOfflinePlayer(playerFromHead),

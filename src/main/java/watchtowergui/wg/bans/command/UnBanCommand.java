@@ -6,7 +6,6 @@ import watchtowergui.wg.bans.event.PlayerRemoveTempBanEvent;
 import watchtowergui.wg.bans.guis.ActiveTempBansGui;
 import watchtowergui.wg.bans.listeners.TempBanListener;
 import watchtowergui.wg.fileManager.configsutils.configs.LanguageConfig;
-import watchtowergui.wg.managers.CommandsManager;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.*;
@@ -34,14 +33,14 @@ public class UnBanCommand implements CommandExecutor, TabCompleter {
         if (args.length >= 1) {
             OfflinePlayer offlinePlayer = UltimateGuis.getOfflinePlayer(args[0]);
             if (offlinePlayer == null) {
-                sender.sendMessage(languageConfig.getBasicPlayerNotFound(args[0]));
+                sender.sendMessage(languageConfig.getCommandsLocale_basic_playerNotFoundWithPlayerName(args[0]));
                 return true;
             }
             if (!this.watchTowerGui.listenersManager.tempBanListener.isPlayerBanned(offlinePlayer.getUniqueId())) {
-                sender.sendMessage(languageConfig.getThisPlayerIsNotBanned());
+                sender.sendMessage(languageConfig.getCommandsLocale_bans_ban_thisPlayerIsNotBanned());
                 return true;
             }
-            sender.sendMessage(languageConfig.getUnBannedPlayer(args[0]));
+            sender.sendMessage(languageConfig.getCommandsLocale_bans_unban_unBannedPlayer(args[0]));
             Bukkit.getPluginManager().callEvent(new PlayerRemoveTempBanEvent(offlinePlayer, sender));
         } else {
             new ActiveTempBansGui(null).open((Player) sender);
@@ -51,7 +50,7 @@ public class UnBanCommand implements CommandExecutor, TabCompleter {
 
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
-        return CommandsManager.mergeTabCompleter(this.tempBanListener.getBanDataList().stream()
+        return watchtowergui.wg.manager.CommandsManager.mergeTabCompleter(this.tempBanListener.getBanDataList().stream()
                 .map(data -> Bukkit.getOfflinePlayer(data.getBannedPlayer()).getName())
                 .collect(Collectors.toList()), args[0]);
     }

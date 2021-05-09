@@ -78,11 +78,11 @@ public class ReplaceBadWords implements Listener {
                     count.replace(event.getPlayer().getName(), count.get(event.getPlayer().getName()) + 1);
                     if (count.get(event.getPlayer().getName()) > mainConfig.getCountOfTries() + 1) {
 
-                        Bukkit.getPluginManager().callEvent(new PlayerKickEvent(event.getPlayer(), languageConfig.getSpamKickMessage(), languageConfig.getSpamKickMessageInConsole(event.getPlayer().getName())));
+                        Bukkit.getPluginManager().callEvent(new PlayerKickEvent(event.getPlayer(), languageConfig.getSpecialLocale_spamming_spamKickMessage(), languageConfig.getSpecialLocale_spamming_spamKickMessageInConsole(event.getPlayer().getName())));
                         count.remove(event.getPlayer().getName());
                     }
                     event.setCancelled(true);
-                    event.getPlayer().sendMessage(languageConfig.getMessageForSpammingToPlayer());
+                    event.getPlayer().sendMessage(languageConfig.getSpecialLocale_spamming_messageForSpammingToPlayer());
                     return;
                 } else {
                     cooldown.remove(event.getPlayer().getName());

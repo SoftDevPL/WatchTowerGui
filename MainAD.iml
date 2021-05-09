@@ -36,7 +36,7 @@
     <orderEntry type="module-library">
       <library name="Maven: ad.guis:ultimateguis:RELEASE">
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../UltimateGuis.jar!/" />
+          <root url="jar://$MODULE_DIR$/libs/UltimateGuis.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

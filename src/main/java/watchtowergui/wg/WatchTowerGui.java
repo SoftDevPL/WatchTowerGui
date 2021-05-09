@@ -1,9 +1,5 @@
 package watchtowergui.wg;
 
-import org.bukkit.configuration.MemorySection;
-import org.bukkit.configuration.file.YamlConfiguration;
-import watchtowergui.wg.fileManager.configsutils.configs.LanguageConfig;
-import watchtowergui.wg.managers.CommandsManager;
 import watchtowergui.wg.fileManager.configsutils.ConfigsManager;
 import watchtowergui.wg.fileManager.sql.sqlUtils.SQLManager;
 import watchtowergui.wg.managers.ListenersManager;
@@ -30,7 +26,7 @@ public final class WatchTowerGui extends JavaPlugin {
     static private WatchTowerGui instance;
 
     public ListenersManager listenersManager;
-    public CommandsManager commandsManager;
+    public watchtowergui.wg.manager.CommandsManager commandsManager;
     public CommandsControlListener commandsControlListener;
     public ConfigsManager configsManager;
     public SQLManager SQLmanager;
@@ -47,7 +43,7 @@ public final class WatchTowerGui extends JavaPlugin {
     public void createClasses() {
         permissions = new Permissions();
         listenersManager = new ListenersManager();
-        commandsManager = new CommandsManager();
+        commandsManager = new watchtowergui.wg.manager.CommandsManager();
         configsManager = new ConfigsManager();
         SQLmanager = new SQLManager();
         commandsControlListener = new CommandsControlListener();

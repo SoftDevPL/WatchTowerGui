@@ -36,8 +36,8 @@ public class SinglePluginGui extends BasicGui {
 
     private void initPassiveItems() {
         backgroundBlue = BasicGui.createBackground(Colors.LIGHT_BLUE);
-        backItem = BasicGui.createItem(Material.WOOD_DOOR, glc.getAdminGuiBack());
-        closeItem = BasicGui.createItem(Material.BARRIER, glc.getAdminGuiClose());
+        backItem = BasicGui.createItem(Material.WOOD_DOOR, glc.getGuiLocale_adminGui_back());
+        closeItem = BasicGui.createItem(Material.BARRIER, glc.getGuiLocale_adminGui_close());
     }
 
     private ItemStack createPluginNameItem() {
@@ -48,22 +48,22 @@ public class SinglePluginGui extends BasicGui {
 
     private ItemStack createPluginDescriptionItem() {
         String description = plugin.getDescription().getDescription();
-        return BasicGui.createItem(Material.PAPER, glc.getSinglePluginGuiCreatePluginDescriptionItemDescription(),
-                BasicGui.splitLore(((description == null || description.isEmpty()) ? glc.getSinglePluginGuiCreatePluginDescriptionItemNotSpecified() : glc.getSinglePluginGuiCreatePluginDescriptionItemLore(description)), 25));
+        return BasicGui.createItem(Material.PAPER, glc.getGuiLocale_singlePluginGui_createPluginDescriptionItemDescription(),
+                BasicGui.splitLore(((description == null || description.isEmpty()) ? glc.getGuiLocale_singlePluginGui_createPluginDescriptionItemNotSpecified() : glc.getSinglePluginGuiCreatePluginDescriptionItemLore(description)), 25));
     }
 
     private ItemStack createAuthorsItem() {
         List<String> authors = plugin.getDescription().getAuthors();
         List<String> coloredAuthors = new ArrayList<>(authors.size());
         authors.forEach(author -> coloredAuthors.add(glc.getSinglePluginGuiCreateAuthorsItemLore(author)));
-        return BasicGui.createItem(Material.DIAMOND_PICKAXE, glc.getSinglePluginGuiCreateAuthorsItemAuthors(),
-                (coloredAuthors.isEmpty()) ? splitLore(glc.getSinglePluginGuiCreateAuthorsItemNotSpecified(), 25) : coloredAuthors);
+        return BasicGui.createItem(Material.DIAMOND_PICKAXE, glc.getGuiLocale_singlePluginGui_createAuthorsItemAuthors(),
+                (coloredAuthors.isEmpty()) ? splitLore(glc.getGuiLocale_singlePluginGui_createAuthorsItemNotSpecified(), 25) : coloredAuthors);
     }
 
     private ItemStack createWebsiteItem() {
         String website = plugin.getDescription().getWebsite();
-        return BasicGui.createItem(Material.EMPTY_MAP, glc.getSinglePluginGuiCreateWebsiteItemWebsite(),
-                (website == null || website.isEmpty()) ? splitLore(glc.getSinglePluginGuiCreateWebsiteItemNotSpecified(), 25)
+        return BasicGui.createItem(Material.EMPTY_MAP, glc.getGuiLocale_singlePluginGui_createWebsiteItemWebsite(),
+                (website == null || website.isEmpty()) ? splitLore(glc.getGuiLocale_singlePluginGui_createWebsiteItemNotSpecified(), 25)
                         : splitLore(glc.getSinglePluginGuiCreateWebsiteItemLore(website), 25));
     }
 
@@ -73,9 +73,9 @@ public class SinglePluginGui extends BasicGui {
                         ((PluginIdentifiableCommand) command).getPlugin().getName().equals(plugin.getName()))
                 .collect(Collectors.toList());
 
-        return BasicGui.createItem(Material.BOOK, glc.getSinglePluginGuiCreatePluginCommandsItemName(),
-                splitLore(!pluginCommands.isEmpty() ? glc.getSinglePluginGuiCreatePluginCommandsItemCommandsLore()
-                        : glc.getSinglePluginGuiCreatePluginCommandsItemNoCommandsLore(), 25));
+        return BasicGui.createItem(Material.BOOK, glc.getGuiLocale_singlePluginGui_createPluginCommandsItemName(),
+                splitLore(!pluginCommands.isEmpty() ? glc.getGuiLocale_singlePluginGui_createPluginCommandsItemCommandsLore()
+                        : glc.getGuiLocale_singlePluginGui_createPluginCommandsItemNoCommandsLore(), 25));
     }
 
     private ItemStack createDependItem() {
@@ -88,10 +88,10 @@ public class SinglePluginGui extends BasicGui {
 
         List<String> loreList = new ArrayList<>(coloredDependencies.size() + coloredSoftDependencies.size() + 1);
         loreList.addAll(coloredDependencies);
-        loreList.add(glc.getSinglePluginGuiCreateDependItemLore());
+        loreList.add(glc.getGuiLocale_singlePluginGui_createDependItemLore());
         loreList.addAll(coloredSoftDependencies);
 
-        return BasicGui.createItem(Material.COMPASS, glc.getSinglePluginGuiCreateDependItemName(), loreList);
+        return BasicGui.createItem(Material.COMPASS, glc.getGuiLocale_singlePluginGui_createDependItemName(), loreList);
     }
 
     public void init() {

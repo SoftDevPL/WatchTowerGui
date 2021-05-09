@@ -1,6 +1,5 @@
 package watchtowergui.wg.bans;
 
-import watchtowergui.wg.managers.CommandsManager;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
@@ -20,7 +19,7 @@ public class OfflinePlayerTabCompleter implements TabCompleter {
 
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
-        return CommandsManager.mergeTabCompleter(Arrays.stream(Bukkit.getOfflinePlayers())
+        return watchtowergui.wg.manager.CommandsManager.mergeTabCompleter(Arrays.stream(Bukkit.getOfflinePlayers())
                 .map(OfflinePlayer::getName).collect(Collectors.toList()), args[0]);
     }
 }

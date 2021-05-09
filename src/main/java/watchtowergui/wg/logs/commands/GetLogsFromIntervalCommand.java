@@ -41,11 +41,11 @@ public class GetLogsFromIntervalCommand implements CommandExecutor {
         if (sender instanceof Player) {
             LogsGui.logsManyDays(null).open((Player) sender);
         } else {
-            logsYmlGenerator.sendTypedMessageToSender(sender, languageConfig.getLogsEnterMessageForDate());
+            logsYmlGenerator.sendTypedMessageToSender(sender, languageConfig.getCommandsLocale_logs_logsEnterMessageForDate());
             consoleChatListener.setTask(sender, (chatMessage, chatSender) -> {
                 List<String> dates = getDatesFromString(chatMessage);
                 if (dates.size() == 4) {
-                    BukkitTask task = logsYmlGenerator.displayCurrentSec(languageConfig.getLogsGettingLogs(), sender, this.plugin);
+                    BukkitTask task = logsYmlGenerator.displayCurrentSec(languageConfig.getCommandsLocale_logs_logsGettingLogs(), sender, this.plugin);
                     Bukkit.getScheduler().runTaskAsynchronously(this.plugin,
                             () -> {
                                 generateFilesWithLogs(getFromDatabase(
@@ -56,7 +56,7 @@ public class GetLogsFromIntervalCommand implements CommandExecutor {
                                 logsYmlGenerator.taskFinished(sender, task);
                             });
                 } else {
-                    logsYmlGenerator.sendTypedMessageToSender(chatSender, languageConfig.getLogsWrongMessageForDate());
+                    logsYmlGenerator.sendTypedMessageToSender(chatSender, languageConfig.getCommandsLocale_logs_logsWrongMessageForDate());
                 }
                 return true;
             });
@@ -79,7 +79,7 @@ public class GetLogsFromIntervalCommand implements CommandExecutor {
             date1 = sdf.parse(stringFirstDate);
             date2 = sdf.parse(stringSecondDate);
         } catch (ParseException e) {
-            logsYmlGenerator.sendTypedMessageToSender(sender, languageConfig.getLogsWrongMessageForDate());
+            logsYmlGenerator.sendTypedMessageToSender(sender, languageConfig.getCommandsLocale_logs_logsWrongMessageForDate());
             e.printStackTrace();
         }
         assert date1 != null;
@@ -107,7 +107,7 @@ public class GetLogsFromIntervalCommand implements CommandExecutor {
             return true;
         }
         if (args.length == 4 && checkDate(args[0], args[1]) && checkDate(args[2], args[3])) {
-            BukkitTask task = logsYmlGenerator.displayCurrentSec(languageConfig.getLogsGettingLogs(), sender, this.plugin);
+            BukkitTask task = logsYmlGenerator.displayCurrentSec(languageConfig.getCommandsLocale_logs_logsGettingLogs(), sender, this.plugin);
             Bukkit.getScheduler().runTaskAsynchronously(this.plugin,
                     () -> {
                         generateFilesWithLogs(getFromDatabase(
@@ -118,7 +118,7 @@ public class GetLogsFromIntervalCommand implements CommandExecutor {
                         logsYmlGenerator.taskFinished(sender, task);
                     });
         } else {
-            logsYmlGenerator.sendTypedMessageToSender(sender, languageConfig.getLogsWrongMessageForDate());
+            logsYmlGenerator.sendTypedMessageToSender(sender, languageConfig.getCommandsLocale_logs_logsWrongMessageForDate());
         }
         return true;
     }

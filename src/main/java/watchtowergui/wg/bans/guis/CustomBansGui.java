@@ -60,7 +60,7 @@ public class CustomBansGui extends BasicGui {
     private String command;
 
     public CustomBansGui(OfflinePlayer playerToBan, BasicGui previousGui, int guiType) {
-        super(3, WatchTowerGui.getInstance().configsManager.guiLanguageConfig.getChooseTimeGuiPageName(), previousGui);
+        super(3, WatchTowerGui.getInstance().configsManager.guiLanguageConfig.getGuiLocale_chooseTimeGui_pageName(), previousGui);
         this.plugin = WatchTowerGui.getInstance();
         if (guiType < 0 || guiType > 1) this.guiType = BAN_GUI;
         else this.guiType = guiType;
@@ -86,20 +86,20 @@ public class CustomBansGui extends BasicGui {
         clockItem = new ItemStack(Material.WATCH);
 
         meta = clockItem.getItemMeta();
-        meta.setDisplayName(glc.getAdminGuiExpiredTime());
+        meta.setDisplayName(glc.getGuiLocale_adminGui_expiredTime());
         clockItem.setItemMeta(meta);
 
-        secondsItem = BasicGui.createItem(Material.STAINED_GLASS_PANE, glc.getChooseTimeGuiSecond(), Colors.GRAY);
+        secondsItem = BasicGui.createItem(Material.STAINED_GLASS_PANE, glc.getGuiLocale_chooseTimeGui_second(), Colors.GRAY);
 
-        minutesItem = BasicGui.createItem(Material.STAINED_GLASS_PANE, glc.getChooseTimeGuiMinute(), Colors.BLUE);
+        minutesItem = BasicGui.createItem(Material.STAINED_GLASS_PANE, glc.getGuiLocale_chooseTimeGui_minute(), Colors.BLUE);
 
-        hoursItem = BasicGui.createItem(Material.STAINED_GLASS_PANE, glc.getChooseTimeGuiHour(), Colors.LIGHT_BLUE);
-        daysItem = BasicGui.createItem(Material.STAINED_GLASS_PANE, glc.getChooseTimeGuiDay(), Colors.MAGENTA);
-        weeksItem = BasicGui.createItem(Material.STAINED_GLASS_PANE, glc.getChooseTimeGuiWeek(), Colors.PURPLE);
-        monthItem = BasicGui.createItem(Material.STAINED_GLASS_PANE, glc.getChooseTimeGuiMonth(), Colors.YELLOW);
-        yearsItem = BasicGui.createItem(Material.STAINED_GLASS_PANE, glc.getChooseTimeGuiYear(), Colors.ORANGE);
-        closeItem = BasicGui.createItem(Material.BARRIER, glc.getAdminGuiClose());
-        backItem = BasicGui.createItem(Material.ARROW, glc.getAdminGuiBack());
+        hoursItem = BasicGui.createItem(Material.STAINED_GLASS_PANE, glc.getGuiLocale_chooseTimeGui_hour(), Colors.LIGHT_BLUE);
+        daysItem = BasicGui.createItem(Material.STAINED_GLASS_PANE, glc.getGuiLocale_chooseTimeGui_day(), Colors.MAGENTA);
+        weeksItem = BasicGui.createItem(Material.STAINED_GLASS_PANE, glc.getGuiLocale_chooseTimeGui_week(), Colors.PURPLE);
+        monthItem = BasicGui.createItem(Material.STAINED_GLASS_PANE, glc.getGuiLocale_chooseTimeGui_month(), Colors.YELLOW);
+        yearsItem = BasicGui.createItem(Material.STAINED_GLASS_PANE, glc.getGuiLocale_chooseTimeGui_year(), Colors.ORANGE);
+        closeItem = BasicGui.createItem(Material.BARRIER, glc.getGuiLocale_adminGui_close());
+        backItem = BasicGui.createItem(Material.ARROW, glc.getGuiLocale_adminGui_back());
         executeItem = BasicGui.createItem(Material.NETHER_STAR, glc.getAdminGuiExecute(""));
         backGroundBlack = BasicGui.createBackground(Colors.BLACK);
 
@@ -124,7 +124,7 @@ public class CustomBansGui extends BasicGui {
         this.setItem(6, 2, yearsItem, player -> setMod(YEARS));
         this.setItem(8, 0, closeItem, player -> {
             if (time > 0) {
-                new ConfirmGui(glc.getChooseTimeGuiExit(), playerWhoAccept ->
+                new ConfirmGui(glc.getGuiLocale_chooseTimeGui_exit(), playerWhoAccept ->
                         player.closeInventory(), CustomBansGui.this::open).open(player);
             } else {
                 player.closeInventory();
@@ -157,14 +157,14 @@ public class CustomBansGui extends BasicGui {
                         + weeks + " " + months
                         + " " + years);
             } else {
-                player.sendMessage(glc.getBansGuiSelectTime());
+                player.sendMessage(glc.getGuiLocale_bansGui_selectTime());
             }
         });
         if (previousGui != null) {
             this.setItem(7, 0, backItem, player -> {
                 if (previousGui != null) {
                     if (time > 0) {
-                        new ConfirmGui(glc.getAdminGuiBack(), playerWhoAccept ->
+                        new ConfirmGui(glc.getGuiLocale_adminGui_back(), playerWhoAccept ->
                                 previousGui.open(player), CustomBansGui.this::open).open(player);
                     } else {
                         previousGui.open(player);
@@ -180,25 +180,25 @@ public class CustomBansGui extends BasicGui {
         this.mod = value;
         switch (value) {
             case SECOND:
-                changeTexts(glc.getChooseTimeGuiSecond(), glc.getChooseTimeGuiSeconds());
+                changeTexts(glc.getGuiLocale_chooseTimeGui_second(), glc.getGuiLocale_chooseTimeGui_seconds());
                 break;
             case MINUTES:
-                changeTexts(glc.getChooseTimeGuiMinute(), glc.getChooseTimeGuiMinutes());
+                changeTexts(glc.getGuiLocale_chooseTimeGui_minute(), glc.getGuiLocale_chooseTimeGui_minutes());
                 break;
             case HOURS:
-                changeTexts(glc.getChooseTimeGuiHour(), glc.getChooseTimeGuiHours());
+                changeTexts(glc.getGuiLocale_chooseTimeGui_hour(), glc.getGuiLocale_chooseTimeGui_hours());
                 break;
             case DAYS:
-                changeTexts(glc.getChooseTimeGuiDay(), glc.getChooseTimeGuiDays());
+                changeTexts(glc.getGuiLocale_chooseTimeGui_day(), glc.getGuiLocale_chooseTimeGui_days());
                 break;
             case WEEKS:
-                changeTexts(glc.getChooseTimeGuiWeek(), glc.getChooseTimeGuiWeeks());
+                changeTexts(glc.getGuiLocale_chooseTimeGui_week(), glc.getGuiLocale_chooseTimeGui_weeks());
                 break;
             case MONTHS:
-                changeTexts(glc.getChooseTimeGuiMonth(), glc.getChooseTimeGuiMonths());
+                changeTexts(glc.getGuiLocale_chooseTimeGui_month(), glc.getGuiLocale_chooseTimeGui_months());
                 break;
             case YEARS:
-                changeTexts(glc.getChooseTimeGuiYear(), glc.getChooseTimeGuiYears());
+                changeTexts(glc.getGuiLocale_chooseTimeGui_year(), glc.getGuiLocale_chooseTimeGui_years());
                 break;
         }
     }

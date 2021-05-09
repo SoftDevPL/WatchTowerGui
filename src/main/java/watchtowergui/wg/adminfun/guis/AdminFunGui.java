@@ -7,7 +7,6 @@ import watchtowergui.wg.adminfun.events.*;
 import watchtowergui.wg.adminfun.listeners.DisableChatListener;
 import watchtowergui.wg.adminfun.listeners.WhiteListListener;
 import watchtowergui.wg.fileManager.configsutils.configs.GuiLanguageConfig;
-import watchtowergui.wg.managers.CommandsManager;
 import watchtowergui.wg.managers.Permissions;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -37,7 +36,7 @@ public class AdminFunGui extends BasicGui {
     private ItemStack worldToolsGui;
 
     public AdminFunGui(BasicGui previousGui) {
-        super(3, WatchTowerGui.getInstance().configsManager.guiLanguageConfig.getAdminStaffGuiPageName(), previousGui);
+        super(3, WatchTowerGui.getInstance().configsManager.guiLanguageConfig.getGuiLocale_adminStaff_guiPageName(), previousGui);
         this.plugin = WatchTowerGui.getInstance();
         glc = plugin.configsManager.guiLanguageConfig;
         setupGuiItems();
@@ -48,20 +47,20 @@ public class AdminFunGui extends BasicGui {
     }
 
     private void setupGuiItems() {
-        worldToolsGui = BasicGui.createItem(Material.JUKEBOX, glc.getAdminGuiWorldToolsGuiWorldToolsGuiPageName());
-        vanishOn = BasicGui.createItem(Material.GLASS, glc.getAdminStaffGuiVanish(),
-                BasicGui.splitLore(glc.getAdminStaffGuiVanishCurrent() + ChatColor.GREEN + ChatColor.BOLD + " ON"
+        worldToolsGui = BasicGui.createItem(Material.JUKEBOX, glc.getGuiLocale_adminGuiWorldToolsGui_worldToolsGuiPageName());
+        vanishOn = BasicGui.createItem(Material.GLASS, glc.getGuiLocale_adminStaff_guiVanish(),
+                BasicGui.splitLore(glc.getGuiLocale_adminStaff_guiVanishCurrent() + ChatColor.GREEN + ChatColor.BOLD + " ON"
                         , 20));
 
-        vanishOff = BasicGui.createItem(Material.GLASS, glc.getAdminStaffGuiVanish(),
-                BasicGui.splitLore(glc.getAdminStaffGuiVanishCurrent() + ChatColor.RED + ChatColor.BOLD + " OFF"
+        vanishOff = BasicGui.createItem(Material.GLASS, glc.getGuiLocale_adminStaff_guiVanish(),
+                BasicGui.splitLore(glc.getGuiLocale_adminStaff_guiVanishCurrent() + ChatColor.RED + ChatColor.BOLD + " OFF"
                         , 20));
 
-        close = BasicGui.createItem(Material.BARRIER, glc.getAdminGuiClose());
-        goBack = BasicGui.createItem(Material.ARROW, glc.getAdminGuiBack());
+        close = BasicGui.createItem(Material.BARRIER, glc.getGuiLocale_adminGui_close());
+        goBack = BasicGui.createItem(Material.ARROW, glc.getGuiLocale_adminGui_back());
         backgroundBlack = BasicGui.createBackground(Colors.BLACK);
         backgroundOrange = BasicGui.createBackground(Colors.ORANGE);
-        adminTools = BasicGui.createItem(Material.DIAMOND_AXE, glc.getAdminStaffGuiAdminTools());
+        adminTools = BasicGui.createItem(Material.DIAMOND_AXE, glc.getGuiLocale_adminStaff_adminTools());
     }
 
     @Override
@@ -74,11 +73,11 @@ public class AdminFunGui extends BasicGui {
     public void setDisableCharMode(int activity) {
         ItemStack redstoneLamp;
         if (activity == ONN)
-            redstoneLamp = BasicGui.createItem(Material.LAVA_BUCKET, glc.getAdminStaffGuiDisableChat(), BasicGui.splitLore(glc.getAdminStaffGuiDisableChatCurrent() + ChatColor.GREEN + ChatColor.BOLD + " ON", 20));
+            redstoneLamp = BasicGui.createItem(Material.LAVA_BUCKET, glc.getGuiLocale_adminStaffGui_disableChat(), BasicGui.splitLore(glc.getGuiLocale_adminStaffGui_disableChatCurrent() + ChatColor.GREEN + ChatColor.BOLD + " ON", 20));
         else if (activity == OFF)
-            redstoneLamp = BasicGui.createItem(Material.BUCKET, glc.getAdminStaffGuiDisableChat(), BasicGui.splitLore(glc.getAdminStaffGuiDisableChatCurrent() + ChatColor.RED + ChatColor.BOLD + " OFF", 20));
+            redstoneLamp = BasicGui.createItem(Material.BUCKET, glc.getGuiLocale_adminStaffGui_disableChat(), BasicGui.splitLore(glc.getGuiLocale_adminStaffGui_disableChatCurrent() + ChatColor.RED + ChatColor.BOLD + " OFF", 20));
         else
-            redstoneLamp = BasicGui.createItem(Material.BARRIER, glc.getAdminGuiUnknownStatus());
+            redstoneLamp = BasicGui.createItem(Material.BARRIER, glc.getGuiLocale_adminGui_unknownStatus());
         this.setItem(3, 1, redstoneLamp, player -> {
             isChatDisabled = disableChatListener.disabledChat;
             if (isChatDisabled) {
@@ -94,11 +93,11 @@ public class AdminFunGui extends BasicGui {
     public void setMaintenanceMode(int activity) {
         ItemStack torch;
         if (activity == ONN)
-            torch = BasicGui.createItem(Material.REDSTONE_TORCH_ON, glc.getAdminStaffGuiMaintenance(), BasicGui.splitLore(glc.getAdminStaffGuiMaintenanceCurrent() + ChatColor.GREEN + ChatColor.BOLD + " ON", 20));
+            torch = BasicGui.createItem(Material.REDSTONE_TORCH_ON, glc.getGuiLocale_adminStaff_guiMaintenance(), BasicGui.splitLore(glc.getGuiLocale_adminStaffGui_maintenanceCurrent() + ChatColor.GREEN + ChatColor.BOLD + " ON", 20));
         else if (activity == OFF)
-            torch = BasicGui.createItem(Material.LEVER, glc.getAdminStaffGuiMaintenance(), BasicGui.splitLore(glc.getAdminStaffGuiMaintenanceCurrent() + ChatColor.RED + ChatColor.BOLD + " OFF", 20));
+            torch = BasicGui.createItem(Material.LEVER, glc.getGuiLocale_adminStaff_guiMaintenance(), BasicGui.splitLore(glc.getGuiLocale_adminStaffGui_maintenanceCurrent() + ChatColor.RED + ChatColor.BOLD + " OFF", 20));
         else
-            torch = BasicGui.createItem(Material.BARRIER, glc.getAdminGuiUnknownStatus());
+            torch = BasicGui.createItem(Material.BARRIER, glc.getGuiLocale_adminGui_unknownStatus());
 
         this.setItem(4, 1, torch, player -> {
 
@@ -156,6 +155,6 @@ public class AdminFunGui extends BasicGui {
 
     public void setVanishMode(boolean value) {
         this.setItem(2, 1, (value) ? vanishOn : vanishOff,
-                player -> player.performCommand(CommandsManager.getADCommand("hide")));
+                player -> player.performCommand(watchtowergui.wg.manager.CommandsManager.getADCommand("hide")));
     }
 }

@@ -5,7 +5,6 @@ import ad.guis.ultimateguis.engine.basics.ListGui;
 import ad.guis.ultimateguis.examples.ConfirmGui;
 import ad.guis.ultimateguis.examples.PlayersGui;
 import ad.guis.ultimateguis.multithreading.Operation;
-import org.bukkit.ChatColor;
 import watchtowergui.wg.WatchTowerGui;
 import watchtowergui.wg.bans.listeners.PlayerBanData;
 import watchtowergui.wg.fileManager.configsutils.configs.GuiLanguageConfig;
@@ -30,7 +29,7 @@ public class ActiveTempBansGui extends ListGui<PlayerBanData> {
     public WatchTowerGui plugin;
 
     public ActiveTempBansGui(BasicGui previousGui) {
-        super(previousGui, WatchTowerGui.getInstance().configsManager.guiLanguageConfig.getBansGuiTemporaryBannedPlayersList());
+        super(previousGui, WatchTowerGui.getInstance().configsManager.guiLanguageConfig.getGuiLocale_bansGui_temporaryBannedPlayersList());
         this.setAction(this::dataBanAction);
         this.plugin = WatchTowerGui.getInstance();
         glc = plugin.configsManager.guiLanguageConfig;

@@ -29,6 +29,6 @@ public class PluginControlGui extends ListGui<Plugin> {
     @Override
     public ItemStack getDescriptionItem(Plugin plugin) {
         return BasicGui.createItem(Material.BOOKSHELF, ChatColor.LIGHT_PURPLE + "" + ChatColor.BOLD + plugin.getName(),
-                BasicGui.splitLore(glc.getPluginControlGuiGetDescriptionItemLore(), 25));
+                BasicGui.splitLore(glc.getGuiLocale_pluginControlGui_getDescriptionItemLore(), 25));
     }
 }

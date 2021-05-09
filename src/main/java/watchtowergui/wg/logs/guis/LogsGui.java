@@ -27,7 +27,7 @@ public class LogsGui extends BasicGui {
     private int timeRange = ONE_DAY;
 
     public LogsGui(int timeRange, BasicGui previousGui) {
-        super(3, WatchTowerGui.getInstance().configsManager.guiLanguageConfig.getLogsGuiTitle(), previousGui);
+        super(3, WatchTowerGui.getInstance().configsManager.guiLanguageConfig.getGuiLocale_logsGui_title(), previousGui);
         glc = WatchTowerGui.getInstance().configsManager.guiLanguageConfig;
         this.timeRange = timeRange;
         init();
@@ -45,7 +45,7 @@ public class LogsGui extends BasicGui {
         return new CalendarGui(YearMonth.now(), (date, player, cGui) -> {
             player.performCommand("glday " + format.format(date));
             player.closeInventory();
-        }, WatchTowerGui.getInstance().configsManager.guiLanguageConfig.getCalendarGuiTitle(), previousGui);
+        }, WatchTowerGui.getInstance().configsManager.guiLanguageConfig.getGuiLocale_calendarGui_title(), previousGui);
     }
 
     public static CalendarGui logsOneDayForPlayer(String playerName, BasicGui previousGui) {
@@ -53,7 +53,7 @@ public class LogsGui extends BasicGui {
             player.performCommand("gluday " + playerName + " " + format.format(date));
             player.closeInventory();
 
-        }, WatchTowerGui.getInstance().configsManager.guiLanguageConfig.getCalendarGuiTitle(), previousGui);
+        }, WatchTowerGui.getInstance().configsManager.guiLanguageConfig.getGuiLocale_calendarGui_title(), previousGui);
     }
 
     public static CalendarGui logsManyDays(BasicGui previousGui) {
@@ -72,11 +72,11 @@ public class LogsGui extends BasicGui {
         return new CalendarGui(YearMonth.now(), (firstDate, player1, cGui) -> {
             CalendarGui secCalendarGui = new CalendarGui(YearMonth.from(firstDate), (secondDate, player2, cGui2) -> {
             },
-                    glc.getSecondCalendarGuiTitle(), previousGui);
+                    glc.getGuiLocale_calendarGui_secondCalendarGuiTitle(), previousGui);
 
             secCalendarGui.setCalendarGuiAction((secondDate, player, cGui3) -> {
                 if (secondDate.equals(firstDate)) return;
-                cGui3.setSecondSpecialDate(new SpecialDate(secondDate, glc.getCalendarGuiEndDate()));
+                cGui3.setSecondSpecialDate(new SpecialDate(secondDate, glc.getGuiLocale_calendarGui_endDate()));
                 cGui3.setAcceptAction(player3 -> {
                     player3.performCommand(command.replaceFirst("###", format.format(firstDate)).
                             replaceFirst("###", format.format(secondDate)));
@@ -84,17 +84,17 @@ public class LogsGui extends BasicGui {
                 });
             });
 
-            secCalendarGui.setFirstSpecialDate(new SpecialDate(firstDate, glc.getCalendarGuiFirstDate()));
+            secCalendarGui.setFirstSpecialDate(new SpecialDate(firstDate, glc.getGuiLocale_calendarGui_firstDate()));
             secCalendarGui.open(player1);
 
-        }, glc.getFirstCalendarGuiTitle(), previousGui);
+        }, glc.getGuiLocale_calendarGui_firstCalendarGuiTitle(), previousGui);
     }
 
     protected void init() {
-        ItemStack exit = createItem(Material.BARRIER, glc.getAdminGuiClose());
-        ItemStack back = createItem(Material.WOOD_DOOR, glc.getAdminGuiBack());
-        ItemStack forAllPlayer = createItem(Material.NETHER_STAR, glc.getLogsForAll());
-        ItemStack forOnePlayer = createItem(Material.SKULL_ITEM, glc.getLogsForOnePlayer());
+        ItemStack exit = createItem(Material.BARRIER, glc.getGuiLocale_adminGui_close());
+        ItemStack back = createItem(Material.WOOD_DOOR, glc.getGuiLocale_adminGui_back());
+        ItemStack forAllPlayer = createItem(Material.NETHER_STAR, glc.getGuiLocale_logsGui_logsForAll());
+        ItemStack forOnePlayer = createItem(Material.SKULL_ITEM, glc.getGuiLocale_logsGui_logsForOnePlayer());
         ItemStack backgroundWhite = createBackground(Colors.WHITE);
         ItemStack backgroundBlack = createBackground(Colors.BLACK);
 
@@ -120,7 +120,7 @@ public class LogsGui extends BasicGui {
                 calendarGui.open(player);
 
             }, () -> Arrays.stream(Bukkit.getOfflinePlayers()).map(OfflinePlayer::getUniqueId).collect(Collectors.toList())
-                    , this, glc.getLogsGuiSelectPlayer());
+                    , this, glc.getGuiLocale_logsGui_selectPlayer());
             playersGui.open(player);
         });
 

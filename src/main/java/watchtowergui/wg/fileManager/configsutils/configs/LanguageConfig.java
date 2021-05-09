@@ -11,65 +11,65 @@ import java.util.Map;
 @ConfigYml
 public class LanguageConfig extends ConfigAccessor {
 
-    String basicPlayerNotFoundAD = "§4§lPlayer not found";
-    String basicPlayerNotFound = "§4§lPlayer §f§l[playerName] §4§lnot found";
-    String basicOnlyPlayerCanExecuteThisCommand = "§4§lOnly §f§lplayer §4§lcan execute this command!";
-    String mesToFrozenPlayer = "§9§lYou have been frozen by §f§l[playerName]!";
-    String mesToFreezer = "§9§lYou've frozen §f§l[playerName]";
-    String mesToReleasedPlayer = "§c§lYou have been released by §f§l[playerName]!";
-    String mesToReleaser = "§c§lYou've released §f§l[playerName]";
-    String mesPlayerOffline = "§4§lWARNING: §f§l[playerName] §e§lis offline!";
-    String mesToPlayerWhoIsFrozen = "§9§lYou are frozen!";
-    String bannedPlayer = "§f§lPlayer §2§l[playerName] §f§lhas been banned";
-    String valueNotANumber = "§c§lWrong arguments, §f§lvalue not a number";
-    String banMustBeGreaterThan0 = "§c§lBan time must be greater than 0";
-    String banComment = "§f§lYou are banned to §6§l[banTime] \n §f§lReason: §c§l[comment]";
-    String enterBanComment = "§e§lEnter ban comment";
-    String banCommentCanceled = "§c§lCanceled";
-    String thisPlayerIsNotBanned = "§f§lThis player §c§lis §f§lnot banned!";
-    String banUnBadArgs = "§2§l/tmunban §3§l<player>";
-    String unBannedPlayer = "§2§lPlayer §f§l[playerName] §2§lhas been unbanned";
-    String banEnterTime = "§c§lEnter time!";
-    String spamKickMessage = "§c§lYou have been kicked §f§lfor spamming";
-    String spamKickMessageInConsole = "'§3§l[playerName] §e§lhas been kicked for spamming'";
-    String messageForSpammingToPlayer = "§c§lHey!! §f§lStop spamming";
-    String muteValueNotANumber = "§f§lWrong arguments, §f§lvalue not a number";
-    String mutedPlayer = "§f§l[playerName] §6§lis muted";
-    String mutedEarlier = "§f§l[playerName] §e§lhas been muted earlier";
-    String muteEnterTime = "§6§lEnter Time";
-    String unMuteBadArgs = "§2§l/unmute §3§l<player>";
-    String unMutedPlayer = "§f§l[playerName] §a§lis unmuted";
-    String unMutedEarlier = "§f§l[playerName] §a§lhas been unmuted earlier";
-    String muteMessage = "§b§lYou are muted by §a§l[sender] §b§lto §f§l[date]";
-    String youAreMutedMessage = "§4§lSORRY!! §e§lYou are muted";
-    String logsGettingLogs = "§e§lGetting Logs";
-    String logsSuccessfullyDownloaded = "§2§lLogs created §4§l!!§f§lCheck plugins/MainAD/Logs";
-    String logsEnterMessageForDay = "§6§lEnter day: \n <yyyy/MM/dd>";
-    String logsEnterMessageForDate = "§6§lEnter date: \n <yyyy/MM/dd HH:mm:ss> <yyyy/MM/dd HH:mm:ss>";
-    String logsEnterMessageForDayAndUUID = "§6§lEnter date: \n <playerName> <yyyy/MM/dd>";
-    String logsEnterMessageForDateAndUUID = "§6§lEnter date: \n <playerName> <yyyy/MM/dd HH:mm:ss> <yyyy/MM/dd HH:mm:ss>";
-    String logsWrongMessageForDay = "§c§lWrong format: \n §f§l<yyyy/MM/dd>";
-    String logsWrongMessageForDate = "§c§lWrong format: \n §f§l<yyyy/MM/dd HH:mm:ss> <yyyy/MM/dd/HH:mm:ss>";
-    String logsWrongMessageForDayAndUUID = "§c§lWrong format: \n §f§l<playerName> <yyyy/MM/dd>";
-    String logsWrongMessageForDateAndUUID = "§c§lWrong format: \n §f§l<playerName> <yyyy/MM/dd HH:mm:ss> <yyyy/MM/dd HH:mm:ss>";
-    String disabledChat = "§7§lChat has been disabled!";
-    String commandMenuCommandsHasBeenReset = "§f§lCommands has been reset reload your server by typing §a§l /reload §f§lto apply changes";
-    String commandMenuResetAllCommandsWarning = "§d§lCalling this command will reset all your commands setting like aliases and labels, this cannot be undo. Type §f§l[commandLabel] yes. §d§lIf you really want it";
-    String commandMenuCommandNotFound = "§c§lCommand not found or is disabled";
-    String playerHidden = "§4§lPlayer §f§l[playerName] §4§lis already hidden!";
-    String playerNotHidden = "§f§lPlayer §2§l[playerName] §f§lis visible now!";
-    String youAreHidden = "§f§lYou §e§lare hidden §f§lnow!";
-    String youAreNotHidden = "§f§lYou §2§lare not hidden §f§lnow!";
-    String maintenanceModeKickMessage = "§c§lSORRY! \n §6§lServer §f§lencountered an unprecedented problem \n §a§lTry again later!";
-    String maintenanceModeOn = "§6§lMaintenance mode is §2§loff!";
-    String youAreHiddenNow = "§f§lYou §4§lcan not §f§lbe hidden twice!";
-    String playerIsHiddenNow = "§4§lPlayer §f§l[playerName] §4§lis already hidden!";
-    String maintenanceModeOff = "§6§lMaintenance mode is §c§lon!";
-    String pluginMenuNotExists = "§c§lPlugin does not exist";
+    String commandsLocale_basic_playerNotFound = "&4&lPlayer not found";
+    String commandsLocale_basic_playerNotFoundWithPlayerName = "&4&lPlayer &f&l[playerName] &4&lnot found";
+    String commandsLocale_basic_onlyPlayerCanExecuteThisCommand = "&4&lOnly &f&lplayer &4&lcan execute this command!";
     @Getter
-    String sudoSuccess = "§a§lCommand successfully revoked!";
+    String commandsLocale_basic_sudoSuccess = "&a&lCommand successfully revoked!";
     @Getter
-    String sudoFailed = "§c§lCommand failed!";
+    String commandsLocale_basic_sudoFailed = "&c&lCommand failed!";
+    String commandsLocale_commandMenu_CommandsHasBeenReset = "&f&lCommands has been reset reload your server by typing &a&l /reload &f&lto apply changes";
+    String commandsLocale_commandMenu_ResetAllCommandsWarning = "&d&lCalling this command will reset all your commands setting like aliases and labels, this cannot be undo. Type &f&l[commandLabel] yes. &d&lIf you really want it";
+    String commandsLocale_commandMenu_CommandNotFound = "&c&lCommand not found or is disabled";
+    String commandsLocale_pluginMenu_pluginMenuNotExists = "&c&lPlugin does not exist";
+    String commandsLocale_hide_playerIsAlreadyHidden = "&4&lPlayer &f&l[playerName] &4&lis already hidden!";
+    String commandsLocale_hide_playerNotHidden = "&f&lPlayer &2&l[playerName] &f&lis visible now!";
+    String commandsLocale_hide_youAreHidden = "&f&lYou &e&lare hidden &f&lnow!";
+    String commandsLocale_hide_youAreNotHidden = "&f&lYou &2&lare not hidden &f&lnow!";
+    String commandsLocale_hide_youAreHiddenNow = "&f&lYou &4&lcan not &f&lbe hidden twice!";
+    String commandsLocale_hide_playerIsHiddenNow = "&4&lPlayer &f&l[playerName] &4&lis already hidden!";
+    String commandsLocale_freeze_messageToFrozenPlayer = "&9&lYou have been frozen by &f&l[playerName]!";
+    String commandsLocale_freeze_messageToFreezer = "&9&lYou've frozen &f&l[playerName]";
+    String commandsLocale_freeze_messageToReleasedPlayer = "&c&lYou have been released by &f&l[playerName]!";
+    String commandsLocale_freeze_messageToReleaser = "&c&lYou've released &f&l[playerName]";
+    String commandsLocale_freeze_messagePlayerOffline = "&4&lWARNING: &f&l[playerName] &e&lis offline!";
+    String commandsLocale_freeze_messageToPlayerWhoIsFrozen = "&9&lYou are frozen!";
+    String commandsLocale_bans_ban_bannedPlayer = "&f&lPlayer &2&l[playerName] &f&lhas been banned";
+    String commandsLocale_bans_ban_valueNotANumber = "&c&lWrong arguments, &f&lvalue not a number";
+    String commandsLocale_bans_ban_banMustBeGreaterThan0 = "&c&lBan time must be greater than 0";
+    String commandsLocale_bans_ban_banComment = "&f&lYou are banned to &6&l[banTime] \n &f&lReason: &c&l[comment]";
+    String commandsLocale_bans_ban_enterBanComment = "&e&lEnter ban comment";
+    String commandsLocale_bans_ban_banCommentCanceled = "&c&lCanceled";
+    String commandsLocale_bans_ban_thisPlayerIsNotBanned = "&f&lThis player &c&lis &f&lnot banned!";
+    String commandsLocale_bans_ban_banEnterTime = "&c&lEnter time!";
+    String commandsLocale_bans_unban_unbanUnBadArgs = "&2&l/tmunban &3&l<player>";
+    String commandsLocale_bans_unban_unBannedPlayer = "&2&lPlayer &f&l[playerName] &2&lhas been unbanned";
+    String commandsLocale_mutes_mute_muteValueNotANumber = "&f&lWrong arguments, &f&lvalue not a number";
+    String commandsLocale_mutes_mute_mutedPlayer = "&f&l[playerName] &6&lis muted";
+    String commandsLocale_mutes_mute_mutedEarlier = "&f&l[playerName] &e&lhas been muted earlier";
+    String commandsLocale_mutes_mute_muteEnterTime = "&6&lEnter Time";
+    String commandsLocale_mutes_mute_muteMessage = "&b&lYou are muted by &a&l[sender] &b&lto &f&l[date]";
+    String commandsLocale_mutes_mute_youAreMutedMessage = "&4&lSORRY!! &e&lYou are muted";
+    String commandsLocale_mutes_unmute_unMuteBadArgs = "&2&l/unmute &3&l<player>";
+    String commandsLocale_mutes_unmute_unMutedPlayer = "&f&l[playerName] &a&lis unmuted";
+    String commandsLocale_mutes_unmute_unMutedEarlier = "&f&l[playerName] &a&lhas been unmuted earlier";
+    String commandsLocale_logs_logsGettingLogs = "&e&lGetting Logs";
+    String commandsLocale_logs_logsSuccessfullyDownloaded = "&2&lLogs created &4&l!!&f&lCheck plugins/MainAD/Logs";
+    String commandsLocale_logs_logsEnterMessageForDay = "&6&lEnter day: \n <yyyy/MM/dd>";
+    String commandsLocale_logs_logsEnterMessageForDate = "&6&lEnter date: \n <yyyy/MM/dd HH:mm:ss> <yyyy/MM/dd HH:mm:ss>";
+    String commandsLocale_logs_logsEnterMessageForDayAndUUID = "&6&lEnter date: \n <playerName> <yyyy/MM/dd>";
+    String commandsLocale_logs_logsEnterMessageForDateAndUUID = "&6&lEnter date: \n <playerName> <yyyy/MM/dd HH:mm:ss> <yyyy/MM/dd HH:mm:ss>";
+    String commandsLocale_logs_logsWrongMessageForDay = "&c&lWrong format: \n &f&l<yyyy/MM/dd>";
+    String commandsLocale_logs_logsWrongMessageForDate = "&c&lWrong format: \n &f&l<yyyy/MM/dd HH:mm:ss> <yyyy/MM/dd/HH:mm:ss>";
+    String commandsLocale_logs_logsWrongMessageForDayAndUUID = "&c&lWrong format: \n &f&l<playerName> <yyyy/MM/dd>";
+    String commandsLocale_logs_logsWrongMessageForDateAndUUID = "&c&lWrong format: \n &f&l<playerName> <yyyy/MM/dd HH:mm:ss> <yyyy/MM/dd HH:mm:ss>";
+    String specialLocale_spamming_spamKickMessage = "&c&lYou have been kicked &f&lfor spamming";
+    String specialLocale_spamming_spamKickMessageInConsole = "'&3&l[playerName] &e&lhas been kicked for spamming'";
+    String specialLocale_spamming_messageForSpammingToPlayer = "&c&lHey!! &f&lStop spamming";
+    String specialLocale_adminStaff_chat_disabledChat = "&7&lChat has been disabled!";
+    String specialLocale_adminStaff_maintenanceMode_maintenanceModeOn = "&6&lMaintenance mode is &2&loff!";
+    String specialLocale_adminStaff_maintenanceMode_maintenanceModeOff = "&6&lMaintenance mode is &c&lon!";
+    String specialLocale_adminStaff_maintenanceMode_maintenanceModeKickMessage = "&c&lSORRY! \n &6&lServer &f&lencountered an unprecedented problem \n &a&lTry again later!";
 
     public void init() {
         super.init("Locale_en", "locale");
@@ -90,225 +90,225 @@ public class LanguageConfig extends ConfigAccessor {
         return watchtowergui.wg.fileManager.configsutils.configs.LanguageConfigSerializator.serialize(this);
     }
 
-    public String getBasicOnlyPlayerCanExecuteThisCommand() {
-        return basicOnlyPlayerCanExecuteThisCommand;
+    public String getCommandsLocale_basic_onlyPlayerCanExecuteThisCommand() {
+        return commandsLocale_basic_onlyPlayerCanExecuteThisCommand;
     }
 
-    public String getBasicPlayerNotFoundAD() {
-        return basicPlayerNotFoundAD;
+    public String getCommandsLocale_basic_playerNotFound() {
+        return commandsLocale_basic_playerNotFound;
     }
 
-    public String getBasicPlayerNotFound(String playerName) {
-        return basicPlayerNotFound.replaceAll(LiteralType.PLAYER_NAME, playerName);
+    public String getCommandsLocale_basic_playerNotFoundWithPlayerName(String playerName) {
+        return commandsLocale_basic_playerNotFoundWithPlayerName.replaceAll(LiteralType.PLAYER_NAME, playerName);
     }
 
-    public String getDisabledChat() {
-        return disabledChat;
+    public String getSpecialLocale_adminStaff_chat_disabledChat() {
+        return specialLocale_adminStaff_chat_disabledChat;
     }
 
-    public String getPluginMenuNotExists() {
-        return pluginMenuNotExists;
+    public String getCommandsLocale_pluginMenu_pluginMenuNotExists() {
+        return commandsLocale_pluginMenu_pluginMenuNotExists;
     }
 
-    public String getCommandMenuCommandsHasBeenReset() {
-        return commandMenuCommandsHasBeenReset;
+    public String getCommandsLocale_commandMenu_CommandsHasBeenReset() {
+        return commandsLocale_commandMenu_CommandsHasBeenReset;
     }
 
-    public String getCommandMenuResetAllCommandsWarning(String word) {
-        return commandMenuResetAllCommandsWarning.replaceAll(LiteralType.COMMAND_LABEL, word);
+    public String getCommandsLocale_commandMenu_ResetAllCommandsWarning(String word) {
+        return commandsLocale_commandMenu_ResetAllCommandsWarning.replaceAll(LiteralType.COMMAND_LABEL, word);
     }
 
-    public String getCommandMenuCommandNotFound() {
-        return commandMenuCommandNotFound;
+    public String getCommandsLocale_commandMenu_CommandNotFound() {
+        return commandsLocale_commandMenu_CommandNotFound;
     }
 
-    public String getPlayerIsHiddenNow(String player) {
-        return this.playerIsHiddenNow.replaceAll(LiteralType.PLAYER_NAME, player);
+    public String getCommandsLocale_hide_playerIsHiddenNow(String player) {
+        return this.commandsLocale_hide_playerIsHiddenNow.replaceAll(LiteralType.PLAYER_NAME, player);
     }
-    public String getYouAreHiddenNow() {
-        return this.youAreHiddenNow;
-    }
-
-    public String getPlayerHidden(String player) {
-        return this.playerHidden.replaceAll(LiteralType.PLAYER_NAME, player);
+    public String getCommandsLocale_hide_youAreHiddenNow() {
+        return this.commandsLocale_hide_youAreHiddenNow;
     }
 
-    public String getPlayerNotHidden(String player) {
-        return this.playerNotHidden.replaceAll(LiteralType.PLAYER_NAME, player);
+    public String getCommandsLocale_hide_playerIsAlreadyHidden(String player) {
+        return this.commandsLocale_hide_playerIsAlreadyHidden.replaceAll(LiteralType.PLAYER_NAME, player);
     }
 
-    public String getYouAreHidden() {
-        return this.youAreHidden;
+    public String getCommandsLocale_hide_playerNotHidden(String player) {
+        return this.commandsLocale_hide_playerNotHidden.replaceAll(LiteralType.PLAYER_NAME, player);
     }
 
-    public String getYouAreNotHidden() {
-        return this.youAreNotHidden;
+    public String getCommandsLocale_hide_youAreHidden() {
+        return this.commandsLocale_hide_youAreHidden;
     }
 
-    public String getMaintenanceModeOn() {
-        return maintenanceModeOn;
+    public String getCommandsLocale_hide_youAreNotHidden() {
+        return this.commandsLocale_hide_youAreNotHidden;
     }
 
-    public String getMaintenanceModeOff() {
-        return maintenanceModeOff;
+    public String getSpecialLocale_adminStaff_maintenanceMode_maintenanceModeOn() {
+        return specialLocale_adminStaff_maintenanceMode_maintenanceModeOn;
     }
 
-    public String getMaintenanceModeKickMessage() {
-        return maintenanceModeKickMessage;
+    public String getSpecialLocale_adminStaff_maintenanceMode_maintenanceModeOff() {
+        return specialLocale_adminStaff_maintenanceMode_maintenanceModeOff;
     }
 
-    public String getLogsGettingLogs() {
-        return logsGettingLogs;
+    public String getSpecialLocale_adminStaff_maintenanceMode_maintenanceModeKickMessage() {
+        return specialLocale_adminStaff_maintenanceMode_maintenanceModeKickMessage;
     }
 
-    public String getLogsSuccessfullyDownloaded() {
-        return logsSuccessfullyDownloaded;
+    public String getCommandsLocale_logs_logsGettingLogs() {
+        return commandsLocale_logs_logsGettingLogs;
     }
 
-    public String getLogsEnterMessageForDay() {
-        return logsEnterMessageForDay;
+    public String getCommandsLocale_logs_logsSuccessfullyDownloaded() {
+        return commandsLocale_logs_logsSuccessfullyDownloaded;
     }
 
-    public String getLogsEnterMessageForDate() {
-        return logsEnterMessageForDate;
+    public String getCommandsLocale_logs_logsEnterMessageForDay() {
+        return commandsLocale_logs_logsEnterMessageForDay;
     }
 
-    public String getLogsEnterMessageForDayAndUUID() {
-        return logsEnterMessageForDayAndUUID;
+    public String getCommandsLocale_logs_logsEnterMessageForDate() {
+        return commandsLocale_logs_logsEnterMessageForDate;
     }
 
-    public String getLogsEnterMessageForDateAndUUID() {
-        return logsEnterMessageForDateAndUUID;
+    public String getCommandsLocale_logs_logsEnterMessageForDayAndUUID() {
+        return commandsLocale_logs_logsEnterMessageForDayAndUUID;
     }
 
-    public String getLogsWrongMessageForDay() {
-        return logsWrongMessageForDay;
+    public String getCommandsLocale_logs_logsEnterMessageForDateAndUUID() {
+        return commandsLocale_logs_logsEnterMessageForDateAndUUID;
     }
 
-    public String getLogsWrongMessageForDate() {
-        return logsWrongMessageForDate;
+    public String getCommandsLocale_logs_logsWrongMessageForDay() {
+        return commandsLocale_logs_logsWrongMessageForDay;
     }
 
-    public String getLogsWrongMessageForDayAndUUID() {
-        return logsWrongMessageForDayAndUUID;
+    public String getCommandsLocale_logs_logsWrongMessageForDate() {
+        return commandsLocale_logs_logsWrongMessageForDate;
     }
 
-    public String getLogsWrongMessageForDateAndUUID() {
-        return logsWrongMessageForDateAndUUID;
+    public String getCommandsLocale_logs_logsWrongMessageForDayAndUUID() {
+        return commandsLocale_logs_logsWrongMessageForDayAndUUID;
     }
 
-    public String getBanEnterTime() {
-        return banEnterTime;
+    public String getCommandsLocale_logs_logsWrongMessageForDateAndUUID() {
+        return commandsLocale_logs_logsWrongMessageForDateAndUUID;
     }
 
-    public String getEnterBanComment() {
-        return enterBanComment;
+    public String getCommandsLocale_bans_ban_banEnterTime() {
+        return commandsLocale_bans_ban_banEnterTime;
+    }
+
+    public String getCommandsLocale_bans_ban_enterBanComment() {
+        return commandsLocale_bans_ban_enterBanComment;
     }
 
     public String getBanReasonCom(String banTime, String comment) {
-       String mes = this.banComment.replaceAll(LiteralType.BAN_TIME, banTime);
+       String mes = this.commandsLocale_bans_ban_banComment.replaceAll(LiteralType.BAN_TIME, banTime);
         return mes.replaceAll(LiteralType.COMMENT, comment);
     }
 
-    public String getBanCommentCanceled() {
-        return banCommentCanceled;
+    public String getCommandsLocale_bans_ban_banCommentCanceled() {
+        return commandsLocale_bans_ban_banCommentCanceled;
     }
 
-    public String getThisPlayerIsNotBanned() {
-        return thisPlayerIsNotBanned;
+    public String getCommandsLocale_bans_ban_thisPlayerIsNotBanned() {
+        return commandsLocale_bans_ban_thisPlayerIsNotBanned;
     }
 
-    public String getMuteMessage(String sender, String date) {
-       String mes = this.muteMessage.replaceAll(LiteralType.DATE, date);
+    public String getCommandsLocale_mutes_mute_muteMessage(String sender, String date) {
+       String mes = this.commandsLocale_mutes_mute_muteMessage.replaceAll(LiteralType.DATE, date);
         return mes.replaceAll(LiteralType.SENDER, sender);
     }
 
-    public String getYouAreMutedMessage() {
-        return this.youAreMutedMessage;
+    public String getCommandsLocale_mutes_mute_youAreMutedMessage() {
+        return this.commandsLocale_mutes_mute_youAreMutedMessage;
     }
 
 
-    public String getMuteEnterTime() {
-        return muteEnterTime;
+    public String getCommandsLocale_mutes_mute_muteEnterTime() {
+        return commandsLocale_mutes_mute_muteEnterTime;
     }
 
-    public String getMuteValueNotANumber() {
-        return muteValueNotANumber;
+    public String getCommandsLocale_mutes_mute_muteValueNotANumber() {
+        return commandsLocale_mutes_mute_muteValueNotANumber;
     }
 
-    public String getMutedPlayer(String playerName) {
-        return mutedPlayer.replaceAll(LiteralType.PLAYER_NAME, playerName);
+    public String getCommandsLocale_mutes_mute_mutedPlayer(String playerName) {
+        return commandsLocale_mutes_mute_mutedPlayer.replaceAll(LiteralType.PLAYER_NAME, playerName);
     }
 
-    public String getMutedEarlier(String playerName) {
-        return mutedEarlier.replaceAll(LiteralType.PLAYER_NAME, playerName);
+    public String getCommandsLocale_mutes_mute_mutedEarlier(String playerName) {
+        return commandsLocale_mutes_mute_mutedEarlier.replaceAll(LiteralType.PLAYER_NAME, playerName);
     }
 
-    public String getBanUnBadArgs() {
-        return unMuteBadArgs;
+    public String getCommandsLocale_bans_unban_unbanUnBadArgs() {
+        return commandsLocale_mutes_unmute_unMuteBadArgs;
     }
 
-    public String getUnMutedPlayer(String playerName) {
-        return unMutedPlayer.replaceAll(LiteralType.PLAYER_NAME, playerName);
+    public String getCommandsLocale_mutes_unmute_unMutedPlayer(String playerName) {
+        return commandsLocale_mutes_unmute_unMutedPlayer.replaceAll(LiteralType.PLAYER_NAME, playerName);
     }
 
-    public String getUnMutedEarlier(String playerName) {
-        return unMutedEarlier.replaceAll(LiteralType.PLAYER_NAME, playerName);
+    public String getCommandsLocale_mutes_unmute_unMutedEarlier(String playerName) {
+        return commandsLocale_mutes_unmute_unMutedEarlier.replaceAll(LiteralType.PLAYER_NAME, playerName);
     }
 
-    public String getMessageForSpammingToPlayer() {
-        return this.messageForSpammingToPlayer;
+    public String getSpecialLocale_spamming_messageForSpammingToPlayer() {
+        return this.specialLocale_spamming_messageForSpammingToPlayer;
     }
 
-    public String getSpamKickMessageInConsole(String playerName) {
-        return this.spamKickMessageInConsole.replaceAll(LiteralType.PLAYER_NAME, playerName);
+    public String getSpecialLocale_spamming_spamKickMessageInConsole(String playerName) {
+        return this.specialLocale_spamming_spamKickMessageInConsole.replaceAll(LiteralType.PLAYER_NAME, playerName);
     }
 
-    public String getSpamKickMessage() {
-        return this.spamKickMessage;
+    public String getSpecialLocale_spamming_spamKickMessage() {
+        return this.specialLocale_spamming_spamKickMessage;
     }
 
     public String getUnBanBadArgs() {
-        return this.banUnBadArgs;
+        return this.commandsLocale_bans_unban_unbanUnBadArgs;
     }
 
-    public String getUnBannedPlayer(String playerName) {
-        return this.unBannedPlayer.replaceAll(LiteralType.PLAYER_NAME, playerName);
+    public String getCommandsLocale_bans_unban_unBannedPlayer(String playerName) {
+        return this.commandsLocale_bans_unban_unBannedPlayer.replaceAll(LiteralType.PLAYER_NAME, playerName);
     }
 
-    public String getValueNotANumber() {
-        return this.valueNotANumber;
+    public String getCommandsLocale_bans_ban_valueNotANumber() {
+        return this.commandsLocale_bans_ban_valueNotANumber;
     }
 
-    public String getBannedPlayer(String playerToBan) {
-        return this.bannedPlayer.replaceAll(LiteralType.PLAYER_NAME, playerToBan);
+    public String getCommandsLocale_bans_ban_bannedPlayer(String playerToBan) {
+        return this.commandsLocale_bans_ban_bannedPlayer.replaceAll(LiteralType.PLAYER_NAME, playerToBan);
     }
 
-    public String getMesToFrozenPlayer(String freezenerName) {
-        return this.mesToFrozenPlayer.replaceAll(LiteralType.PLAYER_NAME, freezenerName);
+    public String getCommandsLocale_freeze_messageToFrozenPlayer(String freezenerName) {
+        return this.commandsLocale_freeze_messageToFrozenPlayer.replaceAll(LiteralType.PLAYER_NAME, freezenerName);
     }
 
     public String getMesToFreezener(String frozenPlayerName) {
-        return this.mesToFreezer.replaceAll(LiteralType.PLAYER_NAME, frozenPlayerName);
+        return this.commandsLocale_freeze_messageToFreezer.replaceAll(LiteralType.PLAYER_NAME, frozenPlayerName);
     }
 
-    public String getMesToReleasedPlayer(String releaserName) {
-        return this.mesToReleasedPlayer.replaceAll(LiteralType.PLAYER_NAME, releaserName);
+    public String getCommandsLocale_freeze_messageToReleasedPlayer(String releaserName) {
+        return this.commandsLocale_freeze_messageToReleasedPlayer.replaceAll(LiteralType.PLAYER_NAME, releaserName);
     }
 
-    public String getMesToReleaser(String releasedPlayerName) {
-        return this.mesToReleaser.replaceAll(LiteralType.PLAYER_NAME, releasedPlayerName);
+    public String getCommandsLocale_freeze_messageToReleaser(String releasedPlayerName) {
+        return this.commandsLocale_freeze_messageToReleaser.replaceAll(LiteralType.PLAYER_NAME, releasedPlayerName);
     }
 
-    public String getMesPlayerOffline(String offlinePlayerName) {
-        return this.mesPlayerOffline.replaceAll(LiteralType.PLAYER_NAME, offlinePlayerName);
+    public String getCommandsLocale_freeze_messagePlayerOffline(String offlinePlayerName) {
+        return this.commandsLocale_freeze_messagePlayerOffline.replaceAll(LiteralType.PLAYER_NAME, offlinePlayerName);
     }
 
-    public String getMesToPlayerWhoIsFrozen() {
-        return this.mesToPlayerWhoIsFrozen;
+    public String getCommandsLocale_freeze_messageToPlayerWhoIsFrozen() {
+        return this.commandsLocale_freeze_messageToPlayerWhoIsFrozen;
     }
 
-    public String getBanMustBeGreaterThan0() {
-        return banMustBeGreaterThan0;
+    public String getCommandsLocale_bans_ban_banMustBeGreaterThan0() {
+        return commandsLocale_bans_ban_banMustBeGreaterThan0;
     }
 }

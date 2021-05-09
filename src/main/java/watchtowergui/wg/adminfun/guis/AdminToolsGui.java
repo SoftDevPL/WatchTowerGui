@@ -26,7 +26,7 @@ public class AdminToolsGui extends BasicGui {
     public WatchTowerGui plugin;
 
     public AdminToolsGui(BasicGui previousGui) {
-        super(3, WatchTowerGui.getInstance().configsManager.guiLanguageConfig.getAdminToolsGuiPageName(), previousGui);
+        super(3, WatchTowerGui.getInstance().configsManager.guiLanguageConfig.getGuiLocale_adminToolsGui_pageName(), previousGui);
         this.plugin = WatchTowerGui.getInstance();
         glc = plugin.configsManager.guiLanguageConfig;
         setupGuiItems();
@@ -38,7 +38,7 @@ public class AdminToolsGui extends BasicGui {
 
         adminShovel = new ItemStack(Material.DIAMOND_SPADE);
         meta = adminShovel.getItemMeta();
-        meta.setDisplayName(glc.getAdminToolsGuiAdminShovel());
+        meta.setDisplayName(glc.getGuiLocale_adminToolsGui_adminShovel());
         meta.addEnchant(Enchantment.DIG_SPEED, 32000, true);
         meta.addEnchant(Enchantment.VANISHING_CURSE, 1, true);
         meta.setUnbreakable(true);
@@ -46,7 +46,7 @@ public class AdminToolsGui extends BasicGui {
 
         adminPickaxe = new ItemStack(Material.DIAMOND_PICKAXE);
         meta = adminPickaxe.getItemMeta();
-        meta.setDisplayName(glc.getAdminToolsGuiAdminPickAxe());
+        meta.setDisplayName(glc.getGuiLocale_adminToolsGui_adminPickAxe());
         meta.addEnchant(Enchantment.DIG_SPEED, 32000, true);
         meta.addEnchant(Enchantment.VANISHING_CURSE, 1, true);
         meta.setUnbreakable(true);
@@ -54,7 +54,7 @@ public class AdminToolsGui extends BasicGui {
 
         adminSword = new ItemStack(Material.DIAMOND_SWORD);
         meta = adminSword.getItemMeta();
-        meta.setDisplayName(glc.getAdminToolsGuiAdminSword());
+        meta.setDisplayName(glc.getGuiLocale_adminToolsGui_adminSword());
         meta.addEnchant(Enchantment.DAMAGE_ALL, 32000, true);
         meta.addEnchant(Enchantment.VANISHING_CURSE, 1, true);
         meta.setUnbreakable(true);
@@ -62,7 +62,7 @@ public class AdminToolsGui extends BasicGui {
 
         adminBow = new ItemStack(Material.BOW);
         meta = adminBow.getItemMeta();
-        meta.setDisplayName(glc.getAdminToolsGuiAdminBow());
+        meta.setDisplayName(glc.getGuiLocale_adminToolsGui_adminBow());
         meta.addEnchant(Enchantment.ARROW_DAMAGE, 32000, true);
         meta.addEnchant(Enchantment.VANISHING_CURSE, 1, true);
         meta.setUnbreakable(true);
@@ -70,7 +70,7 @@ public class AdminToolsGui extends BasicGui {
 
         adminAxe = new ItemStack(Material.DIAMOND_AXE);
         meta = adminAxe.getItemMeta();
-        meta.setDisplayName(glc.getAdminToolsGuiAdminAxe());
+        meta.setDisplayName(glc.getGuiLocale_adminToolsGui_adminAxe());
         meta.addEnchant(Enchantment.DIG_SPEED, 32000, true);
         meta.addEnchant(Enchantment.VANISHING_CURSE, 1, true);
         meta.setUnbreakable(true);
@@ -78,7 +78,7 @@ public class AdminToolsGui extends BasicGui {
 
         adminHoe = new ItemStack(Material.DIAMOND_HOE);
         meta = adminHoe.getItemMeta();
-        meta.setDisplayName(glc.getAdminToolsGuiAdminHoe());
+        meta.setDisplayName(glc.getGuiLocale_adminToolsGui_adminHoe());
         meta.addEnchant(Enchantment.KNOCKBACK, 32, true);
         meta.addEnchant(Enchantment.VANISHING_CURSE, 1, true);
         meta.setUnbreakable(true);
@@ -86,12 +86,12 @@ public class AdminToolsGui extends BasicGui {
 
         backItem = new ItemStack(Material.ARROW);
         meta = backItem.getItemMeta();
-        meta.setDisplayName(glc.getAdminGuiBack());
+        meta.setDisplayName(glc.getGuiLocale_adminGui_back());
         backItem.setItemMeta(meta);
 
         closeItem = new ItemStack(Material.WOOD_DOOR);
         meta = closeItem.getItemMeta();
-        meta.setDisplayName(glc.getAdminGuiClose());
+        meta.setDisplayName(glc.getGuiLocale_adminGui_close());
         closeItem.setItemMeta(meta);
 
         backGroundBlue = new ItemStack(Material.STAINED_GLASS_PANE, 1, Colors.BLUE);

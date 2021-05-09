@@ -1,6 +1,5 @@
 package watchtowergui.wg.adminfun.listeners;
 
-import org.bukkit.Bukkit;
 import watchtowergui.wg.WatchTowerGui;
 import watchtowergui.wg.adminfun.events.PlayerFreezeEvent;
 import watchtowergui.wg.adminfun.events.PlayerUnfreezeEvent;
@@ -67,7 +66,7 @@ public class FreezeListener implements Listener {
     private void freezeMoveEvent(PlayerMoveEvent e) {
         if (isFrozen(e.getPlayer())) {
             e.setCancelled(true);
-            e.getPlayer().sendMessage(this.languageConfig.getMesToPlayerWhoIsFrozen());
+            e.getPlayer().sendMessage(this.languageConfig.getCommandsLocale_freeze_messageToPlayerWhoIsFrozen());
         }
     }
 
@@ -75,7 +74,7 @@ public class FreezeListener implements Listener {
     private void freezeInteractEvent(PlayerInteractEvent e) {
         if (isFrozen(e.getPlayer())) {
             e.setCancelled(true);
-            e.getPlayer().sendMessage(this.languageConfig.getMesToPlayerWhoIsFrozen());
+            e.getPlayer().sendMessage(this.languageConfig.getCommandsLocale_freeze_messageToPlayerWhoIsFrozen());
         }
     }
 
@@ -83,7 +82,7 @@ public class FreezeListener implements Listener {
     private void placeBlockEvent(BlockPlaceEvent e) {
         if (isFrozen(e.getPlayer())) {
             e.setCancelled(true);
-            e.getPlayer().sendMessage(this.languageConfig.getMesToPlayerWhoIsFrozen());
+            e.getPlayer().sendMessage(this.languageConfig.getCommandsLocale_freeze_messageToPlayerWhoIsFrozen());
         }
     }
 
@@ -91,7 +90,7 @@ public class FreezeListener implements Listener {
     private void damageEntityEvent(EntityDamageByEntityEvent e) {
         if (e.getDamager() instanceof Player && isFrozen((OfflinePlayer) e.getDamager())) {
             e.setCancelled(true);
-            e.getDamager().sendMessage(this.languageConfig.getMesToPlayerWhoIsFrozen());
+            e.getDamager().sendMessage(this.languageConfig.getCommandsLocale_freeze_messageToPlayerWhoIsFrozen());
         }
     }
 }

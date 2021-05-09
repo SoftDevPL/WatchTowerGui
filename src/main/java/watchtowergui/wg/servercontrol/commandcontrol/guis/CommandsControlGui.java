@@ -156,9 +156,9 @@ public class CommandsControlGui extends ListGui<Command> {
         ItemMeta meta = item.getItemMeta();
         List<String> lore = new ArrayList<>(1);
         if (onOff)
-            lore.add(ChatColor.RESET + glc.getCommandControlGuiFilterOn());
+            lore.add(ChatColor.RESET + glc.getGuiLocale_commandControlGui_filterOn());
         else
-            lore.add(ChatColor.RESET + glc.getCommandControlGuiFilterOff());
+            lore.add(ChatColor.RESET + glc.getGuiLocale_commandControlGui_filterOff());
         meta.setLore(lore);
         item.setItemMeta(meta);
         return item;
@@ -200,12 +200,12 @@ public class CommandsControlGui extends ListGui<Command> {
 
 
     private void initFilterItems() {
-        activeCommandsFilterItem = BasicGui.createItem(Material.REDSTONE_TORCH_ON, glc.getCommandControlGuiActiveCommandsFilterItem());
-        disabledCommandsFilterItem = BasicGui.createItem(Material.LEVER, glc.getCommandControlGuiDisabledCommandsFilterItem());
-        alphabeticOrderFilterItem = BasicGui.createItem(Material.BOOK, glc.getCommandControlGuiAlphabeticOrderFilterItem());
-        pluginOrderFilterItem = BasicGui.createItem(Material.BOOKSHELF, glc.getCommandControlGuiPluginOrderFilterItem());
-        vanillaCommandsFilterItem = BasicGui.createItem(Material.EGG, glc.getCommandControlGuiVanillaCommandsFilterItem());
-        pluginCommandsFilterItem = BasicGui.createItem(Material.DRAGON_EGG, glc.getCommandControlGuiPluginCommandsFilterItem());
+        activeCommandsFilterItem = BasicGui.createItem(Material.REDSTONE_TORCH_ON, glc.getGuiLocale_commandControlGui_activeCommandsFilterItem());
+        disabledCommandsFilterItem = BasicGui.createItem(Material.LEVER, glc.getGuiLocale_commandControlGui_disabledCommandsFilterItem());
+        alphabeticOrderFilterItem = BasicGui.createItem(Material.BOOK, glc.getGuiLocale_commandControlGui_alphabeticOrderFilterItem());
+        pluginOrderFilterItem = BasicGui.createItem(Material.BOOKSHELF, glc.getGuiLocale_commandControlGui_pluginOrderFilterItem());
+        vanillaCommandsFilterItem = BasicGui.createItem(Material.EGG, glc.getGuiLocale_commandControlGui_vanillaCommandsFilterItem());
+        pluginCommandsFilterItem = BasicGui.createItem(Material.DRAGON_EGG, glc.getGuiLocale_commandControlGui_pluginCommandsFilterItem());
 
     }
 
@@ -219,16 +219,16 @@ public class CommandsControlGui extends ListGui<Command> {
 
     private String getStatus(Command cmd) {
         if (commandsControlListener.isActive(cmd)) {
-            return glc.getCommandControlGuiStatusOn();
+            return glc.getGuiLocale_commandControlGui_statusOn();
         }
-        return glc.getCommandControlGuiStatusOff();
+        return glc.getGuiLocale_commandControlGui_statusOff();
     }
 
     private List<String> getAliases(Command cmd) {
         List<String> aliases = cmd.getAliases();
         if (!aliases.isEmpty()) {
             List<String> aliasesStrings = new ArrayList<>();
-            aliasesStrings.add(glc.getCommandControlGuiGetAliases());
+            aliasesStrings.add(glc.getGuiLocale_commandControlGui_getAliases());
             for (String alias : aliases)
                 aliasesStrings.add(ChatColor.GOLD + alias);
             return aliasesStrings;
@@ -247,7 +247,7 @@ public class CommandsControlGui extends ListGui<Command> {
     }
 
     private String getEditLabel() {
-        return glc.getCommandControlGuiGetEditLabel();
+        return glc.getGuiLocale_commandControlGui_getEditLabel();
     }
 
     @Override

@@ -1,4 +1,4 @@
-package watchtowergui.wg.managers;
+package watchtowergui.wg.manager;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;

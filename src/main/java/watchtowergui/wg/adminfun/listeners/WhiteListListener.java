@@ -48,7 +48,7 @@ public class WhiteListListener implements Listener {
                     if (!player.hasPermission(permissions.maintenancePerm)) {
                         maintenancePlayerList.remove(player.getUniqueId().toString());
                         database.deleteMeintenencePlayers(player.getUniqueId().toString());
-                        player.kickPlayer(languageConfig.getMaintenanceModeKickMessage());
+                        player.kickPlayer(languageConfig.getSpecialLocale_adminStaff_maintenanceMode_maintenanceModeKickMessage());
                     }
                 }
             }
@@ -86,14 +86,14 @@ public class WhiteListListener implements Listener {
     private void removePlayerFromWhiteList(RemovePlayerFromWhiteListEvent e) {
         maintenancePlayerList.remove(e.getPlayer().getUniqueId().toString());
         database.deleteMeintenencePlayers(e.getPlayer().getUniqueId().toString());
-        e.getPlayer().getPlayer().kickPlayer(languageConfig.getMaintenanceModeKickMessage());
+        e.getPlayer().getPlayer().kickPlayer(languageConfig.getSpecialLocale_adminStaff_maintenanceMode_maintenanceModeKickMessage());
     }
 
     @EventHandler
     private void kickIfNotInMaintenanceMode(PlayerLoginEvent event) {
         if (maintenanceMode) {
             if (!event.getPlayer().hasPermission(permissions.maintenancePerm)) {
-                event.disallow(PlayerLoginEvent.Result.KICK_OTHER, languageConfig.getMaintenanceModeKickMessage());
+                event.disallow(PlayerLoginEvent.Result.KICK_OTHER, languageConfig.getSpecialLocale_adminStaff_maintenanceMode_maintenanceModeKickMessage());
 
             }
         }

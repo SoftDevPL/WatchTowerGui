@@ -92,7 +92,7 @@ public class DisableChatListener implements Listener {
     private void disableChat(AsyncPlayerChatEvent event) {
         if (disabledChat) {
             if (!event.getPlayer().hasPermission(this.permissions.allowWritingOnDisableChat)) {
-                event.getPlayer().sendMessage(languageConfig.getDisabledChat());
+                event.getPlayer().sendMessage(languageConfig.getSpecialLocale_adminStaff_chat_disabledChat());
                 event.setCancelled(true);
             }
         }

@@ -40,7 +40,7 @@ public class HidePlayerCommand implements CommandExecutor {
         String playerName = args[0];
         OfflinePlayer player = UltimateGuis.getOfflinePlayer(playerName);
         if (player == null) {
-            sender.sendMessage(languageConfig.getBasicPlayerNotFound(playerName));
+            sender.sendMessage(languageConfig.getCommandsLocale_basic_playerNotFoundWithPlayerName(playerName));
             return true;
         }
         callHideEvent((Player) player, sender);

@@ -27,10 +27,10 @@ public class AllPlayersGui extends PlayersGui {
 
     private void addFilterItem() {
         this.setActionItem(BasicGui.createSegmentedItem(Material.WATCH,
-                WatchTowerGui.getInstance().configsManager.guiLanguageConfig.getAdminGuiPlayersGuiShowOfflinePlayersName() + "\n" +
+                WatchTowerGui.getInstance().configsManager.guiLanguageConfig.getGuiLocale_adminGui_playersGuiShowOfflinePlayersName() + "\n" +
                         ((showOfflinePlayers)
-                                ? WatchTowerGui.getInstance().configsManager.guiLanguageConfig.getAdminGuiPlayersGuiShowOfflinePlayersON()
-                                : WatchTowerGui.getInstance().configsManager.guiLanguageConfig.getAdminGuiPlayersGuiShowOfflinePlayersOFF())), player -> {
+                                ? WatchTowerGui.getInstance().configsManager.guiLanguageConfig.getGuiLocale_adminGui_playersGuiShowOfflinePlayersON()
+                                : WatchTowerGui.getInstance().configsManager.guiLanguageConfig.getGuiLocale_adminGui_playersGuiShowOfflinePlayersOFF())), player -> {
             showOfflinePlayers = !showOfflinePlayers;
             open(player);
         }, 5);
